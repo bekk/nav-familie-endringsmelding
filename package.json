@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@navikt/ds-react": "^3.3.1",
+    "@navikt/ds-css": "^3.3.1",
+    "@navikt/aksel-icons": "^3.3.1",
+    "@navikt/ds-tokens": "^3.3.1",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
