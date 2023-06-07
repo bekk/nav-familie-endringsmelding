@@ -1,0 +1,15 @@
+# flyctl launch added from .gitignore
+**/node_modules
+
+.cache
+build
+public/build
+**/.env
+**/.idea
+**/.DS_Store
+**/npm-debug.log*
+**/*.tsbuildinfo
+
+# flyctl launch added from .husky/_/.gitignore
+.husky/_/**/*
+fly.toml
