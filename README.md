@@ -1,53 +1,41 @@
-# Welcome to Remix!
+# Nav familie endringsmelding
+
+Applikasjonen bruker remix. Se den offisielle dokumentasjonen for mer info
 
 - [Remix Docs](https://remix.run/docs)
 
-## Development
+## Installasjon
 
-From your terminal:
+For å komme i gang med applikasjonen, følg disse trinnene:
+
+1. Få token fra en tjommi og legg det til som miljøvariabel `NPM_AUTH_TOKEN`
+
+2. Klone repositoriet:
+
+```sh
+git clone git@github.com:bekk/nav-familie-endringsmelding.git
+```
+
+3. Naviger til prosjektmappen:
+
+```sh
+cd nav-familie-endringsmelding
+```
+
+4. Installer avhengigheter (NB! krever token fra steg 1.):
+
+```sh
+npm install
+```
+
+5. Start utviklingsserveren:
 
 ```sh
 npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+6. Lag endringsmeldingsløsning for NAV 🚀
 
-## Deployment
+## Deploye
 
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+Filen [deploy.yml](.github%2Fworkflows%2Fdeploy.yml) sørger for at vi deployer hver gang vi merger med master 🚀
