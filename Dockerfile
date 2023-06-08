@@ -9,7 +9,10 @@ FROM base as deps
 
 WORKDIR /myapp
 
-ADD package.json package-lock.json ./
+ARG NPM_AUTH_TOKEN
+
+ADD package.json package-lock.json .npmrc ./
+
 RUN npm install --include=dev
 
 # Setup production node_modules
