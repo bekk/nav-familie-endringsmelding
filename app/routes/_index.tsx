@@ -3,8 +3,12 @@ import { BodyShort } from '@navikt/ds-react';
 
 export const meta: V2_MetaFunction = () => {
   return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
+    { title: 'Familie endringsmelding' },
+    {
+      name: 'description',
+      content:
+        'Endringsmelding for barnetrygd, kontantstøtte og enslig forsørger',
+    },
   ];
 };
 
