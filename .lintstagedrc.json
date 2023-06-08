@@ -1,4 +1,7 @@
 {
-  "*.(ts|tsx|js|jsx)": ["eslint", "prettier --write"],
+  "*.(ts|tsx|js|jsx)": [
+    "eslint --cache --cache-location ./node_modules/.cache/eslint",
+    "prettier --write"
+  ],
   "*.(json|md|css)": ["prettier --write"]
 }
