@@ -31,7 +31,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: superfly/flyctl-actions@1.4
         with:
-          args: deploy --remote-only --build-arg NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} COMMIT_SHA=${{ github.sha }} --app ${{ steps.app_name.outputs.value }}
+          args: deploy --remote-only --build-arg NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} --build-arg COMMIT_SHA=${{ github.sha }} --app ${{ steps.app_name.outputs.value }}
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
