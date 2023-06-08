@@ -8,9 +8,15 @@
     "dev": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
+  "eslintIgnore": [
+    "/node_modules",
+    "/build",
+    "/public/build"
+  ],
   "dependencies": {
     "@navikt/aksel-icons": "^3.3.1",
     "@navikt/ds-css": "^3.3.1",
