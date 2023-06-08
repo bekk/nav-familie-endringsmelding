@@ -17,7 +17,7 @@ jobs:
           node-version: 18
 
       - name: 📥 Install deps
-        run: npm install
+        run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} npm install
 
       - name: 🔬 Lint
         run: npm run lint
@@ -37,7 +37,7 @@ jobs:
           node-version: 18
 
       - name: 📥 Install deps
-        run: npm install
+        run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} npm install
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
