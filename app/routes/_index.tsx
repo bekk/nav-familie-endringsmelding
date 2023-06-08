@@ -1,4 +1,5 @@
 import type { V2_MetaFunction } from '@remix-run/node';
+import { BodyShort } from '@navikt/ds-react';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -10,7 +11,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>Hello sommerstudenter!</h1>
+      <BodyShort>Hello sommerstudenter!</BodyShort>
     </div>
   );
 }
