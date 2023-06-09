@@ -24,7 +24,7 @@ For å komme i gang med applikasjonen, følg disse trinnene:
 1. Spør en venn om du kan få en token for å laste ned nav sine frontendpakker, og legg tokenet til i en miljøvariabel som heter `NPM_AUTH_TOKEN`
 
    1. For å legge til miljøvariabelen kan du i terminalen skrive: `echo 'export NPM_AUTH_TOKEN=<Token fra en venn>' >> ~/.zshenv`
-   2. Så må du restarte terminalen: `omz reload`
+   2. Så må du restarte terminalen: `source ~/.zshrc`
    3. For å dobbeltsjekke at variabelen er satt kan du skrive: `echo $NPM_AUTH_TOKEN` for å printe ut tokenet i terminalen.
 
 2. Klone repositoriet:
