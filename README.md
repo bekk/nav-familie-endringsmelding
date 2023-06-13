@@ -56,3 +56,5 @@ For å komme i gang med applikasjonen, følg disse trinnene:
 ## Deploye til prod
 
 Filen [deploy.yml](.github%2Fworkflows%2Fdeploy.yml) sørger for at vi deployer hver gang vi merger med master 🚀
+
+Prod finnes her: [nav-familie-endringsmelding.fly.dev](https://nav-familie-endringsmelding.fly.dev/)
