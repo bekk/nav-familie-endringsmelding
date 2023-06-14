@@ -18,8 +18,8 @@ export default function Index() {
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div>
-        <Heading size="xlarge">
-          Hello <span className={css.regnbue}>sommerjobbere</span>!
+        <Heading level="1" size="xlarge">
+          Endringsmelding
         </Heading>
       </div>
     </div>
