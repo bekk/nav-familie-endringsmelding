@@ -1,4 +1,5 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
+import designsystemStyles from '@navikt/ds-css/dist/index.css';
 import type { LinksFunction } from '@remix-run/node';
 import {
   Links,
@@ -10,6 +11,7 @@ import {
 } from '@remix-run/react';
 
 export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: designsystemStyles },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
