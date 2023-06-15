@@ -2,7 +2,7 @@ import type { V2_MetaFunction } from '@remix-run/node';
 import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import React from 'react';
-import VeilederHilsen from '../komponenter/veilederhilsen/veilderhilsen';
+import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 
 export const meta: V2_MetaFunction = () => {
   return [
