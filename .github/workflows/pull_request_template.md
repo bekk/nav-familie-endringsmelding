@@ -1,5 +1,5 @@
+### Hvorfor er dette nødvendig? ✨
+
 [Lenke til trello kort](URL)
 
-### Hva har blitt gjort? ✨
-
-### Hvordan er det løst?
+### Hvordan er det løst? 🧠
