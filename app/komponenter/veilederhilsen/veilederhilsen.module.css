@@ -1,0 +1,14 @@
+.poster {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.tittelMargin {
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.liste {
+  margin-top: 0px;
+}

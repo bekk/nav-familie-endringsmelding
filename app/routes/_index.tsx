@@ -2,6 +2,7 @@ import type { V2_MetaFunction } from '@remix-run/node';
 import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import React from 'react';
+import VeilederHilsen from '../komponenter/veilederhilsen/veilderhilsen';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -17,10 +18,12 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-      <div>
+      <div className={`${css.innholdkonteiner}`}>
         <Heading level="1" size="xlarge">
           Endringsmelding
         </Heading>
+
+        <VeilederHilsen />
       </div>
     </div>
   );
