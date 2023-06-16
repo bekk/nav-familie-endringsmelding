@@ -4,6 +4,7 @@ import css from './_index.module.css';
 import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
 import React from 'react';
+import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -33,10 +34,11 @@ export default function Index() {
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-      <div>
+       <div className={`${css.innholdkonteiner}`}>
         <Heading level="1" size="xlarge">
           {data ? data[0].nb[0].children[0].text : 'Sanity funker ikke'}
         </Heading>
+        <VeilederHilsen />
       </div>
     </div>
   );
