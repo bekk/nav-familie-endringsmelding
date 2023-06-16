@@ -5,6 +5,7 @@ import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
 import React from 'react';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
+import { LocaleType, Sprakvelger } from '@navikt/familie-sprakvelger';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -34,11 +35,18 @@ export default function Index() {
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-       <div className={`${css.innholdkonteiner}`}>
+      <div className={`${css.innholdkonteiner}`}>
         <Heading level="1" size="xlarge">
           {data ? data[0].nb[0].children[0].text : 'Sanity funker ikke'}
         </Heading>
+
         <VeilederHilsen />
+
+        <div>
+          <Sprakvelger
+            støttedeSprak={[LocaleType.nn, LocaleType.nb, LocaleType.en]}
+          />
+        </div>
       </div>
     </div>
   );
