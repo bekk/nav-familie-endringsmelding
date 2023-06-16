@@ -4,8 +4,21 @@
 
 .fyllSide {
   height: 30rem;
+  padding: 0.5rem;
   display: grid;
   align-items: center;
+}
+
+.innholdkonteiner {
+  max-width: 37.5rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  @media (min-width: 768px) {
+    width: 37.5rem;
+  }
 }
 
 .regnbue {
