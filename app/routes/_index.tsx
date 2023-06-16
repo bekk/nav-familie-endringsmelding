@@ -25,7 +25,6 @@ const sanityKlient = createClient({
 
 export const loader = async () => {
   const data = await sanityKlient.fetch('*');
-  console.log('response', data);
   return { data };
 };
 
