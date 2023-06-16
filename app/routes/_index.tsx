@@ -3,7 +3,7 @@ import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
-import React from 'react';
+import React, { useState } from 'react';
 import Spinner from '~/components/Spinner';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 
@@ -27,6 +27,7 @@ const sanityKlient = createClient({
 
 export const loader = async () => {
   const data = await sanityKlient.fetch('*');
+
   return { data };
 };
 
@@ -37,9 +38,8 @@ export default function Index() {
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
         <Heading level="1" size="xlarge">
-          {data ? data[0].nb[0].children[0].text : 'Sanity funker ikke'}
+          {data ? data[0].en[0].children[0].text : 'Sanity funker ikke'}
         </Heading>
-        <Spinner />
         <VeilederHilsen />
       </div>
     </div>
