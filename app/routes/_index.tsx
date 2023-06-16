@@ -2,6 +2,7 @@ import type { V2_MetaFunction } from '@remix-run/node';
 import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import React from 'react';
+import Spinner from '~/components/Spinner';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -21,6 +22,7 @@ export default function Index() {
         <Heading level="1" size="xlarge">
           Endringsmelding
         </Heading>
+        <Spinner />
       </div>
     </div>
   );
