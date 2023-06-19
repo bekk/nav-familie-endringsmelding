@@ -33,23 +33,23 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   const { data } = useLoaderData<typeof loader>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [laster, settLaster] = useState(true);
 
   useEffect(() => {
     if (data) {
-      setIsLoading(false);
+      settLaster(false);
     }
   }, [data]);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-      <div className={`${css.innholdkonteiner}`}>
-        {isLoading ? (
+      <div className={`${css.innholdKonteiner}`}>
+        {laster ? (
           <Spinner />
         ) : (
           <>
             <Heading level="1" size="xlarge">
-              {/*   {data ? data[1].en[0].children[0].text : 'Sanity funker ikke'} */}
+              Endringsmelding
             </Heading>
             <VeilederHilsen />
           </>
