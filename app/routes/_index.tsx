@@ -1,9 +1,8 @@
 import type { V2_MetaFunction } from '@remix-run/node';
-import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 import {
   ESanityApiKey,
@@ -32,6 +31,9 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
+const API_URL_BACKEND: string =
+  'http://localhost:8099/local/cookie?redirect=http://localhost:3000&issuerId=selvbetjening&audience=aud-localhost';
+
 export const loader = async () => {
   const forsideTekst = await sanityKlient.fetch<SanityDokument[]>(
     '*[steg == "FORSIDE"]',
@@ -51,6 +53,19 @@ export default function Index() {
     ESanityApiKey.TITTEL_PUNKTLISTE,
   );
 
+  const [navn, settNavn] = useState('');
+
+  useEffect(() => {
+    let data;
+    const hentData = async () => {
+      data = await fetch(API_URL_BACKEND).catch(err => console.log);
+    };
+    hentData();
+    if (data) {
+      settNavn(data);
+    }
+  }, [navn]);
+
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
@@ -59,7 +74,7 @@ export default function Index() {
           valgBlock={spraak}
           typografi={TypografiTyper.StegHeadingH1}
         />
-
+        {navn ? navn : 'Ingen'}
         <VeilederHilsen
           punktlisteDokument={punktlisteDokument}
           tittelPunktlisteDokument={tittelPunktlisteDokument}
