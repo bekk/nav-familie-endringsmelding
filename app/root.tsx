@@ -8,10 +8,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useNavigation,
 } from '@remix-run/react';
-import Spinner from './components/Spinner';
-import { useEffect } from 'react';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -19,13 +16,6 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  /*   Et alternativ, som vi ikke fikk til å funke. Kommenterer ut i tilfelle den skal bli brukt allikevel.
-  
-  const navigation = useNavigation();
-  useEffect(() => {
-    console.log(navigation);
-  }, [navigation]);
- */
   return (
     <html lang="en">
       <head>
@@ -35,7 +25,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {/*  {navigation.state === 'loading' && <Spinner />} */}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
