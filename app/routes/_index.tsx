@@ -43,6 +43,7 @@ export default function Index() {
   useEffect(() => {
     if (data) {
       setIsLoading(false);
+      console.log('is Loading:', isLoading);
     }
   }, [data]);
 
@@ -56,7 +57,7 @@ export default function Index() {
         ) : (
           <>
             <Heading level="1" size="xlarge">
-              {/* {data ? data[1].en[0].children[0].text : 'Sanity funker ikke'} */}
+              {/*   {data ? data[1].en[0].children[0].text : 'Sanity funker ikke'} */}
             </Heading>
             <VeilederHilsen />
           </>

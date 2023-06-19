@@ -19,9 +19,8 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  /* 
-  Et alternativ, som vi ikke fikk til å funke. Kommenterer ut i tilfelle den skal bli brukt allikevel.
-
+  /*   Et alternativ, som vi ikke fikk til å funke. Kommenterer ut i tilfelle den skal bli brukt allikevel.
+  
   const navigation = useNavigation();
   useEffect(() => {
     console.log(navigation);
