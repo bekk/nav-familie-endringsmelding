@@ -1,23 +1,23 @@
-import { TypografiTyper } from '~/typer/typografi';
+import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import css from './veilederhilsen.module.css';
+import { LocaleType } from '~/typer/sanity/sanity';
 
-interface TekstBlokkProps {
+interface Props {
   tekstblokk: any | undefined;
-  valgBlock: string;
+  valgSpraak: LocaleType;
   typografi?: TypografiTyper;
 }
 
-const TekstBlokk: React.FC<TekstBlokkProps> = ({
+const TekstBlokk: React.FC<Props> = ({
   tekstblokk,
   typografi,
-  valgBlock,
-}: TekstBlokkProps) => {
+  valgSpraak,
+}: Props) => {
   return tekstblokk ? (
     <PortableText
-      value={tekstblokk[valgBlock]}
+      value={tekstblokk[valgSpraak]}
       components={{
         block: {
           normal: ({ children }) => (
