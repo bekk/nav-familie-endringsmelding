@@ -6,22 +6,30 @@ import TekstBlokk from '../tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 
 interface VeilederHilsenProp {
-  dokument: SanityDokument | undefined;
+  punktlisteDokument: SanityDokument | undefined;
+  tittelPunktlisteDokument: SanityDokument | undefined;
+  spraak: string;
 }
 
 const VeilederHilsen: React.FC<VeilederHilsenProp> = ({
-  dokument,
+  punktlisteDokument,
+  tittelPunktlisteDokument,
+  spraak,
 }: VeilederHilsenProp) => {
   return (
     <GuidePanel poster className={`${css.poster}`}>
       <Heading level="2" size="xlarge" className={`${css.tittelMargin}`}>
         Hei [fornavn]
       </Heading>
-      Du må melde fra til oss hvis:
+      <TekstBlokk
+        tekstblokk={tittelPunktlisteDokument}
+        valgBlock={spraak}
+        typografi={TypografiTyper.Normal}
+      />
       <ul className={`${css.liste}`}>
         <TekstBlokk
-          tekstblokk={dokument}
-          valgBlock="en"
+          tekstblokk={punktlisteDokument}
+          valgBlock={spraak}
           typografi={TypografiTyper.Liste}
         />
       </ul>

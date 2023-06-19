@@ -2,6 +2,7 @@ import { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
+import css from './veilederhilsen.module.css';
 
 interface TekstBlokkProps {
   tekstblokk: any | undefined;
@@ -20,7 +21,7 @@ const TekstBlokk: React.FC<TekstBlokkProps> = ({
       components={{
         block: {
           normal: ({ children }) => (
-            <TypografiWrapper typografi={typografi}>
+            <TypografiWrapper typografi={typografi} style={{ margin: '0' }}>
               {children}
             </TypografiWrapper>
           ),

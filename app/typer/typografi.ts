@@ -10,4 +10,5 @@ export enum TypografiTyper {
   Bold = 'Bold',
   HeadingH2 = 'HeadingH2',
   Liste = 'Liste',
+  Normal = 'Normal',
 }

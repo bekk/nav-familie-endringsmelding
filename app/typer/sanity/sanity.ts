@@ -7,18 +7,19 @@ export interface SanityDokument {
   _id: string;
   api_navn: ESanityApiKey;
   visningsnavn: string;
-  nb: CustomSanityTyper.CUSTUM_BLOCK;
+  /*  nb: CustomSanityTyper.CUSTUM_BLOCK;
   nn: CustomSanityTyper.CUSTUM_BLOCK;
-  en: CustomSanityTyper.CUSTUM_BLOCK;
+  en: CustomSanityTyper.CUSTUM_BLOCK; */
 }
 
-export enum CustomSanityTyper {
+/* export enum CustomSanityTyper {
   CUSTUM_BLOCK = 'customBlock',
-}
+} */
 
 export enum ESanityApiKey {
   TITTEL = 'tittelPaForside',
   PUNKTLISTE = 'punktlisteMedEndringsgrunner',
+  TITTEL_PUNKTLISTE = 'tittelPunktlisteMedEndringsgrunner',
 }
 
 export type TextBlock = Record<ESanityApiKey, string> & {
@@ -38,6 +39,7 @@ export enum LocaleType {
   nn = 'nn',
 }
 
+//Ikke brukt enda, men notert at det er gjort i eksempel repo
 export type LocaleRecordString = Record<LocaleType, string> & {
   api_navn: string;
   [key: string]: unknown;

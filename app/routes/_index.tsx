@@ -5,7 +5,11 @@ import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
 import React from 'react';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
-import { ESanityApiKey, SanityDokument } from '~/typer/sanity/sanity';
+import {
+  ESanityApiKey,
+  LocaleType,
+  SanityDokument,
+} from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 //import { LocaleType, Sprakvelger } from '@navikt/familie-sprakvelger';
@@ -37,22 +41,30 @@ export const loader = async () => {
 
 export default function Index() {
   const { forsideTekst } = useLoaderData<typeof loader>();
+  const spraak: LocaleType = LocaleType.nb;
 
   const dokumenter: Map<ESanityApiKey, SanityDokument> = new Map();
   forsideTekst.map(dokument => dokumenter.set(dokument.api_navn, dokument));
 
   const punktlisteDokument = dokumenter.get(ESanityApiKey.PUNKTLISTE);
+  const tittelPunktlisteDokument = dokumenter.get(
+    ESanityApiKey.TITTEL_PUNKTLISTE,
+  );
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
         <TekstBlokk
           tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
-          valgBlock="nb"
+          valgBlock={spraak}
           typografi={TypografiTyper.StegHeadingH1}
         />
 
-        <VeilederHilsen dokument={punktlisteDokument} />
+        <VeilederHilsen
+          punktlisteDokument={punktlisteDokument}
+          tittelPunktlisteDokument={tittelPunktlisteDokument}
+          spraak={spraak}
+        />
       </div>
     </div>
   );
