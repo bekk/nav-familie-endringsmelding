@@ -22,6 +22,9 @@ jobs:
       - name: 🔬 Lint
         run: npm run lint
 
+      - name: 🔬 Lint staged
+        run: npm run lint-staged
+
   typecheck:
     name: ʦ TypeScript
     runs-on: ubuntu-latest
