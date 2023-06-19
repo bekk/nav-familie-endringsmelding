@@ -6,6 +6,8 @@ import { createClient } from '@sanity/client';
 import React from 'react';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 import { ESanityApiKey, SanityDokument } from '~/typer/sanity/sanity';
+import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
+import { TypografiTyper } from '~/typer/typografi';
 //import { LocaleType, Sprakvelger } from '@navikt/familie-sprakvelger';
 
 export const meta: V2_MetaFunction = () => {
@@ -45,12 +47,13 @@ export default function Index() {
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
         <Heading level="1" size="xlarge">
-          {/*       {     tittel ? tittel[0].nb[0].children[0].text : 'Sanity funker ikke'}
-           */}{' '}
+          <TekstBlokk
+            tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
+            valgBlock="nn"
+            typografi={TypografiTyper.StegHeadingH1}
+          />
         </Heading>
         <VeilederHilsen />
-        {/*         <p>{punktliste ? punktliste[0].nb[0].children[0].text :"Ingen punktliste her"}</p>
-         */}{' '}
       </div>
     </div>
   );
