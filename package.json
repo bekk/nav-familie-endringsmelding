@@ -12,12 +12,6 @@
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css}": [
-      "prettier --write",
-      "eslint --fix --max-warnings=0"
-    ]
-  },
   "eslintIgnore": [
     "/node_modules",
     "/build",

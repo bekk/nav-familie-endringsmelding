@@ -8,4 +8,5 @@ module.exports = {
   rules: {
     '@typescript-eslint/consistent-type-imports': 'off',
   },
+  ignorePatterns: ['!.*', 'dist', 'node_modules'],
 };
