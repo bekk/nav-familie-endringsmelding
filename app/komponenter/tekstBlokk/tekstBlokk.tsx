@@ -19,7 +19,17 @@ const TekstBlokk: React.FC<TekstBlokkProps> = ({
       value={tekstblokk[valgBlock]}
       components={{
         block: {
+          normal: ({ children }) => (
+            <TypografiWrapper typografi={typografi}>
+              {children}
+            </TypografiWrapper>
+          ),
           h1: ({ children }) => (
+            <TypografiWrapper typografi={typografi}>
+              {children}
+            </TypografiWrapper>
+          ),
+          li: ({ children }) => (
             <TypografiWrapper typografi={typografi}>
               {children}
             </TypografiWrapper>

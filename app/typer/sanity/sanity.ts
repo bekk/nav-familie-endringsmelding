@@ -18,7 +18,7 @@ export enum CustomSanityTyper {
 
 export enum ESanityApiKey {
   TITTEL = 'tittelPaForside',
-  PUNKTLISTE = 'punktlistePaForside',
+  PUNKTLISTE = 'punktlisteMedEndringsgrunner',
 }
 
 export type TextBlock = Record<ESanityApiKey, string> & {

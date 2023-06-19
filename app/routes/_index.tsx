@@ -41,19 +41,18 @@ export default function Index() {
   const dokumenter: Map<ESanityApiKey, SanityDokument> = new Map();
   forsideTekst.map(dokument => dokumenter.set(dokument.api_navn, dokument));
 
-  console.log(dokumenter.get(ESanityApiKey.TITTEL));
+  const punktlisteDokument = dokumenter.get(ESanityApiKey.PUNKTLISTE);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
-        <Heading level="1" size="xlarge">
-          <TekstBlokk
-            tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
-            valgBlock="nn"
-            typografi={TypografiTyper.StegHeadingH1}
-          />
-        </Heading>
-        <VeilederHilsen />
+        <TekstBlokk
+          tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
+          valgBlock="nb"
+          typografi={TypografiTyper.StegHeadingH1}
+        />
+
+        <VeilederHilsen dokument={punktlisteDokument} />
       </div>
     </div>
   );

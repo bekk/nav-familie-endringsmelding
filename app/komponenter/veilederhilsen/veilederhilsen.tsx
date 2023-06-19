@@ -1,8 +1,17 @@
 import { GuidePanel, Heading } from '@navikt/ds-react';
 
 import css from './veilederhilsen.module.css';
+import { SanityDokument } from '~/typer/sanity/sanity';
+import TekstBlokk from '../tekstBlokk/tekstBlokk';
+import { TypografiTyper } from '~/typer/typografi';
 
-export default function VeilederHilsen() {
+interface VeilederHilsenProp {
+  dokument: SanityDokument | undefined;
+}
+
+const VeilederHilsen: React.FC<VeilederHilsenProp> = ({
+  dokument,
+}: VeilederHilsenProp) => {
   return (
     <GuidePanel poster className={`${css.poster}`}>
       <Heading level="2" size="xlarge" className={`${css.tittelMargin}`}>
@@ -10,11 +19,14 @@ export default function VeilederHilsen() {
       </Heading>
       Du må melde fra til oss hvis:
       <ul className={`${css.liste}`}>
-        <li>Familiesituasjonen din endrer seg.</li>
-        <li>Dere planlegger opphold i utlandet.</li>
-        <li>Det er endring i arbeidsforhold i utlandet.</li>
-        <li>Du ikke lenger har rett til utvidet barnetrygd.</li>
+        <TekstBlokk
+          tekstblokk={dokument}
+          valgBlock="en"
+          typografi={TypografiTyper.Liste}
+        />
       </ul>
     </GuidePanel>
   );
-}
+};
+
+export default VeilederHilsen;
