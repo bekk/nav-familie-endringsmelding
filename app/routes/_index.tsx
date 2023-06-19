@@ -1,9 +1,10 @@
-import type { V2_MetaFunction } from '@remix-run/node';
+import type { LoaderFunction, V2_MetaFunction } from '@remix-run/node';
 import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
 import { useLoaderData } from '@remix-run/react';
 import { createClient } from '@sanity/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 
 export const meta: V2_MetaFunction = () => {
@@ -24,21 +25,35 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
-export const loader = async () => {
+export const loader: LoaderFunction = async () => {
   const data = await sanityKlient.fetch('*');
+
   return { data };
 };
 
 export default function Index() {
   const { data } = useLoaderData<typeof loader>();
+  const [laster, settLaster] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      settLaster(false);
+    }
+  }, [data]);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-       <div className={`${css.innholdkonteiner}`}>
-        <Heading level="1" size="xlarge">
-          {data ? data[0].nb[0].children[0].text : 'Sanity funker ikke'}
-        </Heading>
-        <VeilederHilsen />
+      <div className={`${css.innholdKonteiner}`}>
+        {laster ? (
+          <Spinner />
+        ) : (
+          <>
+            <Heading level="1" size="xlarge">
+              Endringsmelding
+            </Heading>
+            <VeilederHilsen />
+          </>
+        )}
       </div>
     </div>
   );
