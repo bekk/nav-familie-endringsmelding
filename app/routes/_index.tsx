@@ -31,7 +31,7 @@ export default function Index() {
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-      <div className={`${css.innholdkonteiner}`}>
+      <div className={`${css.innholdKonteiner}`}>
         {laster ? (
           <Spinner />
         ) : (
