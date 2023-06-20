@@ -1,6 +1,6 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
@@ -22,7 +22,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
   const [laster, settLaster] = useState(true);
-  
+
   useEffect(() => {
     if (tekster) {
       settLaster(false);
@@ -32,17 +32,17 @@ export default function Index() {
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
-         {laster ? (
+        {laster ? (
           <Spinner />
-          ) : (
-            <>
-              <TekstBlokk
-                tekstblokk={tekster.tittel}
-                typografi={TypografiTyper.StegHeadingH1}
-              />
-              <VeilederHilsen innhold={tekster.veilederhilsenInnhold} />
-            </>
-          )}
+        ) : (
+          <>
+            <TekstBlokk
+              tekstblokk={tekster.tittel}
+              typografi={TypografiTyper.StegHeadingH1}
+            />
+            <VeilederHilsen innhold={tekster.veilederhilsenInnhold} />
+          </>
+        )}
       </div>
     </div>
   );
