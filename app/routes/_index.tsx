@@ -20,7 +20,6 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
-  console.log(tekster);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
