@@ -6,7 +6,8 @@ export const hentSøkerFornavn = () => {
   let fornavn: string = søker.visningsnavn.trim();
   try {
     fornavn = fornavn.split(' ')[0];
-  } catch (e) {
+  } catch (e: unknown) {
+    console.log('❌ kunne ikke hente brukers navn: ', { e });
     fornavn = '!';
   }
   return fornavn;
