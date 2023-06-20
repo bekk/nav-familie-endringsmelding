@@ -8,14 +8,9 @@ import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 interface Props {
   tekstblokk: SanityDokument | undefined;
   typografi?: TypografiTyper;
-  flettefelter?: TypografiTyper;
 }
 
-const TekstBlokk: React.FC<Props> = ({
-  tekstblokk,
-  typografi,
-  flettefelter,
-}: Props) => {
+const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
   const spraak: LocaleType = LocaleType.nb;
 
   return tekstblokk ? (
