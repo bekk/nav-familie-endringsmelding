@@ -1,8 +1,5 @@
 import cookie from 'cookie';
 
-const AUTHORIZATION_HEADER = 'authorization';
-const WONDERWALL_ID_TOKEN_HEADER = 'x-wonderwall-id-token';
-
 export const fetchWithToken = async (
   remixRequest: Request,
   url: string,
@@ -12,8 +9,8 @@ export const fetchWithToken = async (
   const token = await prepareSecuredRequest(remixRequest);
   const headersWithToken = new Headers({
     ...headersFromRequest,
-    [AUTHORIZATION_HEADER]: token.authorization,
-    [WONDERWALL_ID_TOKEN_HEADER]: '',
+    authorization: token.authorization,
+    'x-wonderwall-id-token': '',
   });
   return fetch(url, {
     ...requestInfo,
