@@ -29,3 +29,8 @@ export type IForsideTekstinnhold = Record<string, SanityDokument>;
 export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
 }
+
+export interface AppContex {
+  sanityTekster: ITekstinnhold;
+  spraak: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
+}

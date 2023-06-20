@@ -1,12 +1,12 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
-import React from 'react';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
-import { ESanitySteg } from '~/typer/sanity/sanity';
+import { ESanitySteg, LocaleType } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
+import { useSpraak } from '~/root';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -21,6 +21,9 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
+  const [spraak, settSpraak] = useSpraak();
+  settSpraak(LocaleType.en);
+  console.log(spraak);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
