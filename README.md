@@ -55,7 +55,7 @@ For å komme i gang med applikasjonen, følg disse trinnene:
 
 ```
 Start backend (nav-familie-endringsmelding-api) ApplicationLocalLauncher
-Gå til http://localhost:8099/local/cookie?redirect=http://localhost:3000&issuerId=selvbetjening&audience=aud-localhost
+Gå til http://localhost:8099/local/cookie?redirect=http://localhost:3000&issuerId=tokenx&audience=familie-endringsmelding
 Da har du fått. satt en cookie som gjør at du KAN nå backend (men vi har ikke kode for å lese ut cookie og sende videre som header)
 ```
 
