@@ -1,23 +1,20 @@
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { TypografiTyper } from '~/typer/typografi';
 
-export interface WrapperProps {
+export interface Props {
   typografi?: TypografiTyper;
   children?: React.ReactNode | React.ReactNode[];
   style?: React.CSSProperties;
 }
 
-export const TypografiWrapper: React.FC<WrapperProps> = ({
+export const TypografiWrapper: React.FC<Props> = ({
   typografi,
   children,
   style,
-}: WrapperProps) => {
+}: Props) => {
   switch (typografi) {
-    case TypografiTyper.Liste:
-      return <li>{children}</li>;
-
-    case TypografiTyper.Normal:
-      return <p style={style}>{children}</p>;
+    case TypografiTyper.BodyShort:
+      return <BodyShort style={style}>{children}</BodyShort>;
 
     case TypografiTyper.StegHeadingH1:
       return (
@@ -26,13 +23,7 @@ export const TypografiWrapper: React.FC<WrapperProps> = ({
         </Heading>
       );
 
-    case TypografiTyper.Bold:
-      return <b style={style}>{children}</b>;
-
-    case undefined:
-      return <div style={style}>{children}</div>;
-
     default:
-      return <div>{children}</div>;
+      return <div style={style}>{children}</div>;
   }
 };
