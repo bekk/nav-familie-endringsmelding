@@ -1,18 +1,11 @@
 import type { V2_MetaFunction } from '@remix-run/node';
-import { Heading } from '@navikt/ds-react';
 import css from './_index.module.css';
-import { useLoaderData } from '@remix-run/react';
-import { createClient } from '@sanity/client';
 import React from 'react';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
-import {
-  ESanityApiKey,
-  LocaleType,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
+import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-//import { LocaleType, Sprakvelger } from '@navikt/familie-sprakvelger';
+import { useTekster } from '~/utils/sanityLoader';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -25,46 +18,18 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
-const sanityKlient = createClient({
-  projectId: 'd8ycstqz',
-  dataset: 'production',
-  apiVersion: '2021-10-21',
-  useCdn: true,
-});
-
-export const loader = async () => {
-  const forsideTekst = await sanityKlient.fetch<SanityDokument[]>(
-    '*[steg == "FORSIDE"]',
-  );
-  return { forsideTekst };
-};
-
 export default function Index() {
-  const { forsideTekst } = useLoaderData<typeof loader>();
-  const spraak: LocaleType = LocaleType.nb;
-
-  const dokumenter: Map<ESanityApiKey, SanityDokument> = new Map();
-  forsideTekst.map(dokument => dokumenter.set(dokument.api_navn, dokument));
-
-  const punktlisteDokument = dokumenter.get(ESanityApiKey.PUNKTLISTE);
-  const tittelPunktlisteDokument = dokumenter.get(
-    ESanityApiKey.TITTEL_PUNKTLISTE,
-  );
+  const tekster = useTekster(ESanitySteg.FORSIDE);
+  console.log(tekster);
 
   return (
     <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
       <div className={`${css.innholdkonteiner}`}>
         <TekstBlokk
-          tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
-          valgBlock={spraak}
+          tekstblokk={tekster.tittel}
           typografi={TypografiTyper.StegHeadingH1}
         />
-
-        <VeilederHilsen
-          punktlisteDokument={punktlisteDokument}
-          tittelPunktlisteDokument={tittelPunktlisteDokument}
-          spraak={spraak}
-        />
+        <VeilederHilsen innhold={tekster.veilederhilsenInnhold} />
       </div>
     </div>
   );
