@@ -33,7 +33,10 @@ export default function Index() {
               tekstblokk={tekster.tittel}
               typografi={TypografiTyper.StegHeadingH1}
             />
-            <VeilederHilsen innhold={tekster.veilederhilsenInnhold} />
+            <VeilederHilsen
+              innhold={tekster.veilederhilsenInnhold}
+              hilsen={tekster.brukerHilsen}
+            />
           </>
         )}
       </div>

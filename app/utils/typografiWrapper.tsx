@@ -22,6 +22,12 @@ export const TypografiWrapper: React.FC<Props> = ({
           {children}
         </Heading>
       );
+    case TypografiTyper.StegHeadingH2:
+      return (
+        <Heading style={style} level="2" size="xlarge">
+          {children}
+        </Heading>
+      );
 
     default:
       return <div style={style}>{children}</div>;

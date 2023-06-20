@@ -29,3 +29,7 @@ export type IForsideTekstinnhold = Record<string, SanityDokument>;
 export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
 }
+
+export enum ESanityFlettefeltverdi {
+  SØKER_NAVN = 'SØKER_NAVN',
+}
