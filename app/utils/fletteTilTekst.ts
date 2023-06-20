@@ -3,7 +3,6 @@ import { hentSøkerFornavn } from './hentFraApi';
 
 export const flettefeltTilTekst = (
   sanityFlettefelt: ESanityFlettefeltverdi,
-  flettefelter?: string,
 ): string => {
   switch (sanityFlettefelt) {
     case ESanityFlettefeltverdi.SØKER_NAVN:

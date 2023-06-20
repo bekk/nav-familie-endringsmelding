@@ -2,7 +2,7 @@ import { ISøker } from '~/typer/søker';
 
 const søkerMock: ISøker = {
   ident: '12345678910',
-  visningsnavn: 'Søker mellomnavn Etternavn',
+  visningsnavn: 'Mock mellomnavn Etternavn',
 };
 
 export default søkerMock;

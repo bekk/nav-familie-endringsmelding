@@ -2,11 +2,7 @@ import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import {
-  ESanityFlettefeltverdi,
-  LocaleType,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
+import { LocaleType, SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 
 interface Props {
@@ -47,12 +43,7 @@ const TekstBlokk: React.FC<Props> = ({
           flettefelt: props => {
             if (props?.value?.flettefeltVerdi) {
               return (
-                <span>
-                  {flettefeltTilTekst(
-                    props?.value?.flettefeltVerdi,
-                    ESanityFlettefeltverdi.SØKER_NAVN,
-                  )}
-                </span>
+                <span>{flettefeltTilTekst(props?.value?.flettefeltVerdi)}</span>
               );
             } else {
               throw new Error(`Fant ikke flettefeltVerdi`);
