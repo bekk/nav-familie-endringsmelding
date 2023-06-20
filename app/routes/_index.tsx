@@ -2,12 +2,12 @@ import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
-import { ESanitySteg, LocaleType } from '~/typer/sanity/sanity';
+import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
-import { useSpraak } from '~/root';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -22,9 +22,6 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
-  const [spraak, settSpraak] = useSpraak();
-  settSpraak(LocaleType.en);
-  console.log(spraak);
 
   return (
     <div className={`${css.fyllSide}`}>
@@ -37,6 +34,7 @@ export default function Index() {
               tekstblokk={tekster.tittel}
               typografi={TypografiTyper.StegHeadingH1}
             />
+            <Språkvelger />
             <VeilederHilsen
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}

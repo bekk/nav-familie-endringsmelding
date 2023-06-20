@@ -5,7 +5,7 @@ import { TypografiWrapper } from '~/utils/typografiWrapper';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
-import { useSpraak } from '~/root';
+import { useSpråk } from '~/root';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
@@ -13,11 +13,11 @@ interface Props {
 }
 
 const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
-  const [spraak] = useSpraak();
+  const [språk] = useSpråk();
 
   return tekstblokk ? (
     <PortableText
-      value={tekstblokk[spraak]}
+      value={tekstblokk[språk]}
       components={{
         block: {
           normal: ({ children }) => (

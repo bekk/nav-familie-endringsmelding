@@ -35,5 +35,5 @@ export enum ESanityFlettefeltverdi {
 }
 export interface AppContext {
   sanityTekster: ITekstinnhold;
-  spraak: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
+  språk: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
 }
