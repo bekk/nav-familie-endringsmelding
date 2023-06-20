@@ -34,6 +34,11 @@ export default function Index() {
               typografi={TypografiTyper.StegHeadingH1}
             />
             <VeilederHilsen innhold={tekster.veilederhilsenInnhold} />
+            <div className={`${css.personvernerklaeringLink}`}>
+              <TekstBlokk
+                tekstblokk={tekster.linkTilPersonvernerklaering}
+              ></TekstBlokk>
+            </div>
           </>
         )}
       </div>
