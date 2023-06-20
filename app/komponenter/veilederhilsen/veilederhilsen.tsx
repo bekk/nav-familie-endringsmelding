@@ -1,20 +1,23 @@
 import { GuidePanel, Heading } from '@navikt/ds-react';
-
 import css from './veilederhilsen.module.css';
+import { SanityDokument } from '~/typer/sanity/sanity';
+import TekstBlokk from '../tekstBlokk/tekstBlokk';
 
-export default function VeilederHilsen() {
+interface VeilederHilsenProp {
+  innhold: SanityDokument | undefined;
+}
+
+const VeilederHilsen: React.FC<VeilederHilsenProp> = ({
+  innhold,
+}: VeilederHilsenProp) => {
   return (
     <GuidePanel poster className={`${css.poster}`}>
       <Heading level="2" size="xlarge" className={`${css.tittelMargin}`}>
         Hei [fornavn]
       </Heading>
-      Du må melde fra til oss hvis:
-      <ul className={`${css.liste}`}>
-        <li>Familiesituasjonen din endrer seg.</li>
-        <li>Dere planlegger opphold i utlandet.</li>
-        <li>Det er endring i arbeidsforhold i utlandet.</li>
-        <li>Du ikke lenger har rett til utvidet barnetrygd.</li>
-      </ul>
+      <TekstBlokk tekstblokk={innhold} />
     </GuidePanel>
   );
-}
+};
+
+export default VeilederHilsen;

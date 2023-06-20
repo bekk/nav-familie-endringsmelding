@@ -1,6 +1,6 @@
 {
   "*.(ts|tsx|js|jsx)": [
-    "eslint --cache --cache-location ./node_modules/.cache/eslint",
+    "eslint --fix --max-warnings=0 --cache --cache-location ./node_modules/.cache/eslint",
     "prettier --write"
   ],
   "*.(json|md|css)": ["prettier --write"]
