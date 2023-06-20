@@ -26,8 +26,8 @@ export const loader: LoaderFunction = async () => {
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
-  const [spraak, settSpraak] = useState<LocaleType>(LocaleType.nb);
-  console.log(spraak);
+  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+
   return (
     <html lang="en">
       <head>
@@ -37,9 +37,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet
-          context={{ sanityTekster: data, spraak: [spraak, settSpraak] }}
-        />
+        <Outlet context={{ sanityTekster: data, språk: [språk, settSpråk] }} />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -48,7 +46,7 @@ export default function App() {
   );
 }
 
-export function useSpraak() {
-  const { spraak } = useOutletContext<AppContex>();
-  return spraak;
+export function useSpråk() {
+  const { språk } = useOutletContext<AppContex>();
+  return språk;
 }
