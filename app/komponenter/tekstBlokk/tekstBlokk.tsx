@@ -45,6 +45,19 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
             }
           },
         },
+        marks: {
+          link: props => {
+            return (
+              <a
+                target={props.value.blank ? '_blank' : '_self'}
+                href={encodeURI(props.value.href)}
+                rel="noreferrer"
+              >
+                {props.text}
+              </a>
+            );
+          },
+        },
       }}
     />
   ) : null;
