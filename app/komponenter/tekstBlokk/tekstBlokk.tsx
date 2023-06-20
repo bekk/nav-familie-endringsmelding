@@ -44,8 +44,6 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
               throw new Error(`Fant ikke flettefeltVerdi`);
             }
           },
-        },
-        marks: {
           link: props => {
             return (
               <a
