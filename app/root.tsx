@@ -1,6 +1,7 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
 import type { LinksFunction, LoaderFunction } from '@remix-run/node';
+import { AppContext, LocaleType } from './typer/sanity/sanity';
 import {
   Links,
   LiveReload,
@@ -9,8 +10,10 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useOutletContext,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
+import { useState } from 'react';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -23,7 +26,8 @@ export const loader: LoaderFunction = async () => {
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
-
+  const [spraak, settSpraak] = useState<LocaleType>(LocaleType.nb);
+  console.log(spraak);
   return (
     <html lang="en">
       <head>
@@ -33,11 +37,18 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet context={data} />
+        <Outlet
+          context={{ sanityTekster: data, spraak: [spraak, settSpraak] }}
+        />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
   );
+}
+
+export function useSpraak() {
+  const { spraak } = useOutletContext<AppContext>();
+  return spraak;
 }

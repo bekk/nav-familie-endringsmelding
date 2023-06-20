@@ -33,3 +33,7 @@ export interface ITekstinnhold {
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
 }
+export interface AppContext {
+  sanityTekster: ITekstinnhold;
+  spraak: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
+}
