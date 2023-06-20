@@ -51,7 +51,15 @@ For å komme i gang med applikasjonen, følg disse trinnene:
    npm run dev
    ```
 
-6. Lag endringsmeldingsløsning for NAV 🚀
+6. Start frontend med cookie fra backend:
+
+```
+Start backend (nav-familie-endringsmelding-api) ApplicationLocalLauncher
+Gå til http://localhost:8099/local/cookie?redirect=http://localhost:3000&issuerId=selvbetjening&audience=aud-localhost
+Da har du fått. satt en cookie som gjør at du KAN nå backend (men vi har ikke kode for å lese ut cookie og sende videre som header)
+```
+
+7. Lag endringsmeldingsløsning for NAV 🚀
 
 ## Deploye til prod
 
