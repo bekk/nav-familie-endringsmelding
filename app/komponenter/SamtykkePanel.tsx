@@ -21,7 +21,7 @@ const SamtykkePanel: React.FC<Props> = ({
   const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
 
   return (
-    <div>
+    <>
       <ConfirmationPanel
         checked={samtykkeErBekreftet}
         label={<TekstBlokk tekstblokk={samtykke} />}
@@ -34,7 +34,7 @@ const SamtykkePanel: React.FC<Props> = ({
         <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
       <Button
-        variant="secondary"
+        variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
         onClick={() =>
           samtykkeErBekreftet
             ? navigate('/send-endringsmelding')
@@ -43,7 +43,7 @@ const SamtykkePanel: React.FC<Props> = ({
       >
         Start
       </Button>
-    </div>
+    </>
   );
 };
 
