@@ -15,16 +15,19 @@ const SamtykkePanel: React.FC<Props> = ({
   samtykke,
   feilmelding,
 }: Props) => {
-  const [lest, settLest] = useState(false);
+  const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
   const [trykkVidere, settTrykkVidere] = useState(false);
 
   return (
     <div>
       <ConfirmationPanel
-        checked={lest}
+        checked={samtykkeErBekreftet}
         label={<TekstBlokk tekstblokk={samtykke} />}
-        onChange={() => settLest(harLest => !harLest)}
-        error={!lest && trykkVidere && <TekstBlokk tekstblokk={feilmelding} />}
+        onChange={() => settSamtykkeErBekreftet(harLest => !harLest)}
+        error={
+          !samtykkeErBekreftet &&
+          trykkVidere && <TekstBlokk tekstblokk={feilmelding} />
+        }
       >
         <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
