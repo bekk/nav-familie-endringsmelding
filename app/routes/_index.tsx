@@ -39,7 +39,7 @@ export default function Index() {
               hilsen={tekster.brukerHilsen}
             />
             <SamtykkePanel
-              melding={tekster.samtykkePanelMelding}
+              innhold={tekster.samtykkePanelMelding}
               samtykke={tekster.samtykkePanelSamtykke}
               feilmelding={tekster.samtykkePanelFeilmelding}
             />

@@ -5,13 +5,13 @@ import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from './tekstBlokk/tekstBlokk';
 
 interface BekreftelsePanelProp {
-  melding: SanityDokument;
+  innhold: SanityDokument;
   samtykke: SanityDokument;
   feilmelding: SanityDokument;
 }
 
 const SamtykkePanel: React.FC<BekreftelsePanelProp> = ({
-  melding,
+  innhold,
   samtykke,
   feilmelding,
 }: BekreftelsePanelProp) => {
@@ -26,7 +26,7 @@ const SamtykkePanel: React.FC<BekreftelsePanelProp> = ({
         onChange={() => settLest(x => !x)}
         error={!lest && trykkVidere && <TekstBlokk tekstblokk={feilmelding} />}
       >
-        <TekstBlokk tekstblokk={melding} />
+        <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
       <Button variant="secondary" onClick={() => settTrykkVidere(true)}>
         Start
