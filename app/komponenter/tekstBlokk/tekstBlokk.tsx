@@ -8,9 +8,14 @@ import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 interface Props {
   tekstblokk: SanityDokument | undefined;
   typografi?: TypografiTyper;
+  flettefeltInnhold?: string;
 }
 
-const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
+const TekstBlokk: React.FC<Props> = ({
+  tekstblokk,
+  typografi,
+  flettefeltInnhold,
+}: Props) => {
   const spraak: LocaleType = LocaleType.nb;
 
   return tekstblokk ? (
@@ -36,9 +41,14 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
         },
         marks: {
           flettefelt: props => {
-            if (props?.value?.flettefeltVerdi) {
+            if (props?.value?.flettefeltVerdi && flettefeltInnhold) {
               return (
-                <span>{flettefeltTilTekst(props?.value?.flettefeltVerdi)}</span>
+                <span>
+                  {flettefeltTilTekst(
+                    props?.value?.flettefeltVerdi,
+                    flettefeltInnhold,
+                  )}
+                </span>
               );
             } else {
               throw new Error(`Fant ikke flettefeltVerdi`);

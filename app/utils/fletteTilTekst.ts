@@ -1,11 +1,11 @@
 import { ESanityFlettefeltverdi } from '~/typer/sanity/sanity';
-import { hentSøkerFornavn } from './hentFraApi';
 
 export const flettefeltTilTekst = (
-  sanityFlettefelt: ESanityFlettefeltverdi,
+  flettefeltType: ESanityFlettefeltverdi,
+  flettefeltInnhold: string,
 ): string => {
-  switch (sanityFlettefelt) {
+  switch (flettefeltType) {
     case ESanityFlettefeltverdi.SØKER_NAVN:
-      return hentSøkerFornavn();
+      return flettefeltInnhold;
   }
 };

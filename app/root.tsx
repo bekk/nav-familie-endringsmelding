@@ -9,8 +9,12 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useOutletContext,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
+import { AppContext, LocaleType } from './typer/sanity/sanity';
+import { useState } from 'react';
+import { hentSøkerFornavn } from './utils/hentFraApi';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -23,6 +27,8 @@ export const loader: LoaderFunction = async () => {
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
+  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const fornavn = hentSøkerFornavn();
 
   return (
     <html lang="en">
@@ -33,11 +39,22 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet context={data} />
+        <Outlet
+          context={{
+            sanityTekster: data,
+            språk: [språk, settSpråk],
+            fornavn: fornavn,
+          }}
+        />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
   );
+}
+
+export function useFornavn() {
+  const { fornavn } = useOutletContext<AppContext>();
+  return fornavn;
 }
