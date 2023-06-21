@@ -5,9 +5,9 @@ import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from './tekstBlokk/tekstBlokk';
 
 interface BekreftelsePanelProp {
-  melding: SanityDokument | undefined;
-  samtykke: SanityDokument | undefined;
-  feilmelding: SanityDokument | undefined;
+  melding: SanityDokument;
+  samtykke: SanityDokument;
+  feilmelding: SanityDokument;
 }
 
 const SamtykkePanel: React.FC<BekreftelsePanelProp> = ({
