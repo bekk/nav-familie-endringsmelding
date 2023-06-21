@@ -38,7 +38,11 @@ export default function Index() {
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}
             />
-            <BekreftelsePanel melding={tekster.bekreftelsesPanelMelding} />
+            <BekreftelsePanel
+              melding={tekster.bekreftelsesPanelMelding}
+              samtykke={tekster.bekreftelsesPanelSamtykke}
+              feilmelding={tekster.bekreftelsesPanelFeilmelding}
+            />
             <div className={`${css.personvernerklaeringLink}`}>
               <TekstBlokk
                 tekstblokk={tekster.linkTilPersonvernerklaering}

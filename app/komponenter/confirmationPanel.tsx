@@ -6,11 +6,14 @@ import TekstBlokk from './tekstBlokk/tekstBlokk';
 
 interface BekreftelsePanelProp {
   melding: SanityDokument | undefined;
-  /*  hilsen: SanityDokument | undefined; */
+  samtykke: SanityDokument | undefined;
+  feilmelding: SanityDokument | undefined;
 }
 
 const BekreftelsePanel: React.FC<BekreftelsePanelProp> = ({
   melding,
+  samtykke,
+  feilmelding,
 }: BekreftelsePanelProp) => {
   const [lest, settLest] = useState(false);
   const [trykkVidere, settTrykkVidere] = useState(false);
@@ -19,13 +22,11 @@ const BekreftelsePanel: React.FC<BekreftelsePanelProp> = ({
     <div>
       <ConfirmationPanel
         checked={lest}
-        label="Ja, jeg samtykker."
+        label={<TekstBlokk tekstblokk={samtykke} />}
         onChange={() => settLest(x => !x)}
-        error={!lest && trykkVidere && 'Du må samtykke før du kan fortsette.'}
+        error={!lest && trykkVidere && <TekstBlokk tekstblokk={feilmelding} />}
       >
         <TekstBlokk tekstblokk={melding} />
-        {/*      For å komme videre må du gi oss lov til å hente inn og bruke
-        opplysninger om deg. */}
       </ConfirmationPanel>
       <Button variant="secondary" onClick={() => settTrykkVidere(true)}>
         Start
