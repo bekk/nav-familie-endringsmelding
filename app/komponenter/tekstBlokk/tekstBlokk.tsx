@@ -2,8 +2,9 @@ import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import { SanityDokument } from '~/typer/sanity/sanity';
 import { useSpråk } from '~/root';
+import { SanityDokument } from '~/typer/sanity/sanity';
+import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
@@ -28,8 +29,22 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
               {children}
             </TypografiWrapper>
           ),
+          h2: ({ children }) => (
+            <TypografiWrapper typografi={typografi}>
+              {children}
+            </TypografiWrapper>
+          ),
         },
         marks: {
+          flettefelt: props => {
+            if (props?.value?.flettefeltVerdi) {
+              return (
+                <span>{flettefeltTilTekst(props?.value?.flettefeltVerdi)}</span>
+              );
+            } else {
+              throw new Error(`Fant ikke flettefeltVerdi`);
+            }
+          },
           link: props => {
             return (
               <a
