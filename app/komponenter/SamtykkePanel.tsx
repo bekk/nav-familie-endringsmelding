@@ -4,17 +4,17 @@ import { Button } from '@navikt/ds-react';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from './tekstBlokk/tekstBlokk';
 
-interface BekreftelsePanelProp {
+interface Props {
   innhold: SanityDokument;
   samtykke: SanityDokument;
   feilmelding: SanityDokument;
 }
 
-const SamtykkePanel: React.FC<BekreftelsePanelProp> = ({
+const SamtykkePanel: React.FC<Props> = ({
   innhold,
   samtykke,
   feilmelding,
-}: BekreftelsePanelProp) => {
+}: Props) => {
   const [lest, settLest] = useState(false);
   const [trykkVidere, settTrykkVidere] = useState(false);
 
