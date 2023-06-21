@@ -24,7 +24,7 @@ export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
 
   return (
-    <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
+    <div className={`${css.fyllSide}`}>
       <div className={`${css.innholdKonteiner}`}>
         {!tekster ? (
           <Spinner />
