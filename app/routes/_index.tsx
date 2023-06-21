@@ -7,7 +7,7 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
-import BekreftelsePanel from '~/komponenter/confirmationPanel';
+import BekreftelsePanel from '~/komponenter/BekreftelsePanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
