@@ -10,7 +10,7 @@ interface BekreftelsePanelProp {
   feilmelding: SanityDokument | undefined;
 }
 
-const BekreftelsePanel: React.FC<BekreftelsePanelProp> = ({
+const SamtykkePanel: React.FC<BekreftelsePanelProp> = ({
   melding,
   samtykke,
   feilmelding,
@@ -35,4 +35,4 @@ const BekreftelsePanel: React.FC<BekreftelsePanelProp> = ({
   );
 };
 
-export default BekreftelsePanel;
+export default SamtykkePanel;

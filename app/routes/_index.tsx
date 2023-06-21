@@ -7,7 +7,7 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
-import BekreftelsePanel from '~/komponenter/BekreftelsePanel';
+import SamtykkePanel from '~/komponenter/SamtykkePanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -38,10 +38,10 @@ export default function Index() {
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}
             />
-            <BekreftelsePanel
-              melding={tekster.bekreftelsesPanelMelding}
-              samtykke={tekster.bekreftelsesPanelSamtykke}
-              feilmelding={tekster.bekreftelsesPanelFeilmelding}
+            <SamtykkePanel
+              melding={tekster.samtykkePanelMelding}
+              samtykke={tekster.samtykkePanelSamtykke}
+              feilmelding={tekster.samtykkePanelFeilmelding}
             />
             <div className={`${css.personvernerklaeringLink}`}>
               <TekstBlokk
