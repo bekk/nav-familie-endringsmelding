@@ -8,7 +8,6 @@ import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
-
 export const meta: V2_MetaFunction = () => {
   return [
     { title: 'Familie endringsmelding' },

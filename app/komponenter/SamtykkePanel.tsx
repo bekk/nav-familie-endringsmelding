@@ -1,8 +1,8 @@
-import { ConfirmationPanel } from '@navikt/ds-react';
+import { Button, ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
-import { Button } from '@navikt/ds-react';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from './tekstBlokk/tekstBlokk';
+import { useNavigate } from '@remix-run/react';
 
 interface Props {
   innhold: SanityDokument;
@@ -15,8 +15,10 @@ const SamtykkePanel: React.FC<Props> = ({
   samtykke,
   feilmelding,
 }: Props) => {
+  const navigate = useNavigate();
+
   const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
-  const [trykkVidere, settTrykkVidere] = useState(false);
+  const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
 
   return (
     <div>
@@ -26,12 +28,19 @@ const SamtykkePanel: React.FC<Props> = ({
         onChange={() => settSamtykkeErBekreftet(harLest => !harLest)}
         error={
           !samtykkeErBekreftet &&
-          trykkVidere && <TekstBlokk tekstblokk={feilmelding} />
+          feilmeldingAktivert && <TekstBlokk tekstblokk={feilmelding} />
         }
       >
         <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
-      <Button variant="secondary" onClick={() => settTrykkVidere(true)}>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          samtykkeErBekreftet
+            ? navigate('/send-endringsmelding')
+            : settFeilmeldingAktivert(true)
+        }
+      >
         Start
       </Button>
     </div>
