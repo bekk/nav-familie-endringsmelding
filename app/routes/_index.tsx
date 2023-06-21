@@ -7,6 +7,7 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
+import SamtykkePanel from '~/komponenter/SamtykkePanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -23,7 +24,7 @@ export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
 
   return (
-    <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
+    <div className={`${css.fyllSide}`}>
       <div className={`${css.innholdKonteiner}`}>
         {!tekster ? (
           <Spinner />
@@ -33,10 +34,14 @@ export default function Index() {
               tekstblokk={tekster.tittel}
               typografi={TypografiTyper.StegHeadingH1}
             />
-
             <VeilederHilsen
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}
+            />
+            <SamtykkePanel
+              innhold={tekster.samtykkePanelMelding}
+              samtykke={tekster.samtykkePanelSamtykke}
+              feilmelding={tekster.samtykkePanelFeilmelding}
             />
             <div className={`${css.personvernerklaeringLink}`}>
               <TekstBlokk
