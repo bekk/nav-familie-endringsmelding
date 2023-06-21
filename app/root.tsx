@@ -9,10 +9,9 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useOutletContext,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { AppContext, LocaleType } from './typer/sanity/sanity';
+import { LocaleType } from './typer/sanity/sanity';
 import { useState } from 'react';
 import { hentSøkerFornavn } from './utils/hentFraApi';
 
@@ -52,9 +51,4 @@ export default function App() {
       </body>
     </html>
   );
-}
-
-export function useFornavn() {
-  const { fornavn } = useOutletContext<AppContext>();
-  return fornavn;
 }

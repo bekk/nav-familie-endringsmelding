@@ -3,7 +3,7 @@ import css from './veilederhilsen.module.css';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import { useFornavn } from '~/root';
+import { useFornavn } from '~/hooks/contextHooks';
 
 interface VeilederHilsenProp {
   innhold: SanityDokument | undefined;
