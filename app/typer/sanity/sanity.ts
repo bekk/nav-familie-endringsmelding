@@ -22,12 +22,14 @@ export enum LocaleType {
 
 export enum ESanitySteg {
   FORSIDE = 'FORSIDE',
+  SEND_ENDRINGER = 'SEND_ENDRINGER',
 }
 
 export type IForsideTekstinnhold = Record<string, SanityDokument>;
 
 export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+  [ESanitySteg.SEND_ENDRINGER]: IForsideTekstinnhold;
 }
 
 export enum ESanityFlettefeltverdi {

@@ -21,6 +21,10 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
 
   const tekstInnhold = {
     [ESanitySteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESanitySteg.FORSIDE),
+    [ESanitySteg.SEND_ENDRINGER]: strukturerInnholdForSteg(
+      tekst,
+      ESanitySteg.SEND_ENDRINGER,
+    ),
   };
 
   return tekstInnhold;
