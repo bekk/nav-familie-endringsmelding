@@ -1,7 +1,7 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
 import type { LinksFunction, LoaderFunction } from '@remix-run/node';
-import { AppContext, LocaleType } from './typer/sanity/sanity';
+import { LocaleType } from './typer/sanity/sanity';
 import {
   Links,
   LiveReload,
@@ -14,6 +14,7 @@ import {
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
 import { useState } from 'react';
+import { AppContext } from './typer/context';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
