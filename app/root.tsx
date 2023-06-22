@@ -13,7 +13,7 @@ import {
 import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { useState } from 'react';
-import { hentSøkerFornavn } from './utils/hentFraApi';
+import { hentSøker } from './utils/hentFraApi';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async () => {
 export default function App() {
   const data = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
-  const søkerFornavn = hentSøkerFornavn();
+  const søker = hentSøker();
 
   return (
     <html lang="en">
@@ -42,7 +42,7 @@ export default function App() {
           context={{
             sanityTekster: data,
             språk: [språk, settSpråk],
-            brukerdata: { fornavn: søkerFornavn },
+            søker: søker,
           }}
         />
         <ScrollRestoration />
