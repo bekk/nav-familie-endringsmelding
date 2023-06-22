@@ -1,11 +1,11 @@
 import { GuidePanel } from '@navikt/ds-react';
 import css from './veilederhilsen.module.css';
 import { SanityDokument } from '~/typer/sanity/sanity';
-import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { AppContext } from '~/typer/context';
 import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
+import TekstBlokk from '../tekstBlokk/TekstBlokk';
 
 interface Props {
   innhold: SanityDokument | undefined;
