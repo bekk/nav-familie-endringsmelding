@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async () => {
 export default function App() {
   const data = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
-  const fornavn = hentSøkerFornavn();
+  const søkerFornavn = hentSøkerFornavn();
 
   return (
     <html lang="en">
@@ -42,7 +42,7 @@ export default function App() {
           context={{
             sanityTekster: data,
             språk: [språk, settSpråk],
-            fornavn: fornavn,
+            brukerdata: { fornavn: søkerFornavn },
           }}
         />
         <ScrollRestoration />
