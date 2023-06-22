@@ -2,19 +2,23 @@ import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import { LocaleType, SanityDokument } from '~/typer/sanity/sanity';
+import {
+  FlettefeltVerdier,
+  LocaleType,
+  SanityDokument,
+} from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
   typografi?: TypografiTyper;
-  flettefeltInnhold?: string;
+  flettefelter?: FlettefeltVerdier;
 }
 
 const TekstBlokk: React.FC<Props> = ({
   tekstblokk,
   typografi,
-  flettefeltInnhold,
+  flettefelter,
 }: Props) => {
   const spraak: LocaleType = LocaleType.nb;
 
@@ -41,12 +45,12 @@ const TekstBlokk: React.FC<Props> = ({
         },
         marks: {
           flettefelt: props => {
-            if (props?.value?.flettefeltVerdi && flettefeltInnhold) {
+            if (props?.value?.flettefeltVerdi) {
               return (
                 <span>
                   {flettefeltTilTekst(
-                    props?.value?.flettefeltVerdi,
-                    flettefeltInnhold,
+                    props.value.flettefeltVerdi,
+                    flettefelter,
                   )}
                 </span>
               );

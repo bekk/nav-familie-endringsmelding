@@ -21,7 +21,7 @@ const VeilederHilsen: React.FC<VeilederHilsenProp> = ({
       <TekstBlokk
         tekstblokk={hilsen}
         typografi={TypografiTyper.StegHeadingH2}
-        flettefeltInnhold={fornavn}
+        flettefelter={{ søkerNavn: fornavn }}
       />
       <TekstBlokk tekstblokk={innhold} />
     </GuidePanel>

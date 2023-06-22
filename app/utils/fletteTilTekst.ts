@@ -1,11 +1,17 @@
-import { ESanityFlettefeltverdi } from '~/typer/sanity/sanity';
+import {
+  ESanityFlettefeltverdi,
+  FlettefeltVerdier,
+} from '~/typer/sanity/sanity';
 
 export const flettefeltTilTekst = (
   flettefeltType: ESanityFlettefeltverdi,
-  flettefeltInnhold: string,
+  flettefelter?: FlettefeltVerdier,
 ): string => {
   switch (flettefeltType) {
     case ESanityFlettefeltverdi.SØKER_NAVN:
-      return flettefeltInnhold;
+      if (!flettefelter?.søkerNavn) {
+        throw Error('Flettefeltet søkernavn ikke sendt med');
+      }
+      return flettefelter.søkerNavn;
   }
 };
