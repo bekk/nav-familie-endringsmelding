@@ -14,7 +14,7 @@ import {
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
 import { useState } from 'react';
-import { AppContex } from './typer/context';
+import { AppContext } from './typer/context';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -50,6 +50,6 @@ export default function App() {
 }
 
 export function useSpråk() {
-  const { språkContext } = useOutletContext<AppContex>();
+  const { språkContext } = useOutletContext<AppContext>();
   return språkContext;
 }

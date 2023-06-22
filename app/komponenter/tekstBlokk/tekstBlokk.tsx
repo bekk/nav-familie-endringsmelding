@@ -2,10 +2,10 @@ import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import { useSpråk } from '~/root';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
+import { useSpråk } from '~/root';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
