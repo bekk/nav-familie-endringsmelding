@@ -1,13 +1,13 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
-import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
+import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
-import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { TypografiTyper } from '~/typer/typografi';
 
 export const meta: V2_MetaFunction = () => {
   return [

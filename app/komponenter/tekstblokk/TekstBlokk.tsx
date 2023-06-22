@@ -1,7 +1,7 @@
 import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
-import { TypografiWrapper } from '~/utils/typografiWrapper';
+import { TypografiWrapper } from '~/utils/TypografiWrapper';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';

@@ -1,7 +1,7 @@
 import { Button, ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
 import { SanityDokument } from '~/typer/sanity/sanity';
-import TekstBlokk from './tekstBlokk/tekstBlokk';
+import TekstBlokk from './tekstblokk/TekstBlokk';
 import { useNavigate } from '@remix-run/react';
 
 interface Props {
