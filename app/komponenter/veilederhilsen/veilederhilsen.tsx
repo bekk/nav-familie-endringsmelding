@@ -8,7 +8,6 @@ interface VeilederHilsenProp {
   innhold: SanityDokument | undefined;
   hilsen: SanityDokument | undefined;
 }
-
 const VeilederHilsen: React.FC<VeilederHilsenProp> = ({
   innhold,
   hilsen,
