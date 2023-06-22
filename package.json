@@ -8,7 +8,7 @@
     "dev": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
-    "lint": "eslint --max-warnings=0 --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint --max-warnings=0 .",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
@@ -43,6 +43,7 @@
     "@types/react-dom": "^18.0.11",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-css-modules": "^2.11.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
