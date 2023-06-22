@@ -1,17 +1,15 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
-import { useLoaderData } from '@remix-run/react';
-import { createClient } from '@sanity/client';
-import React, { useEffect, useState } from 'react';
-import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
-import {
-  ESanityApiKey,
-  LocaleType,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
-import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
+import Spinner from '~/komponenter/Spinner';
+import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
+import { ESanitySteg, SanityDokument } from '~/typer/sanity/sanity';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-//import { LocaleType, Sprakvelger } from '@navikt/familie-sprakvelger';
+import SamtykkePanel from '~/komponenter/SamtykkePanel';
+import { useTekster } from '~/hooks/contextHooks';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { useEffect, useState } from 'react';
+import { createClient } from '@sanity/client';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -42,16 +40,7 @@ export const loader = async () => {
 };
 
 export default function Index() {
-  const { forsideTekst } = useLoaderData<typeof loader>();
-  const spraak: LocaleType = LocaleType.nb;
-
-  const dokumenter: Map<ESanityApiKey, SanityDokument> = new Map();
-  forsideTekst.map(dokument => dokumenter.set(dokument.api_navn, dokument));
-
-  const punktlisteDokument = dokumenter.get(ESanityApiKey.PUNKTLISTE);
-  const tittelPunktlisteDokument = dokumenter.get(
-    ESanityApiKey.TITTEL_PUNKTLISTE,
-  );
+  const tekster = useTekster(ESanitySteg.FORSIDE);
 
   const [navn, settNavn] = useState('');
 
@@ -67,19 +56,33 @@ export default function Index() {
   }, [navn]);
 
   return (
-    <div className={`${css.sentrerTekst} ${css.fyllSide}`}>
-      <div className={`${css.innholdkonteiner}`}>
-        <TekstBlokk
-          tekstblokk={dokumenter.get(ESanityApiKey.TITTEL)}
-          valgBlock={spraak}
-          typografi={TypografiTyper.StegHeadingH1}
-        />
-        {navn ? navn : 'Ingen'}
-        <VeilederHilsen
-          punktlisteDokument={punktlisteDokument}
-          tittelPunktlisteDokument={tittelPunktlisteDokument}
-          spraak={spraak}
-        />
+    <div className={`${css.fyllSide}`}>
+      <div className={`${css.innholdKonteiner}`}>
+        {!tekster ? (
+          <Spinner />
+        ) : (
+          <>
+            <TekstBlokk
+              tekstblokk={tekster.tittel}
+              typografi={TypografiTyper.StegHeadingH1}
+            />
+            <Språkvelger />
+            <VeilederHilsen
+              innhold={tekster.veilederhilsenInnhold}
+              hilsen={tekster.brukerHilsen}
+            />
+            <SamtykkePanel
+              innhold={tekster.samtykkePanelMelding}
+              samtykke={tekster.samtykkePanelSamtykke}
+              feilmelding={tekster.samtykkePanelFeilmelding}
+            />
+            <div className={`${css.personvernerklaeringLink}`}>
+              <TekstBlokk
+                tekstblokk={tekster.linkTilPersonvernerklaering}
+              ></TekstBlokk>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,8 @@
 .poster {
   text-align: left;
+  width: 100%;
 }
 
-.tittelMargin {
-  margin-top: 1rem;
-  margin-bottom: 0.6rem;
-}
-
-.liste {
-  margin-top: 0px;
+.poster ul {
+  margin: 0;
 }

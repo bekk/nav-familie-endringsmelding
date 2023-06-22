@@ -5,47 +5,35 @@ export interface SanityDokument {
   _rev: string;
   _type: string;
   _id: string;
-  api_navn: ESanityApiKey;
-  visningsnavn: string;
-  /*  nb: CustomSanityTyper.CUSTUM_BLOCK;
-  nn: CustomSanityTyper.CUSTUM_BLOCK;
-  en: CustomSanityTyper.CUSTUM_BLOCK; */
-}
-
-/* export enum CustomSanityTyper {
-  CUSTUM_BLOCK = 'customBlock',
-} */
-
-export enum ESanityApiKey {
-  TITTEL = 'tittelPaForside',
-  PUNKTLISTE = 'punktlisteMedEndringsgrunner',
-  TITTEL_PUNKTLISTE = 'tittelPunktlisteMedEndringsgrunner',
-}
-
-export type TextBlock = Record<ESanityApiKey, string> & {
   api_navn: string;
-  [key: string]: unknown;
-};
-
-export interface IForsideTekstinnhold {
-  tittel: LocaleRecordString;
-  punktliste: LocaleRecordBlock;
+  visningsnavn: string;
+  steg: ESanitySteg;
+  ytelse: string;
+  nb: PortableTextBlock;
+  nn: PortableTextBlock;
+  en: PortableTextBlock;
 }
 
-//import { LocaleType } from '@navikt/familie-sprakvelger';
 export enum LocaleType {
   en = 'en',
   nb = 'nb',
   nn = 'nn',
 }
 
-//Ikke brukt enda, men notert at det er gjort i eksempel repo
-export type LocaleRecordString = Record<LocaleType, string> & {
-  api_navn: string;
-  [key: string]: unknown;
-};
+export enum ESanitySteg {
+  FORSIDE = 'FORSIDE',
+}
 
-export type LocaleRecordBlock = Record<LocaleType, PortableTextBlock[]> & {
-  api_navn: string;
-  [key: string]: unknown;
+export type IForsideTekstinnhold = Record<string, SanityDokument>;
+
+export interface ITekstinnhold {
+  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+}
+
+export enum ESanityFlettefeltverdi {
+  SØKER_NAVN = 'SØKER_NAVN',
+}
+
+export type FlettefeltVerdier = {
+  søkerNavn?: string;
 };
