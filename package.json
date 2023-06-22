@@ -8,7 +8,7 @@
     "dev": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
-    "lint": "eslint --max-warnings=0 --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint .",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },

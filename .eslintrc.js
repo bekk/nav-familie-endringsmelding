@@ -11,8 +11,6 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
-    'css-modules/no-unused-class': [2, { camelCase: true }],
-    'css-modules/no-undef-class': [2, { camelCase: true }],
   },
   ignorePatterns: ['!.*', 'dist', 'node_modules'],
 };
