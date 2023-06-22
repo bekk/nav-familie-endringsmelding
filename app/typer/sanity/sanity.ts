@@ -35,3 +35,7 @@ export interface ITekstinnhold {
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
 }
+
+export type FlettefeltVerdier = {
+  søkerNavn?: string;
+};

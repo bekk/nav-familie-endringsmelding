@@ -1,18 +1,23 @@
 import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
+import { FlettefeltVerdier, SanityDokument } from '~/typer/sanity/sanity';
 import { TypografiWrapper } from '~/utils/TypografiWrapper';
-import { SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
-import { useSpråk } from '~/root';
+import { useSpråk } from '~/hooks/contextHooks';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
   typografi?: TypografiTyper;
+  flettefelter?: FlettefeltVerdier;
 }
 
-const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
+const TekstBlokk: React.FC<Props> = ({
+  tekstblokk,
+  typografi,
+  flettefelter,
+}: Props) => {
   const [språk] = useSpråk();
 
   return tekstblokk ? (
@@ -40,7 +45,12 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
           flettefelt: props => {
             if (props?.value?.flettefeltVerdi) {
               return (
-                <span>{flettefeltTilTekst(props?.value?.flettefeltVerdi)}</span>
+                <span>
+                  {flettefeltTilTekst(
+                    props.value.flettefeltVerdi,
+                    flettefelter,
+                  )}
+                </span>
               );
             } else {
               throw new Error(`Fant ikke flettefeltVerdi`);
