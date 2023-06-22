@@ -1,6 +1,6 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
-import type { LinksFunction, LoaderFunction } from '@remix-run/node';
+import { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -20,14 +20,17 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
-export const loader: LoaderFunction = async () => {
-  return await hentDataFraSanity();
+export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const sanityTekster = await hentDataFraSanity();
+  const response = await hentSøker(request);
+  const søker = await response.json();
+  return { sanityTekster, søker };
 };
-
 export default function App() {
   const data = useLoaderData<typeof loader>();
+  console.log(data.søker);
+
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
-  const søker = hentSøker();
 
   return (
     <html lang={språk}>
@@ -40,9 +43,9 @@ export default function App() {
       <body>
         <Outlet
           context={{
-            sanityTekster: data,
+            sanityTekster: data.sanityTekster,
             språkContext: [språk, settSpråk],
-            søker: søker,
+            søker: data.søker,
           }}
         />
         <ScrollRestoration />

@@ -1,6 +1,8 @@
-import søkerMock from '~/mock/søkerMock';
+import { fetchWithToken } from '~/server/authorization';
 
-export const hentSøker = () => {
-  const søker = søkerMock;
+const API_URL_BACKEND: string = 'http://localhost:8099/api/oppslag/soker';
+
+export const hentSøker = async (request: Request): Promise<any> => {
+  const søker = await fetchWithToken(request, API_URL_BACKEND);
   return søker;
 };
