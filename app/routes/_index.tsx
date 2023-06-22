@@ -7,6 +7,7 @@ import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { useTekster } from '~/utils/sanityLoader';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { TypografiTyper } from '~/typer/typografi';
 
 export const meta: V2_MetaFunction = () => {
   return [
