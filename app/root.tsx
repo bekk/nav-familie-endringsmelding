@@ -37,7 +37,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet context={{ sanityTekster: data, språk: [språk, settSpråk] }} />
+        <Outlet
+          context={{ sanityTekster: data, språkContext: [språk, settSpråk] }}
+        />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -47,6 +49,6 @@ export default function App() {
 }
 
 export function useSpråk() {
-  const { språk } = useOutletContext<AppContext>();
-  return språk;
+  const { språkContext } = useOutletContext<AppContext>();
+  return språkContext;
 }

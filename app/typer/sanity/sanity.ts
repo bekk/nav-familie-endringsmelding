@@ -30,10 +30,11 @@ export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
 }
 
-export enum ESanityFlettefeltverdi {
-  SØKER_NAVN = 'SØKER_NAVN',
-}
 export interface AppContext {
   sanityTekster: ITekstinnhold;
-  språk: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
+  språkContext: [LocaleType, React.Dispatch<React.SetStateAction<LocaleType>>];
+}
+
+export enum ESanityFlettefeltverdi {
+  SØKER_NAVN = 'SØKER_NAVN',
 }
