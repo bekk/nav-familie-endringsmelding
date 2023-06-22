@@ -3,7 +3,7 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import { TypografiTyper } from '~/typer/typografi';
 import css from './send-endringsmelding.module.css';
-import { useTekster } from '~/utils/sanityLoader';
+import { useTekster } from '~/hooks/contextHooks';
 
 export default function SendEndringsmelding() {
   const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
