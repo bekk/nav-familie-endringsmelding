@@ -2,7 +2,7 @@ import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { SanityDokument } from '~/typer/sanity/sanity';
-import TekstBlokk from './tekstBlokk/tekstBlokk';
+import TekstBlokk from './tekstblokk/TekstBlokk';
 
 interface Props {
   innhold: SanityDokument;
