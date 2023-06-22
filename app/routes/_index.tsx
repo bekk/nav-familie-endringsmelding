@@ -1,13 +1,13 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
-import React from 'react';
 import Spinner from '~/komponenter/Spinner';
-import VeilederHilsen from '../komponenter/veilederhilsen/veilederhilsen';
+import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
-import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -34,6 +34,7 @@ export default function Index() {
               tekstblokk={tekster.tittel}
               typografi={TypografiTyper.StegHeadingH1}
             />
+            <Språkvelger />
             <VeilederHilsen
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}

@@ -12,8 +12,8 @@ import {
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
-import { useState } from 'react';
 import { hentSøker } from './utils/hentFraApi';
+import { useState } from 'react';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -30,7 +30,7 @@ export default function App() {
   const søker = hentSøker();
 
   return (
-    <html lang="en">
+    <html lang={språk}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -41,7 +41,7 @@ export default function App() {
         <Outlet
           context={{
             sanityTekster: data,
-            språk: [språk, settSpråk],
+            språkContext: [språk, settSpråk],
             søker: søker,
           }}
         />

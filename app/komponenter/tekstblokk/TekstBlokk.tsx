@@ -1,13 +1,11 @@
 import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
-import { TypografiWrapper } from '~/utils/typografiWrapper';
-import {
-  FlettefeltVerdier,
-  LocaleType,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
+import { FlettefeltVerdier, SanityDokument } from '~/typer/sanity/sanity';
+import { TypografiWrapper } from '~/utils/TypografiWrapper';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
+import { Link } from '@navikt/ds-react';
+import { useSpråk } from '~/hooks/contextHooks';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
@@ -20,11 +18,11 @@ const TekstBlokk: React.FC<Props> = ({
   typografi,
   flettefelter,
 }: Props) => {
-  const spraak: LocaleType = LocaleType.nb;
+  const [språk] = useSpråk();
 
   return tekstblokk ? (
     <PortableText
-      value={tekstblokk[spraak]}
+      value={tekstblokk[språk]}
       components={{
         block: {
           normal: ({ children }) => (
@@ -60,13 +58,13 @@ const TekstBlokk: React.FC<Props> = ({
           },
           link: props => {
             return (
-              <a
+              <Link
                 target={props.value.blank ? '_blank' : '_self'}
                 href={encodeURI(props.value.href)}
                 rel="noreferrer"
               >
                 {props.text}
-              </a>
+              </Link>
             );
           },
         },
