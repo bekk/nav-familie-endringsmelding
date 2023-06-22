@@ -1,5 +1,7 @@
 import { useOutletContext } from '@remix-run/react';
 import { createClient } from '@sanity/client';
+import { AppContex } from '~/typer/context';
+
 import {
   ESanitySteg,
   ITekstinnhold,
@@ -36,6 +38,6 @@ const strukturerInnholdForSteg = (
     }, {});
 
 export function useTekster(steg: ESanitySteg) {
-  const tekster = useOutletContext<ITekstinnhold>();
-  return tekster[steg];
+  const { sanityTekster } = useOutletContext<AppContex>();
+  return sanityTekster[steg];
 }

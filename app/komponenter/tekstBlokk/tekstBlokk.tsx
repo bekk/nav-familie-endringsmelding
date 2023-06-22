@@ -2,7 +2,8 @@ import type { TypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
-import { LocaleType, SanityDokument } from '~/typer/sanity/sanity';
+import { useSpråk } from '~/root';
+import { SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
 
@@ -12,11 +13,11 @@ interface Props {
 }
 
 const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
-  const spraak: LocaleType = LocaleType.nb;
+  const [språk] = useSpråk();
 
   return tekstblokk ? (
     <PortableText
-      value={tekstblokk[spraak]}
+      value={tekstblokk[språk]}
       components={{
         block: {
           normal: ({ children }) => (
