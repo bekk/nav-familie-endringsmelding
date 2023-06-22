@@ -6,8 +6,8 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstBlokk/tekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/utils/sanityLoader';
-import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 
 export const meta: V2_MetaFunction = () => {
   return [

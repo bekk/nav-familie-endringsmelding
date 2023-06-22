@@ -7,8 +7,9 @@ import { GlobeIcon } from '@navikt/aksel-icons';
 export const Språkvelger = () => {
   const [, settSpråk] = useSpråk();
 
-  function handleChange(evt: React.ChangeEvent<HTMLSelectElement>) {
-    settSpråk(evt.target.value as LocaleType);
+  function endreSpråk(endring: React.ChangeEvent<HTMLSelectElement>) {
+    const endringVerdi = endring.target.value as LocaleType;
+    settSpråk(endringVerdi);
   }
 
   return (
@@ -16,8 +17,8 @@ export const Språkvelger = () => {
       <Select
         label={<Label />}
         className={`${css.språkvelger}`}
-        onChange={evt => {
-          handleChange(evt);
+        onChange={endring => {
+          endreSpråk(endring);
         }}
       >
         <option value={LocaleType.nb}>Norsk (Bokmål)</option>
