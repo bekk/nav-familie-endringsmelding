@@ -1,8 +1,8 @@
 import { useOutletContext } from '@remix-run/react';
 import { createClient } from '@sanity/client';
+import { AppContex } from '~/typer/context';
 
 import {
-  AppContex,
   ESanitySteg,
   ITekstinnhold,
   SanityDokument,
