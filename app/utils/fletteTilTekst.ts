@@ -1,11 +1,17 @@
-import { ESanityFlettefeltverdi } from '~/typer/sanity/sanity';
-import { hentSøkerFornavn } from './hentFraApi';
+import {
+  ESanityFlettefeltverdi,
+  FlettefeltVerdier,
+} from '~/typer/sanity/sanity';
 
 export const flettefeltTilTekst = (
-  sanityFlettefelt: ESanityFlettefeltverdi,
+  flettefeltType: ESanityFlettefeltverdi,
+  flettefelter?: FlettefeltVerdier,
 ): string => {
-  switch (sanityFlettefelt) {
+  switch (flettefeltType) {
     case ESanityFlettefeltverdi.SØKER_NAVN:
-      return hentSøkerFornavn();
+      if (!flettefelter?.søkerNavn) {
+        throw Error('Flettefeltet søkernavn ikke sendt med');
+      }
+      return flettefelter.søkerNavn;
   }
 };

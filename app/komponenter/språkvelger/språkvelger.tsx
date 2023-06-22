@@ -1,8 +1,8 @@
 import { Select } from '@navikt/ds-react';
-import { useSpråk } from '~/root';
 import { LocaleType } from '~/typer/sanity/sanity';
 import css from './språkvelger.module.css';
 import { GlobeIcon } from '@navikt/aksel-icons';
+import { useSpråk } from '~/hooks/contextHooks';
 
 export const Språkvelger = () => {
   const [, settSpråk] = useSpråk();

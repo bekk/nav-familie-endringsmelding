@@ -5,8 +5,8 @@ import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import { useTekster } from '~/utils/sanityLoader';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
+import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 
 export const meta: V2_MetaFunction = () => {

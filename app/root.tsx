@@ -1,7 +1,6 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
 import type { LinksFunction, LoaderFunction } from '@remix-run/node';
-import { LocaleType } from './typer/sanity/sanity';
 import {
   Links,
   LiveReload,
@@ -10,11 +9,11 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useOutletContext,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
+import { LocaleType } from './typer/sanity/sanity';
+import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
-import { AppContext } from './typer/context';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: designsystemStyles },
@@ -28,6 +27,7 @@ export const loader: LoaderFunction = async () => {
 export default function App() {
   const data = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const søker = hentSøker();
 
   return (
     <html lang={språk}>
@@ -39,7 +39,11 @@ export default function App() {
       </head>
       <body>
         <Outlet
-          context={{ sanityTekster: data, språkContext: [språk, settSpråk] }}
+          context={{
+            sanityTekster: data,
+            språkContext: [språk, settSpråk],
+            søker: søker,
+          }}
         />
         <ScrollRestoration />
         <Scripts />
@@ -47,9 +51,4 @@ export default function App() {
       </body>
     </html>
   );
-}
-
-export function useSpråk() {
-  const { språkContext } = useOutletContext<AppContext>();
-  return språkContext;
 }
