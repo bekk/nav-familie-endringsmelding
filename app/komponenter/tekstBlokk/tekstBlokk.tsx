@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react';
 import { TypografiWrapper } from '~/utils/typografiWrapper';
 import { LocaleType, SanityDokument } from '~/typer/sanity/sanity';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
+import { Link } from '@navikt/ds-react';
 
 interface Props {
   tekstblokk: SanityDokument | undefined;
@@ -46,13 +47,13 @@ const TekstBlokk: React.FC<Props> = ({ tekstblokk, typografi }: Props) => {
           },
           link: props => {
             return (
-              <a
+              <Link
                 target={props.value.blank ? '_blank' : '_self'}
                 href={encodeURI(props.value.href)}
                 rel="noreferrer"
               >
                 {props.text}
-              </a>
+              </Link>
             );
           },
         },
