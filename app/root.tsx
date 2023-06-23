@@ -25,12 +25,10 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente sanity tekster');
   });
-  const søkerData = await hentSøker(request)
-    .then(resultat => resultat.json())
-    .catch(feil => {
-      //REDIRECT TIL FEIL SIDE
-      throw Error('Kunne ikke hente søker data');
-    });
+  const søkerData = await hentSøker(request).catch(feil => {
+    //REDIRECT TIL FEIL SIDE
+    throw Error('Kunne ikke hente søker data');
+  });
   return { tekstData, søkerData };
 };
 
