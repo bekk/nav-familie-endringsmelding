@@ -1,13 +1,11 @@
 import søkerMock from '~/mock/søkerMock';
 import { fetchWithToken } from '~/server/authorization';
+import { EMiljø } from '~/typer/miljø';
 
 const API_URL_BACKEND: string = 'http://localhost:8099/api/oppslag/soker';
 
-const ER_MOCK: boolean = true;
-
 export const hentSøker = async (request: Request): Promise<any> => {
-  if (ER_MOCK) {
-    console.log('Mokker søker data!');
+  if (process.env.ENV == EMiljø.LOKAL) {
     const mockInnhold = new Blob([JSON.stringify(søkerMock, null, 2)], {
       type: 'application/json',
     });
