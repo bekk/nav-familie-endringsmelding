@@ -21,17 +21,17 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const sanityTekster = await hentDataFraSanity().catch(err => {
+  const tekstData = await hentDataFraSanity().catch(feil => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente sanity tekster');
   });
-  const søker = await hentSøker(request)
-    .then(res => res.json())
-    .catch(err => {
+  const søkerData = await hentSøker(request)
+    .then(resultat => resultat.json())
+    .catch(feil => {
       //REDIRECT TIL FEIL SIDE
       throw Error('Kunne ikke hente søker data');
     });
-  return { sanityTekster, søker };
+  return { tekstData, søkerData };
 };
 
 export default function App() {
