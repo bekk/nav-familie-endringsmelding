@@ -21,15 +21,21 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const sanityTekster = await hentDataFraSanity();
-  const response = await hentSøker(request);
-  const søker = await response.json();
+  const sanityTekster = await hentDataFraSanity().catch(err => {
+    //REDIRECT TIL FEIL SIDE
+    throw Error('Kunne ikke hente sanity tekster');
+  });
+  const søker = await hentSøker(request)
+    .then(res => res.json())
+    .catch(err => {
+      //REDIRECT TIL FEIL SIDE
+      throw Error('Kunne ikke hente søker data');
+    });
   return { sanityTekster, søker };
 };
-export default function App() {
-  const data = useLoaderData<typeof loader>();
-  console.log(data.søker);
 
+export default function App() {
+  const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
 
   return (
@@ -43,9 +49,9 @@ export default function App() {
       <body>
         <Outlet
           context={{
-            sanityTekster: data.sanityTekster,
+            sanityTekster: tekstData,
             språkContext: [språk, settSpråk],
-            søker: data.søker,
+            søker: søkerData,
           }}
         />
         <ScrollRestoration />
