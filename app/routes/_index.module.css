@@ -7,7 +7,7 @@
 
 .innholdKonteiner {
   max-width: 37.5rem;
-  margin: 0 auto;
+  margin: 5rem auto;
   display: flex;
   flex-direction: column;
   gap: 5rem;
@@ -19,5 +19,11 @@
 }
 
 .personvernerklaeringLink {
-  margin-top: 15rem;
+  margin-bottom: 5rem;
+}
+
+.samtykkePanelTittel {
+  margin-bottom: -3.5rem;
+  text-align: left;
+  min-width: 100%;
 }

@@ -39,6 +39,9 @@ export default function Index() {
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}
             />
+            <div className={`${css.samtykkePanelTittel}`}>
+              <TekstBlokk tekstblokk={tekster.samtykkePanelTittel} />
+            </div>
             <SamtykkePanel
               innhold={tekster.samtykkePanelMelding}
               samtykke={tekster.samtykkePanelSamtykke}
