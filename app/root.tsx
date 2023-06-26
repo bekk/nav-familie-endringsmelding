@@ -16,7 +16,17 @@ import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 
 export const links: LinksFunction = () => [
-  { rel: 'preconnect', href: designsystemStyles },
+  {
+    rel: 'stylesheet',
+    href: designsystemStyles,
+  },
+  {
+    rel: 'preload',
+    href: 'https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
