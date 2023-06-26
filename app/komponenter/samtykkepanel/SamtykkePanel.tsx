@@ -1,8 +1,8 @@
-import { Button, ConfirmationPanel } from '@navikt/ds-react';
+import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
 import { SanityDokument } from '~/typer/sanity/sanity';
-import TekstBlokk from './tekstblokk/TekstBlokk';
-import { useNavigate } from '@remix-run/react';
+import TekstBlokk from '../tekstblokk/TekstBlokk';
+import css from './samtykkepanel.module.css';
 
 interface Props {
   tittel: SanityDokument;
@@ -17,13 +17,11 @@ const SamtykkePanel: React.FC<Props> = ({
   samtykke,
   feilmelding,
 }: Props) => {
-  const navigate = useNavigate();
-
   const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
-  const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
+  const [feilmeldingAktivert /* , settFeilmeldingAktivert */] = useState(false);
 
   return (
-    <div>
+    <div className={`${css.samtykkePanelOmråde}`}>
       <TekstBlokk tekstblokk={tittel} />
       <ConfirmationPanel
         checked={samtykkeErBekreftet}
@@ -36,17 +34,6 @@ const SamtykkePanel: React.FC<Props> = ({
       >
         <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
-      {/* FLYTT DENNE KNAPPEN A! */}
-      <Button
-        variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
-        onClick={() =>
-          samtykkeErBekreftet
-            ? navigate('/send-endringsmelding')
-            : settFeilmeldingAktivert(true)
-        }
-      >
-        Start
-      </Button>
     </div>
   );
 };

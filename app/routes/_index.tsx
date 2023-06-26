@@ -5,7 +5,7 @@ import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import SamtykkePanel from '~/komponenter/SamtykkePanel';
+import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 
@@ -39,15 +39,13 @@ export default function Index() {
               innhold={tekster.veilederhilsenInnhold}
               hilsen={tekster.brukerHilsen}
             />
-            <div className={`${css.samtykkePanelTittel}`}>
-              <TekstBlokk tekstblokk={tekster.samtykkePanelTittel} />
-            </div>
             <SamtykkePanel
               tittel={tekster.samtykkePanelTittel}
               innhold={tekster.samtykkePanelMelding}
               samtykke={tekster.samtykkePanelSamtykke}
               feilmelding={tekster.samtykkePanelFeilmelding}
             />
+
             <div className={`${css.personvernerklaeringLink}`}>
               <TekstBlokk
                 tekstblokk={tekster.linkTilPersonvernerklaering}
