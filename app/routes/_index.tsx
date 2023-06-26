@@ -9,7 +9,7 @@ import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { useState } from 'react';
-import StartKnapp from '~/komponenter/StartKnapp';
+import VidereKnapp from '~/komponenter/VidereKnapp';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -60,10 +60,10 @@ export default function Index() {
               onSamtykkeEndring={håndtereSamtykkeEndring}
               feilmeldingAktivert={feilmeldingAktivert}
             />
-            <StartKnapp
+            <VidereKnapp
               tekstPåKnapp="Start"
               kanGåVidere={samtykkeErBekreftet}
-              nesteSteg="/send-endringsmelding"
+              nesteSteg={ESanitySteg.FORSIDE} //endre til SEND-ENDRINGER
               knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
             />
             <div className={`${css.personvernerklaeringLink}`}>
