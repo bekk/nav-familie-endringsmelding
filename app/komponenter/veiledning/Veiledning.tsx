@@ -8,10 +8,11 @@ interface Props {
 }
 
 const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
-  // eslint-disable-line
   return (
     <GuidePanel>
       <TekstBlokk tekstblokk={hilsen} typografi={TypografiTyper.BodyShort} />
     </GuidePanel>
   );
 };
+
+export default Veiledning;
