@@ -5,12 +5,14 @@ import TekstBlokk from './tekstblokk/TekstBlokk';
 import { useNavigate } from '@remix-run/react';
 
 interface Props {
+  tittel: SanityDokument;
   innhold: SanityDokument;
   samtykke: SanityDokument;
   feilmelding: SanityDokument;
 }
 
 const SamtykkePanel: React.FC<Props> = ({
+  tittel,
   innhold,
   samtykke,
   feilmelding,
@@ -21,7 +23,8 @@ const SamtykkePanel: React.FC<Props> = ({
   const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
 
   return (
-    <>
+    <div>
+      <TekstBlokk tekstblokk={tittel} />
       <ConfirmationPanel
         checked={samtykkeErBekreftet}
         label={<TekstBlokk tekstblokk={samtykke} />}
@@ -33,6 +36,7 @@ const SamtykkePanel: React.FC<Props> = ({
       >
         <TekstBlokk tekstblokk={innhold} />
       </ConfirmationPanel>
+      {/* FLYTT DENNE KNAPPEN A! */}
       <Button
         variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
         onClick={() =>
@@ -43,7 +47,7 @@ const SamtykkePanel: React.FC<Props> = ({
       >
         Start
       </Button>
-    </>
+    </div>
   );
 };
 

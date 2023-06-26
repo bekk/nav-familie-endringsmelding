@@ -43,6 +43,7 @@ export default function Index() {
               <TekstBlokk tekstblokk={tekster.samtykkePanelTittel} />
             </div>
             <SamtykkePanel
+              tittel={tekster.samtykkePanelTittel}
               innhold={tekster.samtykkePanelMelding}
               samtykke={tekster.samtykkePanelSamtykke}
               feilmelding={tekster.samtykkePanelFeilmelding}
