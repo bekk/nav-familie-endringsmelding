@@ -1,4 +1,5 @@
 import { PortableTextBlock } from '@portabletext/types';
+import { EApiKeysForside, IForsideTekstinnhold } from './sanityForside';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -24,12 +25,6 @@ export enum ESanitySteg {
   FORSIDE = 'FORSIDE',
 }
 
-export type IForsideTekstinnhold = Record<string, SanityDokument>;
-
-export interface ITekstinnhold {
-  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
-}
-
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
 }
@@ -37,3 +32,12 @@ export enum ESanityFlettefeltverdi {
 export type FlettefeltVerdier = {
   søkerNavn?: string;
 };
+
+export interface ITekstinnhold {
+  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+}
+
+//For typene ApiKeys og Tekstinnhold må nye sider legges til på formatet: EApiKeysForside | EApiKeysSide;
+export type ApiKeys = EApiKeysForside;
+
+export type Tekstinnhold = IForsideTekstinnhold;

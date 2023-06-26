@@ -8,6 +8,7 @@ import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -21,7 +22,7 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const tekster = useTekster(ESanitySteg.FORSIDE);
+  const tekster: IForsideTekstinnhold = useTekster(ESanitySteg.FORSIDE);
 
   return (
     <div className={`${css.fyllSide}`}>
