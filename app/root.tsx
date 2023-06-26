@@ -16,7 +16,7 @@ import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: designsystemStyles },
+  { rel: 'preconnect', href: designsystemStyles },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
