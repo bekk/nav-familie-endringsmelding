@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
+import { TypografiTyper } from '~/typer/typografi';
 
 interface Props {
   tittel: SanityDokument;
   innhold: SanityDokument;
   samtykke: SanityDokument;
   feilmelding: SanityDokument;
+  onSamtykkeEndring: (bekreftet: boolean) => void;
+  feilmeldingAktivert: boolean;
 }
 
 const SamtykkePanel: React.FC<Props> = ({
@@ -16,9 +19,15 @@ const SamtykkePanel: React.FC<Props> = ({
   innhold,
   samtykke,
   feilmelding,
+  onSamtykkeEndring,
+  feilmeldingAktivert,
 }: Props) => {
   const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
-  const [feilmeldingAktivert /* , settFeilmeldingAktivert */] = useState(false);
+
+  const håndtereSamtykkeEndring = (bekreftet: boolean) => {
+    settSamtykkeErBekreftet(bekreftet);
+    onSamtykkeEndring(bekreftet);
+  };
 
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
@@ -26,10 +35,17 @@ const SamtykkePanel: React.FC<Props> = ({
       <ConfirmationPanel
         checked={samtykkeErBekreftet}
         label={<TekstBlokk tekstblokk={samtykke} />}
-        onChange={() => settSamtykkeErBekreftet(harLest => !harLest)}
+        onChange={() => {
+          håndtereSamtykkeEndring(!samtykkeErBekreftet);
+        }}
         error={
           !samtykkeErBekreftet &&
-          feilmeldingAktivert && <TekstBlokk tekstblokk={feilmelding} />
+          feilmeldingAktivert && (
+            <TekstBlokk
+              tekstblokk={feilmelding}
+              typografi={TypografiTyper.BodyShort}
+            /> //må være String? funker med "test"
+          )
         }
       >
         <TekstBlokk tekstblokk={innhold} />

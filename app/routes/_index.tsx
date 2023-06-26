@@ -8,6 +8,8 @@ import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { useState } from 'react';
+import StartKnapp from '~/komponenter/StartKnapp';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -22,6 +24,17 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
+  const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
+  const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
+
+  const håndtereSamtykkeEndring = (bekreftet: boolean) => {
+    settSamtykkeErBekreftet(bekreftet);
+    settFeilmeldingAktivert(false);
+  };
+
+  const håndtereKnappeTrykk = () => {
+    settFeilmeldingAktivert(true);
+  };
 
   return (
     <div className={`${css.fyllSide}`}>
@@ -44,12 +57,17 @@ export default function Index() {
               innhold={tekster.samtykkePanelMelding}
               samtykke={tekster.samtykkePanelSamtykke}
               feilmelding={tekster.samtykkePanelFeilmelding}
+              onSamtykkeEndring={håndtereSamtykkeEndring}
+              feilmeldingAktivert={feilmeldingAktivert}
             />
-
+            <StartKnapp
+              tekstPåKnapp="Start"
+              kanGåVidere={samtykkeErBekreftet}
+              nesteSteg="/send-endringsmelding"
+              knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
+            />
             <div className={`${css.personvernerklaeringLink}`}>
-              <TekstBlokk
-                tekstblokk={tekster.linkTilPersonvernerklaering}
-              ></TekstBlokk>
+              <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
             </div>
           </>
         )}
