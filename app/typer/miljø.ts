@@ -1,4 +1,4 @@
 export enum EMiljø {
-  PRODUKSJON = 'PRODUCTION',
-  LOKAL = 'LOCAL',
+  PRODUKSJON = 'PRODUKSJON',
+  LOKAL = 'LOKAL',
 }
