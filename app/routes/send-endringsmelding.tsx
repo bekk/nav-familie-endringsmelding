@@ -4,12 +4,14 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
-import VidereKnapp from '~/komponenter/VidereKnapp';
 import css from './send-endringsmelding.module.css';
+import { useNavigate } from '@remix-run/react';
+import { Button } from '@navikt/ds-react';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export default function SendEndringsmelding() {
   const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
-
+  const navigate = useNavigate();
   return (
     <InnholdKonteiner>
       <>
@@ -18,17 +20,13 @@ export default function SendEndringsmelding() {
           typografi={TypografiTyper.StegHeadingH1}
         />
         <div className={`${css.navigeringsKnapper}`}>
-          <VidereKnapp
-            kanGåVidere={true} //skal denne alltid være true, eller skal man legge på en state, slik som i index?
-            nesteSteg={ESanitySteg.FORSIDE}
-            tekstPåKnapp={'Tilbake'}
-            //gjorde knappeTrykkUtenSamtykke optional, denne må vi vurdere om vi trenger eller ikke ut ifra om det er noe som må "verifiseres" før en kan navigere videre (slik som på forsiden)
-          />
-          <VidereKnapp
-            kanGåVidere={false}
-            nesteSteg={ESanitySteg.FORSIDE}
-            tekstPåKnapp={'Gå videre'}
-          />
+          <Button
+            variant={'primary'}
+            onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
+          >
+            Tilbake
+          </Button>
+          <Button variant={'secondary'}>Gå videre</Button>
         </div>
       </>
     </InnholdKonteiner>
