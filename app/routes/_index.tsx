@@ -10,6 +10,7 @@ import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { useState } from 'react';
 import VidereKnapp from '~/komponenter/VidereKnapp';
+import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -37,41 +38,40 @@ export default function Index() {
   };
 
   return (
-    <div className={`${css.fyllSide}`}>
-      <div className={`${css.innholdKonteiner}`}>
-        {!tekster ? (
-          <Spinner />
-        ) : (
-          <>
-            <TekstBlokk
-              tekstblokk={tekster.tittel}
-              typografi={TypografiTyper.StegHeadingH1}
-            />
-            <Språkvelger />
-            <VeilederHilsen
-              innhold={tekster.veilederhilsenInnhold}
-              hilsen={tekster.brukerHilsen}
-            />
-            <SamtykkePanel
-              tittel={tekster.samtykkePanelTittel}
-              innhold={tekster.samtykkePanelMelding}
-              samtykke={tekster.samtykkePanelSamtykke}
-              feilmelding={tekster.samtykkePanelFeilmelding}
-              onSamtykkeEndring={håndtereSamtykkeEndring}
-              feilmeldingAktivert={feilmeldingAktivert}
-            />
-            <VidereKnapp
-              tekstPåKnapp="Start"
-              kanGåVidere={samtykkeErBekreftet}
-              nesteSteg={ESanitySteg.FORSIDE} //endre til SEND-ENDRINGER
-              knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
-            />
-            <div className={`${css.personvernerklaeringLink}`}>
-              <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+    <InnholdKonteiner>
+      {!tekster ? (
+        <Spinner />
+      ) : (
+        <>
+          <TekstBlokk
+            tekstblokk={tekster.tittel}
+            typografi={TypografiTyper.StegHeadingH1}
+          />
+          <Språkvelger />
+
+          <VeilederHilsen
+            innhold={tekster.veilederhilsenInnhold}
+            hilsen={tekster.brukerHilsen}
+          />
+          <SamtykkePanel
+            tittel={tekster.samtykkePanelTittel}
+            innhold={tekster.samtykkePanelMelding}
+            samtykke={tekster.samtykkePanelSamtykke}
+            feilmelding={tekster.samtykkePanelFeilmelding}
+            onSamtykkeEndring={håndtereSamtykkeEndring}
+            feilmeldingAktivert={feilmeldingAktivert}
+          />
+          <VidereKnapp
+            tekstPåKnapp="Start"
+            kanGåVidere={samtykkeErBekreftet}
+            nesteSteg={ESanitySteg.FORSIDE} //endre til SEND-ENDRINGER
+            knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
+          />
+          <div className={`${css.personvernerklaeringLink}`}>
+            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
+          </div>
+        </>
+      )}
+    </InnholdKonteiner>
   );
 }
