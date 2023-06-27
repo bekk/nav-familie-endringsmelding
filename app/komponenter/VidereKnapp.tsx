@@ -7,7 +7,7 @@ interface Props {
   kanGåVidere: boolean;
   nesteSteg: ESanitySteg;
   tekstPåKnapp: string;
-  knappeTrykkUtenSamtykke: () => void;
+  knappeTrykkUtenSamtykke?: () => void;
 }
 
 const VidereKnapp: React.FC<Props> = ({
