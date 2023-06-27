@@ -9,8 +9,10 @@ import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { useState } from 'react';
-import VidereKnapp from '~/komponenter/VidereKnapp';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
+import { Button } from '@navikt/ds-react';
+import { useNavigate } from '@remix-run/react';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -27,6 +29,9 @@ export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
   const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
   const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
+
+  const navigate = useNavigate();
+  const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
 
   const håndtereSamtykkeEndring = (bekreftet: boolean) => {
     settSamtykkeErBekreftet(bekreftet);
@@ -58,15 +63,19 @@ export default function Index() {
             innhold={tekster.samtykkePanelMelding}
             samtykke={tekster.samtykkePanelSamtykke}
             feilmelding={tekster.samtykkePanelFeilmelding}
-            onSamtykkeEndring={håndtereSamtykkeEndring}
+            påSamtykkeEndring={håndtereSamtykkeEndring}
             feilmeldingAktivert={feilmeldingAktivert}
           />
-          <VidereKnapp
-            tekstPåKnapp="Start"
-            kanGåVidere={samtykkeErBekreftet}
-            nesteSteg={ESanitySteg.SEND_ENDRINGER}
-            knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
-          />
+          <Button
+            variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
+            onClick={
+              samtykkeErBekreftet
+                ? () => navigate(nestePath)
+                : håndtereKnappeTrykk
+            }
+          >
+            Start
+          </Button>
           <div className={`${css.personvernerklaeringLink}`}>
             <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
           </div>
