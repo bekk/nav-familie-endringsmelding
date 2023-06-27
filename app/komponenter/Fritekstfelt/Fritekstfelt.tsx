@@ -3,7 +3,7 @@ import css from './fritekstfelt.module.css';
 import { SanityDokument } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useSpråk } from '~/hooks/contextHooks';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 interface Props {
   tittel: SanityDokument | undefined;
@@ -19,15 +19,15 @@ const Fritekstfelt: React.FC<Props> = ({
   feilmeldingManglerTegn,
 }: Props) => {
   const [språk] = useSpråk();
-  const specialCharsRegex = /[!@#$%^&*()?"{}|<>]+/;
+  const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨]/;
   const [manglerTekst, settManglerTekst] = useState<boolean>(true);
   const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
   const i18nInnhold = {
-    counterTooMuch: hentTekst(true),
-    counterLeft: hentTekst(false),
+    counterTooMuch: hentI18nInnhold(true),
+    counterLeft: hentI18nInnhold(false),
   };
 
-  function hentTekst(tegnIgjen: boolean) {
+  function hentI18nInnhold(tegnIgjen: boolean) {
     switch (språk) {
       case 'nb':
         return tegnIgjen ? 'tegn igjen' : 'tegn for mye';
@@ -38,8 +38,8 @@ const Fritekstfelt: React.FC<Props> = ({
     }
   }
 
-  const sjekkTekst = (handling: any) => {
-    const innholdVerdi = handling.target.value;
+  const sjekkTekstInput = (handling: FormEvent<HTMLTextAreaElement>) => {
+    const innholdVerdi = handling.currentTarget.value;
 
     if (innholdVerdi.length == 0) {
       settManglerTekst(true);
@@ -47,7 +47,7 @@ const Fritekstfelt: React.FC<Props> = ({
       settManglerTekst(false);
     }
 
-    if (innholdVerdi.match(specialCharsRegex)) {
+    if (innholdVerdi.match(spesialTegnRegex)) {
       settBrukerSpesialtegn(true);
     } else {
       settBrukerSpesialtegn(false);
@@ -70,7 +70,7 @@ const Fritekstfelt: React.FC<Props> = ({
           )
         )
       }
-      onInput={event => sjekkTekst(event)}
+      onInput={handling => sjekkTekstInput(handling)}
     />
   );
 };
