@@ -64,7 +64,7 @@ export default function Index() {
           <VidereKnapp
             tekstPåKnapp="Start"
             kanGåVidere={samtykkeErBekreftet}
-            nesteSteg={ESanitySteg.FORSIDE} //endre til SEND-ENDRINGER
+            nesteSteg={ESanitySteg.SEND_ENDRINGER}
             knappeTrykkUtenSamtykke={håndtereKnappeTrykk}
           />
           <div className={`${css.personvernerklaeringLink}`}>

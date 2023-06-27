@@ -44,7 +44,7 @@ const SamtykkePanel: React.FC<Props> = ({
             <TekstBlokk
               tekstblokk={feilmelding}
               typografi={TypografiTyper.BodyShort}
-            /> //må være String? funker med "test"
+            /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }
       >
