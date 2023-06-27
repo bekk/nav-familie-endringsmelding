@@ -58,7 +58,7 @@ const Fritekstfelt: React.FC<Props> = ({
     <Textarea
       label={<TekstBlokk tekstblokk={tittel} />}
       description={<TekstBlokk tekstblokk={hjelpetekst} />}
-      maxLength={10}
+      maxLength={1000}
       className={`${css.fritekstfelt}`}
       i18n={i18nInnhold}
       error={
