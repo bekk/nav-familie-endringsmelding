@@ -37,7 +37,5 @@ export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
 }
 
-//For typene ApiKeys og Tekstinnhold må nye sider legges til på formatet: EApiKeysForside | EApiKeysSide;
+//For typen ApiKeys må nye sider legges til på formatet: EApiKeysForside | EApiKeysSide;
 export type ApiKeys = EApiKeysForside;
-
-export type Tekstinnhold = IForsideTekstinnhold;

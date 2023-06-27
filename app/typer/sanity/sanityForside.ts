@@ -11,13 +11,4 @@ export enum EApiKeysForside {
   VEILEDERHILSENINNHOLD = 'veilederhilsenInnhold',
 }
 
-export interface IForsideTekstinnhold {
-  [EApiKeysForside.TITTEL]: SanityDokument;
-  [EApiKeysForside.BRUKERHILSEN]: SanityDokument;
-  [EApiKeysForside.LINKTILPERSONVERNERKLAERING]: SanityDokument;
-  [EApiKeysForside.SAMTYKKEPANEL_FEILMELDING]: SanityDokument;
-  [EApiKeysForside.SAMTYKKEPANEL_MELDING]: SanityDokument;
-  [EApiKeysForside.SAMTYKKEPANEL_SAMTYKKE]: SanityDokument;
-  [EApiKeysForside.SAMTYKKEPANEL_TITTEL]: SanityDokument;
-  [EApiKeysForside.VEILEDERHILSENINNHOLD]: SanityDokument;
-}
+export type IForsideTekstinnhold = Record<EApiKeysForside, SanityDokument>;
