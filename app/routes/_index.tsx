@@ -63,7 +63,7 @@ export default function Index() {
             innhold={tekster.samtykkePanelMelding}
             samtykke={tekster.samtykkePanelSamtykke}
             feilmelding={tekster.samtykkePanelFeilmelding}
-            påSamtykkeEndring={håndtereSamtykkeEndring}
+            vedSamtykkeEndring={håndtereSamtykkeEndring}
             feilmeldingAktivert={feilmeldingAktivert}
           />
           <Button

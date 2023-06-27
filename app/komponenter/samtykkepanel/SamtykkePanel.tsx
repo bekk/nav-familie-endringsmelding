@@ -10,7 +10,7 @@ interface Props {
   innhold: SanityDokument;
   samtykke: SanityDokument;
   feilmelding: SanityDokument;
-  påSamtykkeEndring: (bekreftet: boolean) => void;
+  vedSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
@@ -19,14 +19,14 @@ const SamtykkePanel: React.FC<Props> = ({
   innhold,
   samtykke,
   feilmelding,
-  påSamtykkeEndring,
+  vedSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
   const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
 
   const håndtereSamtykkeEndring = (bekreftet: boolean) => {
     settSamtykkeErBekreftet(bekreftet);
-    påSamtykkeEndring(bekreftet);
+    vedSamtykkeEndring(bekreftet);
   };
 
   return (
