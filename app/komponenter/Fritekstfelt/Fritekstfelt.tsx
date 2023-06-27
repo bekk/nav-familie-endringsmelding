@@ -19,7 +19,7 @@ const Fritekstfelt: React.FC<Props> = ({
   feilmeldingManglerTegn,
 }: Props) => {
   const [språk] = useSpråk();
-  const specialCharsRegex = /[!@#$%^&*()?"{}|<>]/;
+  const specialCharsRegex = /[!@#$%^&*()?"{}|<>]+/;
   const [manglerTekst, settManglerTekst] = useState<boolean>(true);
   const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
   const i18nInnhold = {
