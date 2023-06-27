@@ -1,6 +1,5 @@
 import React from 'react';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
