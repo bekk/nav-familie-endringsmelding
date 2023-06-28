@@ -22,7 +22,7 @@ const SamtykkePanel: React.FC<Props> = ({
   vedSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
-  const [erSamtykkeErBekreftet, settErSamtykkeErBekreftet] = useState(false);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   const håndterSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeErBekreftet(bekreftet);
