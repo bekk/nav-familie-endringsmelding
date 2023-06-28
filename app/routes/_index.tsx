@@ -8,8 +8,8 @@ import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
-import Banner from '~/komponenter/banner/Banner';
+
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -27,8 +27,7 @@ export default function Index() {
 
   return (
     <>
-      <Banner bannerTekst={tekster.bannerTekstForside} />
-      <InnholdKonteiner>
+      <HovedInnhold>
         {!tekster ? (
           <Spinner />
         ) : (
@@ -54,7 +53,7 @@ export default function Index() {
             </div>
           </>
         )}
-      </InnholdKonteiner>
+      </HovedInnhold>
     </>
   );
 }

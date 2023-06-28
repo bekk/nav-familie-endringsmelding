@@ -1,13 +1,12 @@
-import { SanityDokument } from '~/typer/sanity/sanity';
+import { ESanitySteg } from '~/typer/sanity/sanity';
 import css from './banner.module.css';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
+import { useTekster } from '~/hooks/contextHooks';
 
-interface Props {
-  bannerTekst: SanityDokument;
-}
+const Banner: React.FC = () => {
+  const { bannerTekst } = useTekster(ESanitySteg.FELLES);
 
-const Banner: React.FC<Props> = ({ bannerTekst }: Props) => {
   return (
     <section className={`${css.bannerStil}`}>
       <TekstBlokk
