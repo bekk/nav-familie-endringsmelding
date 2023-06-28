@@ -18,6 +18,13 @@ const SamtykkePanel: React.FC<Props> = ({
 }: Props) => {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
+  const {
+    samtykkePanelTittel,
+    samtykkePanelSamtykke,
+    samtykkePanelFeilmelding,
+    samtykkePanelMelding,
+  } = tekster;
+
   const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
     håndterSamtykkeEndring(bekreftet);
@@ -25,10 +32,10 @@ const SamtykkePanel: React.FC<Props> = ({
 
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
-      <TekstBlokk tekstblokk={tekster.samtykkePanelTittel} />
+      <TekstBlokk tekstblokk={samtykkePanelTittel} />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
-        label={<TekstBlokk tekstblokk={tekster.samtykkePanelSamtykke} />}
+        label={<TekstBlokk tekstblokk={samtykkePanelSamtykke} />}
         onChange={() => {
           vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
@@ -36,13 +43,13 @@ const SamtykkePanel: React.FC<Props> = ({
           !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
-              tekstblokk={tekster.samtykkePanelFeilmelding}
+              tekstblokk={samtykkePanelFeilmelding}
               typografi={TypografiTyper.BodyShort}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }
       >
-        <TekstBlokk tekstblokk={tekster.samtykkePanelMelding} />
+        <TekstBlokk tekstblokk={samtykkePanelMelding} />
       </ConfirmationPanel>
     </div>
   );
