@@ -49,10 +49,12 @@ export default function Index() {
         <Spinner />
       ) : (
         <>
-          <TekstBlokk
-            tekstblokk={tekster.tittel}
-            typografi={TypografiTyper.StegHeadingH1}
-          />
+          <div className={`${css.toppMargin}`}>
+            <TekstBlokk
+              tekstblokk={tekster.tittel}
+              typografi={TypografiTyper.StegHeadingH1}
+            />
+          </div>
           <Språkvelger />
           <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
@@ -70,9 +72,7 @@ export default function Index() {
           >
             Start
           </Button>
-          <div className={`${css.personvernerklæringLink}`}>
-            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-          </div>
+          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
       )}
     </HovedInnhold>
