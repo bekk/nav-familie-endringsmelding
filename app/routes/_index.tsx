@@ -27,8 +27,8 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
-  const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
-  const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
   const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
@@ -38,7 +38,7 @@ export default function Index() {
     settFeilmeldingAktivert(false);
   };
 
-  const håndtereKnappeTrykk = () => {
+  const håndterKnappeTrykk = () => {
     settFeilmeldingAktivert(true);
   };
 
