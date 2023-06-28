@@ -6,7 +6,6 @@ import { useSpråk, useTekster } from '~/hooks/contextHooks';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 import css from './send-endringsmelding.module.css';
 import cssFritekst from './fritekstfelt.module.css';
-
 import { Button, Textarea } from '@navikt/ds-react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
@@ -20,6 +19,8 @@ export default function SendEndringsmelding() {
     fritekstfeltFeilmeldingTegn,
     fritekstfeltFeilmeldingMinTegn,
   } = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const { knappTilbake, knappSendEndringer } = useTekster(ESanitySteg.FELLES);
+
   const navigate = useNavigate();
   const [språk] = useSpråk();
 
@@ -99,7 +100,7 @@ export default function SendEndringsmelding() {
             variant={'secondary'}
             onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
           >
-            Tilbake
+            <TekstBlokk tekstblokk={knappTilbake} />
           </Button>
           <Button
             variant={tekstInputOK ? 'primary' : 'secondary'}
@@ -107,9 +108,8 @@ export default function SendEndringsmelding() {
               settKnappTrykketPå(true);
               tekstInputOK && console.log('går til neste side');
             }}
-            //Teksten for knappene her må hentes på ulike språk
           >
-            Gå videre
+            <TekstBlokk tekstblokk={knappSendEndringer} />
           </Button>
         </div>
       </>
