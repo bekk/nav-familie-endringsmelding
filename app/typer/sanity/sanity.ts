@@ -1,4 +1,10 @@
 import { PortableTextBlock } from '@portabletext/types';
+import { EApiKeysForside, IForsideTekstinnhold } from './sanityForside';
+import {
+  EApiKeysSendEndring,
+  ISendEndringTekstinnhold,
+} from './sanitySendEndring';
+import { EApiKeysFelles, IFellesTekstinnhold } from './sanityFelles';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -26,16 +32,6 @@ export enum ESanitySteg {
   FELLES = 'FELLES',
 }
 
-export type IForsideTekstinnhold = Record<string, SanityDokument>;
-export type ISendEndringerTekstinnhold = Record<string, SanityDokument>;
-export type IFellesTekstinnhold = Record<string, SanityDokument>;
-
-export interface ITekstinnhold {
-  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
-  [ESanitySteg.SEND_ENDRINGER]: ISendEndringerTekstinnhold;
-  [ESanitySteg.FELLES]: IFellesTekstinnhold;
-}
-
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
 }
@@ -43,3 +39,11 @@ export enum ESanityFlettefeltverdi {
 export type FlettefeltVerdier = {
   søkerNavn?: string;
 };
+
+export interface ITekstinnhold {
+  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+  [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
+  [ESanitySteg.FELLES]: IFellesTekstinnhold;
+}
+
+export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;

@@ -10,18 +10,22 @@ import { Button, Textarea } from '@navikt/ds-react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 
 export default function SendEndringsmelding() {
+  const sanityTekster = useTekster();
   const {
     overskrift,
     veilederInnhold,
     fritekstfeltTittel,
     fritekstfeltBeskrivelse,
-    fritekstfeltFeilmeldingTekst,
-    fritekstfeltFeilmeldingTegn,
+    fritekstfeltFeilmeldingManglerTekst,
+    fritekstfeltFeilmeldingSpesialTegn,
     fritekstfeltFeilmeldingMinTegn,
-  } = useTekster(ESanitySteg.SEND_ENDRINGER);
-  const { knappTilbake, knappSendEndringer } = useTekster(ESanitySteg.FELLES);
+  } = sanityTekster[ESanitySteg.SEND_ENDRINGER];
+
+  const { knappTilbake, knappSendEndringer } =
+    sanityTekster[ESanitySteg.FELLES];
 
   const navigate = useNavigate();
   const [språk] = useSpråk();
@@ -63,9 +67,9 @@ export default function SendEndringsmelding() {
 
   const utledFeilmelding = () => {
     if (manglerTekst) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingTekst} />;
+      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingManglerTekst} />;
     } else if (brukerSpesialtegn) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingTegn} />;
+      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingSpesialTegn} />;
     } else if (!minimumTegnOppfylt) {
       return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingMinTegn} />;
     }
@@ -82,6 +86,8 @@ export default function SendEndringsmelding() {
   return (
     <InnholdKonteiner>
       <>
+        <StegIndikator nåværendeSteg={1} />
+
         <TekstBlokk
           tekstblokk={overskrift}
           typografi={TypografiTyper.StegHeadingH1}
