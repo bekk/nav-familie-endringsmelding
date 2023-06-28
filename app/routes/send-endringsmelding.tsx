@@ -4,6 +4,7 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import css from './send-endringsmelding.module.css';
 import { useNavigate } from '@remix-run/react';
 import { Button } from '@navikt/ds-react';
@@ -15,6 +16,8 @@ export default function SendEndringsmelding() {
   const navigate = useNavigate();
   return (
     <InnholdKonteiner>
+      <StegIndikator nåværendeSteg={1} />
+
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={TypografiTyper.StegHeadingH1}
