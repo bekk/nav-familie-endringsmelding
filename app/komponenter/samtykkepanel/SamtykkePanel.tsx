@@ -1,9 +1,9 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
-import { IForsideTekstinnhold } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { TypografiTyper } from '~/typer/typografi';
+import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 
 interface Props {
   tekster: IForsideTekstinnhold;

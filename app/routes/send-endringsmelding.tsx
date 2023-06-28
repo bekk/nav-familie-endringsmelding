@@ -12,8 +12,10 @@ import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 
 export default function SendEndringsmelding() {
-  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const sanityTekster = useTekster();
+  const tekster = sanityTekster[ESanitySteg.SEND_ENDRINGER];
   const navigate = useNavigate();
+
   return (
     <InnholdKonteiner>
       <StegIndikator nåværendeSteg={1} />

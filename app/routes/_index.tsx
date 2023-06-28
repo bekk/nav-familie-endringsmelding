@@ -5,14 +5,14 @@ import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
-import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { useTekster } from '~/hooks/contextHooks';
 import { useState } from 'react';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -26,7 +26,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const tekster = useTekster(ESanitySteg.FORSIDE);
+  const sanityTekster = useTekster();
+  const tekster = sanityTekster[ESanitySteg.FORSIDE];
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 

@@ -1,4 +1,9 @@
 import { PortableTextBlock } from '@portabletext/types';
+import { EApiKeysForside, IForsideTekstinnhold } from './sanityForside';
+import {
+  EApiKeysSendEndring,
+  ISendEndringTekstinnhold,
+} from './sanitySendEndring';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -25,13 +30,6 @@ export enum ESanitySteg {
   SEND_ENDRINGER = 'SEND_ENDRINGER',
 }
 
-export type IForsideTekstinnhold = Record<string, SanityDokument>;
-
-export interface ITekstinnhold {
-  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
-  [ESanitySteg.SEND_ENDRINGER]: IForsideTekstinnhold;
-}
-
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
 }
@@ -39,3 +37,10 @@ export enum ESanityFlettefeltverdi {
 export type FlettefeltVerdier = {
   søkerNavn?: string;
 };
+
+export interface ITekstinnhold {
+  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+  [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
+}
+
+export type ApiKeys = EApiKeysForside | EApiKeysSendEndring;
