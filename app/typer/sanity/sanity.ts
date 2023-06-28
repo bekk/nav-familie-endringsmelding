@@ -4,7 +4,7 @@ import {
   EApiKeysSendEndring,
   ISendEndringTekstinnhold,
 } from './sanitySendEndring';
-import { IFellesTekstinnhold } from './sanityFelles';
+import { EApiKeysFelles, IFellesTekstinnhold } from './sanityFelles';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -46,7 +46,4 @@ export interface ITekstinnhold {
   [ESanitySteg.FELLES]: IFellesTekstinnhold;
 }
 
-export type ApiKeys =
-  | EApiKeysForside
-  | EApiKeysSendEndring
-  | IFellesTekstinnhold;
+export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;
