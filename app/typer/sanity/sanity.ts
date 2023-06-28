@@ -1,5 +1,9 @@
 import { PortableTextBlock } from '@portabletext/types';
 import { EApiKeysForside, IForsideTekstinnhold } from './sanityForside';
+import {
+  EApiKeysSendEndring,
+  ISendEndringTekstinnhold,
+} from './sanitySendEndring';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -23,6 +27,7 @@ export enum LocaleType {
 
 export enum ESanitySteg {
   FORSIDE = 'FORSIDE',
+  SEND_ENDRINGER = 'SEND_ENDRINGER',
 }
 
 export enum ESanityFlettefeltverdi {
@@ -35,7 +40,8 @@ export type FlettefeltVerdier = {
 
 export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
+  [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
 }
 
 //For typen ApiKeys må nye sider legges til på formatet: EApiKeysForside | EApiKeysSide;
-export type ApiKeys = EApiKeysForside;
+export type ApiKeys = EApiKeysForside | EApiKeysSendEndring;

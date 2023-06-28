@@ -1,5 +1,22 @@
 import React from 'react';
+import { useTekster } from '~/hooks/contextHooks';
+import { ESanitySteg } from '~/typer/sanity/sanity';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import { TypografiTyper } from '~/typer/typografi';
+import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
+import Veiledning from '~/komponenter/veiledning/Veiledning';
 
 export default function SendEndringsmelding() {
-  return <p>Send Endringsmelding</p>;
+  const sanityTekster = useTekster();
+  const tekster = sanityTekster[ESanitySteg.SEND_ENDRINGER];
+
+  return (
+    <InnholdKonteiner>
+      <TekstBlokk
+        tekstblokk={tekster.overskrift}
+        typografi={TypografiTyper.StegHeadingH1}
+      />
+      <Veiledning hilsen={tekster.veilederInnhold} />
+    </InnholdKonteiner>
+  );
 }

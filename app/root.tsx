@@ -1,6 +1,6 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
-import type { LinksFunction, LoaderFunction } from '@remix-run/node';
+import { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -16,18 +16,35 @@ import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: designsystemStyles },
+  {
+    rel: 'stylesheet',
+    href: designsystemStyles,
+  },
+  {
+    rel: 'preload',
+    href: 'https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
-export const loader: LoaderFunction = async () => {
-  return await hentDataFraSanity();
+export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const tekstData = await hentDataFraSanity().catch(feil => {
+    //REDIRECT TIL FEIL SIDE
+    throw Error('Kunne ikke hente sanity tekster');
+  });
+  const søkerData = await hentSøker(request).catch(feil => {
+    //REDIRECT TIL FEIL SIDE
+    throw Error('Kunne ikke hente søker data');
+  });
+  return { tekstData, søkerData };
 };
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
+  const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
-  const søker = hentSøker();
 
   return (
     <html lang={språk}>
@@ -40,9 +57,9 @@ export default function App() {
       <body>
         <Outlet
           context={{
-            sanityTekster: data,
+            sanityTekster: tekstData,
             språkContext: [språk, settSpråk],
-            søker: søker,
+            søker: søkerData,
           }}
         />
         <ScrollRestoration />
