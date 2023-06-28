@@ -53,17 +53,10 @@ export default function Index() {
             typografi={TypografiTyper.StegHeadingH1}
           />
           <Språkvelger />
-
-          <VeilederHilsen
-            innhold={tekster.veilederhilsenInnhold}
-            hilsen={tekster.brukerHilsen}
-          />
+          <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
-            tittel={tekster.samtykkePanelTittel}
-            innhold={tekster.samtykkePanelMelding}
-            samtykke={tekster.samtykkePanelSamtykke}
-            feilmelding={tekster.samtykkePanelFeilmelding}
-            onSamtykkeEndring={håndterSamtykkeEndring}
+            tekster={tekster}
+            håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />
           <Button

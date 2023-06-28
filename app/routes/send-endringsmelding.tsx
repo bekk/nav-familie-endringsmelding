@@ -9,10 +9,12 @@ import cssFritekst from './fritekstfelt.module.css';
 import { Button, Textarea } from '@navikt/ds-react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
+import Veiledning from '~/komponenter/veiledning/Veiledning';
 
 export default function SendEndringsmelding() {
   const {
     overskrift,
+    veilederInnhold,
     fritekstfeltTittel,
     fritekstfeltBeskrivelse,
     fritekstfeltFeilmeldingTekst,
@@ -84,6 +86,8 @@ export default function SendEndringsmelding() {
           tekstblokk={overskrift}
           typografi={TypografiTyper.StegHeadingH1}
         />
+        <Veiledning hilsen={veilederInnhold} />
+
         <Textarea
           label={<TekstBlokk tekstblokk={fritekstfeltTittel} />}
           description={<TekstBlokk tekstblokk={fritekstfeltBeskrivelse} />}

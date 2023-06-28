@@ -1,7 +1,7 @@
 import css from './innholdKonteiner.module.css';
 
 interface Props {
-  children?: JSX.Element;
+  children?: React.ReactNode;
 }
 
 const InnholdKonteiner: React.FC<Props> = ({ children }) => {
