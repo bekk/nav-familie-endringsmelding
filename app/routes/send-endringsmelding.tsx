@@ -1,19 +1,38 @@
 import React from 'react';
-import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import { ESanitySteg } from '~/typer/sanity/sanity';
-import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
+import { ESanitySteg } from '~/typer/sanity/sanity';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
+import css from './send-endringsmelding.module.css';
+import { useNavigate } from '@remix-run/react';
+import { Button } from '@navikt/ds-react';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import Veiledning from '~/komponenter/veiledning/Veiledning';
+import { TypografiTyper } from '~/typer/typografi';
 
 export default function SendEndringsmelding() {
-  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const sanityTekster = useTekster();
+  const tekster = sanityTekster[ESanitySteg.SEND_ENDRINGER];
+  const navigate = useNavigate();
 
   return (
     <HovedInnhold>
+      <StegIndikator nåværendeSteg={1} />
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={TypografiTyper.StegHeadingH1}
       />
+      <Veiledning hilsen={tekster.veilederInnhold} />
+      <div className={`${css.navigeringsKnapper}`}>
+        <Button
+          variant={'primary'}
+          onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
+        >
+          Tilbake
+        </Button>
+        <Button variant={'secondary'}>Gå videre</Button>
+      </div>{' '}
     </HovedInnhold>
   );
 }

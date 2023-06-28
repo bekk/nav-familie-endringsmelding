@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import {
+  ApiKeys,
   ESanitySteg,
   ITekstinnhold,
   SanityDokument,
@@ -32,9 +33,9 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
 const strukturerInnholdForSteg = (
   dokumenter: SanityDokument[],
   steg: ESanitySteg,
-): Record<string, SanityDokument> =>
+): Record<ApiKeys, SanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
     .reduce((acc, dok) => {
       return { ...acc, [dok.api_navn]: dok };
-    }, {});
+    }, {} as Record<ApiKeys, SanityDokument>);
