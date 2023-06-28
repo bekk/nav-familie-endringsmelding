@@ -4,6 +4,7 @@ import {
   EApiKeysSendEndring,
   ISendEndringTekstinnhold,
 } from './sanitySendEndring';
+import { EApiKeysFelles, IFellesTekstinnhold } from './sanityFelles';
 
 export interface SanityDokument {
   _createdAt: string;
@@ -28,6 +29,7 @@ export enum LocaleType {
 export enum ESanitySteg {
   FORSIDE = 'FORSIDE',
   SEND_ENDRINGER = 'SEND_ENDRINGER',
+  FELLES = 'FELLES',
 }
 
 export enum ESanityFlettefeltverdi {
@@ -41,6 +43,7 @@ export type FlettefeltVerdier = {
 export interface ITekstinnhold {
   [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
   [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
+  [ESanitySteg.FELLES]: IFellesTekstinnhold;
 }
 
-export type ApiKeys = EApiKeysForside | EApiKeysSendEndring;
+export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;
