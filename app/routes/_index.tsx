@@ -5,10 +5,14 @@ import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import SamtykkePanel from '~/komponenter/SamtykkePanel';
+import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { useState } from 'react';
 import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
+import { Button } from '@navikt/ds-react';
+import { useNavigate } from '@remix-run/react';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -23,6 +27,20 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
+
+  const navigate = useNavigate();
+  const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
+
+  const håndterSamtykkeEndring = (bekreftet: boolean) => {
+    settErSamtykkeBekreftet(bekreftet);
+    settErFeilmeldingAktivert(false);
+  };
+
+  const håndterKnappeTrykk = () => {
+    settErFeilmeldingAktivert(true);
+  };
 
   return (
     <InnholdKonteiner>
@@ -35,19 +53,24 @@ export default function Index() {
             typografi={TypografiTyper.StegHeadingH1}
           />
           <Språkvelger />
-          <VeilederHilsen
-            innhold={tekster.veilederhilsenInnhold}
-            hilsen={tekster.brukerHilsen}
-          />
+          <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
-            innhold={tekster.samtykkePanelMelding}
-            samtykke={tekster.samtykkePanelSamtykke}
-            feilmelding={tekster.samtykkePanelFeilmelding}
+            tekster={tekster}
+            håndterSamtykkeEndring={håndterSamtykkeEndring}
+            feilmeldingAktivert={erFeilmeldingAktivert}
           />
-          <div className={`${css.personvernerklaeringLink}`}>
-            <TekstBlokk
-              tekstblokk={tekster.linkTilPersonvernerklaering}
-            ></TekstBlokk>
+          <Button
+            variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
+            onClick={
+              erSamtykkeBekreftet
+                ? () => navigate(nestePath)
+                : håndterKnappeTrykk
+            }
+          >
+            Start
+          </Button>
+          <div className={`${css.personvernErklæringLink}`}>
+            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
           </div>
         </>
       )}
