@@ -4,7 +4,7 @@ import { SanityDokument } from '~/typer/sanity/sanity';
 import { TypografiTyper } from '~/typer/typografi';
 
 interface Props {
-  hilsen: SanityDokument | undefined;
+  hilsen: SanityDokument;
 }
 
 const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
