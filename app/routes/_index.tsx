@@ -7,7 +7,6 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 import { useOutletContext } from '@remix-run/react';
 import { AppContext } from '~/typer/context';
 
@@ -24,7 +23,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const { sanityTekster } = useOutletContext<AppContext>();
-  const tekster: IForsideTekstinnhold = sanityTekster[ESanitySteg.FORSIDE];
+  const tekster = sanityTekster[ESanitySteg.FORSIDE];
 
   return (
     <div className={`${css.fyllSide}`}>
