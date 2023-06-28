@@ -1,13 +1,13 @@
 import { useOutletContext } from '@remix-run/react';
-import { AppContext } from '~/typer/context';
-import { ESanitySteg } from '~/typer/sanity/sanity';
+import { ESteg } from '~/typer/common';
+import { IAppContext } from '~/typer/context';
 
-export function useTekster(steg: ESanitySteg) {
-  const { sanityTekster } = useOutletContext<AppContext>();
+export function useTekster(steg: ESteg) {
+  const { sanityTekster } = useOutletContext<IAppContext>();
   return sanityTekster[steg];
 }
 
 export function useSpråk() {
-  const { språkContext } = useOutletContext<AppContext>();
+  const { språkContext } = useOutletContext<IAppContext>();
   return språkContext;
 }

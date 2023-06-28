@@ -1,21 +1,21 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
-import { IForsideTekstinnhold } from '~/typer/sanity/sanity';
+import { ForsideTekstinnhold } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
-import { TypografiTyper } from '~/typer/typografi';
+import { ETypografiTyper } from '~/typer/typografi';
 
-interface Props {
-  tekster: IForsideTekstinnhold;
+interface IProps {
+  tekster: ForsideTekstinnhold;
   håndterSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
-const SamtykkePanel: React.FC<Props> = ({
+const SamtykkePanel: React.FC<IProps> = ({
   tekster,
   håndterSamtykkeEndring,
   feilmeldingAktivert,
-}: Props) => {
+}: IProps) => {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   const {
@@ -44,7 +44,7 @@ const SamtykkePanel: React.FC<Props> = ({
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={samtykkePanelFeilmelding}
-              typografi={TypografiTyper.BodyShort}
+              typografi={ETypografiTyper.BodyShort}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }

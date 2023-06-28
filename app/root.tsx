@@ -11,7 +11,7 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { LocaleType } from './typer/sanity/sanity';
+import { ELocaleType } from './typer/common';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 
@@ -44,7 +44,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.nb);
 
   return (
     <html lang={språk}>

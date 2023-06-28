@@ -2,11 +2,11 @@ import { Stepper } from '@navikt/ds-react';
 
 import css from './StegIndikator.module.css';
 
-interface Props {
+interface IProps {
   nåværendeSteg: number;
 }
 
-const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
+const StegIndikator: React.FC<IProps> = ({ nåværendeSteg }) => {
   const ANTALL_STEG = 2;
   return (
     <Stepper

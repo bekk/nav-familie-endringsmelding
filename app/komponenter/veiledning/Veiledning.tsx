@@ -1,16 +1,16 @@
 import { GuidePanel } from '@navikt/ds-react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { SanityDokument } from '~/typer/sanity/sanity';
-import { TypografiTyper } from '~/typer/typografi';
+import { ISanityDokument } from '~/typer/sanity/sanity';
+import { ETypografiTyper } from '~/typer/typografi';
 
-interface Props {
-  hilsen: SanityDokument;
+interface IProps {
+  hilsen: ISanityDokument;
 }
 
-const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
+const Veiledning: React.FC<IProps> = ({ hilsen }: IProps) => {
   return (
     <GuidePanel>
-      <TekstBlokk tekstblokk={hilsen} typografi={TypografiTyper.BodyShort} />
+      <TekstBlokk tekstblokk={hilsen} typografi={ETypografiTyper.BodyShort} />
     </GuidePanel>
   );
 };

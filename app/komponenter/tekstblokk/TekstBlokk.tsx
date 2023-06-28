@@ -1,23 +1,23 @@
-import type { TypografiTyper } from '~/typer/typografi';
+import type { ETypografiTyper } from '~/typer/typografi';
 import React from 'react';
 import { PortableText } from '@portabletext/react';
-import { FlettefeltVerdier, SanityDokument } from '~/typer/sanity/sanity';
+import { FlettefeltVerdier, ISanityDokument } from '~/typer/sanity/sanity';
 import { TypografiWrapper } from '~/utils/TypografiWrapper';
 import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
 import { useSpråk } from '~/hooks/contextHooks';
 
-interface Props {
-  tekstblokk: SanityDokument | undefined;
-  typografi?: TypografiTyper;
+interface IProps {
+  tekstblokk: ISanityDokument | undefined;
+  typografi?: ETypografiTyper;
   flettefelter?: FlettefeltVerdier;
 }
 
-const TekstBlokk: React.FC<Props> = ({
+const TekstBlokk: React.FC<IProps> = ({
   tekstblokk,
   typografi,
   flettefelter,
-}: Props) => {
+}: IProps) => {
   const [språk] = useSpråk();
 
   return tekstblokk ? (

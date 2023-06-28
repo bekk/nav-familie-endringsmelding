@@ -1,9 +1,6 @@
 import { createClient } from '@sanity/client';
-import {
-  ESanitySteg,
-  ITekstinnhold,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
+import { ESteg } from '~/typer/common';
+import { ISanityDokument, ITekstinnhold } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({
   projectId: 'd8ycstqz',
@@ -13,15 +10,15 @@ const sanityKlient = createClient({
 });
 
 export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
-  const tekst = await sanityKlient.fetch<SanityDokument[]>(
+  const tekst = await sanityKlient.fetch<ISanityDokument[]>(
     '*[ytelse == "BARNETRYGD"]',
   );
 
   const tekstInnhold = {
-    [ESanitySteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESanitySteg.FORSIDE),
-    [ESanitySteg.SEND_ENDRINGER]: strukturerInnholdForSteg(
+    [ESteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESteg.FORSIDE),
+    [ESteg.SEND_ENDRINGER]: strukturerInnholdForSteg(
       tekst,
-      ESanitySteg.SEND_ENDRINGER,
+      ESteg.SEND_ENDRINGER,
     ),
   };
 
@@ -29,9 +26,9 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
 };
 
 const strukturerInnholdForSteg = (
-  dokumenter: SanityDokument[],
-  steg: ESanitySteg,
-): Record<string, SanityDokument> =>
+  dokumenter: ISanityDokument[],
+  steg: ESteg,
+): Record<string, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
     .reduce((acc, dok) => {

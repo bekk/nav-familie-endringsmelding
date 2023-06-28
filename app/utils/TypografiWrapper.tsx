@@ -1,28 +1,28 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { TypografiTyper } from '~/typer/typografi';
+import { ETypografiTyper } from '~/typer/typografi';
 
-export interface Props {
-  typografi?: TypografiTyper;
-  children?: React.ReactNode | React.ReactNode[];
+export interface IProps {
+  typografi?: ETypografiTyper;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export const TypografiWrapper: React.FC<Props> = ({
+export const TypografiWrapper: React.FC<IProps> = ({
   typografi,
   children,
   style,
-}: Props) => {
+}: IProps) => {
   switch (typografi) {
-    case TypografiTyper.BodyShort:
+    case ETypografiTyper.BodyShort:
       return <BodyShort style={style}>{children}</BodyShort>;
 
-    case TypografiTyper.StegHeadingH1:
+    case ETypografiTyper.StegHeadingH1:
       return (
         <Heading style={style} level="1" size="xlarge">
           {children}
         </Heading>
       );
-    case TypografiTyper.StegHeadingH2:
+    case ETypografiTyper.StegHeadingH2:
       return (
         <Heading style={style} level="2" size="xlarge">
           {children}
