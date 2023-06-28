@@ -6,9 +6,10 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
-import { useTekster } from '~/hooks/contextHooks';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
+import { useOutletContext } from '@remix-run/react';
+import { AppContext } from '~/typer/context';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -22,7 +23,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const tekster: IForsideTekstinnhold = useTekster(ESanitySteg.FORSIDE);
+  const { sanityTekster } = useOutletContext<AppContext>();
+  const tekster: IForsideTekstinnhold = sanityTekster[ESanitySteg.FORSIDE];
 
   return (
     <div className={`${css.fyllSide}`}>
