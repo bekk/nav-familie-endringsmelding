@@ -76,7 +76,7 @@ export default function Index() {
           >
             Start
           </Button>
-          <div className={`${css.personvernerklaeringLink}`}>
+          <div className={`${css.personvernerklæringLink}`}>
             <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
           </div>
         </>

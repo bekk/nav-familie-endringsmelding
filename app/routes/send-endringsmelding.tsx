@@ -12,7 +12,14 @@ import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
 
 export default function SendEndringsmelding() {
-  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const {
+    overskrift,
+    fritekstfeltTittel,
+    fritekstfeltBeskrivelse,
+    fritekstfeltFeilmeldingTekst,
+    fritekstfeltFeilmeldingTegn,
+    fritekstfeltFeilmeldingMinTegn,
+  } = useTekster(ESanitySteg.SEND_ENDRINGER);
   const navigate = useNavigate();
   const [språk] = useSpråk();
 
@@ -53,11 +60,11 @@ export default function SendEndringsmelding() {
 
   const utledFeilmelding = () => {
     if (manglerTekst) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingTekst} />;
+      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingTekst} />;
     } else if (brukerSpesialtegn) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingTegn} />;
+      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingTegn} />;
     } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
+      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingMinTegn} />;
     }
   };
 
@@ -73,14 +80,12 @@ export default function SendEndringsmelding() {
     <InnholdKonteiner>
       <>
         <TekstBlokk
-          tekstblokk={tekster.overskrift}
+          tekstblokk={overskrift}
           typografi={TypografiTyper.StegHeadingH1}
         />
         <Textarea
-          label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
-          description={
-            <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
-          }
+          label={<TekstBlokk tekstblokk={fritekstfeltTittel} />}
+          description={<TekstBlokk tekstblokk={fritekstfeltBeskrivelse} />}
           maxLength={MAKS_INPUT_LENGDE}
           className={`${cssFritekst.fritekstfelt}`}
           i18n={i18nInnhold}
