@@ -7,20 +7,20 @@ import { TypografiTyper } from '~/typer/typografi';
 
 interface Props {
   tekster: IForsideTekstinnhold;
-  vedSamtykkeEndring: (bekreftet: boolean) => void;
+  håndterSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
 const SamtykkePanel: React.FC<Props> = ({
   tekster,
-  vedSamtykkeEndring,
+  håndterSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
-  const håndterSamtykkeEndring = (bekreftet: boolean) => {
+  const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
-    vedSamtykkeEndring(bekreftet);
+    håndterSamtykkeEndring(bekreftet);
   };
 
   return (
@@ -30,7 +30,7 @@ const SamtykkePanel: React.FC<Props> = ({
         checked={erSamtykkeBekreftet}
         label={<TekstBlokk tekstblokk={tekster.samtykkePanelSamtykke} />}
         onChange={() => {
-          håndterSamtykkeEndring(!erSamtykkeBekreftet);
+          vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
         error={
           !erSamtykkeBekreftet &&

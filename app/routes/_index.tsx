@@ -56,7 +56,7 @@ export default function Index() {
           <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
             tekster={tekster}
-            vedSamtykkeEndring={håndterSamtykkeEndring}
+            håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />
           <Button
