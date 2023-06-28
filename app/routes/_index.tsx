@@ -33,13 +33,13 @@ export default function Index() {
   const navigate = useNavigate();
   const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
 
-  const håndtereSamtykkeEndring = (bekreftet: boolean) => {
-    settSamtykkeErBekreftet(bekreftet);
-    settFeilmeldingAktivert(false);
+  const håndterSamtykkeEndring = (bekreftet: boolean) => {
+    settErSamtykkeBekreftet(bekreftet);
+    settErFeilmeldingAktivert(false);
   };
 
   const håndterKnappeTrykk = () => {
-    settFeilmeldingAktivert(true);
+    settErFeilmeldingAktivert(true);
   };
 
   return (
@@ -63,15 +63,15 @@ export default function Index() {
             innhold={tekster.samtykkePanelMelding}
             samtykke={tekster.samtykkePanelSamtykke}
             feilmelding={tekster.samtykkePanelFeilmelding}
-            onSamtykkeEndring={håndtereSamtykkeEndring}
-            feilmeldingAktivert={feilmeldingAktivert}
+            onSamtykkeEndring={håndterSamtykkeEndring}
+            feilmeldingAktivert={erFeilmeldingAktivert}
           />
           <Button
-            variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
+            variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
             onClick={
-              samtykkeErBekreftet
+              erSamtykkeBekreftet
                 ? () => navigate(nestePath)
-                : håndtereKnappeTrykk
+                : håndterKnappeTrykk
             }
           >
             Start
