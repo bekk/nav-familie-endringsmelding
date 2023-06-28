@@ -48,10 +48,10 @@ export default function SendEndringsmelding() {
   const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
   const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const sjekkTekst = (innholdVerdi: string) => {
-    settManglerTekst(innholdVerdi.length == 0);
-    settMinimumTegnOppfylt(innholdVerdi.length > 9);
-    if (innholdVerdi.match(spesialTegnRegex)) {
+  const validerTekst = (tekst: string) => {
+    settManglerTekst(tekst.length === 0);
+    settMinimumTegnOppfylt(tekst.length > 9);
+    if (tekst.match(spesialTegnRegex)) {
       settBrukerSpesialtegn(true);
     } else {
       settBrukerSpesialtegn(false);
@@ -91,7 +91,7 @@ export default function SendEndringsmelding() {
           i18n={i18nInnhold}
           error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
           onInput={event => {
-            sjekkTekst(event.currentTarget.value);
+            validerTekst(event.currentTarget.value);
           }}
         />
         <div className={`${css.navigeringsKnapper}`}>
