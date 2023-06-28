@@ -15,6 +15,7 @@ export default function SendEndringsmelding() {
   const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
   const navigate = useNavigate();
   const [språk] = useSpråk();
+
   const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
   const MAKS_INPUT_LENGDE = 1000;
 
@@ -40,20 +41,9 @@ export default function SendEndringsmelding() {
   const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
   const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const sjekkTekst = (input: string) => {
-    const innholdVerdi = input;
-    if (innholdVerdi.length == 0) {
-      settManglerTekst(true);
-    } else {
-      settManglerTekst(false);
-    }
-
-    if (innholdVerdi.length > 9) {
-      settMinimumTegnOppfylt(true);
-    } else {
-      settMinimumTegnOppfylt(false);
-    }
-
+  const sjekkTekst = (innholdVerdi: string) => {
+    settManglerTekst(innholdVerdi.length == 0);
+    settMinimumTegnOppfylt(innholdVerdi.length > 9);
     if (innholdVerdi.match(spesialTegnRegex)) {
       settBrukerSpesialtegn(true);
     } else {
