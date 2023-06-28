@@ -25,7 +25,7 @@ const SamtykkePanel: React.FC<Props> = ({
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   const håndterSamtykkeEndring = (bekreftet: boolean) => {
-    settErSamtykkeErBekreftet(bekreftet);
+    settErSamtykkeBekreftet(bekreftet);
     vedSamtykkeEndring(bekreftet);
   };
 
@@ -33,13 +33,13 @@ const SamtykkePanel: React.FC<Props> = ({
     <div className={`${css.samtykkePanelOmråde}`}>
       <TekstBlokk tekstblokk={tittel} />
       <ConfirmationPanel
-        checked={erSamtykkeErBekreftet}
+        checked={erSamtykkeBekreftet}
         label={<TekstBlokk tekstblokk={samtykke} />}
         onChange={() => {
-          håndterSamtykkeEndring(!erSamtykkeErBekreftet);
+          håndterSamtykkeEndring(!erSamtykkeBekreftet);
         }}
         error={
-          !erSamtykkeErBekreftet &&
+          !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={feilmelding}
