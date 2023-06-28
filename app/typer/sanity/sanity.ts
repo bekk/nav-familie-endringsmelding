@@ -43,5 +43,4 @@ export interface ITekstinnhold {
   [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
 }
 
-//For typen ApiKeys må nye sider legges til på formatet: EApiKeysForside | EApiKeysSide;
 export type ApiKeys = EApiKeysForside | EApiKeysSendEndring;
