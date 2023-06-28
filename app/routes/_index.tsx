@@ -7,8 +7,7 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import SamtykkePanel from '~/komponenter/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { useOutletContext } from '@remix-run/react';
-import { AppContext } from '~/typer/context';
+import { useTekster } from '~/hooks/contextHooks';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -22,7 +21,7 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const { sanityTekster } = useOutletContext<AppContext>();
+  const sanityTekster = useTekster();
   const tekster = sanityTekster[ESanitySteg.FORSIDE];
 
   return (
