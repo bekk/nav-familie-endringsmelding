@@ -1,54 +1,55 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
-import { SanityDokument } from '~/typer/sanity/sanity';
+import { IForsideTekstinnhold } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { TypografiTyper } from '~/typer/typografi';
 
 interface Props {
-  tittel: SanityDokument;
-  innhold: SanityDokument;
-  samtykke: SanityDokument;
-  feilmelding: SanityDokument;
-  påSamtykkeEndring: (bekreftet: boolean) => void;
+  tekster: IForsideTekstinnhold;
+  håndterSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
 const SamtykkePanel: React.FC<Props> = ({
-  tittel,
-  innhold,
-  samtykke,
-  feilmelding,
-  påSamtykkeEndring,
+  tekster,
+  håndterSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
-  const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
-  const håndtereSamtykkeEndring = (bekreftet: boolean) => {
-    settSamtykkeErBekreftet(bekreftet);
-    påSamtykkeEndring(bekreftet);
+  const {
+    samtykkePanelTittel,
+    samtykkePanelSamtykke,
+    samtykkePanelFeilmelding,
+    samtykkePanelMelding,
+  } = tekster;
+
+  const vedSamtykkeEndring = (bekreftet: boolean) => {
+    settErSamtykkeBekreftet(bekreftet);
+    håndterSamtykkeEndring(bekreftet);
   };
 
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
-      <TekstBlokk tekstblokk={tittel} />
+      <TekstBlokk tekstblokk={samtykkePanelTittel} />
       <ConfirmationPanel
-        checked={samtykkeErBekreftet}
-        label={<TekstBlokk tekstblokk={samtykke} />}
+        checked={erSamtykkeBekreftet}
+        label={<TekstBlokk tekstblokk={samtykkePanelSamtykke} />}
         onChange={() => {
-          håndtereSamtykkeEndring(!samtykkeErBekreftet);
+          vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
         error={
-          !samtykkeErBekreftet &&
+          !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
-              tekstblokk={feilmelding}
+              tekstblokk={samtykkePanelFeilmelding}
               typografi={TypografiTyper.BodyShort}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }
       >
-        <TekstBlokk tekstblokk={innhold} />
+        <TekstBlokk tekstblokk={samtykkePanelMelding} />
       </ConfirmationPanel>
     </div>
   );

@@ -27,19 +27,19 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
-  const [samtykkeErBekreftet, settSamtykkeErBekreftet] = useState(false);
-  const [feilmeldingAktivert, settFeilmeldingAktivert] = useState(false);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
   const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
 
-  const håndtereSamtykkeEndring = (bekreftet: boolean) => {
-    settSamtykkeErBekreftet(bekreftet);
-    settFeilmeldingAktivert(false);
+  const håndterSamtykkeEndring = (bekreftet: boolean) => {
+    settErSamtykkeBekreftet(bekreftet);
+    settErFeilmeldingAktivert(false);
   };
 
-  const håndtereKnappeTrykk = () => {
-    settFeilmeldingAktivert(true);
+  const håndterKnappeTrykk = () => {
+    settErFeilmeldingAktivert(true);
   };
 
   return (
@@ -53,30 +53,23 @@ export default function Index() {
             typografi={TypografiTyper.StegHeadingH1}
           />
           <Språkvelger />
-
-          <VeilederHilsen
-            innhold={tekster.veilederhilsenInnhold}
-            hilsen={tekster.brukerHilsen}
-          />
+          <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
-            tittel={tekster.samtykkePanelTittel}
-            innhold={tekster.samtykkePanelMelding}
-            samtykke={tekster.samtykkePanelSamtykke}
-            feilmelding={tekster.samtykkePanelFeilmelding}
-            påSamtykkeEndring={håndtereSamtykkeEndring}
-            feilmeldingAktivert={feilmeldingAktivert}
+            tekster={tekster}
+            håndterSamtykkeEndring={håndterSamtykkeEndring}
+            feilmeldingAktivert={erFeilmeldingAktivert}
           />
           <Button
-            variant={samtykkeErBekreftet ? 'primary' : 'secondary'}
+            variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
             onClick={
-              samtykkeErBekreftet
+              erSamtykkeBekreftet
                 ? () => navigate(nestePath)
-                : håndtereKnappeTrykk
+                : håndterKnappeTrykk
             }
           >
             Start
           </Button>
-          <div className={`${css.personvernerklaeringLink}`}>
+          <div className={`${css.personvernErklæringLink}`}>
             <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
           </div>
         </>
