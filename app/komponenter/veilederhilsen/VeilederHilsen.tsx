@@ -19,7 +19,7 @@ const VeilederHilsen: React.FC<Props> = ({ tekster }: Props) => {
       <div className={`${css.tekstInnholdMellomrom}`}>
         <TekstBlokk
           tekstblokk={tekster.brukerHilsen}
-          typografi={TypografiTyper.StegHeadingH2}
+          typografi={TypografiTyper.HeadingH2}
           flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
         />
       </div>

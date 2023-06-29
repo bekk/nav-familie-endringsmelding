@@ -24,13 +24,13 @@ export const TypografiWrapper: React.FC<Props> = ({
       );
     case TypografiTyper.StegHeadingSmallH1:
       return (
-        <Heading style={style} level="1" size="large">
+        <Heading style={style} level="1" size="small">
           {children}
         </Heading>
       );
     case TypografiTyper.HeadingH2:
       return (
-        <Heading style={style} level="2" size="small">
+        <Heading style={style} level="2" size="large">
           {children}
         </Heading>
       );
