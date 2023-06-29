@@ -36,7 +36,7 @@ export const TypografiWrapper: React.FC<Props> = ({
       );
     case TypografiTyper.BannerHeading:
       return (
-        <Heading style={style} level="2" size="large">
+        <Heading style={style} level="1" size="large">
           {children}
         </Heading>
       );
