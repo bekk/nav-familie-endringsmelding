@@ -89,7 +89,7 @@ export default function SendEndringsmelding() {
 
       <TekstBlokk
         tekstblokk={overskrift}
-        typografi={TypografiTyper.HeadingH2}
+        typografi={TypografiTyper.StegHeadingSmallH1}
       />
       <Veiledning hilsen={veilederInnhold} />
 
