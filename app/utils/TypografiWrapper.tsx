@@ -1,4 +1,4 @@
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { TypografiTyper } from '~/typer/typografi';
 
 export interface Props {
@@ -34,6 +34,8 @@ export const TypografiWrapper: React.FC<Props> = ({
           {children}
         </Heading>
       );
+    case TypografiTyper.Label:
+      return <Label>{children}</Label>;
 
     default:
       return <div style={style}>{children}</div>;

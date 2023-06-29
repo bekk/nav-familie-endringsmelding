@@ -3,4 +3,5 @@ export enum TypografiTyper {
   StegHeadingH2 = 'StegHeadingH2',
   BannerHeading = 'BannerHeading',
   BodyShort = 'BodyShort',
+  Label = 'Label',
 }
