@@ -1,9 +1,9 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
 import { useState } from 'react';
-import { ForsideTekstinnhold } from '~/typer/sanity/sanity';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
+import { ForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 
 interface IProps {
   tekster: ForsideTekstinnhold;

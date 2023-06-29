@@ -1,6 +1,10 @@
 .navigeringsKnapper {
-  min-width: 15rem;
+  min-width: 17rem;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+.fullBredde {
+  width: 100%;
 }

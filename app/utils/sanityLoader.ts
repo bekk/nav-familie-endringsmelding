@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import { ESteg } from '~/typer/common';
-import { ISanityDokument, ITekstinnhold } from '~/typer/sanity/sanity';
+import { ITekstinnhold, ISanityDokument, ApiKeys } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({
   projectId: 'd8ycstqz',
@@ -20,6 +20,7 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
       tekst,
       ESteg.SEND_ENDRINGER,
     ),
+    [ESteg.FELLES]: strukturerInnholdForSteg(tekst, ESteg.FELLES),
   };
 
   return tekstInnhold;
@@ -28,9 +29,9 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
 const strukturerInnholdForSteg = (
   dokumenter: ISanityDokument[],
   steg: ESteg,
-): Record<string, ISanityDokument> =>
+): Record<ApiKeys, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
     .reduce((acc, dok) => {
       return { ...acc, [dok.api_navn]: dok };
-    }, {});
+    }, {} as Record<ApiKeys, ISanityDokument>);

@@ -1,10 +1,9 @@
 import { useOutletContext } from '@remix-run/react';
-import { ESteg } from '~/typer/common';
 import { IAppContext } from '~/typer/context';
 
-export function useTekster(steg: ESteg) {
+export function useTekster() {
   const { sanityTekster } = useOutletContext<IAppContext>();
-  return sanityTekster[steg];
+  return sanityTekster;
 }
 
 export function useSpråk() {

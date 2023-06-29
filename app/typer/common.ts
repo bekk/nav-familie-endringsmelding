@@ -7,4 +7,5 @@ export enum ELocaleType {
 export enum ESteg {
   FORSIDE = 'FORSIDE',
   SEND_ENDRINGER = 'SEND_ENDRINGER',
+  FELLES = 'FELLES',
 }

@@ -3,16 +3,16 @@ import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import { ETypografiTyper } from '~/typer/typografi';
-import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
-import { useTekster } from '~/hooks/contextHooks';
-import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { useState } from 'react';
-import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { useState } from 'react';
+import { useTekster } from '~/hooks/contextHooks';
+import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
+import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg } from '~/typer/common';
+import { ETypografiTyper } from '~/typer/typografi';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -26,7 +26,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const tekster = useTekster(ESteg.FORSIDE);
+  const sanityTekster = useTekster();
+  const tekster = sanityTekster[ESteg.FORSIDE];
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
@@ -69,7 +70,7 @@ export default function Index() {
           >
             Start
           </Button>
-          <div className={`${css.personvernErklæringLink}`}>
+          <div className={`${css.personvernerklæringLink}`}>
             <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
           </div>
         </>
