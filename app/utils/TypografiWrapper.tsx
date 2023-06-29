@@ -1,17 +1,17 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { ETypografiTyper } from '~/typer/typografi';
 
-export interface IProps {
+export interface Props {
   typografi?: ETypografiTyper;
   children?: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export const TypografiWrapper: React.FC<IProps> = ({
+export const TypografiWrapper: React.FC<Props> = ({
   typografi,
   children,
   style,
-}: IProps) => {
+}: Props) => {
   switch (typografi) {
     case ETypografiTyper.BodyShort:
       return <BodyShort style={style}>{children}</BodyShort>;

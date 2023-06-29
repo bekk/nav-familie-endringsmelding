@@ -3,11 +3,11 @@ import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { ISanityDokument } from '~/typer/sanity/sanity';
 import { ETypografiTyper } from '~/typer/typografi';
 
-interface IProps {
+interface Props {
   hilsen: ISanityDokument;
 }
 
-const Veiledning: React.FC<IProps> = ({ hilsen }: IProps) => {
+const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
   return (
     <GuidePanel>
       <TekstBlokk tekstblokk={hilsen} typografi={ETypografiTyper.BodyShort} />

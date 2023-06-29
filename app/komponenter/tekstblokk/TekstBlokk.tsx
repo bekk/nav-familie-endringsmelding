@@ -7,17 +7,17 @@ import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
 import { useSpråk } from '~/hooks/contextHooks';
 
-interface IProps {
+interface Props {
   tekstblokk: ISanityDokument | undefined;
   typografi?: ETypografiTyper;
   flettefelter?: FlettefeltVerdier;
 }
 
-const TekstBlokk: React.FC<IProps> = ({
+const TekstBlokk: React.FC<Props> = ({
   tekstblokk,
   typografi,
   flettefelter,
-}: IProps) => {
+}: Props) => {
   const [språk] = useSpråk();
 
   return tekstblokk ? (

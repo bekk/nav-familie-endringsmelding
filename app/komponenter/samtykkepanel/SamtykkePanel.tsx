@@ -5,17 +5,17 @@ import css from './samtykkepanel.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 
-interface IProps {
+interface Props {
   tekster: ForsideTekstinnhold;
   håndterSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
-const SamtykkePanel: React.FC<IProps> = ({
+const SamtykkePanel: React.FC<Props> = ({
   tekster,
   håndterSamtykkeEndring,
   feilmeldingAktivert,
-}: IProps) => {
+}: Props) => {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   const {

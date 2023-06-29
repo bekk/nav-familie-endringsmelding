@@ -7,11 +7,11 @@ import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { ForsideTekstinnhold } from '~/typer/sanity/sanityForside';
 
-interface IProps {
+interface Props {
   tekster: ForsideTekstinnhold;
 }
 
-const VeilederHilsen: React.FC<IProps> = ({ tekster }: IProps) => {
+const VeilederHilsen: React.FC<Props> = ({ tekster }: Props) => {
   const { søker } = useOutletContext<IAppContext>();
 
   return (
