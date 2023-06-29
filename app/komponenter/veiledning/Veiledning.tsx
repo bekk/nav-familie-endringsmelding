@@ -11,9 +11,7 @@ interface Props {
 const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
   return (
     <GuidePanel className={`${css.veilederPanel}`}>
-      <div className={`${css.test}`}>
-        <TekstBlokk tekstblokk={hilsen} typografi={TypografiTyper.BodyShort} />
-      </div>
+      <TekstBlokk tekstblokk={hilsen} typografi={TypografiTyper.BodyShort} />
     </GuidePanel>
   );
 };
