@@ -1,6 +1,11 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
-import { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
+import {
+  json,
+  LinksFunction,
+  LoaderArgs,
+  LoaderFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -14,6 +19,8 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
+import { loggInn } from '~/server/authorization';
+import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 
 export const links: LinksFunction = () => [
   {
@@ -31,15 +38,26 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const session = await getSession(request.headers.get('Cookie'));
+
+  if (!session.has(API_TOKEN_NAME)) {
+    await loggInn(session);
+  }
   const tekstData = await hentDataFraSanity().catch(feil => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente sanity tekster');
   });
-  const søkerData = await hentSøker(request).catch(feil => {
+  const søkerData = await hentSøker(session).catch(feil => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente søker data');
   });
-  return { tekstData, søkerData };
+
+  const data = { tekstData, søkerData };
+  return json(data, {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
 };
 
 export default function App() {
