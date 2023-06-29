@@ -7,7 +7,7 @@ import {Session} from "@remix-run/node";
 const STI: string = '/api/oppslag/soker';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
 const API_URL_BACKEND: string =
-  'https://nav-familie-endringsmelding-api.fly.dev/' + STI;
+  'https://nav-familie-endringsmelding-api.fly.dev' + STI;
 
 export const hentSøker = async (session: Session): Promise<ISøker> => {
   switch (process.env.ENV) {
