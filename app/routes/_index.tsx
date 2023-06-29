@@ -6,9 +6,9 @@ import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { useTekster } from '~/hooks/contextHooks';
 import { useState } from 'react';
-import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
@@ -44,15 +44,17 @@ export default function Index() {
   };
 
   return (
-    <InnholdKonteiner>
+    <HovedInnhold>
       {!tekster ? (
         <Spinner />
       ) : (
         <>
-          <TekstBlokk
-            tekstblokk={tekster.tittel}
-            typografi={TypografiTyper.StegHeadingH1}
-          />
+          <div className={`${css.toppMargin}`}>
+            <TekstBlokk
+              tekstblokk={tekster.tittel}
+              typografi={TypografiTyper.StegHeadingH1}
+            />
+          </div>
           <Språkvelger />
           <VeilederHilsen tekster={tekster} />
           <SamtykkePanel
@@ -70,11 +72,9 @@ export default function Index() {
           >
             Start
           </Button>
-          <div className={`${css.personvernerklæringLink}`}>
-            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-          </div>
+          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
       )}
-    </InnholdKonteiner>
+    </HovedInnhold>
   );
 }
