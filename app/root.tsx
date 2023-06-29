@@ -14,6 +14,8 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
+//import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { fetchDecoratorHtml } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 export const links: LinksFunction = () => [
   {
@@ -39,12 +41,53 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente søker data');
   });
-  return { tekstData, søkerData };
+  const dekoratør = await fetchDecoratorHtml({
+    env: 'localhost',
+    localUrl: 'https://dekoratoren.ekstern.dev.nav.no/',
+  })
+    //.then(resultat => console.log('viktig resultat', resultat))
+    .catch(resultat => console.log(resultat));
+  console.log('Dekoratør backend', dekoratør && dekoratør);
+
+  return { tekstData, søkerData, dekoratør: dekoratør && dekoratør };
 };
 
 export default function App() {
-  const { tekstData, søkerData } = useLoaderData<typeof loader>();
+  const { tekstData, søkerData, dekoratør } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+
+  console.log('dekoratør frontend', dekoratør);
+
+  return (
+    <>
+      <Document>
+        <Layout>
+          <div
+            dangerouslySetInnerHTML={{ __html: dekoratør.DECORATOR_HEADER }}
+          />
+          <Outlet
+            context={{
+              sanityTekster: tekstData,
+              språkContext: [språk, settSpråk],
+              søker: søkerData,
+            }}
+          />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </Layout>
+      </Document>
+    </>
+  );
+}
+
+interface DocumentProps {
+  children: React.ReactNode;
+}
+
+export function Document({ children }: DocumentProps) {
+  //Usikker på denne
+  const [språk] = useState<LocaleType>(LocaleType.nb);
 
   return (
     <html lang={språk}>
@@ -55,17 +98,35 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet
-          context={{
-            sanityTekster: tekstData,
-            språkContext: [språk, settSpråk],
-            søker: søkerData,
-          }}
-        />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        {children}
+        {/*Enable live reload in development environment only, not production */}
+        {/*process.env.NODE_ENV === 'development' ? <LiveReload /> : null*/}
       </body>
     </html>
+  );
+}
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export function Layout({ children }: LayoutProps) {
+  //const Decorator = await fetchDecoratorReact(props);
+
+  return <>{children}</>;
+}
+
+interface ErrorBoundaryProps {
+  error: Error;
+}
+
+export function ErrorBoundary({ error }: ErrorBoundaryProps) {
+  console.log(error);
+  return (
+    <Document>
+      <Layout>
+        <h1>There was an Error</h1>
+      </Layout>
+    </Document>
   );
 }
