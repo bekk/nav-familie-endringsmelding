@@ -26,8 +26,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const sanityTekster = useTekster();
-  const tekster = sanityTekster[ESanitySteg.FORSIDE];
+  const tekster = useTekster(ESanitySteg.FORSIDE);
+
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
@@ -56,9 +56,8 @@ export default function Index() {
             />
           </div>
           <Språkvelger />
-          <VeilederHilsen tekster={tekster} />
+          <VeilederHilsen />
           <SamtykkePanel
-            tekster={tekster}
             håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />

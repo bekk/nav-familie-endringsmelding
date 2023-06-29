@@ -5,8 +5,7 @@ import { TypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
 
 const Banner: React.FC = () => {
-  const sanityTekster = useTekster();
-  const { bannerTekst } = sanityTekster[ESanitySteg.FELLES];
+  const { bannerTekst } = useTekster(ESanitySteg.FELLES);
 
   return (
     <section className={`${css.bannerStil}`}>
