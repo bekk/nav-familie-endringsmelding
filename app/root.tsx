@@ -14,8 +14,6 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
-//import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
-import { fetchDecoratorHtml } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 export const links: LinksFunction = () => [
   {
@@ -41,30 +39,18 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente søker data');
   });
-  const dekoratør = await fetchDecoratorHtml({
-    env: 'localhost',
-    localUrl: 'https://dekoratoren.ekstern.dev.nav.no/',
-  })
-    //.then(resultat => console.log('viktig resultat', resultat))
-    .catch(resultat => console.log(resultat));
-  console.log('Dekoratør backend', dekoratør && dekoratør);
 
-  return { tekstData, søkerData, dekoratør: dekoratør && dekoratør };
+  return { tekstData, søkerData };
 };
 
 export default function App() {
-  const { tekstData, søkerData, dekoratør } = useLoaderData<typeof loader>();
+  const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
-
-  console.log('dekoratør frontend', dekoratør);
 
   return (
     <>
-      <Document>
-        <Layout>
-          <div
-            dangerouslySetInnerHTML={{ __html: dekoratør.DECORATOR_HEADER }}
-          />
+      <Dokument språk={språk}>
+        <Oppsett>
           <Outlet
             context={{
               sanityTekster: tekstData,
@@ -75,20 +61,18 @@ export default function App() {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
-        </Layout>
-      </Document>
+        </Oppsett>
+      </Dokument>
     </>
   );
 }
 
-interface DocumentProps {
+interface DokumentProps {
   children: React.ReactNode;
+  språk: LocaleType;
 }
 
-export function Document({ children }: DocumentProps) {
-  //Usikker på denne
-  const [språk] = useState<LocaleType>(LocaleType.nb);
-
+export function Dokument({ children, språk }: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
@@ -97,36 +81,31 @@ export function Document({ children }: DocumentProps) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
-        {/*Enable live reload in development environment only, not production */}
-        {/*process.env.NODE_ENV === 'development' ? <LiveReload /> : null*/}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
 
-interface LayoutProps {
+interface OppsettProps {
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
-  //const Decorator = await fetchDecoratorReact(props);
-
+export function Oppsett({ children }: OppsettProps) {
+  //Her kommer dekoratør
   return <>{children}</>;
 }
 
-interface ErrorBoundaryProps {
-  error: Error;
+interface FeilsideProps {
+  feil: Error;
 }
 
-export function ErrorBoundary({ error }: ErrorBoundaryProps) {
-  console.log(error);
+export function Feilside({ feil }: FeilsideProps) {
+  //Her kommer feilmeldingsside
   return (
-    <Document>
-      <Layout>
-        <h1>There was an Error</h1>
-      </Layout>
-    </Document>
+    <Dokument språk={LocaleType.nb}>
+      <Oppsett>
+        <h1>En feil oppsto</h1>
+      </Oppsett>
+    </Dokument>
   );
 }
