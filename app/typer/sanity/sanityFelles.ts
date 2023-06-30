@@ -4,6 +4,7 @@ export enum EApiKeysFelles {
   KNAPP_TILBAKE = 'knappTilbake',
   KNAPP_SEND_ENDRINGER = 'knappSendEndringer',
   BANNER = 'bannerTekst',
+  FEILMELDING = 'feilmelding',
 }
 
 export type IFellesTekstinnhold = Record<EApiKeysFelles, SanityDokument>;

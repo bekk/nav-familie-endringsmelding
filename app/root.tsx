@@ -14,6 +14,7 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
+import Feilside from './komponenter/feilside/Feilside';
 
 export const links: LinksFunction = () => [
   {
@@ -91,12 +92,5 @@ interface ErrorBoundaryProps {
 }
 
 export function ErrorBoundary({ feil }: ErrorBoundaryProps) {
-  //Her kommer feilmeldingsside
-  return (
-    <Dokument språk={LocaleType.nb}>
-      <Oppsett>
-        <h1>En feil oppsto</h1>
-      </Oppsett>
-    </Dokument>
-  );
+  return <Feilside />;
 }

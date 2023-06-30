@@ -15,7 +15,7 @@ const sanityKlient = createClient({
 
 export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
   const tekst = await sanityKlient.fetch<SanityDokument[]>(
-    '*[ytelse == "BARNETRYGD"]',
+    '*[ytelse == "BARNRYGD"]',
   );
 
   if (tekst.length === 0) {
