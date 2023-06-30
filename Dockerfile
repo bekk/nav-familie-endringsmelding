@@ -38,7 +38,7 @@ RUN npm run build
 FROM base
 
 ENV PORT="8080"
-ENV NODE_ENV="production"
+ENV NODE_ENV="PRODUKSJON"
 
 WORKDIR /myapp
 

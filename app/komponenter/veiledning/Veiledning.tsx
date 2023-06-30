@@ -1,16 +1,19 @@
 import { GuidePanel } from '@navikt/ds-react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { ISanityDokument } from '~/typer/sanity/sanity';
+import { useTekster } from '~/hooks/contextHooks';
+import css from './veiledning.module.css';
+import { ESteg } from '~/typer/common';
 import { ETypografiTyper } from '~/typer/typografi';
 
-interface Props {
-  hilsen: ISanityDokument;
-}
+const Veiledning: React.FC = () => {
+  const { veilederInnhold } = useTekster(ESteg.SEND_ENDRINGER);
 
-const Veiledning: React.FC<Props> = ({ hilsen }: Props) => {
   return (
-    <GuidePanel>
-      <TekstBlokk tekstblokk={hilsen} typografi={ETypografiTyper.BodyShort} />
+    <GuidePanel className={`${css.veilederPanel}`}>
+      <TekstBlokk
+        tekstblokk={veilederInnhold}
+        typografi={ETypografiTyper.BodyShort}
+      />
     </GuidePanel>
   );
 };

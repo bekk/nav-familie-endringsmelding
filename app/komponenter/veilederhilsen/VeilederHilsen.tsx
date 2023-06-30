@@ -5,23 +5,23 @@ import { IAppContext } from '~/typer/context';
 import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { ForsideTekstinnhold } from '~/typer/sanity/sanityForside';
+import { useTekster } from '~/hooks/contextHooks';
+import { ESteg } from '~/typer/common';
 
-interface Props {
-  tekster: ForsideTekstinnhold;
-}
-
-const VeilederHilsen: React.FC<Props> = ({ tekster }: Props) => {
+const VeilederHilsen: React.FC = () => {
   const { søker } = useOutletContext<IAppContext>();
+  const { brukerHilsen, veilederhilsenInnhold } = useTekster(ESteg.FORSIDE);
 
   return (
     <GuidePanel poster className={`${css.poster}`}>
-      <TekstBlokk
-        tekstblokk={tekster.brukerHilsen}
-        typografi={ETypografiTyper.StegHeadingH2}
-        flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
-      />
-      <TekstBlokk tekstblokk={tekster.veilederhilsenInnhold} />
+      <div className={`${css.tekstInnholdMellomrom}`}>
+        <TekstBlokk
+          tekstblokk={brukerHilsen}
+          typografi={ETypografiTyper.HeadingH2}
+          flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+        />
+      </div>
+      <TekstBlokk tekstblokk={veilederhilsenInnhold} />
     </GuidePanel>
   );
 };

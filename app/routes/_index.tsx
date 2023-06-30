@@ -3,11 +3,11 @@ import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
 import { useTekster } from '~/hooks/contextHooks';
-import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg } from '~/typer/common';
@@ -26,8 +26,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const sanityTekster = useTekster();
-  const tekster = sanityTekster[ESteg.FORSIDE];
+  const tekster = useTekster(ESteg.FORSIDE);
+
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
@@ -44,19 +44,20 @@ export default function Index() {
   };
 
   return (
-    <InnholdKonteiner>
+    <HovedInnhold>
       {!tekster ? (
         <Spinner />
       ) : (
         <>
-          <TekstBlokk
-            tekstblokk={tekster.tittel}
-            typografi={ETypografiTyper.StegHeadingH1}
-          />
+          <div className={`${css.toppMargin}`}>
+            <TekstBlokk
+              tekstblokk={tekster.tittel}
+              typografi={ETypografiTyper.HeadingH1}
+            />
+          </div>
           <Språkvelger />
-          <VeilederHilsen tekster={tekster} />
+          <VeilederHilsen />
           <SamtykkePanel
-            tekster={tekster}
             håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />
@@ -70,11 +71,9 @@ export default function Index() {
           >
             Start
           </Button>
-          <div className={`${css.personvernerklæringLink}`}>
-            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-          </div>
+          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
       )}
-    </InnholdKonteiner>
+    </HovedInnhold>
   );
 }

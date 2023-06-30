@@ -31,14 +31,8 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const tekstData = await hentDataFraSanity().catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente sanity tekster');
-  });
-  const søkerData = await hentSøker(request).catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente søker data');
-  });
+  const tekstData = await hentDataFraSanity();
+  const søkerData = await hentSøker(request);
   return { tekstData, søkerData };
 };
 
@@ -47,14 +41,8 @@ export default function App() {
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.nb);
 
   return (
-    <html lang={språk}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
+    <Dokument språk={språk}>
+      <Oppsett>
         <Outlet
           context={{
             sanityTekster: tekstData,
@@ -65,7 +53,50 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-      </body>
+      </Oppsett>
+    </Dokument>
+  );
+}
+
+interface DokumentProps {
+  children: React.ReactNode;
+  språk: ELocaleType;
+}
+
+export function Dokument({ children, språk }: DokumentProps) {
+  return (
+    <html lang={språk}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>{children}</body>
     </html>
+  );
+}
+
+interface OppsettProps {
+  children: React.ReactNode;
+}
+
+export function Oppsett({ children }: OppsettProps) {
+  //Her kommer dekoratør
+  return <>{children}</>;
+}
+
+interface ErrorBoundaryProps {
+  feil: Error;
+}
+
+export function ErrorBoundary({ feil }: ErrorBoundaryProps) {
+  //Her kommer feilmeldingsside
+  return (
+    <Dokument språk={ELocaleType.nb}>
+      <Oppsett>
+        <h1>En feil oppsto</h1>
+      </Oppsett>
+    </Dokument>
   );
 }
