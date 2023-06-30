@@ -4,5 +4,9 @@
 }
 
 .poster ul {
-  margin: 0;
+  margin: 0 auto 2rem auto;
+}
+
+.tekstInnholdMellomrom {
+  margin-bottom: 1.2rem;
 }

@@ -13,6 +13,7 @@ const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
       className={`${css.stegIndikator}`}
       aria-labelledby="stepper-heading"
       activeStep={nåværendeSteg}
+      interactive={false}
       orientation="horizontal"
     >
       {[...Array(ANTALL_STEG)].map((_, stegIndex) => {

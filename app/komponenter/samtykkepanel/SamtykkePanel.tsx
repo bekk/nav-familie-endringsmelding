@@ -32,7 +32,10 @@ const SamtykkePanel: React.FC<Props> = ({
 
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
-      <TekstBlokk tekstblokk={samtykkePanelTittel} />
+      <TekstBlokk
+        tekstblokk={samtykkePanelTittel}
+        typografi={TypografiTyper.Label}
+      />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
         label={<TekstBlokk tekstblokk={samtykkePanelSamtykke} />}
