@@ -3,27 +3,20 @@ import { useState } from 'react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { TypografiTyper } from '~/typer/typografi';
-import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
+import { useTekster } from '~/hooks/contextHooks';
+import { ESanitySteg } from '~/typer/sanity/sanity';
 
 interface Props {
-  tekster: IForsideTekstinnhold;
   håndterSamtykkeEndring: (bekreftet: boolean) => void;
   feilmeldingAktivert: boolean;
 }
 
 const SamtykkePanel: React.FC<Props> = ({
-  tekster,
   håndterSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
+  const tekster = useTekster(ESanitySteg.FORSIDE);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
-
-  const {
-    samtykkePanelTittel,
-    samtykkePanelSamtykke,
-    samtykkePanelFeilmelding,
-    samtykkePanelMelding,
-  } = tekster;
 
   const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
@@ -33,12 +26,12 @@ const SamtykkePanel: React.FC<Props> = ({
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
       <TekstBlokk
-        tekstblokk={samtykkePanelTittel}
+        tekstblokk={tekster.samtykkePanelTittel}
         typografi={TypografiTyper.Label}
       />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
-        label={<TekstBlokk tekstblokk={samtykkePanelSamtykke} />}
+        label={<TekstBlokk tekstblokk={tekster.samtykkePanelSamtykke} />}
         onChange={() => {
           vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
@@ -46,13 +39,13 @@ const SamtykkePanel: React.FC<Props> = ({
           !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
-              tekstblokk={samtykkePanelFeilmelding}
+              tekstblokk={tekster.samtykkePanelFeilmelding}
               typografi={TypografiTyper.BodyShort}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }
       >
-        <TekstBlokk tekstblokk={samtykkePanelMelding} />
+        <TekstBlokk tekstblokk={tekster.samtykkePanelMelding} />
       </ConfirmationPanel>
     </div>
   );

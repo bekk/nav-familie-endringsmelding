@@ -13,19 +13,8 @@ import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 
 export default function SendEndringsmelding() {
-  const sanityTekster = useTekster();
-  const {
-    overskrift,
-    veilederInnhold,
-    fritekstfeltTittel,
-    fritekstfeltBeskrivelse,
-    fritekstfeltFeilmeldingManglerTekst,
-    fritekstfeltFeilmeldingSpesialTegn,
-    fritekstfeltFeilmeldingMinTegn,
-  } = sanityTekster[ESanitySteg.SEND_ENDRINGER];
-
-  const { knappTilbake, knappSendEndringer } =
-    sanityTekster[ESanitySteg.FELLES];
+  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const teksterFelles = useTekster(ESanitySteg.FELLES);
 
   const navigate = useNavigate();
   const [språk] = useSpråk();
@@ -67,11 +56,15 @@ export default function SendEndringsmelding() {
 
   const utledFeilmelding = () => {
     if (manglerTekst) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingManglerTekst} />;
+      return (
+        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst} />
+      );
     } else if (brukerSpesialtegn) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingSpesialTegn} />;
+      return (
+        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn} />
+      );
     } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingMinTegn} />;
+      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
     }
   };
 
@@ -88,14 +81,16 @@ export default function SendEndringsmelding() {
       <StegIndikator nåværendeSteg={1} />
 
       <TekstBlokk
-        tekstblokk={overskrift}
+        tekstblokk={tekster.overskrift}
         typografi={TypografiTyper.StegHeadingSmallH1}
       />
-      <Veiledning hilsen={veilederInnhold} />
+      <Veiledning />
 
       <Textarea
-        label={<TekstBlokk tekstblokk={fritekstfeltTittel} />}
-        description={<TekstBlokk tekstblokk={fritekstfeltBeskrivelse} />}
+        label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+        description={
+          <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
+        }
         maxLength={MAKS_INPUT_LENGDE}
         className={`${cssFritekst.fritekstfelt}`}
         i18n={i18nInnhold}
@@ -109,7 +104,7 @@ export default function SendEndringsmelding() {
           variant={'secondary'}
           onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
         >
-          <TekstBlokk tekstblokk={knappTilbake} />
+          <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
         </Button>
         <Button
           variant={tekstInputOK ? 'primary' : 'secondary'}
@@ -118,7 +113,7 @@ export default function SendEndringsmelding() {
             tekstInputOK && console.log('går til neste side');
           }}
         >
-          <TekstBlokk tekstblokk={knappSendEndringer} />
+          <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
         </Button>
       </div>
     </HovedInnhold>
