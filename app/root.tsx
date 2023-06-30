@@ -31,15 +31,8 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const tekstData = await hentDataFraSanity().catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente sanity tekster');
-  });
-  const søkerData = await hentSøker(request).catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente søker data');
-  });
-
+  const tekstData = await hentDataFraSanity();
+  const søkerData = await hentSøker(request);
   return { tekstData, søkerData };
 };
 
@@ -95,11 +88,11 @@ export function Oppsett({ children }: OppsettProps) {
   return <>{children}</>;
 }
 
-interface FeilsideProps {
+interface ErrorBoundaryProps {
   feil: Error;
 }
 
-export function Feilside({ feil }: FeilsideProps) {
+export function ErrorBoundary({ feil }: ErrorBoundaryProps) {
   //Her kommer feilmeldingsside
   return (
     <Dokument språk={LocaleType.nb}>
