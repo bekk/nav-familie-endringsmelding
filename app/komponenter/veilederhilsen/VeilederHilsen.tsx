@@ -16,11 +16,13 @@ const VeilederHilsen: React.FC<Props> = ({ tekster }: Props) => {
 
   return (
     <GuidePanel poster className={`${css.poster}`}>
-      <TekstBlokk
-        tekstblokk={tekster.brukerHilsen}
-        typografi={TypografiTyper.StegHeadingH2}
-        flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
-      />
+      <div className={`${css.tekstInnholdMellomrom}`}>
+        <TekstBlokk
+          tekstblokk={tekster.brukerHilsen}
+          typografi={TypografiTyper.HeadingH2}
+          flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+        />
+      </div>
       <TekstBlokk tekstblokk={tekster.veilederhilsenInnhold} />
     </GuidePanel>
   );
