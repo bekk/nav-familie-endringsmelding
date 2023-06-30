@@ -41,22 +41,20 @@ export default function App() {
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
 
   return (
-    <>
-      <Dokument språk={språk}>
-        <Oppsett>
-          <Outlet
-            context={{
-              sanityTekster: tekstData,
-              språkContext: [språk, settSpråk],
-              søker: søkerData,
-            }}
-          />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </Oppsett>
-      </Dokument>
-    </>
+    <Dokument språk={språk}>
+      <Oppsett>
+        <Outlet
+          context={{
+            sanityTekster: tekstData,
+            språkContext: [språk, settSpråk],
+            søker: søkerData,
+          }}
+        />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </Oppsett>
+    </Dokument>
   );
 }
 
