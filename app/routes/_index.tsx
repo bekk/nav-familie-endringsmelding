@@ -52,7 +52,7 @@ export default function Index() {
           <div className={`${css.toppMargin}`}>
             <TekstBlokk
               tekstblokk={tekster.tittel}
-              typografi={TypografiTyper.StegHeadingH1}
+              typografi={TypografiTyper.HeadingH1}
             />
           </div>
           <Språkvelger />

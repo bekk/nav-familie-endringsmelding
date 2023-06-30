@@ -16,7 +16,7 @@ export const TypografiWrapper: React.FC<Props> = ({
     case TypografiTyper.BodyShort:
       return <BodyShort style={style}>{children}</BodyShort>;
 
-    case TypografiTyper.StegHeadingH1:
+    case TypografiTyper.HeadingH1:
       return (
         <Heading style={style} level="1" size="xlarge">
           {children}
