@@ -9,9 +9,7 @@ const HovedInnhold: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Banner />
-      <div className={`${css.fyllSide}`}>
-        <main className={`${css.innholdKonteiner}`}>{children}</main>
-      </div>
+      <main className={`${css.innholdKonteiner}`}>{children}</main>
     </>
   );
 };

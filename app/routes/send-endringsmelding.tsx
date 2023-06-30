@@ -82,7 +82,7 @@ export default function SendEndringsmelding() {
 
       <TekstBlokk
         tekstblokk={tekster.overskrift}
-        typografi={TypografiTyper.StegHeadingH1}
+        typografi={TypografiTyper.StegHeadingSmallH1}
       />
       <Veiledning />
 

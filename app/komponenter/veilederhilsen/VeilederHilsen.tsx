@@ -16,11 +16,13 @@ const VeilederHilsen: React.FC = () => {
 
   return (
     <GuidePanel poster className={`${css.poster}`}>
-      <TekstBlokk
-        tekstblokk={brukerHilsen}
-        typografi={TypografiTyper.StegHeadingH2}
-        flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
-      />
+      <div className={`${css.tekstInnholdMellomrom}`}>
+        <TekstBlokk
+          tekstblokk={brukerHilsen}
+          typografi={TypografiTyper.HeadingH2}
+          flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+        />
+      </div>
       <TekstBlokk tekstblokk={veilederhilsenInnhold} />
     </GuidePanel>
   );
