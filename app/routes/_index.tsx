@@ -28,15 +28,14 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
   const { knappStart } = useTekster(ESanitySteg.FELLES);
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useBekreftetSamtykke();
+  const [erSamtykkeBekreftet] = useBekreftetSamtykke();
 
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
   const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
 
-  const håndterSamtykkeEndring = (bekreftet: boolean) => {
-    settErSamtykkeBekreftet(bekreftet);
+  const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 

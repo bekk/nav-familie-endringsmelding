@@ -6,7 +6,7 @@ import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
 import { ESanitySteg } from '~/typer/sanity/sanity';
 
 interface Props {
-  håndterSamtykkeEndring: (bekreftet: boolean) => void;
+  håndterSamtykkeEndring: () => void;
   feilmeldingAktivert: boolean;
 }
 
@@ -19,7 +19,7 @@ const SamtykkePanel: React.FC<Props> = ({
 
   const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
-    håndterSamtykkeEndring(bekreftet);
+    håndterSamtykkeEndring();
   };
 
   return (
