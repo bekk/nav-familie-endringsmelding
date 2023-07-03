@@ -1,4 +1,4 @@
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 
 export const hentPathForSteg = (steg: ESteg) => {
   switch (steg) {

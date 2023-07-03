@@ -1,7 +1,7 @@
 export enum ELocaleType {
-  en = 'en',
-  nb = 'nb',
-  nn = 'nn',
+  EN = 'en',
+  NB = 'nb',
+  NN = 'nn',
 }
 
 export enum ESteg {

@@ -13,34 +13,34 @@ export const TypografiWrapper: React.FC<Props> = ({
   style,
 }: Props) => {
   switch (typografi) {
-    case ETypografiTyper.BodyShort:
+    case ETypografiTyper.BODY_SHORT:
       return <BodyShort style={style}>{children}</BodyShort>;
 
-    case ETypografiTyper.HeadingH1:
+    case ETypografiTyper.HEADING_H1:
       return (
         <Heading style={style} level="1" size="xlarge">
           {children}
         </Heading>
       );
-    case ETypografiTyper.StegHeadingSmallH1:
+    case ETypografiTyper.STEG_HEADING_SMALL_H1:
       return (
         <Heading style={style} level="1" size="small">
           {children}
         </Heading>
       );
-    case ETypografiTyper.HeadingH2:
+    case ETypografiTyper.HEADING_H2:
       return (
         <Heading style={style} level="2" size="large">
           {children}
         </Heading>
       );
-    case ETypografiTyper.BannerHeading:
+    case ETypografiTyper.BANNER_HEADING:
       return (
         <Heading style={style} level="1" size="large">
           {children}
         </Heading>
       );
-    case ETypografiTyper.Label:
+    case ETypografiTyper.LABEL:
       return <Label>{children}</Label>;
 
     default:

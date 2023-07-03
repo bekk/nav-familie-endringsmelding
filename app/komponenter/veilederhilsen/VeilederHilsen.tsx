@@ -6,7 +6,7 @@ import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 
 const VeilederHilsen: React.FC = () => {
   const { søker } = useOutletContext<IAppContext>();
@@ -17,7 +17,7 @@ const VeilederHilsen: React.FC = () => {
       <div className={`${css.tekstInnholdMellomrom}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}
-          typografi={ETypografiTyper.HeadingH2}
+          typografi={ETypografiTyper.HEADING_H2}
           flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
         />
       </div>

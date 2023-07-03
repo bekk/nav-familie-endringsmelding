@@ -2,7 +2,7 @@ import css from './banner.module.css';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { ETypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 
 const Banner: React.FC = () => {
   const { bannerTekst } = useTekster(ESteg.FELLES);
@@ -11,7 +11,7 @@ const Banner: React.FC = () => {
     <section className={`${css.bannerStil}`}>
       <TekstBlokk
         tekstblokk={bannerTekst}
-        typografi={ETypografiTyper.BannerHeading}
+        typografi={ETypografiTyper.BANNER_HEADING}
       />
     </section>
   );

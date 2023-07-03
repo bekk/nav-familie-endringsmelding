@@ -2,7 +2,7 @@ import { GuidePanel } from '@navikt/ds-react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useTekster } from '~/hooks/contextHooks';
 import css from './veiledning.module.css';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 
 const Veiledning: React.FC = () => {
@@ -12,7 +12,7 @@ const Veiledning: React.FC = () => {
     <GuidePanel className={`${css.veilederPanel}`}>
       <TekstBlokk
         tekstblokk={veilederInnhold}
-        typografi={ETypografiTyper.BodyShort}
+        typografi={ETypografiTyper.BODY_SHORT}
       />
     </GuidePanel>
   );

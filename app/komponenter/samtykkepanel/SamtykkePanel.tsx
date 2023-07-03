@@ -4,7 +4,7 @@ import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 
 interface Props {
   håndterSamtykkeEndring: (bekreftet: boolean) => void;
@@ -27,7 +27,7 @@ const SamtykkePanel: React.FC<Props> = ({
     <div className={`${css.samtykkePanelOmråde}`}>
       <TekstBlokk
         tekstblokk={tekster.samtykkePanelTittel}
-        typografi={ETypografiTyper.Label}
+        typografi={ETypografiTyper.LABEL}
       />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
@@ -40,7 +40,7 @@ const SamtykkePanel: React.FC<Props> = ({
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={tekster.samtykkePanelFeilmelding}
-              typografi={ETypografiTyper.BodyShort}
+              typografi={ETypografiTyper.BODY_SHORT}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }

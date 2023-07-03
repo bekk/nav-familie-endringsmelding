@@ -1,5 +1,5 @@
 import { PortableTextBlock } from '@portabletext/types';
-import { ESteg } from '../common';
+import { ESteg } from '../felles';
 import { FellesTekstinnhold, EApiKeysFelles } from './sanityFelles';
 import { ForsideTekstinnhold, EApiKeysForside } from './sanityForside';
 import {

@@ -8,7 +8,7 @@ import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export default function SendEndringsmelding() {
@@ -81,7 +81,7 @@ export default function SendEndringsmelding() {
 
       <TekstBlokk
         tekstblokk={tekster.overskrift}
-        typografi={ETypografiTyper.StegHeadingSmallH1}
+        typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
 

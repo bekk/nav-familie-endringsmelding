@@ -11,7 +11,7 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { ELocaleType } from './typer/common';
+import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 
@@ -38,7 +38,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.nb);
+  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
 
   return (
     <Dokument språk={språk}>
@@ -93,7 +93,7 @@ interface ErrorBoundaryProps {
 export function ErrorBoundary({ feil }: ErrorBoundaryProps) {
   //Her kommer feilmeldingsside
   return (
-    <Dokument språk={ELocaleType.nb}>
+    <Dokument språk={ELocaleType.NB}>
       <Oppsett>
         <h1>En feil oppsto</h1>
       </Oppsett>

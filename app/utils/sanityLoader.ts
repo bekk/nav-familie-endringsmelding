@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 import { ITekstinnhold, ISanityDokument, ApiKeys } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({

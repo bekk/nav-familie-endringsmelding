@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useTekster } from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
@@ -52,7 +52,7 @@ export default function Index() {
           <div className={`${css.toppMargin}`}>
             <TekstBlokk
               tekstblokk={tekster.tittel}
-              typografi={ETypografiTyper.HeadingH1}
+              typografi={ETypografiTyper.HEADING_H1}
             />
           </div>
           <Språkvelger />

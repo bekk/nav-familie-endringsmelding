@@ -1,5 +1,5 @@
 import { useOutletContext } from '@remix-run/react';
-import { ESteg } from '~/typer/common';
+import { ESteg } from '~/typer/felles';
 import { IAppContext } from '~/typer/context';
 
 export function useTekster<Steg extends ESteg>(steg: Steg) {
