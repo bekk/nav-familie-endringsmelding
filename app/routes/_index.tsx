@@ -8,7 +8,7 @@ import { TypografiTyper } from '~/typer/typografi';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { useTekster } from '~/hooks/contextHooks';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
@@ -44,10 +44,6 @@ export default function Index() {
   const håndterKnappeTrykk = () => {
     settErFeilmeldingAktivert(true);
   };
-
-  useEffect(() => {
-    settErSamtykkeBekreftet(erSamtykkeBekreftet);
-  }, [erSamtykkeBekreftet, settErSamtykkeBekreftet]);
 
   return (
     <HovedInnhold>
