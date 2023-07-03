@@ -1,4 +1,4 @@
-import { SanityDokument } from './sanity';
+import { ISanityDokument } from './sanity';
 
 export enum EApiKeysForside {
   TITTEL = 'tittel',
@@ -11,4 +11,4 @@ export enum EApiKeysForside {
   VEILEDERHILSENINNHOLD = 'veilederhilsenInnhold',
 }
 
-export type IForsideTekstinnhold = Record<EApiKeysForside, SanityDokument>;
+export type ForsideTekstinnhold = Record<EApiKeysForside, ISanityDokument>;
