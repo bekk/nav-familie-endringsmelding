@@ -1,18 +1,26 @@
-import { ESanitySteg } from '~/typer/sanity/sanity';
+import { SanityDokument } from '~/typer/sanity/sanity';
 import css from './banner.module.css';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
-import { useTekster } from '~/hooks/contextHooks';
+import { Heading } from '@navikt/ds-react';
 
-const Banner: React.FC = () => {
-  const { bannerTekst } = useTekster(ESanitySteg.FELLES);
+interface Props {
+  bannerTekst: SanityDokument | string;
+}
 
+const Banner: React.FC<Props> = ({ bannerTekst }) => {
   return (
     <section className={`${css.bannerStil}`}>
-      <TekstBlokk
-        tekstblokk={bannerTekst}
-        typografi={TypografiTyper.BannerHeading}
-      />
+      {typeof bannerTekst == 'string' ? (
+        <Heading level="1" size="large">
+          {bannerTekst}
+        </Heading>
+      ) : (
+        <TekstBlokk
+          tekstblokk={bannerTekst}
+          typografi={TypografiTyper.BannerHeading}
+        />
+      )}
     </section>
   );
 };
