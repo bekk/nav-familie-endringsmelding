@@ -1,20 +1,19 @@
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import React, { useEffect, useState } from 'react';
-import { TypografiTyper } from '~/typer/typografi';
 import { useSpråk, useTekster } from '~/hooks/contextHooks';
-import cssFritekst from './fritekstfelt.module.css';
 import { Button, Textarea } from '@navikt/ds-react';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
+import { ETypografiTyper } from '~/typer/typografi';
+import { ESanityMappe, ESteg } from '~/typer/felles';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export default function SendEndringsmelding() {
-  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
-  const teksterFelles = useTekster(ESanitySteg.FELLES);
+  const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
+  const teksterFelles = useTekster(ESanityMappe.FELLES);
 
   const navigate = useNavigate();
   const [språk] = useSpråk();
@@ -82,7 +81,7 @@ export default function SendEndringsmelding() {
 
       <TekstBlokk
         tekstblokk={tekster.overskrift}
-        typografi={TypografiTyper.StegHeadingSmallH1}
+        typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
 
@@ -92,7 +91,7 @@ export default function SendEndringsmelding() {
           <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
         }
         maxLength={MAKS_INPUT_LENGDE}
-        className={`${cssFritekst.fritekstfelt}`}
+        className={`${css.fullBredde}`}
         i18n={i18nInnhold}
         error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
         onInput={event => {
@@ -102,7 +101,7 @@ export default function SendEndringsmelding() {
       <div className={`${css.navigeringsKnapper}`}>
         <Button
           variant={'secondary'}
-          onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
+          onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
         >
           <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
         </Button>

@@ -1,10 +1,11 @@
-import { ITekstinnhold, LocaleType } from './sanity/sanity';
+import { ITekstinnhold } from './sanity/sanity';
+import { ELocaleType } from './felles';
 import { ISøker } from './søker';
 import { Dispatch, SetStateAction } from 'react';
 
-export interface AppContext {
+export interface IAppContext {
   sanityTekster: ITekstinnhold;
-  språkContext: [LocaleType, Dispatch<SetStateAction<LocaleType>>];
+  språkContext: [ELocaleType, Dispatch<SetStateAction<ELocaleType>>];
   søker: ISøker;
   erSamtykkeBekreftetContext: [boolean, Dispatch<SetStateAction<boolean>>];
 }

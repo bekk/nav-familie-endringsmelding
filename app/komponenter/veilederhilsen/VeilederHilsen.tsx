@@ -1,17 +1,17 @@
 import { GuidePanel } from '@navikt/ds-react';
 import css from './veilederhilsen.module.css';
-import { TypografiTyper } from '~/typer/typografi';
-import { AppContext } from '~/typer/context';
+import { ETypografiTyper } from '~/typer/typografi';
+import { IAppContext } from '~/typer/context';
 import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { ESanitySteg } from '~/typer/sanity/sanity';
 import { useTekster } from '~/hooks/contextHooks';
+import { ESanityMappe } from '~/typer/felles';
 
 const VeilederHilsen: React.FC = () => {
-  const { søker } = useOutletContext<AppContext>();
+  const { søker } = useOutletContext<IAppContext>();
   const { brukerHilsen, veilederhilsenInnhold } = useTekster(
-    ESanitySteg.FORSIDE,
+    ESanityMappe.FORSIDE,
   );
 
   return (
@@ -19,7 +19,7 @@ const VeilederHilsen: React.FC = () => {
       <div className={`${css.tekstInnholdMellomrom}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}
-          typografi={TypografiTyper.HeadingH2}
+          typografi={ETypografiTyper.HEADING_H2}
           flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
         />
       </div>

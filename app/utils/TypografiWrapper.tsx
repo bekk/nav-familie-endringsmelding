@@ -1,9 +1,9 @@
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { TypografiTyper } from '~/typer/typografi';
+import { ETypografiTyper } from '~/typer/typografi';
 
 export interface Props {
-  typografi?: TypografiTyper;
-  children?: React.ReactNode | React.ReactNode[];
+  typografi?: ETypografiTyper;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
 }
 
@@ -13,34 +13,34 @@ export const TypografiWrapper: React.FC<Props> = ({
   style,
 }: Props) => {
   switch (typografi) {
-    case TypografiTyper.BodyShort:
+    case ETypografiTyper.BODY_SHORT:
       return <BodyShort style={style}>{children}</BodyShort>;
 
-    case TypografiTyper.HeadingH1:
+    case ETypografiTyper.HEADING_H1:
       return (
         <Heading style={style} level="1" size="xlarge">
           {children}
         </Heading>
       );
-    case TypografiTyper.StegHeadingSmallH1:
+    case ETypografiTyper.STEG_HEADING_SMALL_H1:
       return (
         <Heading style={style} level="1" size="small">
           {children}
         </Heading>
       );
-    case TypografiTyper.HeadingH2:
+    case ETypografiTyper.HEADING_H2:
       return (
         <Heading style={style} level="2" size="large">
           {children}
         </Heading>
       );
-    case TypografiTyper.BannerHeading:
+    case ETypografiTyper.BANNER_HEADING:
       return (
         <Heading style={style} level="1" size="large">
           {children}
         </Heading>
       );
-    case TypografiTyper.Label:
+    case ETypografiTyper.LABEL:
       return <Label>{children}</Label>;
 
     default:
