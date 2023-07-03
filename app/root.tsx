@@ -39,6 +39,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   return (
     <Dokument språk={språk}>
@@ -48,6 +49,10 @@ export default function App() {
             sanityTekster: tekstData,
             språkContext: [språk, settSpråk],
             søker: søkerData,
+            erSamtykkeBekreftetContext: [
+              erSamtykkeBekreftet,
+              settErSamtykkeBekreftet,
+            ],
           }}
         />
         <ScrollRestoration />

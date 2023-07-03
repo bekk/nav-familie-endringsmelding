@@ -6,4 +6,5 @@ export interface AppContext {
   sanityTekster: ITekstinnhold;
   språkContext: [LocaleType, Dispatch<SetStateAction<LocaleType>>];
   søker: ISøker;
+  erSamtykkeBekreftetContext: [boolean, Dispatch<SetStateAction<boolean>>];
 }

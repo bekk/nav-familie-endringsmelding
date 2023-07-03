@@ -8,11 +8,12 @@ import { TypografiTyper } from '~/typer/typografi';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { useTekster } from '~/hooks/contextHooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
+import { useBekreftetSamtykke } from '~/context/InnsendingContext';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -28,8 +29,8 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   const tekster = useTekster(ESanitySteg.FORSIDE);
   const { knappStart } = useTekster(ESanitySteg.FELLES);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useBekreftetSamtykke();
 
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
@@ -43,6 +44,10 @@ export default function Index() {
   const håndterKnappeTrykk = () => {
     settErFeilmeldingAktivert(true);
   };
+
+  useEffect(() => {
+    settErSamtykkeBekreftet(erSamtykkeBekreftet);
+  }, [erSamtykkeBekreftet, settErSamtykkeBekreftet]);
 
   return (
     <HovedInnhold>
