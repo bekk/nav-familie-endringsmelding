@@ -27,6 +27,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const tekster = useTekster(ESanityMappe.FORSIDE);
+  const { knappStart } = useTekster(ESanityMappe.FELLES);
 
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
@@ -69,7 +70,7 @@ export default function Index() {
                 : håndterKnappeTrykk
             }
           >
-            Start
+            <TekstBlokk tekstblokk={knappStart} />
           </Button>
           <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
