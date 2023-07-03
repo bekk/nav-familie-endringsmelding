@@ -11,3 +11,8 @@ export function useSpråk() {
   const { språkContext } = useOutletContext<AppContext>();
   return språkContext;
 }
+
+export function useBekreftetSamtykke() {
+  const { erSamtykkeBekreftetContext } = useOutletContext<AppContext>();
+  return erSamtykkeBekreftetContext;
+}

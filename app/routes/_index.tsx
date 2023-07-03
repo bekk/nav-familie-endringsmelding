@@ -7,13 +7,12 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { TypografiTyper } from '~/typer/typografi';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import { useTekster } from '~/hooks/contextHooks';
+import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
 import { useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
-import { useBekreftetSamtykke } from '~/context/InnsendingContext';
 
 export const meta: V2_MetaFunction = () => {
   return [
