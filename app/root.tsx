@@ -43,38 +43,25 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     //REDIRECT TIL FEIL SIDE
     throw Error('Kunne ikke hente søker data');
   });
-  /*   const dekoratør = await fetchDecoratorHtml({
-    env: 'localhost',
-    localUrl: 'https://dekoratoren.ekstern.dev.nav.no/',
-  })
-    //.then(resultat => console.log('viktig resultat', resultat))
-    .catch(resultat => console.log(resultat));
-  console.log('Dekoratør backend', dekoratør && dekoratør); */
-  const fragments = await hentDekoratorHtml();
+
+  const dekoratørFragmenter = await hentDekoratorHtml();
 
   return {
     tekstData,
     søkerData,
-    /*   env: {
-      BASE_PATH: process.env.BASE_PATH,
-      IS_LOCALHOST: process.env.IS_LOCALHOST,
-    }, */
-
-    fragments,
+    dekoratørFragmenter,
   };
 };
 
 export default function App() {
-  const { tekstData, søkerData, fragments } = useLoaderData<typeof loader>();
+  const { tekstData, søkerData, dekoratørFragmenter } =
+    useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
 
   return (
     <>
-      <Document fragments={fragments}>
-        <Layout fragments={fragments}>
-          {/*         <div
-            dangerouslySetInnerHTML={{ __html: dekoratør.DECORATOR_HEADER }}
-          /> */}
+      <Dokument språk={språk} dekoratørFragmenter={dekoratørFragmenter}>
+        <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
           <Outlet
             context={{
               sanityTekster: tekstData,
@@ -84,61 +71,50 @@ export default function App() {
           />
           <ScrollRestoration />
           <Scripts />
-          {parse(fragments.DECORATOR_SCRIPTS, { trim: true })}
+          {parse(dekoratørFragmenter.DECORATOR_SCRIPTS, { trim: true })}
           <LiveReload />
-        </Layout>
-      </Document>
+        </Oppsett>
+      </Dokument>
     </>
   );
 }
 
-interface DocumentProps {
+interface DokumentProps {
   children: React.ReactNode;
-  fragments: DecoratorElements;
+  språk: LocaleType;
+  dekoratørFragmenter: DecoratorElements;
 }
 
-export function Document({ children, fragments }: DocumentProps) {
-  /* const { fragments } = useLoaderData<typeof loader>(); */
-  //Usikker på denne
-  const [språk] = useState<LocaleType>(LocaleType.nb);
-
+export function Dokument({
+  children,
+  språk,
+  dekoratørFragmenter,
+}: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
-        {parse(fragments.DECORATOR_STYLES, { trim: true })}
+        {parse(dekoratørFragmenter.DECORATOR_STYLES, { trim: true })}
         <Links />
       </head>
-      <body>
-        {children}
-        {/*Enable live reload in development environment only, not production */}
-        {/*process.env.NODE_ENV === 'development' ? <LiveReload /> : null*/}
-        {/*  <script
-          dangerouslySetInnerHTML={{
-            __html: `window.env = ${JSON.stringify(env)}`,
-          }}
-        /> */}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
 
-interface LayoutProps {
+interface OppsettProps {
   children: React.ReactNode;
-  fragments: DecoratorElements;
+  dekoratørFragmenter: DecoratorElements;
 }
 
-export function Layout({ children, fragments }: LayoutProps) {
-  /*   const { fragments } = useLoaderData<typeof loader>();
-   */ //const Decorator = await fetchDecoratorReact(props);
-
+export function Oppsett({ children, dekoratørFragmenter }: OppsettProps) {
   return (
     <>
-      {parse(fragments.DECORATOR_HEADER, { trim: true })}
+      {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
       {children}
-      {parse(fragments.DECORATOR_FOOTER, { trim: true })}
+      {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
     </>
   );
 }
@@ -148,14 +124,14 @@ interface ErrorBoundaryProps {
 }
 
 export function ErrorBoundary({ error }: ErrorBoundaryProps) {
-  const { fragments } = useLoaderData<typeof loader>();
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
 
   console.log(error);
   return (
-    <Document fragments={fragments}>
-      <Layout fragments={fragments}>
+    <Dokument språk={LocaleType.nb} dekoratørFragmenter={dekoratørFragmenter}>
+      <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
         <h1>There was an Error</h1>
-      </Layout>
-    </Document>
+      </Oppsett>
+    </Dokument>
   );
 }

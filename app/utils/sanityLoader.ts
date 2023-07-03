@@ -18,6 +18,9 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
     '*[ytelse == "BARNETRYGD"]',
   );
 
+  if (tekst.length === 0) {
+    throw Error('Kunne ikke hente søker data');
+  }
   const tekstInnhold = {
     [ESanitySteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESanitySteg.FORSIDE),
     [ESanitySteg.SEND_ENDRINGER]: strukturerInnholdForSteg(

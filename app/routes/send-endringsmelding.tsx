@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { ESanitySteg } from '~/typer/sanity/sanity';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
+import React, { useEffect, useState } from 'react';
 import { TypografiTyper } from '~/typer/typografi';
 import { useSpråk, useTekster } from '~/hooks/contextHooks';
-import InnholdKonteiner from '~/komponenter/innholdkonteiner/InnholdKonteiner';
-import css from './send-endringsmelding.module.css';
 import cssFritekst from './fritekstfelt.module.css';
 import { Button, Textarea } from '@navikt/ds-react';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
-import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
+import css from './send-endringsmelding.module.css';
 
 export default function SendEndringsmelding() {
-  const sanityTekster = useTekster();
-  const {
-    overskrift,
-    veilederInnhold,
-    fritekstfeltTittel,
-    fritekstfeltBeskrivelse,
-    fritekstfeltFeilmeldingManglerTekst,
-    fritekstfeltFeilmeldingSpesialTegn,
-    fritekstfeltFeilmeldingMinTegn,
-  } = sanityTekster[ESanitySteg.SEND_ENDRINGER];
-
-  const { knappTilbake, knappSendEndringer } =
-    sanityTekster[ESanitySteg.FELLES];
+  const tekster = useTekster(ESanitySteg.SEND_ENDRINGER);
+  const teksterFelles = useTekster(ESanitySteg.FELLES);
 
   const navigate = useNavigate();
   const [språk] = useSpråk();
@@ -67,11 +56,15 @@ export default function SendEndringsmelding() {
 
   const utledFeilmelding = () => {
     if (manglerTekst) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingManglerTekst} />;
+      return (
+        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst} />
+      );
     } else if (brukerSpesialtegn) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingSpesialTegn} />;
+      return (
+        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn} />
+      );
     } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={fritekstfeltFeilmeldingMinTegn} />;
+      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
     }
   };
 
@@ -84,45 +77,45 @@ export default function SendEndringsmelding() {
   }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
 
   return (
-    <InnholdKonteiner>
-      <>
-        <StegIndikator nåværendeSteg={1} />
+    <HovedInnhold>
+      <StegIndikator nåværendeSteg={1} />
 
-        <TekstBlokk
-          tekstblokk={overskrift}
-          typografi={TypografiTyper.StegHeadingH1}
-        />
-        <Veiledning hilsen={veilederInnhold} />
+      <TekstBlokk
+        tekstblokk={tekster.overskrift}
+        typografi={TypografiTyper.StegHeadingSmallH1}
+      />
+      <Veiledning />
 
-        <Textarea
-          label={<TekstBlokk tekstblokk={fritekstfeltTittel} />}
-          description={<TekstBlokk tekstblokk={fritekstfeltBeskrivelse} />}
-          maxLength={MAKS_INPUT_LENGDE}
-          className={`${cssFritekst.fritekstfelt}`}
-          i18n={i18nInnhold}
-          error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
-          onInput={event => {
-            validerTekst(event.currentTarget.value);
+      <Textarea
+        label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+        description={
+          <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
+        }
+        maxLength={MAKS_INPUT_LENGDE}
+        className={`${cssFritekst.fritekstfelt}`}
+        i18n={i18nInnhold}
+        error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
+        onInput={event => {
+          validerTekst(event.currentTarget.value);
+        }}
+      />
+      <div className={`${css.navigeringsKnapper}`}>
+        <Button
+          variant={'secondary'}
+          onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
+        >
+          <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
+        </Button>
+        <Button
+          variant={tekstInputOK ? 'primary' : 'secondary'}
+          onClick={() => {
+            settKnappTrykketPå(true);
+            tekstInputOK && console.log('går til neste side');
           }}
-        />
-        <div className={`${css.navigeringsKnapper}`}>
-          <Button
-            variant={'secondary'}
-            onClick={() => navigate(hentPathForSteg(ESanitySteg.FORSIDE))}
-          >
-            <TekstBlokk tekstblokk={knappTilbake} />
-          </Button>
-          <Button
-            variant={tekstInputOK ? 'primary' : 'secondary'}
-            onClick={() => {
-              settKnappTrykketPå(true);
-              tekstInputOK && console.log('går til neste side');
-            }}
-          >
-            <TekstBlokk tekstblokk={knappSendEndringer} />
-          </Button>
-        </div>
-      </>
-    </InnholdKonteiner>
+        >
+          <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
+        </Button>
+      </div>
+    </HovedInnhold>
   );
 }
