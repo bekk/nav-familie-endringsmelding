@@ -1,5 +1,5 @@
 import { Select } from '@navikt/ds-react';
-import { LocaleType } from '~/typer/sanity/sanity';
+import { ELocaleType } from '~/typer/felles';
 import css from './språkvelger.module.css';
 import { GlobeIcon } from '@navikt/aksel-icons';
 import { useSpråk } from '~/hooks/contextHooks';
@@ -13,12 +13,12 @@ export const Språkvelger = () => {
         label={<Label />}
         className={`${css.språkvelger}`}
         onChange={endring => {
-          settSpråk(endring.target.value as LocaleType);
+          settSpråk(endring.target.value as ELocaleType);
         }}
       >
-        <option value={LocaleType.nb}>Norsk (Bokmål)</option>
-        <option value={LocaleType.nn}>Norsk (Nynorsk)</option>
-        <option value={LocaleType.en}>English</option>
+        <option value={ELocaleType.NB}>Norsk (Bokmål)</option>
+        <option value={ELocaleType.NN}>Norsk (Nynorsk)</option>
+        <option value={ELocaleType.EN}>English</option>
       </Select>
     </>
   );

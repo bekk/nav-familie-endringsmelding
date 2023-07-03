@@ -1,13 +1,12 @@
-import { SanityDokument } from '~/typer/sanity/sanity';
 import css from './banner.module.css';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { TypografiTyper } from '~/typer/typografi';
 import { Heading } from '@navikt/ds-react';
+import { ETypografiTyper } from '~/typer/typografi';
+import { ISanityDokument } from '~/typer/sanity/sanity';
 
 interface Props {
-  bannerTekst: SanityDokument | string;
+  bannerTekst: ISanityDokument | string;
 }
-
 const Banner: React.FC<Props> = ({ bannerTekst }) => {
   return (
     <section className={`${css.bannerStil}`}>
@@ -18,7 +17,7 @@ const Banner: React.FC<Props> = ({ bannerTekst }) => {
       ) : (
         <TekstBlokk
           tekstblokk={bannerTekst}
-          typografi={TypografiTyper.BannerHeading}
+          typografi={ETypografiTyper.BANNER_HEADING}
         />
       )}
     </section>

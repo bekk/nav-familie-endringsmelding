@@ -1,10 +1,6 @@
 import { createClient } from '@sanity/client';
-import {
-  ApiKeys,
-  ESanitySteg,
-  ITekstinnhold,
-  SanityDokument,
-} from '~/typer/sanity/sanity';
+import { ESanityMappe } from '~/typer/felles';
+import { ITekstinnhold, ISanityDokument, ApiKeys } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({
   projectId: 'd8ycstqz',
@@ -14,31 +10,34 @@ const sanityKlient = createClient({
 });
 
 export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
-  const tekst = await sanityKlient.fetch<SanityDokument[]>(
-    '*[ytelse == "BARNxRYGD"]',
+  const tekst = await sanityKlient.fetch<ISanityDokument[]>(
+    '*[ytelse == "BARNETRYGD"]',
   );
 
   if (tekst.length === 0) {
     throw Error('Kunne ikke hente søker data');
   }
   const tekstInnhold = {
-    [ESanitySteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESanitySteg.FORSIDE),
-    [ESanitySteg.SEND_ENDRINGER]: strukturerInnholdForSteg(
+    [ESanityMappe.FORSIDE]: strukturerInnholdForSteg(
       tekst,
-      ESanitySteg.SEND_ENDRINGER,
+      ESanityMappe.FORSIDE,
     ),
-    [ESanitySteg.FELLES]: strukturerInnholdForSteg(tekst, ESanitySteg.FELLES),
+    [ESanityMappe.SEND_ENDRINGER]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.SEND_ENDRINGER,
+    ),
+    [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
   };
 
   return tekstInnhold;
 };
 
 const strukturerInnholdForSteg = (
-  dokumenter: SanityDokument[],
-  steg: ESanitySteg,
-): Record<ApiKeys, SanityDokument> =>
+  dokumenter: ISanityDokument[],
+  steg: ESanityMappe,
+): Record<ApiKeys, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
     .reduce((acc, dok) => {
       return { ...acc, [dok.api_navn]: dok };
-    }, {} as Record<ApiKeys, SanityDokument>);
+    }, {} as Record<ApiKeys, ISanityDokument>);

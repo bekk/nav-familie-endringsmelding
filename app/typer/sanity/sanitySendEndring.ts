@@ -1,4 +1,4 @@
-import { SanityDokument } from './sanity';
+import { ISanityDokument } from './sanity';
 
 export enum EApiKeysSendEndring {
   OVERSKRIFT = 'overskrift',
@@ -10,7 +10,7 @@ export enum EApiKeysSendEndring {
   FRITEKSTFELT_FEILMELDING_MANGLERTEKST = 'fritekstfeltFeilmeldingManglerTekst',
 }
 
-export type ISendEndringTekstinnhold = Record<
+export type SendEndringTekstinnhold = Record<
   EApiKeysSendEndring,
-  SanityDokument
+  ISanityDokument
 >;

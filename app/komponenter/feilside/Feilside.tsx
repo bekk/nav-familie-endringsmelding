@@ -1,13 +1,13 @@
 import { GuidePanel } from '@navikt/ds-react';
 import { Dokument } from '~/root';
-import { LocaleType } from '~/typer/sanity/sanity';
 import Banner from '../banner/Banner';
 import HovedInnholdCss from '../hovedInnhold/hovedInnhold.module.css';
 import css from './feilside.module.css';
+import { ELocaleType } from '~/typer/felles';
 
 const Feilside: React.FC = () => {
   return (
-    <Dokument språk={LocaleType.nb}>
+    <Dokument språk={ELocaleType.NB}>
       <Banner bannerTekst={'Endringsmelding for barnetrygd'} />
       <main className={`${HovedInnholdCss.innholdKonteiner}`}>
         <GuidePanel className={`${css.feilmeldingPanel}`}>

@@ -1,35 +1,24 @@
 import { PortableTextBlock } from '@portabletext/types';
-import { EApiKeysForside, IForsideTekstinnhold } from './sanityForside';
+import { ESanityMappe } from '../felles';
+import { FellesTekstinnhold, EApiKeysFelles } from './sanityFelles';
+import { ForsideTekstinnhold, EApiKeysForside } from './sanityForside';
 import {
   EApiKeysSendEndring,
-  ISendEndringTekstinnhold,
+  SendEndringTekstinnhold,
 } from './sanitySendEndring';
-import { EApiKeysFelles, IFellesTekstinnhold } from './sanityFelles';
 
-export interface SanityDokument {
+export interface ISanityDokument {
   _createdAt: string;
   _rev: string;
   _type: string;
   _id: string;
   api_navn: string;
   visningsnavn: string;
-  steg: ESanitySteg;
+  steg: ESanityMappe;
   ytelse: string;
   nb: PortableTextBlock;
   nn: PortableTextBlock;
   en: PortableTextBlock;
-}
-
-export enum LocaleType {
-  en = 'en',
-  nb = 'nb',
-  nn = 'nn',
-}
-
-export enum ESanitySteg {
-  FORSIDE = 'FORSIDE',
-  SEND_ENDRINGER = 'SEND_ENDRINGER',
-  FELLES = 'FELLES',
 }
 
 export enum ESanityFlettefeltverdi {
@@ -41,9 +30,9 @@ export type FlettefeltVerdier = {
 };
 
 export interface ITekstinnhold {
-  [ESanitySteg.FORSIDE]: IForsideTekstinnhold;
-  [ESanitySteg.SEND_ENDRINGER]: ISendEndringTekstinnhold;
-  [ESanitySteg.FELLES]: IFellesTekstinnhold;
+  [ESanityMappe.FORSIDE]: ForsideTekstinnhold;
+  [ESanityMappe.SEND_ENDRINGER]: SendEndringTekstinnhold;
+  [ESanityMappe.FELLES]: FellesTekstinnhold;
 }
 
 export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;

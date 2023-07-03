@@ -11,7 +11,7 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { LocaleType } from './typer/sanity/sanity';
+import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 import Feilside from './komponenter/feilside/Feilside';
@@ -39,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
 
   return (
     <Dokument språk={språk}>
@@ -61,7 +61,7 @@ export default function App() {
 
 interface DokumentProps {
   children: React.ReactNode;
-  språk: LocaleType;
+  språk: ELocaleType;
 }
 
 export function Dokument({ children, språk }: DokumentProps) {
