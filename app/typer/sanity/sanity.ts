@@ -1,5 +1,5 @@
 import { PortableTextBlock } from '@portabletext/types';
-import { ESteg } from '../felles';
+import { ESanityMappe } from '../felles';
 import { FellesTekstinnhold, EApiKeysFelles } from './sanityFelles';
 import { ForsideTekstinnhold, EApiKeysForside } from './sanityForside';
 import {
@@ -14,7 +14,7 @@ export interface ISanityDokument {
   _id: string;
   api_navn: string;
   visningsnavn: string;
-  steg: ESteg;
+  steg: ESanityMappe;
   ytelse: string;
   nb: PortableTextBlock;
   nn: PortableTextBlock;
@@ -30,9 +30,9 @@ export type FlettefeltVerdier = {
 };
 
 export interface ITekstinnhold {
-  [ESteg.FORSIDE]: ForsideTekstinnhold;
-  [ESteg.SEND_ENDRINGER]: SendEndringTekstinnhold;
-  [ESteg.FELLES]: FellesTekstinnhold;
+  [ESanityMappe.FORSIDE]: ForsideTekstinnhold;
+  [ESanityMappe.SEND_ENDRINGER]: SendEndringTekstinnhold;
+  [ESanityMappe.FELLES]: FellesTekstinnhold;
 }
 
 export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;

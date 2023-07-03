@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client';
-import { ESteg } from '~/typer/felles';
+import { ESanityMappe } from '~/typer/felles';
 import { ITekstinnhold, ISanityDokument, ApiKeys } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({
@@ -18,12 +18,15 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
     throw Error('Kunne ikke hente søker data');
   }
   const tekstInnhold = {
-    [ESteg.FORSIDE]: strukturerInnholdForSteg(tekst, ESteg.FORSIDE),
-    [ESteg.SEND_ENDRINGER]: strukturerInnholdForSteg(
+    [ESanityMappe.FORSIDE]: strukturerInnholdForSteg(
       tekst,
-      ESteg.SEND_ENDRINGER,
+      ESanityMappe.FORSIDE,
     ),
-    [ESteg.FELLES]: strukturerInnholdForSteg(tekst, ESteg.FELLES),
+    [ESanityMappe.SEND_ENDRINGER]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.SEND_ENDRINGER,
+    ),
+    [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
   };
 
   return tekstInnhold;
@@ -31,7 +34,7 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
 
 const strukturerInnholdForSteg = (
   dokumenter: ISanityDokument[],
-  steg: ESteg,
+  steg: ESanityMappe,
 ): Record<ApiKeys, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)

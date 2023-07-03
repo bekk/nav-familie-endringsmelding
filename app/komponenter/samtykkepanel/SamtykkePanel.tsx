@@ -4,7 +4,7 @@ import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESteg } from '~/typer/felles';
+import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
   håndterSamtykkeEndring: (bekreftet: boolean) => void;
@@ -15,7 +15,7 @@ const SamtykkePanel: React.FC<Props> = ({
   håndterSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
-  const tekster = useTekster(ESteg.FORSIDE);
+  const tekster = useTekster(ESanityMappe.FORSIDE);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   const vedSamtykkeEndring = (bekreftet: boolean) => {

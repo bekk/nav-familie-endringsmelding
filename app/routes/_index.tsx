@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useTekster } from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { ESteg } from '~/typer/felles';
+import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
@@ -26,7 +26,7 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const tekster = useTekster(ESteg.FORSIDE);
+  const tekster = useTekster(ESanityMappe.FORSIDE);
 
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);

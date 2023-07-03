@@ -8,12 +8,12 @@ import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { ESteg } from '~/typer/felles';
+import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export default function SendEndringsmelding() {
-  const tekster = useTekster(ESteg.SEND_ENDRINGER);
-  const teksterFelles = useTekster(ESteg.FELLES);
+  const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
+  const teksterFelles = useTekster(ESanityMappe.FELLES);
 
   const navigate = useNavigate();
   const [språk] = useSpråk();

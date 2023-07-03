@@ -4,8 +4,13 @@ export enum ELocaleType {
   NN = 'nn',
 }
 
-export enum ESteg {
+export enum ESanityMappe {
   FORSIDE = 'FORSIDE',
   SEND_ENDRINGER = 'SEND_ENDRINGER',
   FELLES = 'FELLES',
+}
+
+export enum ESteg {
+  FORSIDE = 'FORSIDE',
+  SEND_ENDRINGER = 'SEND_ENDRINGER',
 }

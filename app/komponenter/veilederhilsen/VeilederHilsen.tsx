@@ -6,11 +6,13 @@ import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESteg } from '~/typer/felles';
+import { ESanityMappe } from '~/typer/felles';
 
 const VeilederHilsen: React.FC = () => {
   const { søker } = useOutletContext<IAppContext>();
-  const { brukerHilsen, veilederhilsenInnhold } = useTekster(ESteg.FORSIDE);
+  const { brukerHilsen, veilederhilsenInnhold } = useTekster(
+    ESanityMappe.FORSIDE,
+  );
 
   return (
     <GuidePanel poster className={`${css.poster}`}>
