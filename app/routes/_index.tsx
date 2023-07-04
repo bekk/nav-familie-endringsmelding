@@ -7,7 +7,7 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
-import { useTekster } from '~/hooks/contextHooks';
+import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg, ESanityMappe } from '~/typer/felles';
@@ -26,17 +26,16 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
+  const [erSamtykkeBekreftet] = useBekreftetSamtykke();
   const tekster = useTekster(ESanityMappe.FORSIDE);
   const { knappStart } = useTekster(ESanityMappe.FELLES);
 
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
   const nestePath = hentPathForSteg(ESteg.SEND_ENDRINGER);
 
-  const håndterSamtykkeEndring = (bekreftet: boolean) => {
-    settErSamtykkeBekreftet(bekreftet);
+  const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 
