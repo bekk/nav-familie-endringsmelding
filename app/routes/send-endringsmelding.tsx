@@ -80,9 +80,23 @@ export default function SendEndringsmelding() {
 
   async function gåVidere() {
     //send data til backend
-    const response = await sendEndringsmelding(endringsmeldingTekst);
     //redirect til kvitteringsside
-    console.log(response);
+
+    try {
+      const response = await sendEndringsmelding(endringsmeldingTekst);
+      console.log('response', response.status);
+      console.log('json', response.json());
+
+      if (response.status === 200) {
+        navigate(hentPathForSteg(ESteg.KVITTERING));
+        //Lagde tidspunkt i context? For å så vise det i kvittering.tsx
+      } else {
+        //Unødvendig ettersom det vil bli catch om status ikke er ok
+        throw Error('Kunne ikke sende endringsmelding');
+      }
+    } catch (error) {
+      throw Error('Kunne ikke koble til backend');
+    }
   }
 
   return (

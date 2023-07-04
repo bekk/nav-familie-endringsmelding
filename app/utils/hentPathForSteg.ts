@@ -6,6 +6,8 @@ export const hentPathForSteg = (steg: ESteg) => {
       return '/';
     case ESteg.SEND_ENDRINGER:
       return '/send-endringsmelding';
+    case ESteg.KVITTERING:
+      return '/kvittering';
     default:
       return '/'; //bør i fremtiden vise til feilmelding-side + error handling
   }

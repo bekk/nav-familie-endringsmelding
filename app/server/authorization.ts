@@ -6,14 +6,12 @@ export const fetchWithToken = async (
   requestInfo?: Request,
 ): Promise<Response> => {
   const headersFromRequest = requestInfo?.headers || {};
-  console.log('headersFromRequest', headersFromRequest);
   const token = await prepareSecuredRequest(remixRequest);
   const headersWithToken = new Headers({
     ...headersFromRequest,
     authorization: token.authorization,
     'x-wonderwall-id-token': '',
   });
-  console.log('requestInfo', requestInfo);
   return fetch(url, {
     ...requestInfo,
     headers: headersWithToken,
@@ -33,15 +31,13 @@ const prepareSecuredRequest = async (req: Request) => {
     authorization: `Bearer ${token}`,
   };
 };
-/* 
+
 export const fetchWithTokenPost = async (
   remixRequest: Request,
   url: string,
   endringsmeldingTekst: string,
   requestInfo?: Request,
 ): Promise<Response> => {
-  //const headersFromRequest = requestInfo?.headers || {};
-  console.log('fetch url', url);
   const token = await prepareSecuredRequest(remixRequest);
   const headersWithToken = new Headers({
     authorization: token.authorization,
@@ -53,4 +49,4 @@ export const fetchWithTokenPost = async (
     headers: headersWithToken,
     body: JSON.stringify(endringsmeldingTekst),
   });
-}; */
+};
