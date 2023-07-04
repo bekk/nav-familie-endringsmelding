@@ -2,13 +2,14 @@
 import { createCookieSessionStorage } from '@remix-run/node';
 
 export const API_TOKEN_NAME = 'token';
-type SessionData = {
-  token: any;
-};
 
-type SessionFlashData = {
-  error: string;
-};
+interface SessionData {
+    token: string;
+}
+
+interface SessionFlashData {
+    error: string;
+}
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage<SessionData, SessionFlashData>({
