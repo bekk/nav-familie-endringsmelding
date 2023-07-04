@@ -1,9 +1,8 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
-import { useBekreftetSamtykke } from '~/hooks/contextHooks';
+import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
 import { ETypografiTyper } from '~/typer/typografi';
-import { useTekster } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
