@@ -11,7 +11,7 @@ const HovedInnhold: React.FC<Props> = ({ children }) => {
   const { bannerTekst } = useTekster(ESanityMappe.FELLES);
   return (
     <>
-      <Banner bannerTekst={bannerTekst} />
+      <Banner tekst={bannerTekst} />
       <main className={`${css.innholdKonteiner}`}>{children}</main>
     </>
   );

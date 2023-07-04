@@ -8,7 +8,7 @@ import { ELocaleType } from '~/typer/felles';
 const Feilside: React.FC = () => {
   return (
     <Dokument språk={ELocaleType.NB}>
-      <Banner bannerTekst={'Endringsmelding for barnetrygd'} />
+      <Banner tekst={'Endringsmelding for barnetrygd'} />
       <main className={`${HovedInnholdCss.innholdKonteiner}`}>
         <GuidePanel className={`${css.feilmeldingPanel}`}>
           <p>En feil har oppstått! Vennligst prøv igjen.</p>
