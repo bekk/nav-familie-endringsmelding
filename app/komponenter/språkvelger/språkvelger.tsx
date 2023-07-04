@@ -5,13 +5,14 @@ import { GlobeIcon } from '@navikt/aksel-icons';
 import { useSpråk } from '~/hooks/contextHooks';
 
 export const Språkvelger = () => {
-  const [, settSpråk] = useSpråk();
+  const [språk, settSpråk] = useSpråk();
 
   return (
     <>
       <Select
         label={<Label />}
         className={`${css.språkvelger}`}
+        value={språk}
         onChange={endring => {
           settSpråk(endring.target.value as ELocaleType);
         }}
