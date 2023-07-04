@@ -1,13 +1,13 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
-import { useState } from 'react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
-import { TypografiTyper } from '~/typer/typografi';
+import { useBekreftetSamtykke } from '~/hooks/contextHooks';
+import { ETypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
-import { ESanitySteg } from '~/typer/sanity/sanity';
+import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
-  håndterSamtykkeEndring: (bekreftet: boolean) => void;
+  håndterSamtykkeEndring: () => void;
   feilmeldingAktivert: boolean;
 }
 
@@ -15,19 +15,19 @@ const SamtykkePanel: React.FC<Props> = ({
   håndterSamtykkeEndring,
   feilmeldingAktivert,
 }: Props) => {
-  const tekster = useTekster(ESanitySteg.FORSIDE);
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const tekster = useTekster(ESanityMappe.FORSIDE);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useBekreftetSamtykke();
 
   const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
-    håndterSamtykkeEndring(bekreftet);
+    håndterSamtykkeEndring();
   };
 
   return (
     <div className={`${css.samtykkePanelOmråde}`}>
       <TekstBlokk
         tekstblokk={tekster.samtykkePanelTittel}
-        typografi={TypografiTyper.Label}
+        typografi={ETypografiTyper.LABEL}
       />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
@@ -40,7 +40,7 @@ const SamtykkePanel: React.FC<Props> = ({
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={tekster.samtykkePanelFeilmelding}
-              typografi={TypografiTyper.BodyShort}
+              typografi={ETypografiTyper.BODY_SHORT}
             /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }

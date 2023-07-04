@@ -11,13 +11,13 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { LocaleType } from './typer/sanity/sanity';
+import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 import { DecoratorElements } from '@navikt/nav-dekoratoren-moduler/ssr';
-
 import parse from 'html-react-parser';
 import { hentDekoratorHtml } from './server/dekorator.server';
+import Feilside from './komponenter/feilside/Feilside';
 
 export const links: LinksFunction = () => [
   {
@@ -56,7 +56,8 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 export default function App() {
   const { tekstData, søkerData, dekoratørFragmenter } =
     useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   return (
     <>
@@ -67,6 +68,10 @@ export default function App() {
               sanityTekster: tekstData,
               språkContext: [språk, settSpråk],
               søker: søkerData,
+              erSamtykkeBekreftetContext: [
+                erSamtykkeBekreftet,
+                settErSamtykkeBekreftet,
+              ],
             }}
           />
           <ScrollRestoration />
@@ -81,7 +86,7 @@ export default function App() {
 
 interface DokumentProps {
   children: React.ReactNode;
-  språk: LocaleType;
+  språk: ELocaleType;
   dekoratørFragmenter: DecoratorElements;
 }
 
@@ -119,19 +124,8 @@ export function Oppsett({ children, dekoratørFragmenter }: OppsettProps) {
   );
 }
 
-interface ErrorBoundaryProps {
-  error: Error;
-}
-
-export function ErrorBoundary({ error }: ErrorBoundaryProps) {
+export function ErrorBoundary() {
   const { dekoratørFragmenter } = useLoaderData<typeof loader>();
 
-  console.log(error);
-  return (
-    <Dokument språk={LocaleType.nb} dekoratørFragmenter={dekoratørFragmenter}>
-      <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
-        <h1>There was an Error</h1>
-      </Oppsett>
-    </Dokument>
-  );
+  return <Feilside dekoratørFragmenter={dekoratørFragmenter} />;
 }

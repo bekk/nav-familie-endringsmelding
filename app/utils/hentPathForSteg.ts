@@ -1,10 +1,10 @@
-import { ESanitySteg } from '~/typer/sanity/sanity';
+import { ESteg } from '~/typer/felles';
 
-export const hentPathForSteg = (steg: ESanitySteg) => {
+export const hentPathForSteg = (steg: ESteg) => {
   switch (steg) {
-    case ESanitySteg.FORSIDE:
+    case ESteg.FORSIDE:
       return '/';
-    case ESanitySteg.SEND_ENDRINGER:
+    case ESteg.SEND_ENDRINGER:
       return '/send-endringsmelding';
     default:
       return '/'; //bør i fremtiden vise til feilmelding-side + error handling
