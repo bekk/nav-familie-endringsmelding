@@ -1,18 +1,25 @@
 import css from './banner.module.css';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
+import { Heading } from '@navikt/ds-react';
 import { ETypografiTyper } from '~/typer/typografi';
-import { useTekster } from '~/hooks/contextHooks';
-import { ESanityMappe } from '~/typer/felles';
+import { ISanityDokument } from '~/typer/sanity/sanity';
 
-const Banner: React.FC = () => {
-  const { bannerTekst } = useTekster(ESanityMappe.FELLES);
-
+interface Props {
+  tekst: ISanityDokument | string;
+}
+const Banner: React.FC<Props> = ({ tekst }) => {
   return (
     <section className={`${css.bannerStil}`}>
-      <TekstBlokk
-        tekstblokk={bannerTekst}
-        typografi={ETypografiTyper.BANNER_HEADING}
-      />
+      {typeof tekst === 'string' ? (
+        <Heading level="1" size="large">
+          {tekst}
+        </Heading>
+      ) : (
+        <TekstBlokk
+          tekstblokk={tekst}
+          typografi={ETypografiTyper.BANNER_HEADING}
+        />
+      )}
     </section>
   );
 };
