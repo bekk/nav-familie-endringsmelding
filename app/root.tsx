@@ -87,10 +87,6 @@ export function Oppsett({ children }: OppsettProps) {
   return <>{children}</>;
 }
 
-interface ErrorBoundaryProps {
-  feil: Error;
-}
-
-export function ErrorBoundary({ feil }: ErrorBoundaryProps) {
+export function ErrorBoundary() {
   return <Feilside />;
 }

@@ -5,18 +5,18 @@ import { ETypografiTyper } from '~/typer/typografi';
 import { ISanityDokument } from '~/typer/sanity/sanity';
 
 interface Props {
-  bannerTekst: ISanityDokument | string;
+  tekst: ISanityDokument | string;
 }
-const Banner: React.FC<Props> = ({ bannerTekst }) => {
+const Banner: React.FC<Props> = ({ tekst }) => {
   return (
     <section className={`${css.bannerStil}`}>
-      {typeof bannerTekst == 'string' ? (
+      {typeof tekst === 'string' ? (
         <Heading level="1" size="large">
-          {bannerTekst}
+          {tekst}
         </Heading>
       ) : (
         <TekstBlokk
-          tekstblokk={bannerTekst}
+          tekstblokk={tekst}
           typografi={ETypografiTyper.BANNER_HEADING}
         />
       )}
