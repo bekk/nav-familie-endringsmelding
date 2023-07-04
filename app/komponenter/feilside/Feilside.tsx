@@ -4,10 +4,15 @@ import Banner from '../banner/Banner';
 import HovedInnholdCss from '../hovedInnhold/hovedInnhold.module.css';
 import css from './feilside.module.css';
 import { ELocaleType } from '~/typer/felles';
+import { DecoratorElements } from '@navikt/nav-dekoratoren-moduler/ssr';
 
-const Feilside: React.FC = () => {
+interface Props {
+  dekoratørFragmenter: DecoratorElements;
+}
+
+const Feilside: React.FC<Props> = ({ dekoratørFragmenter }: Props) => {
   return (
-    <Dokument språk={ELocaleType.NB}>
+    <Dokument språk={ELocaleType.NB} dekoratørFragmenter={dekoratørFragmenter}>
       <Banner tekst={'Endringsmelding for barnetrygd'} />
       <main className={`${HovedInnholdCss.innholdKonteiner}`}>
         <GuidePanel className={`${css.feilmeldingPanel}`}>
