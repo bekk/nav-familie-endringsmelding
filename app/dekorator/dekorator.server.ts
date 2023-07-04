@@ -1,21 +1,19 @@
 import type { DecoratorFetchProps } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { fetchDecoratorHtml } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { LocaleType } from '~/typer/sanity/sanity';
 
-export async function hentDekoratorHtml() {
-  const env = 'dev';
-
+export async function hentDekoratorHtml(språk?: LocaleType) {
   const config: DecoratorFetchProps = {
-    env: env ?? 'prod',
-    serviceDiscovery: false, //process.env.IS_LOCALHOST !== "true", //virker som at den defaulter til true og slår på service discovery?
+    env: 'dev',
+    serviceDiscovery: false,
     params: {
-      language: 'nb',
+      language: 'nb' || språk,
+      /*  availableLanguages: [
+        { handleInApp: true, locale: 'nb' },
+        { handleInApp: true, locale: 'en' },
+      ], */
       context: 'privatperson',
-      chatbot: false,
       simple: true,
-      enforceLogin: false,
-      redirectToApp: true,
-      level: 'Level4',
-      simpleFooter: true,
     },
   };
 

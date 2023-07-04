@@ -14,7 +14,6 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { LocaleType } from './typer/sanity/sanity';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
-//import { fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { DecoratorElements } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { hentDekoratorHtml } from './dekorator/dekorator.server';
 import parse from 'html-react-parser';
@@ -53,10 +52,28 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   };
 };
 
+/* export const dekoratørLoader: LoaderFunction = async (
+  { request: LoaderArgs },
+  språk?: LocaleType,
+) => {
+  const dekoratørFragmenter = await hentDekoratorHtml(
+    språk ? språk : undefined,
+  );
+  return { dekoratørFragmenter };
+}; */
+
 export default function App() {
   const { tekstData, søkerData, dekoratørFragmenter } =
     useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+
+  /*  const { dekoratørData } = useLoaderData<typeof dekoratørLoader>();
+  const [dekoratørFragmenter, settDekoratørFragmenter] =
+    useState<DecoratorElements>(dekoratørData);
+  useEffect(() => {
+    let { dek } = useLoaderData<typeof dekoratørLoader>();
+    settDekoratørFragmenter(dek);
+  }, [språk]); */
 
   return (
     <>
