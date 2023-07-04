@@ -16,11 +16,12 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { hentDataFraSanity } from './utils/sanityLoader';
-import { LocaleType } from './typer/sanity/sanity';
+import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
+import Feilside from './komponenter/feilside/Feilside';
 
 export const links: LinksFunction = () => [
   {
@@ -43,14 +44,8 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (!session.has(API_TOKEN_NAME)) {
     await loggInn(session);
   }
-  const tekstData = await hentDataFraSanity().catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente sanity tekster');
-  });
-  const søkerData = await hentSøker(session).catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente søker data');
-  });
+  const tekstData = await hentDataFraSanity();
+  const søkerData = await hentSøker(session);
 
   const data = { tekstData, søkerData };
   return json(data, {
@@ -62,8 +57,36 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<LocaleType>(LocaleType.nb);
+  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  return (
+    <Dokument språk={språk}>
+      <Oppsett>
+        <Outlet
+          context={{
+            sanityTekster: tekstData,
+            språkContext: [språk, settSpråk],
+            søker: søkerData,
+            erSamtykkeBekreftetContext: [
+              erSamtykkeBekreftet,
+              settErSamtykkeBekreftet,
+            ],
+          }}
+        />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </Oppsett>
+    </Dokument>
+  );
+}
 
+interface DokumentProps {
+  children: React.ReactNode;
+  språk: ELocaleType;
+}
+
+export function Dokument({ children, språk }: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
@@ -72,18 +95,20 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet
-          context={{
-            sanityTekster: tekstData,
-            språkContext: [språk, settSpråk],
-            søker: søkerData,
-          }}
-        />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
+      <body>{children}</body>
     </html>
   );
+}
+
+interface OppsettProps {
+  children: React.ReactNode;
+}
+
+export function Oppsett({ children }: OppsettProps) {
+  //Her kommer dekoratør
+  return <>{children}</>;
+}
+
+export function ErrorBoundary() {
+  return <Feilside />;
 }

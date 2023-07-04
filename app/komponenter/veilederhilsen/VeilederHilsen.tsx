@@ -1,27 +1,29 @@
 import { GuidePanel } from '@navikt/ds-react';
 import css from './veilederhilsen.module.css';
-import { TypografiTyper } from '~/typer/typografi';
-import { AppContext } from '~/typer/context';
+import { ETypografiTyper } from '~/typer/typografi';
+import { IAppContext } from '~/typer/context';
 import { useOutletContext } from '@remix-run/react';
 import { hentSøkerFornavn } from '~/utils/hentSøkerData';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { IForsideTekstinnhold } from '~/typer/sanity/sanityForside';
+import { useTekster } from '~/hooks/contextHooks';
+import { ESanityMappe } from '~/typer/felles';
 
-interface Props {
-  tekster: IForsideTekstinnhold;
-}
-
-const VeilederHilsen: React.FC<Props> = ({ tekster }: Props) => {
-  const { søker } = useOutletContext<AppContext>();
+const VeilederHilsen: React.FC = () => {
+  const { søker } = useOutletContext<IAppContext>();
+  const { brukerHilsen, veilederhilsenInnhold } = useTekster(
+    ESanityMappe.FORSIDE,
+  );
 
   return (
     <GuidePanel poster className={`${css.poster}`}>
-      <TekstBlokk
-        tekstblokk={tekster.brukerHilsen}
-        typografi={TypografiTyper.StegHeadingH2}
-        flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
-      />
-      <TekstBlokk tekstblokk={tekster.veilederhilsenInnhold} />
+      <div className={`${css.tekstInnholdMellomrom}`}>
+        <TekstBlokk
+          tekstblokk={brukerHilsen}
+          typografi={ETypografiTyper.HEADING_H2}
+          flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+        />
+      </div>
+      <TekstBlokk tekstblokk={veilederhilsenInnhold} />
     </GuidePanel>
   );
 };

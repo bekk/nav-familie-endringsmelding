@@ -2,17 +2,17 @@ import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
-import { ESanitySteg } from '~/typer/sanity/sanity';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import { TypografiTyper } from '~/typer/typografi';
-import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import { useTekster } from '~/hooks/contextHooks';
-import { useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { useState } from 'react';
+import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
+import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
+import { ESteg, ESanityMappe } from '~/typer/felles';
+import { ETypografiTyper } from '~/typer/typografi';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -26,16 +26,16 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function Index() {
-  const sanityTekster = useTekster();
-  const tekster = sanityTekster[ESanitySteg.FORSIDE];
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [erSamtykkeBekreftet] = useBekreftetSamtykke();
+  const tekster = useTekster(ESanityMappe.FORSIDE);
+  const { knappStart } = useTekster(ESanityMappe.FELLES);
+
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
-  const nestePath = hentPathForSteg(ESanitySteg.SEND_ENDRINGER);
+  const nestePath = hentPathForSteg(ESteg.SEND_ENDRINGER);
 
-  const håndterSamtykkeEndring = (bekreftet: boolean) => {
-    settErSamtykkeBekreftet(bekreftet);
+  const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 
@@ -52,13 +52,12 @@ export default function Index() {
           <div className={`${css.toppMargin}`}>
             <TekstBlokk
               tekstblokk={tekster.tittel}
-              typografi={TypografiTyper.StegHeadingH1}
+              typografi={ETypografiTyper.HEADING_H1}
             />
           </div>
           <Språkvelger />
-          <VeilederHilsen tekster={tekster} />
+          <VeilederHilsen />
           <SamtykkePanel
-            tekster={tekster}
             håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />
@@ -70,7 +69,7 @@ export default function Index() {
                 : håndterKnappeTrykk
             }
           >
-            Start
+            <TekstBlokk tekstblokk={knappStart} />
           </Button>
           <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
