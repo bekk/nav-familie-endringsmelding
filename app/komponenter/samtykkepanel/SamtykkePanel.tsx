@@ -1,13 +1,13 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
-import { useState } from 'react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
+import { useBekreftetSamtykke } from '~/hooks/contextHooks';
 import { ETypografiTyper } from '~/typer/typografi';
 import { useTekster } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
-  håndterSamtykkeEndring: (bekreftet: boolean) => void;
+  håndterSamtykkeEndring: () => void;
   feilmeldingAktivert: boolean;
 }
 
@@ -16,11 +16,11 @@ const SamtykkePanel: React.FC<Props> = ({
   feilmeldingAktivert,
 }: Props) => {
   const tekster = useTekster(ESanityMappe.FORSIDE);
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useBekreftetSamtykke();
 
   const vedSamtykkeEndring = (bekreftet: boolean) => {
     settErSamtykkeBekreftet(bekreftet);
-    håndterSamtykkeEndring(bekreftet);
+    håndterSamtykkeEndring();
   };
 
   return (
