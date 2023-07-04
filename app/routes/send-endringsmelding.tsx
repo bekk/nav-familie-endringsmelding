@@ -10,6 +10,7 @@ import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 
 export default function SendEndringsmelding() {
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
@@ -42,8 +43,10 @@ export default function SendEndringsmelding() {
   const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
   const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
   const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
+  const [endringsmeldingTekst, settEndringsmeldingTekst] = useState<string>('');
 
   const validerTekst = (tekst: string) => {
+    settEndringsmeldingTekst(tekst);
     settManglerTekst(tekst.length === 0);
     settMinimumTegnOppfylt(tekst.length > 9);
     if (tekst.match(spesialTegnRegex)) {
@@ -74,6 +77,13 @@ export default function SendEndringsmelding() {
       settTekstInputOK(false);
     }
   }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
+
+  async function gåVidere() {
+    //send data til backend
+    const response = await sendEndringsmelding(endringsmeldingTekst);
+    //redirect til kvitteringsside
+    console.log(response);
+  }
 
   return (
     <HovedInnhold>
@@ -109,7 +119,7 @@ export default function SendEndringsmelding() {
           variant={tekstInputOK ? 'primary' : 'secondary'}
           onClick={() => {
             settKnappTrykketPå(true);
-            tekstInputOK && console.log('går til neste side');
+            tekstInputOK && gåVidere();
           }}
         >
           <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
