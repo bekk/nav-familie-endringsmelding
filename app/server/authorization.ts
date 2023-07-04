@@ -21,7 +21,7 @@ export const fetchWithToken = async (
 };
 
 const prepareSecuredRequest = async (session: Session) => {
-  const token = (await hentApiToken(session)) ?? '';
+  const token = (await session.get(API_TOKEN_NAME)) ?? '';
 
   // TODO: TokenX-exchange i NAV-miljø
   return {
@@ -40,10 +40,6 @@ async function hentCookieFraBackend() {
 
 export async function loggInn(session: Session) {
   session.set(API_TOKEN_NAME, (await hentCookieFraBackend()).value);
-}
-
-async function hentApiToken(session: Session) {
-  return session.get(API_TOKEN_NAME);
 }
 
 const hentApiUrl = () => {
