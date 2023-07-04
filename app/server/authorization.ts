@@ -21,7 +21,7 @@ export const fetchWithToken = async (
 };
 
 const prepareSecuredRequest = async (session: Session) => {
-  const token = (await hentApiToken(session)) ?? "";
+  const token = (await hentApiToken(session)) ?? '';
 
   // TODO: TokenX-exchange i NAV-miljø
   return {
@@ -34,14 +34,8 @@ async function hentCookieFraBackend() {
   const url =
     apiUrl + '/local/cookie?issuerId=tokenx&audience=familie-endringsmelding';
 
-  console.log("url", url)
-
   const cookieResponse = await fetch(url);
-  const newVar = await cookieResponse.json();
-
-  console.log(newVar)
-
-  return newVar;
+  return await cookieResponse.json();
 }
 
 export async function loggInn(session: Session) {
@@ -54,9 +48,10 @@ async function hentApiToken(session: Session) {
 
 const hentApiUrl = () => {
   switch (process.env.ENV) {
-    case EMiljø.PRODUKSJON:
-      return 'https://nav-familie-endringsmelding-api.fly.dev';
     case EMiljø.LOKAL:
       return 'http://localhost:8099';
+    case EMiljø.PRODUKSJON:
+    default:
+      return 'https://nav-familie-endringsmelding-api.fly.dev';
   }
 };

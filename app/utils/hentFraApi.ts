@@ -1,8 +1,7 @@
-import søkerMock from '~/mock/søkerMock';
 import { fetchWithToken } from '~/server/authorization';
 import { EMiljø } from '~/typer/miljø';
 import { ISøker } from '~/typer/søker';
-import {Session} from "@remix-run/node";
+import { Session } from '@remix-run/node';
 
 const STI: string = '/api/oppslag/soker';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
@@ -14,8 +13,7 @@ export const hentSøker = async (session: Session): Promise<ISøker> => {
     case EMiljø.LOKAL:
       return (await fetchWithToken(session, LOKAL_URL_BACKEND)).json();
     case EMiljø.PRODUKSJON:
-      return (await fetchWithToken(session, API_URL_BACKEND)).json();
     default:
-      return Promise.resolve(søkerMock);
+      return (await fetchWithToken(session, API_URL_BACKEND)).json();
   }
 };
