@@ -11,11 +11,12 @@ export const fetchWithToken = async (
   const headersWithToken = new Headers({
     ...headersFromRequest,
     authorization: token.authorization,
+    'x-wonderwall-id-token': '',
   });
   return fetch(url, {
+    headers: headersWithToken,
     method: requestInfo?.method || 'GET',
     body: payload || null,
-    headers: headersWithToken,
   });
 };
 

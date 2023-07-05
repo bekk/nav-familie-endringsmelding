@@ -5,8 +5,8 @@ const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
 //const API_URL_BACKEND: string ='https://nav-familie-endringsmelding-api.fly.dev/' + STI;
 //const testUrl: string = 'http://localhost:8099/api/test/hello';
 
-export async function sendEndringsmelding(tekst: string) {
-  const requestRemix = new Request(LOKAL_URL_BACKEND);
+export async function sendEndringsmelding(name: string, requestRemix: any) {
+  //const requestRemix = new Request(LOKAL_URL_BACKEND);
 
   const head = new Headers();
   head.append('Content-Type', 'application/json');
@@ -24,7 +24,7 @@ export async function sendEndringsmelding(tekst: string) {
         requestRemix,
         LOKAL_URL_BACKEND,
         requestInfo,
-        JSON.stringify(tekst),
+        JSON.stringify(name),
       );
   }
 }

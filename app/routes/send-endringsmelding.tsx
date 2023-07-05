@@ -4,15 +4,33 @@ import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import React, { useEffect, useState } from 'react';
 import { useSpråk, useTekster } from '~/hooks/contextHooks';
 import { Button, Textarea } from '@navikt/ds-react';
-import { useNavigate } from '@remix-run/react';
+import { Form, useActionData, useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
+import { ActionArgs, json } from '@remix-run/node';
+
+export async function action({ request }: ActionArgs) {
+  const formData = await request.formData();
+  console.log('action body', formData);
+  const name = formData.get('endringsmelding') as string;
+  console.log('action name', name);
+  const response = await sendEndringsmelding(name, request);
+  console.log(response);
+  if (!response.ok) {
+    return json({ error: 'Det skjedde en feil' });
+  }
+  //return redirect
+  return response;
+}
 
 export default function SendEndringsmelding() {
+  const actionData = useActionData<typeof action>();
+  console.log('data', actionData);
+
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
 
@@ -43,7 +61,7 @@ export default function SendEndringsmelding() {
   const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
   const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
   const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
-  const [endringsmeldingTekst, settEndringsmeldingTekst] = useState<string>('');
+  const [, settEndringsmeldingTekst] = useState<string>('');
 
   const validerTekst = (tekst: string) => {
     settEndringsmeldingTekst(tekst);
@@ -78,11 +96,11 @@ export default function SendEndringsmelding() {
     }
   }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
 
-  async function gåVidere() {
+  function gåVidere() {
     //send data til backend
-    const response = await sendEndringsmelding(endringsmeldingTekst);
+    //const response = await sendEndringsmelding(endringsmeldingTekst);
     //redirect til kvitteringsside
-    console.log('response', response);
+    //console.log('response', response);
   }
 
   return (
@@ -94,37 +112,41 @@ export default function SendEndringsmelding() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
-
-      <Textarea
-        label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
-        description={
-          <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
-        }
-        maxLength={MAKS_INPUT_LENGDE}
-        className={`${css.fullBredde}`}
-        i18n={i18nInnhold}
-        error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
-        onInput={event => {
-          validerTekst(event.currentTarget.value);
-        }}
-      />
-      <div className={`${css.navigeringsKnapper}`}>
-        <Button
-          variant={'secondary'}
-          onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
-        >
-          <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
-        </Button>
-        <Button
-          variant={tekstInputOK ? 'primary' : 'secondary'}
-          onClick={() => {
-            settKnappTrykketPå(true);
-            tekstInputOK && gåVidere();
+      <Form method="post">
+        <Textarea
+          name="endringsmelding"
+          label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+          description={
+            <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
+          }
+          maxLength={MAKS_INPUT_LENGDE}
+          className={`${css.fullBredde}`}
+          i18n={i18nInnhold}
+          error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
+          onInput={event => {
+            validerTekst(event.currentTarget.value);
           }}
-        >
-          <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
-        </Button>
-      </div>
+        />
+
+        <div className={`${css.navigeringsKnapper}`}>
+          <Button
+            variant={'secondary'}
+            onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
+          >
+            <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
+          </Button>
+          <Button
+            type="submit"
+            variant={tekstInputOK ? 'primary' : 'secondary'}
+            onClick={() => {
+              settKnappTrykketPå(true);
+              tekstInputOK && gåVidere();
+            }}
+          >
+            <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
+          </Button>
+        </div>
+      </Form>
     </HovedInnhold>
   );
 }
