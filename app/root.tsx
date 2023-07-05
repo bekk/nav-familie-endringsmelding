@@ -68,7 +68,7 @@ interface DokumentProps {
   språk: ELocaleType;
 }
 
-export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
+export function Dokument({ children, språk }: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
