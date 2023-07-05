@@ -8,4 +8,5 @@ export interface IAppContext {
   språkContext: [ELocaleType, Dispatch<SetStateAction<ELocaleType>>];
   søker: ISøker;
   erSamtykkeBekreftetContext: [boolean, Dispatch<SetStateAction<boolean>>];
+  endringsmeldingMottattDato: [string, Dispatch<SetStateAction<string>>];
 }

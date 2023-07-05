@@ -2,7 +2,11 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import React, { useEffect, useState } from 'react';
-import { useSpråk, useTekster } from '~/hooks/contextHooks';
+import {
+  useEndringsmeldingMottattDato,
+  useSpråk,
+  useTekster,
+} from '~/hooks/contextHooks';
 import { Button, Textarea } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
@@ -78,13 +82,21 @@ export default function SendEndringsmelding() {
     }
   }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
 
+  const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
+
   async function gåVidere() {
     //send data til backend
     //redirect til kvitteringsside
 
     try {
       const response = await sendEndringsmelding(endringsmeldingTekst);
-      console.log('response', response.status);
+      console.log('response', response);
+      settEndringsmeldingMottattDato(response.mottattDato);
+      navigate(hentPathForSteg(ESteg.KVITTERING));
+
+      /* 
+      console.log('response status', response.status);
+      console.log('response text', response.text);
       console.log('json', response.json());
 
       if (response.status === 200) {
@@ -93,8 +105,9 @@ export default function SendEndringsmelding() {
       } else {
         //Unødvendig ettersom det vil bli catch om status ikke er ok
         throw Error('Kunne ikke sende endringsmelding');
-      }
+      } */
     } catch (error) {
+      //Catcher når status er 404 feks
       throw Error('Kunne ikke koble til backend');
     }
   }

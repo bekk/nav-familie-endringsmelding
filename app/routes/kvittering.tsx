@@ -1,23 +1,15 @@
-import Spinner from '~/komponenter/Spinner';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import css from './_index.module.css';
-import { useState } from 'react';
+import { useEndringsmeldingMottattDato } from '~/hooks/contextHooks';
 
 export default function Kvittering() {
-  const [hentetKvittering, settHentetKvittering] = useState<boolean>(false);
-  //For å få commite
-  settHentetKvittering(false);
+  const [endringsmeldingMottattDato] = useEndringsmeldingMottattDato();
   return (
     <HovedInnhold>
-      {!hentetKvittering ? (
-        <Spinner />
-      ) : (
-        <>
-          <div className={`${css.toppMargin}`}>
-            <p>Kvitteringsside</p>
-          </div>
-        </>
-      )}
+      <div className={`${css.toppMargin}`}>
+        <p>Kvitteringsside</p>
+        <p>Mottatt dato: {endringsmeldingMottattDato}</p>
+      </div>
     </HovedInnhold>
   );
 }

@@ -41,6 +41,9 @@ export default function App() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
+    useState('');
+
   return (
     <Dokument språk={språk}>
       <Oppsett>
@@ -52,6 +55,10 @@ export default function App() {
             erSamtykkeBekreftetContext: [
               erSamtykkeBekreftet,
               settErSamtykkeBekreftet,
+            ],
+            endringsmeldingMottattDato: [
+              endringsmeldingMottattDato,
+              settEndringsmeldingMottattDato,
             ],
           }}
         />
