@@ -49,7 +49,7 @@ export default function Index() {
         <Spinner />
       ) : (
         <>
-          <div className={`${css.toppMargin}`} data-testid="forsideTittel">
+          <div className={`${css.toppMargin}`}>
             <TekstBlokk
               tekstblokk={tekster.tittel}
               typografi={ETypografiTyper.HEADING_H1}
@@ -63,7 +63,6 @@ export default function Index() {
           />
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
-            data-testid="startKnapp"
             onClick={
               erSamtykkeBekreftet
                 ? () => navigate(nestePath)
@@ -72,9 +71,7 @@ export default function Index() {
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
-          <span data-testid="linkPersonvern">
-            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-          </span>
+          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
         </>
       )}
     </HovedInnhold>
