@@ -13,6 +13,7 @@ export const Språkvelger = () => {
         label={<Label />}
         className={`${css.språkvelger}`}
         value={språk}
+        data-testid="språkvelger"
         onChange={endring => {
           settSpråk(endring.target.value as ELocaleType);
         }}
@@ -27,9 +28,9 @@ export const Språkvelger = () => {
 
 const Label = () => {
   return (
-    <div className={`${css.label}`}>
+    <span className={`${css.label}`}>
       <GlobeIcon title="a11y-title" fontSize={'1.5rem'} />
       <span> Språk/language </span>
-    </div>
+    </span>
   );
 };
