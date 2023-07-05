@@ -82,7 +82,7 @@ export default function SendEndringsmelding() {
     //send data til backend
     const response = await sendEndringsmelding(endringsmeldingTekst);
     //redirect til kvitteringsside
-    console.log(response);
+    console.log('response', response);
   }
 
   return (
