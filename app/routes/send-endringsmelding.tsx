@@ -86,6 +86,7 @@ export default function SendEndringsmelding() {
       <Veiledning />
 
       <Textarea
+        data-testid="fritekstfelt"
         label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
         description={
           <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
@@ -107,6 +108,7 @@ export default function SendEndringsmelding() {
         </Button>
         <Button
           variant={tekstInputOK ? 'primary' : 'secondary'}
+          data-testid="knappVidereSteg1"
           onClick={() => {
             settKnappTrykketPå(true);
             tekstInputOK && console.log('går til neste side');
