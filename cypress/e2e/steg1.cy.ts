@@ -3,7 +3,7 @@ describe('Steg1-test', () => {
     cy.visit('http://localhost:3000/send-endringsmelding');
   });
   it('Tekst laster fra Sanity', () => {
-    cy.get(`[data-testid='steg1Tittel']`).contains('Send endringer');
+    cy.get('.navds-heading--small').contains('Send endringer');
   });
   it('Tekst i veiledning', () => {
     cy.get(`[data-testid='veiledningSteg1']`).contains(

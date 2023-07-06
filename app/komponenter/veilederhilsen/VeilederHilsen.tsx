@@ -15,11 +15,8 @@ const VeilederHilsen: React.FC = () => {
   );
 
   return (
-    <GuidePanel poster className={`${css.poster}`}>
-      <div
-        className={`${css.tekstInnholdMellomrom}`}
-        data-testid="hilsenFornavn"
-      >
+    <GuidePanel poster className={`${css.poster}`} data-testid="hilsenFornavn">
+      <div className={`${css.tekstInnholdMellomrom}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}
           typografi={ETypografiTyper.HEADING_H2}

@@ -82,7 +82,6 @@ export default function SendEndringsmelding() {
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
-        data-testid="steg1Tittel"
       />
       <Veiledning />
 
