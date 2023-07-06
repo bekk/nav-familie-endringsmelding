@@ -13,6 +13,7 @@ const Veiledning: React.FC = () => {
       <TekstBlokk
         tekstblokk={veilederInnhold}
         typografi={ETypografiTyper.BODY_SHORT}
+        data-testid="veiledningSteg1"
       />
     </GuidePanel>
   );
