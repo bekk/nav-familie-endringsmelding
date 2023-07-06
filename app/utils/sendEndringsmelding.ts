@@ -1,13 +1,15 @@
+import { json } from '@remix-run/node';
+import postResponseMock from '~/mock/postResponseMock';
 import { fetchWithToken } from '~/server/authorization';
+import { EMiljø } from '~/typer/miljø';
 
 const STI: string = '/api/send-inn/ba';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
 //const API_URL_BACKEND: string ='https://nav-familie-endringsmelding-api.fly.dev/' + STI;
-//const testUrl: string = 'http://localhost:8099/api/test/hello';
 
 export async function sendEndringsmelding(
   endringsmelding: string,
-  requestRemix: any,
+  requestRemix: Request,
 ) {
   const head = new Headers();
   head.append('Content-Type', 'application/json');
@@ -19,13 +21,16 @@ export async function sendEndringsmelding(
   });
 
   switch (process.env.ENV) {
-    //Skal være i case EMiljø.LOKAL
-    default:
+    case EMiljø.LOKAL:
       return await fetchWithToken(
         requestRemix,
         LOKAL_URL_BACKEND,
         requestInfo,
         JSON.stringify(endringsmelding),
       );
+    //case EMiljø.PRODUKSJON:
+    //Her kommer case for bruke av API i produksjon
+    default:
+      return json(postResponseMock);
   }
 }
