@@ -60,27 +60,25 @@ export default function App() {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   return (
-    <>
-      <Dokument språk={språk} dekoratørFragmenter={dekoratørFragmenter}>
-        <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
-          <Outlet
-            context={{
-              sanityTekster: tekstData,
-              språkContext: [språk, settSpråk],
-              søker: søkerData,
-              erSamtykkeBekreftetContext: [
-                erSamtykkeBekreftet,
-                settErSamtykkeBekreftet,
-              ],
-            }}
-          />
-          <ScrollRestoration />
-          <Scripts />
-          {parse(dekoratørFragmenter.DECORATOR_SCRIPTS, { trim: true })}
-          <LiveReload />
-        </Oppsett>
-      </Dokument>
-    </>
+    <Dokument språk={språk} dekoratørFragmenter={dekoratørFragmenter}>
+      <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
+        <Outlet
+          context={{
+            sanityTekster: tekstData,
+            språkContext: [språk, settSpråk],
+            søker: søkerData,
+            erSamtykkeBekreftetContext: [
+              erSamtykkeBekreftet,
+              settErSamtykkeBekreftet,
+            ],
+          }}
+        />
+        <ScrollRestoration />
+        <Scripts />
+        {parse(dekoratørFragmenter.DECORATOR_SCRIPTS, { trim: true })}
+        <LiveReload />
+      </Oppsett>
+    </Dokument>
   );
 }
 
