@@ -8,130 +8,103 @@ import {
   useTekster,
 } from '~/hooks/contextHooks';
 import { Button, Textarea } from '@navikt/ds-react';
-import { Form, useActionData, useNavigate } from '@remix-run/react';
+import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { ESanityMappe, ESteg } from '~/typer/felles';
+import { ELocaleType, ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
-import { ActionArgs, json } from '@remix-run/node';
+import { ActionArgs } from '@remix-run/node';
+import { EFritekstFeil } from '~/typer/fritekstfeil';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const endringsmelding = formData.get('endringsmelding') as string;
-
-  const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
-  let error = '';
-
-  //Validere tekst
-  if (endringsmelding.length === 0) {
-    error = 'Mangler tekst';
-  } else if (endringsmelding.length < 9) {
-    error = 'Min 10';
-  } else if (endringsmelding.match(spesialTegnRegex)) {
-    error = 'Spesial';
-  }
-  console.log('errror', error);
-
-  if (!(error === '')) {
-    return json({ error: 'Validering ikke riktig' });
-  }
-  const response = await sendEndringsmelding(endringsmelding, request);
-
-  if (!response.ok) {
-    return json({ error: 'Det skjedde en feil med post til backend' });
-  }
-  return response;
+  return await sendEndringsmelding(endringsmelding, request).then(response => {
+    if (!response.ok) {
+      throw Error('Det skjedde en feil under POST til backend');
+    }
+    return response;
+  });
 }
 
 export default function SendEndringsmelding() {
   const actionData = useActionData<typeof action>();
+  const submit = useSubmit();
 
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
-
   const navigate = useNavigate();
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
-  useEffect(() => {
-    if (actionData && actionData.text === 'OK MOCK') {
-      settEndringsmeldingMottattDato(actionData.mottattDato);
-      navigate(hentPathForSteg(ESteg.KVITTERING));
-    }
-  }, [actionData, navigate, settEndringsmeldingMottattDato]);
+  const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
+    EFritekstFeil.MANGLER_TEKST,
+  );
+  const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
+  const SPESIAL_TEGN_REGEX = /[!@#$%^&*()?"{}|<>+¨=]/;
   const MAKS_INPUT_LENGDE = 1000;
+  const RESPONSE_STATUS_OK = 'OK MOCK';
 
   const i18nInnhold = {
     counterTooMuch: hentI18nInnhold(true),
     counterLeft: hentI18nInnhold(false),
   };
+  const fritekstfeltFeilmeldinger = {
+    [EFritekstFeil.MANGLER_TEKST]: tekster.fritekstfeltFeilmeldingManglerTekst,
+    [EFritekstFeil.HAR_SPESIAL_TEGN]:
+      tekster.fritekstfeltFeilmeldingSpesialTegn,
+    [EFritekstFeil.MINDRE_ENN_TI_TEGN]: tekster.fritekstfeltFeilmeldingMinTegn,
+  };
+
+  useEffect(() => {
+    if (actionData && actionData.text === RESPONSE_STATUS_OK) {
+      settEndringsmeldingMottattDato(actionData.mottattDato);
+      navigate(hentPathForSteg(ESteg.KVITTERING));
+    }
+  }, [actionData, navigate, settEndringsmeldingMottattDato]);
 
   function hentI18nInnhold(tegnIgjen: boolean) {
     switch (språk) {
-      case 'nb':
+      case ELocaleType.NB:
         return tegnIgjen ? 'tegn igjen' : 'tegn for mye';
-      case 'nn':
+      case ELocaleType.NN:
         return tegnIgjen ? 'teikn igjen' : 'teikn for mykje';
-      case 'en':
+      case ELocaleType.EN:
         return tegnIgjen ? 'characters left' : 'characters too many';
     }
   }
 
-  const [tekstInputOK, settTekstInputOK] = useState<boolean>(false);
-  const [manglerTekst, settManglerTekst] = useState<boolean>(false);
-  const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
-  const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
-  const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
-  const [, settEndringsmeldingTekst] = useState<string>('');
-
-  const validerTekst = (tekst: string) => {
-    settEndringsmeldingTekst(tekst);
-    settManglerTekst(tekst.length === 0);
-    settMinimumTegnOppfylt(tekst.length > 9);
-    if (tekst.match(spesialTegnRegex)) {
-      settBrukerSpesialtegn(true);
-    } else {
-      settBrukerSpesialtegn(false);
+  function validerTekst(endringsmelding: string) {
+    if (endringsmelding.length === 0) {
+      settValideringsfeil(EFritekstFeil.MANGLER_TEKST);
+      return;
     }
-  };
-
-  const utledFeilmelding = () => {
-    if (manglerTekst) {
-      return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst} />
-      );
-    } else if (brukerSpesialtegn) {
-      return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn} />
-      );
-    } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
+    if (endringsmelding.length < 10) {
+      settValideringsfeil(EFritekstFeil.MINDRE_ENN_TI_TEGN);
+      return;
     }
-  };
-
-  useEffect(() => {
-    if (!manglerTekst && !brukerSpesialtegn && minimumTegnOppfylt) {
-      settTekstInputOK(true);
-    } else {
-      settTekstInputOK(false);
+    if (endringsmelding.match(SPESIAL_TEGN_REGEX)) {
+      settValideringsfeil(EFritekstFeil.HAR_SPESIAL_TEGN);
+      return;
     }
-  }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
+    settValideringsfeil(null);
+  }
 
-  function gåVidere() {
-    //send data til backend
-    //const response = await sendEndringsmelding(endringsmeldingTekst);
-    //redirect til kvitteringsside
-    //console.log('response', response);
+  function håndterFeilmeldinger() {
+    return (
+      erKnappTrykketPå &&
+      valideringsfeil && (
+        <TekstBlokk tekstblokk={fritekstfeltFeilmeldinger[valideringsfeil]} />
+      )
+    );
   }
 
   return (
     <HovedInnhold>
       <StegIndikator nåværendeSteg={1} />
-
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
@@ -146,14 +119,14 @@ export default function SendEndringsmelding() {
           }
           maxLength={MAKS_INPUT_LENGDE}
           i18n={i18nInnhold}
-          error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
+          error={håndterFeilmeldinger()}
           onInput={event => {
             validerTekst(event.currentTarget.value);
           }}
         />
-
         <div className={`${css.navigeringsKnapper}`}>
           <Button
+            type="button"
             variant={'secondary'}
             onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
           >
@@ -161,10 +134,12 @@ export default function SendEndringsmelding() {
           </Button>
           <Button
             type="submit"
-            variant={tekstInputOK ? 'primary' : 'secondary'}
-            onClick={() => {
+            variant={valideringsfeil === null ? 'primary' : 'secondary'}
+            onClick={event => {
+              event.preventDefault();
+              if (valideringsfeil === null)
+                submit(event.currentTarget, { replace: true });
               settKnappTrykketPå(true);
-              tekstInputOK && gåVidere();
             }}
           >
             <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
