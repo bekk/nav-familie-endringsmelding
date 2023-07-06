@@ -2,7 +2,11 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import React, { useEffect, useState } from 'react';
-import { useSpråk, useTekster } from '~/hooks/contextHooks';
+import {
+  useEndringsmeldingMottattDato,
+  useSpråk,
+  useTekster,
+} from '~/hooks/contextHooks';
 import { Button, Textarea } from '@navikt/ds-react';
 import { Form, useActionData, useNavigate } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
@@ -15,27 +19,48 @@ import { ActionArgs, json } from '@remix-run/node';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
-  console.log('action body', formData);
-  const name = formData.get('endringsmelding') as string;
-  console.log('action name', name);
-  const response = await sendEndringsmelding(name, request);
-  console.log(response);
-  if (!response.ok) {
-    return json({ error: 'Det skjedde en feil' });
+  const endringsmelding = formData.get('endringsmelding') as string;
+
+  const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
+  let error = '';
+
+  //Validere tekst
+  if (endringsmelding.length === 0) {
+    error = 'Mangler tekst';
+  } else if (endringsmelding.length < 9) {
+    error = 'Min 10';
+  } else if (endringsmelding.match(spesialTegnRegex)) {
+    error = 'Spesial';
   }
-  //return redirect
+  console.log('errror', error);
+
+  if (!(error === '')) {
+    return json({ error: 'Validering ikke riktig' });
+  }
+  const response = await sendEndringsmelding(endringsmelding, request);
+
+  if (!response.ok) {
+    return json({ error: 'Det skjedde en feil med post til backend' });
+  }
   return response;
 }
 
 export default function SendEndringsmelding() {
   const actionData = useActionData<typeof action>();
-  console.log('data', actionData);
 
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
 
   const navigate = useNavigate();
   const [språk] = useSpråk();
+  const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
+
+  useEffect(() => {
+    if (actionData && actionData.text === 'OK MOCK') {
+      settEndringsmeldingMottattDato(actionData.mottattDato);
+      navigate(hentPathForSteg(ESteg.KVITTERING));
+    }
+  }, [actionData, navigate, settEndringsmeldingMottattDato]);
 
   const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
   const MAKS_INPUT_LENGDE = 1000;
@@ -112,7 +137,7 @@ export default function SendEndringsmelding() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
-      <Form method="post">
+      <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
           name="endringsmelding"
           label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
@@ -120,7 +145,6 @@ export default function SendEndringsmelding() {
             <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
           }
           maxLength={MAKS_INPUT_LENGDE}
-          className={`${css.fullBredde}`}
           i18n={i18nInnhold}
           error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
           onInput={event => {
