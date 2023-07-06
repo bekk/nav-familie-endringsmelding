@@ -11,6 +11,7 @@ export async function hentDekoratorHtml() {
       simple: true,
     },
   };
+  console.log('henter dekoratør');
 
   return await fetchDecoratorHtml(config);
 }

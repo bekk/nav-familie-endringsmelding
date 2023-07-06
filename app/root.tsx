@@ -14,7 +14,6 @@ import { hentDataFraSanity } from './utils/sanityLoader';
 import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
-import { DecoratorElements } from '@navikt/nav-dekoratoren-moduler/ssr';
 import parse from 'html-react-parser';
 import { hentDekoratorHtml } from './server/dekorator.server';
 import Feilside from './komponenter/feilside/Feilside';
@@ -60,8 +59,8 @@ export default function App() {
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
 
   return (
-    <Dokument språk={språk} dekoratørFragmenter={dekoratørFragmenter}>
-      <Oppsett dekoratørFragmenter={dekoratørFragmenter}>
+    <Dokument språk={språk}>
+      <Oppsett>
         <Outlet
           context={{
             sanityTekster: tekstData,
@@ -84,15 +83,11 @@ export default function App() {
 
 interface DokumentProps {
   children: React.ReactNode;
-  språk: ELocaleType;
-  dekoratørFragmenter: DecoratorElements;
+  språk?: ELocaleType;
 }
 
-export function Dokument({
-  children,
-  språk,
-  dekoratørFragmenter,
-}: DokumentProps) {
+export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
   return (
     <html lang={språk}>
       <head>
@@ -109,10 +104,10 @@ export function Dokument({
 
 interface OppsettProps {
   children: React.ReactNode;
-  dekoratørFragmenter: DecoratorElements;
 }
 
-export function Oppsett({ children, dekoratørFragmenter }: OppsettProps) {
+export function Oppsett({ children }: OppsettProps) {
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
   return (
     <>
       {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
@@ -123,7 +118,5 @@ export function Oppsett({ children, dekoratørFragmenter }: OppsettProps) {
 }
 
 export function ErrorBoundary() {
-  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
-
-  return <Feilside dekoratørFragmenter={dekoratørFragmenter} />;
+  return <Feilside />;
 }
