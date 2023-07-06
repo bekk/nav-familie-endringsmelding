@@ -17,6 +17,11 @@ import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil } from '~/typer/fritekstfeil';
+import {
+  MAKS_INPUT_LENGDE,
+  RESPONSE_STATUS_OK,
+  SPESIAL_TEGN_REGEX,
+} from '~/konstanter/sendEndringsmelding';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -43,10 +48,6 @@ export default function SendEndringsmelding() {
     EFritekstFeil.MANGLER_TEKST,
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
-
-  const SPESIAL_TEGN_REGEX = /[!@#$%^&*()?"{}|<>+¨=]/;
-  const MAKS_INPUT_LENGDE = 1000;
-  const RESPONSE_STATUS_OK = 'OK MOCK';
 
   const i18nInnhold = {
     counterTooMuch: hentI18nInnhold(true),
