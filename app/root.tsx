@@ -10,7 +10,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { hentDataFraSanity } from './utils/sanityLoader';
+import { hentDataFraSanity } from './utils/hentSanityData';
 import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
@@ -34,15 +34,8 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-  const tekstData = await hentDataFraSanity().catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente sanity tekster');
-  });
-  const søkerData = await hentSøker(request).catch(feil => {
-    //REDIRECT TIL FEIL SIDE
-    throw Error('Kunne ikke hente søker data');
-  });
-
+  const tekstData = await hentDataFraSanity();
+  const søkerData = await hentSøker(request);
   const dekoratørFragmenter = await hentDekoratorHtml();
 
   return {
@@ -108,6 +101,7 @@ interface OppsettProps {
 
 export function Oppsett({ children }: OppsettProps) {
   const { dekoratørFragmenter } = useLoaderData<typeof loader>();
+
   return (
     <>
       {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
