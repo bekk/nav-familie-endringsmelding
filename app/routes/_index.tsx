@@ -4,7 +4,7 @@ import Spinner from '~/komponenter/Spinner';
 import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import { Button } from '@navikt/ds-react';
+import { Button, GuidePanel } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
 import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
@@ -13,6 +13,8 @@ import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import HovedInnholdCss from '../komponenter/hovedInnhold/hovedInnhold.module.css';
+import feilsideCss from '../komponenter/feilside/feilside.module.css';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -75,5 +77,20 @@ export default function Index() {
         </>
       )}
     </HovedInnhold>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <>
+      <HovedInnhold>
+        <main className={`${HovedInnholdCss.innholdKonteiner}`}>
+          <GuidePanel className={`${feilsideCss.feilmeldingPanel}`}>
+            {/**Hente dette fra sanity */}
+            <p>En feil har oppstått!</p>
+          </GuidePanel>
+        </main>
+      </HovedInnhold>
+    </>
   );
 }
