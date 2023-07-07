@@ -1,6 +1,11 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
-import { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
+import {
+  json,
+  LinksFunction,
+  LoaderArgs,
+  LoaderFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -16,6 +21,8 @@ import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
 import parse from 'html-react-parser';
 import { hentDekoratorHtml } from './server/dekorator.server';
+import { loggInn } from '~/server/authorization';
+import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 import Feilside from './komponenter/feilside/Feilside';
 
 export const links: LinksFunction = () => [
@@ -34,15 +41,25 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const session = await getSession(request.headers.get('Cookie'));
+
+  if (!session.has(API_TOKEN_NAME)) {
+    await loggInn(session);
+  }
   const tekstData = await hentDataFraSanity();
-  const søkerData = await hentSøker(request);
+  const søkerData = await hentSøker(session);
   const dekoratørFragmenter = await hentDekoratorHtml();
 
-  return {
+  const data = {
     tekstData,
     søkerData,
     dekoratørFragmenter,
   };
+  return json(data, {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
 };
 
 export default function App() {
