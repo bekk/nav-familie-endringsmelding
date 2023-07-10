@@ -15,7 +15,7 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
   );
 
   if (tekst.length === 0) {
-    throw Error('Kunne ikke hente søker data');
+    throw Error('Kunne ikke hente sanity data');
   }
   const tekstInnhold = {
     [ESanityMappe.FORSIDE]: strukturerInnholdForSteg(
