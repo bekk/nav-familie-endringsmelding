@@ -9,13 +9,13 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
-export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
+export const hentSanityData = async (): Promise<ITekstinnhold> => {
   const tekst = await sanityKlient.fetch<ISanityDokument[]>(
     '*[ytelse == "BARNETRYGD"]',
   );
 
   if (tekst.length === 0) {
-    throw Error('Kunne ikke hente søker data');
+    throw Error('Kunne ikke hente sanity data');
   }
   const tekstInnhold = {
     [ESanityMappe.FORSIDE]: strukturerInnholdForSteg(

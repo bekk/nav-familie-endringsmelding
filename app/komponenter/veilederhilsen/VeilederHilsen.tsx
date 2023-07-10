@@ -1,7 +1,7 @@
 import { GuidePanel } from '@navikt/ds-react';
 import css from './veilederhilsen.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { hentSøkerFornavn } from '~/utils/hentSøkerData';
+import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useSøker, useTekster } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';

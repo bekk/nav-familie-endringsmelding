@@ -10,3 +10,4 @@ npm-debug.log*
 *.tsbuildinfo
 yarn-error.log
 *.iml
+cypress/downloads
