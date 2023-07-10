@@ -8,10 +8,10 @@ import { RemixBrowser } from '@remix-run/react';
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
-//Denne må være her for å kjøre tester
-process.env.NODE_ENV = 'test';
+const erCypressTestAktiv =
+  typeof Cypress !== 'undefined' && Cypress.env('test') === true;
 
-if ((process.env.NODE_ENV = 'test')) {
+if (erCypressTestAktiv) {
   require('react-dom').hydrate(<RemixBrowser />, document);
 } else {
   startTransition(() => {
