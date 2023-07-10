@@ -9,7 +9,7 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
-export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
+export const hentSanityData = async (): Promise<ITekstinnhold> => {
   const tekst = await sanityKlient.fetch<ISanityDokument[]>(
     '*[ytelse == "BARNETRYGD"]',
   );
