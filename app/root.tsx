@@ -1,6 +1,11 @@
 import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
-import { LinksFunction, LoaderArgs, LoaderFunction } from '@remix-run/node';
+import {
+  json,
+  LinksFunction,
+  LoaderArgs,
+  LoaderFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -10,10 +15,14 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { hentDataFraSanity } from './utils/sanityLoader';
+import { hentDataFraSanity } from './utils/hentSanityData';
 import { ELocaleType } from './typer/felles';
 import { hentSøker } from './utils/hentFraApi';
 import { useState } from 'react';
+import parse from 'html-react-parser';
+import { hentDekoratorHtml } from './server/dekorator.server';
+import { loggInn } from '~/server/authorization';
+import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 import Feilside from './komponenter/feilside/Feilside';
 
 export const links: LinksFunction = () => [
@@ -32,15 +41,33 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const session = await getSession(request.headers.get('Cookie'));
+
+  if (!session.has(API_TOKEN_NAME)) {
+    await loggInn(session);
+  }
   const tekstData = await hentDataFraSanity();
-  const søkerData = await hentSøker(request);
-  return { tekstData, søkerData };
+  const søkerData = await hentSøker(session);
+  const dekoratørFragmenter = await hentDekoratorHtml();
+
+  const data = {
+    tekstData,
+    søkerData,
+    dekoratørFragmenter,
+  };
+  return json(data, {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
 };
 
 export default function App() {
-  const { tekstData, søkerData } = useLoaderData<typeof loader>();
+  const { tekstData, søkerData, dekoratørFragmenter } =
+    useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+
   return (
     <Dokument språk={språk}>
       <Oppsett>
@@ -57,6 +84,7 @@ export default function App() {
         />
         <ScrollRestoration />
         <Scripts />
+        {parse(dekoratørFragmenter.DECORATOR_SCRIPTS, { trim: true })}
         <LiveReload />
       </Oppsett>
     </Dokument>
@@ -65,16 +93,18 @@ export default function App() {
 
 interface DokumentProps {
   children: React.ReactNode;
-  språk: ELocaleType;
+  språk?: ELocaleType;
 }
 
-export function Dokument({ children, språk }: DokumentProps) {
+export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
   return (
     <html lang={språk}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
+        {parse(dekoratørFragmenter.DECORATOR_STYLES, { trim: true })}
         <Links />
       </head>
       <body>{children}</body>
@@ -87,8 +117,15 @@ interface OppsettProps {
 }
 
 export function Oppsett({ children }: OppsettProps) {
-  //Her kommer dekoratør
-  return <>{children}</>;
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
+
+  return (
+    <>
+      {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
+      {children}
+      {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
+    </>
+  );
 }
 
 export function ErrorBoundary() {

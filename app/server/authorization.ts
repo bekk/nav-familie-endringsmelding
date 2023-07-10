@@ -1,12 +1,14 @@
-import cookie from 'cookie';
+import { EMiljø } from '~/typer/miljø';
+import { Session } from '@remix-run/node';
+import { API_TOKEN_NAME } from '~/sessions';
 
 export const fetchWithToken = async (
-  remixRequest: Request,
+  session: Session,
   url: string,
   requestInfo?: Request,
 ): Promise<Response> => {
   const headersFromRequest = requestInfo?.headers || {};
-  const token = await prepareSecuredRequest(remixRequest);
+  const token = await prepareSecuredRequest(session);
   const headersWithToken = new Headers({
     ...headersFromRequest,
     authorization: token.authorization,
@@ -18,16 +20,34 @@ export const fetchWithToken = async (
   });
 };
 
-const utledToken = (req: Request) => {
-  const cookies = req.headers.get('Cookie');
-  const cookiesFromHeader = cookies ? cookie.parse(cookies) : {};
-  return cookiesFromHeader['localhost-idtoken'];
-};
+const prepareSecuredRequest = async (session: Session) => {
+  const token = (await session.get(API_TOKEN_NAME)) ?? '';
 
-const prepareSecuredRequest = async (req: Request) => {
-  const token = utledToken(req);
   // TODO: TokenX-exchange i NAV-miljø
   return {
     authorization: `Bearer ${token}`,
   };
+};
+
+async function hentCookieFraBackend() {
+  const apiUrl = hentApiUrl();
+  const url =
+    apiUrl + '/local/cookie?issuerId=tokenx&audience=familie-endringsmelding';
+
+  const cookieResponse = await fetch(url);
+  return await cookieResponse.json();
+}
+
+export async function loggInn(session: Session) {
+  session.set(API_TOKEN_NAME, (await hentCookieFraBackend()).value);
+}
+
+const hentApiUrl = () => {
+  switch (process.env.ENV) {
+    case EMiljø.LOKAL:
+      return 'http://localhost:8099';
+    case EMiljø.PRODUKSJON:
+    default:
+      return 'https://nav-familie-endringsmelding-api.fly.dev';
+  }
 };
