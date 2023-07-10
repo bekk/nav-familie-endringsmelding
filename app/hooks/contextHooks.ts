@@ -8,13 +8,18 @@ export function useTekster<Steg extends ESanityMappe>(steg: Steg) {
 }
 
 export function useSpråk() {
-  const { språkContext } = useOutletContext<IAppContext>();
-  return språkContext;
+  const { språk } = useOutletContext<IAppContext>();
+  return språk;
+}
+
+export function useSøker() {
+  const { søker } = useOutletContext<IAppContext>();
+  return søker;
 }
 
 export function useBekreftetSamtykke() {
-  const { erSamtykkeBekreftetContext } = useOutletContext<IAppContext>();
-  return erSamtykkeBekreftetContext;
+  const { erSamtykkeBekreftet } = useOutletContext<IAppContext>();
+  return erSamtykkeBekreftet;
 }
 
 export function useEndringsmeldingMottattDato() {
