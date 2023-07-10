@@ -3,7 +3,7 @@ import css from './veilederhilsen.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { IAppContext } from '~/typer/context';
 import { useOutletContext } from '@remix-run/react';
-import { hentSøkerFornavn } from '~/utils/hentSøkerData';
+import { hentSøkerFornavn } from '~/utils/hentSøkerNavn';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { useTekster } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';
