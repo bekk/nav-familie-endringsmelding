@@ -74,12 +74,9 @@ export default function App() {
         <Outlet
           context={{
             sanityTekster: tekstData,
-            språkContext: [språk, settSpråk],
+            språk: [språk, settSpråk],
             søker: søkerData,
-            erSamtykkeBekreftetContext: [
-              erSamtykkeBekreftet,
-              settErSamtykkeBekreftet,
-            ],
+            erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
           }}
         />
         <ScrollRestoration />
