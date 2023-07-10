@@ -22,12 +22,17 @@ import {
   RESPONSE_STATUS_OK,
   SPESIAL_TEGN_REGEX,
 } from '~/konstanter/sendEndringsmelding';
+import { getSession } from '~/sessions';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const endringsmelding = formData.get('endringsmelding') as string;
-  return await sendEndringsmelding(endringsmelding, request).then(response => {
+  return await sendEndringsmelding(
+    endringsmelding,
+    await getSession(request.headers.get('Cookie')),
+  ).then(response => {
     if (!response.ok) {
+      console.log('Feil i send endringsmelding');
       throw Error('Det skjedde en feil under POST til backend');
     }
     return response;

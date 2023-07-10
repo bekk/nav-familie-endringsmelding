@@ -2,23 +2,39 @@ import { EMiljø } from '~/typer/miljø';
 import { Session } from '@remix-run/node';
 import { API_TOKEN_NAME } from '~/sessions';
 
-export const fetchWithToken = async (
+export const fetchMedToken = async (
+  session: Session,
+  url: string,
+  requestInfo?: Request,
+): Promise<Response> => {
+  const headersMedToken = await lagHeadersMedToken(session, requestInfo);
+  return fetch(url, {
+    headers: headersMedToken,
+    method: 'GET',
+  });
+};
+
+export const postMedToken = async (
   session: Session,
   url: string,
   requestInfo?: Request,
   payload?: string,
 ): Promise<Response> => {
+  const headersMedToken = await lagHeadersMedToken(session, requestInfo);
+  return fetch(url, {
+    headers: headersMedToken,
+    method: 'Post',
+    body: payload,
+  });
+};
+
+const lagHeadersMedToken = async (session: Session, requestInfo?: Request) => {
   const headersFromRequest = requestInfo?.headers || {};
   const token = await prepareSecuredRequest(session);
-  const headersWithToken = new Headers({
+  return new Headers({
     ...headersFromRequest,
     authorization: token.authorization,
     'x-wonderwall-id-token': '',
-  });
-  return fetch(url, {
-    headers: headersWithToken,
-    method: requestInfo?.method || 'GET',
-    body: payload || null,
   });
 };
 
