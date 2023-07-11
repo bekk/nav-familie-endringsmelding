@@ -54,6 +54,9 @@ jobs:
           cache: npm
           cache-dependency-path: ./package.json
           node-version: 18
+
+      - name: 📥 Install deps
+        run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} npm install
       
       - name: Run cypress Test
         uses: cypress-io/github-action@v5
