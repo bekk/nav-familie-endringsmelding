@@ -30,16 +30,6 @@ const TekstBlokk: React.FC<Props> = ({
               {children}
             </TypografiWrapper>
           ),
-          h1: ({ children }) => (
-            <TypografiWrapper typografi={typografi}>
-              {children}
-            </TypografiWrapper>
-          ),
-          h2: ({ children }) => (
-            <TypografiWrapper typografi={typografi}>
-              {children}
-            </TypografiWrapper>
-          ),
         },
         marks: {
           flettefelt: props => {
