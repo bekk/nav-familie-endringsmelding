@@ -5,11 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { useSpråk, useTekster } from '~/hooks/contextHooks';
 import { Button, Textarea } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
-import Veiledning from '~/komponenter/veileder/Veileder';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import Veileder from '~/komponenter/veileder/Veileder';
 
 export default function SendEndringsmelding() {
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
@@ -83,7 +83,7 @@ export default function SendEndringsmelding() {
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <Veiledning tekst={tekster.veilederInnhold} />
+      <Veileder tekst={tekster.veilederInnhold} />
 
       <Textarea
         label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}

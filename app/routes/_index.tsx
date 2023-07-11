@@ -16,8 +16,8 @@ import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
-import Veiledning from '~/komponenter/veileder/Veileder';
 import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
+import Veileder from '~/komponenter/veileder/Veileder';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -64,7 +64,7 @@ export default function Index() {
           </div>
           <Språkvelger />
 
-          <Veiledning
+          <Veileder
             tekst={tekster.veilederhilsenInnhold}
             erForside={true}
             overskrift={tekster.brukerHilsen}
