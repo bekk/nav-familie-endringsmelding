@@ -29,7 +29,7 @@ export const Språkvelger = () => {
 const Label = () => {
   return (
     <div className={`${css.label}`}>
-      <GlobeIcon title="globe-icon" fontSize={'1.5rem'} aria-hidden={false} />
+      <GlobeIcon title="globe-icon" fontSize={'1.5rem'} />
       <span> Språk/language </span>
     </div>
   );
