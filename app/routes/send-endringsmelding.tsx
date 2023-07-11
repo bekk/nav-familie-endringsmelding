@@ -88,7 +88,7 @@ export default function SendEndringsmelding() {
     settValideringsfeil(null);
   }
 
-  function håndterFeilmeldinger() {
+  function visFeilmeldinger() {
     return (
       erKnappTrykketPå &&
       valideringsfeil && (
@@ -125,7 +125,7 @@ export default function SendEndringsmelding() {
           }
           maxLength={MAKS_INPUT_LENGDE}
           i18n={i18nInnhold(språk)}
-          error={håndterFeilmeldinger()}
+          error={visFeilmeldinger()}
           onInput={event => {
             validerTekst(event.currentTarget.value);
           }}
