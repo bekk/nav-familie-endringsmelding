@@ -41,6 +41,7 @@ jobs:
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
+
   cypress-run: 
     name: Run Cypress Tests
     runs-on: ubuntu-latest
@@ -60,3 +61,6 @@ jobs:
       
       - name: Run cypress Test
         uses: cypress-io/github-action@v5
+        with:
+          start: npm run dev
+          wait-on: http://localhost:3030
