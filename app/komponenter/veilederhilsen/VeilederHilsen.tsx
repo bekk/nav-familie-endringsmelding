@@ -1,15 +1,13 @@
 import { GuidePanel } from '@navikt/ds-react';
 import css from './veilederhilsen.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { IAppContext } from '~/typer/context';
-import { useOutletContext } from '@remix-run/react';
-import { hentSøkerFornavn } from '~/utils/hentSøkerData';
+import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import { useTekster } from '~/hooks/contextHooks';
+import { useSøker, useTekster } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';
 
 const VeilederHilsen: React.FC = () => {
-  const { søker } = useOutletContext<IAppContext>();
+  const søker = useSøker();
   const { brukerHilsen, veilederhilsenInnhold } = useTekster(
     ESanityMappe.FORSIDE,
   );
