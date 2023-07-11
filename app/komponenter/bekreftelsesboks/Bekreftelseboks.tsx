@@ -10,7 +10,9 @@ const BekreftelseBoks = () => {
     <Alert variant="success">
       <TekstBlokk
         tekstblokk={bekreftelseBoksInnhold}
-        /* flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }} */
+        //i bekreftelseBoksInnhold må det legges opp flettefelt for dato og tid hentet fra backend
+        //mulig det også bør legges til en metode for å gjøre om dato til en string på riktig format
+        /* flettefelter={tid} */
       />
     </Alert>
   );
