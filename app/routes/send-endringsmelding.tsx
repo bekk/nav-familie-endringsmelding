@@ -120,8 +120,9 @@ export default function SendEndringsmelding() {
         />
         {!erResponseOK && (
           <Alert variant="error" className={`${css.toppMargin}`}>
-            {/* burde hentes fra sanity */}
-            Noe gikk galt! Prøv igjen om noen minutter.
+            <TekstBlokk
+              tekstblokk={tekster.alertFeilUnderSendEndringsmelding}
+            />
           </Alert>
         )}
         <div className={`${css.navigeringsKnapper}`}>
