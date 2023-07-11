@@ -5,7 +5,8 @@ import { EMiljø } from '~/typer/miljø';
 
 const STI: string = '/api/send-inn/ba';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
-//const API_URL_BACKEND: string ='https://nav-familie-endringsmelding-api.fly.dev/' + STI;
+const API_URL_BACKEND: string =
+  'https://nav-familie-endringsmelding-api.fly.dev' + STI;
 
 export async function sendEndringsmelding(
   endringsmelding: string,
@@ -27,8 +28,13 @@ export async function sendEndringsmelding(
         requestInfo,
         JSON.stringify(endringsmelding),
       );
-    //case EMiljø.PRODUKSJON:
-    //Her kommer case for bruke av API i produksjon
+    case EMiljø.PRODUKSJON:
+      return await postMedToken(
+        session,
+        API_URL_BACKEND,
+        requestInfo,
+        JSON.stringify(endringsmelding),
+      );
     default:
       return json(postResponseMock);
   }
