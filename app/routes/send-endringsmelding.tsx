@@ -83,7 +83,10 @@ export default function SendEndringsmelding() {
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <Veiledning />
+      <Veiledning
+        tekst={tekster.veilederInnhold}
+        veilederTypografi={ETypografiTyper.BODY_SHORT}
+      />
 
       <Textarea
         label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}

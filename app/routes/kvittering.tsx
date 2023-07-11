@@ -4,7 +4,8 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
-import VeiledningKvittering from '~/komponenter/veiledning/VeiledningKvittering';
+/* import VeiledningKvittering from '~/komponenter/veiledning/VeiledningKvittering';
+ */ import Veiledning from '~/komponenter/veiledning/Veiledning';
 
 export default function Kvittering() {
   const tekster = useTekster(ESanityMappe.KVITTERING);
@@ -16,7 +17,12 @@ export default function Kvittering() {
         tekstblokk={tekster.kvitteringTittel}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <VeiledningKvittering />
+
+      <Veiledning
+        tekst={tekster.kvitteringVeileder}
+        veilederTypografi={ETypografiTyper.BODY_SHORT}
+      />
+      {/*    <VeiledningKvittering /> */}
     </HovedInnhold>
   );
 }
