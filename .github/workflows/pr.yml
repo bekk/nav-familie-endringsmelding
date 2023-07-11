@@ -41,3 +41,19 @@ jobs:
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
+  cypress-run: 
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+          cache-dependency-path: ./package.json
+          node-version: 18
+      
+      - name: Run cypress Test
+        uses: cypress-io/github-action@v5
