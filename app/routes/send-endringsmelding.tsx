@@ -7,7 +7,7 @@ import {
   useSpråk,
   useTekster,
 } from '~/hooks/contextHooks';
-import { Button, Textarea } from '@navikt/ds-react';
+import { Alert, Button, Textarea } from '@navikt/ds-react';
 import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
@@ -19,11 +19,13 @@ import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil } from '~/typer/fritekstfeil';
 import {
   MAKS_INPUT_LENGDE,
+  RESPONSE_STATUS_FEIL,
   RESPONSE_STATUS_OK,
   SPESIAL_TEGN_REGEX,
 } from '~/konstanter/sendEndringsmelding';
 import { getSession } from '~/sessions';
 import { i18nInnhold } from '~/utils/i18n';
+import { IPostResponse } from '~/typer/response';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -32,16 +34,13 @@ export async function action({ request }: ActionArgs) {
     endringsmelding,
     await getSession(request.headers.get('Cookie')),
   ).then(response => {
-    if (!response.ok) {
-      console.log('Feil i send endringsmelding');
-      throw Error('Det skjedde en feil under POST til backend');
-    }
-    return response;
+    if (response.ok) return response.json();
+    return { text: RESPONSE_STATUS_FEIL };
   });
 }
 
 export default function SendEndringsmelding() {
-  const actionData = useActionData<typeof action>();
+  const actionData: IPostResponse | undefined = useActionData<typeof action>();
   const submit = useSubmit();
 
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
@@ -49,6 +48,7 @@ export default function SendEndringsmelding() {
   const navigate = useNavigate();
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
+  const [erResponseOK, settErResponseOK] = useState<boolean>(true);
 
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
     EFritekstFeil.MANGLER_TEKST,
@@ -63,9 +63,12 @@ export default function SendEndringsmelding() {
   };
 
   useEffect(() => {
-    if (actionData && actionData.text === RESPONSE_STATUS_OK) {
+    if (!actionData) return;
+    if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
       settEndringsmeldingMottattDato(actionData.mottattDato);
       navigate(hentPathForSteg(ESteg.KVITTERING));
+    } else {
+      settErResponseOK(false);
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato]);
 
@@ -94,6 +97,17 @@ export default function SendEndringsmelding() {
     );
   }
 
+  function håndterSendEndringsmelding(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) {
+    event.preventDefault();
+    if (valideringsfeil === null) {
+      settErResponseOK(true);
+      submit(event.currentTarget, { replace: true });
+    }
+    settKnappTrykketPå(true);
+  }
+
   return (
     <HovedInnhold>
       <StegIndikator nåværendeSteg={1} />
@@ -116,6 +130,11 @@ export default function SendEndringsmelding() {
             validerTekst(event.currentTarget.value);
           }}
         />
+        {!erResponseOK && (
+          <Alert variant="error" className={`${css.toppMargin}`}>
+            Noe gikk galt! Prøv igjen om noen minutter.
+          </Alert>
+        )}
         <div className={`${css.navigeringsKnapper}`}>
           <Button
             type="button"
@@ -128,10 +147,7 @@ export default function SendEndringsmelding() {
             type="submit"
             variant={valideringsfeil === null ? 'primary' : 'secondary'}
             onClick={event => {
-              event.preventDefault();
-              if (valideringsfeil === null)
-                submit(event.currentTarget, { replace: true });
-              settKnappTrykketPå(true);
+              håndterSendEndringsmelding(event);
             }}
           >
             <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
