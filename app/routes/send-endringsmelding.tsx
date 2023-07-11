@@ -12,7 +12,7 @@ import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
-import { ELocaleType, ESanityMappe, ESteg } from '~/typer/felles';
+import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 import { ActionArgs } from '@remix-run/node';
@@ -23,6 +23,7 @@ import {
   SPESIAL_TEGN_REGEX,
 } from '~/konstanter/sendEndringsmelding';
 import { getSession } from '~/sessions';
+import { i18nInnhold } from '~/utils/i18n';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -54,10 +55,6 @@ export default function SendEndringsmelding() {
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const i18nInnhold = {
-    counterTooMuch: hentI18nInnhold(true),
-    counterLeft: hentI18nInnhold(false),
-  };
   const fritekstfeltFeilmeldinger = {
     [EFritekstFeil.MANGLER_TEKST]: tekster.fritekstfeltFeilmeldingManglerTekst,
     [EFritekstFeil.HAR_SPESIAL_TEGN]:
@@ -71,17 +68,6 @@ export default function SendEndringsmelding() {
       navigate(hentPathForSteg(ESteg.KVITTERING));
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato]);
-
-  function hentI18nInnhold(tegnIgjen: boolean) {
-    switch (språk) {
-      case ELocaleType.NB:
-        return tegnIgjen ? 'tegn igjen' : 'tegn for mye';
-      case ELocaleType.NN:
-        return tegnIgjen ? 'teikn igjen' : 'teikn for mykje';
-      case ELocaleType.EN:
-        return tegnIgjen ? 'characters left' : 'characters too many';
-    }
-  }
 
   function validerTekst(endringsmelding: string) {
     if (endringsmelding.length === 0) {
@@ -124,7 +110,7 @@ export default function SendEndringsmelding() {
             <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
           }
           maxLength={MAKS_INPUT_LENGDE}
-          i18n={i18nInnhold}
+          i18n={i18nInnhold(språk)}
           error={håndterFeilmeldinger()}
           onInput={event => {
             validerTekst(event.currentTarget.value);
