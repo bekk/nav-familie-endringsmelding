@@ -6,6 +6,7 @@ import {
   EApiKeysSendEndring,
   SendEndringTekstinnhold,
 } from './sanitySendEndring';
+import { EApiKeysKvittering, KvitteringTekstinnhold } from './sanityKvittering';
 
 export interface ISanityDokument {
   _createdAt: string;
@@ -32,7 +33,12 @@ export type FlettefeltVerdier = {
 export interface ITekstinnhold {
   [ESanityMappe.FORSIDE]: ForsideTekstinnhold;
   [ESanityMappe.SEND_ENDRINGER]: SendEndringTekstinnhold;
+  [ESanityMappe.KVITTERING]: KvitteringTekstinnhold;
   [ESanityMappe.FELLES]: FellesTekstinnhold;
 }
 
-export type ApiKeys = EApiKeysForside | EApiKeysSendEndring | EApiKeysFelles;
+export type ApiKeys =
+  | EApiKeysForside
+  | EApiKeysSendEndring
+  | EApiKeysKvittering
+  | EApiKeysFelles;
