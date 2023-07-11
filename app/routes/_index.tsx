@@ -1,18 +1,23 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
-import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
-import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
+import {
+  useBekreftetSamtykke,
+  useSøker,
+  useTekster,
+} from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import Veiledning from '~/komponenter/veileder/Veileder';
+import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -43,6 +48,8 @@ export default function Index() {
     settErFeilmeldingAktivert(true);
   };
 
+  const søker = useSøker();
+
   return (
     <HovedInnhold>
       {!tekster ? (
@@ -56,7 +63,13 @@ export default function Index() {
             />
           </div>
           <Språkvelger />
-          <VeilederHilsen />
+
+          <Veiledning
+            tekst={tekster.veilederhilsenInnhold}
+            erForside={true}
+            overskrift={tekster.brukerHilsen}
+            søker={hentSøkerFornavn(søker)}
+          />
           <SamtykkePanel
             håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
