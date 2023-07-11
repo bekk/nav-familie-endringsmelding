@@ -1,5 +1,5 @@
-import { RESPONSE_STATUS_OK } from '~/konstanter/sendEndringsmelding';
 import { IPostResponse } from '~/typer/response';
+import { RESPONSE_STATUS_OK } from '~/utils/fritekstfeltValidering';
 
 const postResponseMock: IPostResponse = {
   text: RESPONSE_STATUS_OK,

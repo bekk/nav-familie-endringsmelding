@@ -17,15 +17,17 @@ import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil } from '~/typer/fritekstfeil';
+
+import { getSession } from '~/sessions';
+
+import { IPostResponse } from '~/typer/response';
 import {
   MAKS_INPUT_LENGDE,
   RESPONSE_STATUS_FEIL,
   RESPONSE_STATUS_OK,
-  SPESIAL_TEGN_REGEX,
-} from '~/konstanter/sendEndringsmelding';
-import { getSession } from '~/sessions';
-import { i18nInnhold } from '~/utils/i18n';
-import { IPostResponse } from '~/typer/response';
+  i18nInnhold,
+  validerTekst,
+} from '~/utils/fritekstfeltValidering';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
@@ -57,6 +59,8 @@ export default function SendEndringsmelding() {
 
   const fritekstfeltFeilmeldinger = {
     [EFritekstFeil.MANGLER_TEKST]: tekster.fritekstfeltFeilmeldingManglerTekst,
+    [EFritekstFeil.OVER_MAKS_LENGDE]:
+      tekster.fritekstfeltFeilmeldingOverMaksLengde,
     [EFritekstFeil.HAR_SPESIAL_TEGN]:
       tekster.fritekstfeltFeilmeldingSpesialTegn,
     [EFritekstFeil.MINDRE_ENN_TI_TEGN]: tekster.fritekstfeltFeilmeldingMinTegn,
@@ -71,22 +75,6 @@ export default function SendEndringsmelding() {
       settErResponseOK(false);
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato]);
-
-  function validerTekst(endringsmelding: string) {
-    if (endringsmelding.length === 0) {
-      settValideringsfeil(EFritekstFeil.MANGLER_TEKST);
-      return;
-    }
-    if (endringsmelding.length < 10) {
-      settValideringsfeil(EFritekstFeil.MINDRE_ENN_TI_TEGN);
-      return;
-    }
-    if (endringsmelding.match(SPESIAL_TEGN_REGEX)) {
-      settValideringsfeil(EFritekstFeil.HAR_SPESIAL_TEGN);
-      return;
-    }
-    settValideringsfeil(null);
-  }
 
   function visFeilmeldinger() {
     return (
@@ -127,11 +115,12 @@ export default function SendEndringsmelding() {
           i18n={i18nInnhold(språk)}
           error={visFeilmeldinger()}
           onInput={event => {
-            validerTekst(event.currentTarget.value);
+            settValideringsfeil(validerTekst(event.currentTarget.value));
           }}
         />
         {!erResponseOK && (
           <Alert variant="error" className={`${css.toppMargin}`}>
+            {/* burde hentes fra sanity */}
             Noe gikk galt! Prøv igjen om noen minutter.
           </Alert>
         )}
