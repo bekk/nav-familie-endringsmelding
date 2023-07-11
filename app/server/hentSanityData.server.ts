@@ -26,6 +26,10 @@ export const hentSanityData = async (): Promise<ITekstinnhold> => {
       tekst,
       ESanityMappe.SEND_ENDRINGER,
     ),
+    [ESanityMappe.KVITTERING]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.KVITTERING,
+    ),
     [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
   };
 
