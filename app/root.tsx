@@ -15,9 +15,9 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { hentDataFraSanity } from './utils/hentSanityData';
+import { hentSanityData } from './server/hentSanityData.server';
 import { ELocaleType } from './typer/felles';
-import { hentSøker } from './utils/hentFraApi';
+import { hentSøker } from './server/hentSøker.server';
 import { useState } from 'react';
 import parse from 'html-react-parser';
 import { hentDekoratorHtml } from './server/dekorator.server';
@@ -46,7 +46,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (!session.has(API_TOKEN_NAME)) {
     await loggInn(session);
   }
-  const tekstData = await hentDataFraSanity();
+  const tekstData = await hentSanityData();
   const søkerData = await hentSøker(session);
   const dekoratørFragmenter = await hentDekoratorHtml();
 
@@ -74,12 +74,9 @@ export default function App() {
         <Outlet
           context={{
             sanityTekster: tekstData,
-            språkContext: [språk, settSpråk],
+            språk: [språk, settSpråk],
             søker: søkerData,
-            erSamtykkeBekreftetContext: [
-              erSamtykkeBekreftet,
-              settErSamtykkeBekreftet,
-            ],
+            erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
           }}
         />
         <ScrollRestoration />

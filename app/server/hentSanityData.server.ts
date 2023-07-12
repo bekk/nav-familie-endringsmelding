@@ -9,7 +9,7 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
-export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
+export const hentSanityData = async (): Promise<ITekstinnhold> => {
   const tekst = await sanityKlient.fetch<ISanityDokument[]>(
     '*[ytelse == "BARNETRYGD"]',
   );
@@ -25,6 +25,10 @@ export const hentDataFraSanity = async (): Promise<ITekstinnhold> => {
     [ESanityMappe.SEND_ENDRINGER]: strukturerInnholdForSteg(
       tekst,
       ESanityMappe.SEND_ENDRINGER,
+    ),
+    [ESanityMappe.KVITTERING]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.KVITTERING,
     ),
     [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
   };
