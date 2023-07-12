@@ -8,6 +8,8 @@ export enum EApiKeysSendEndring {
   FRITEKSTFELT_FEILMELDING_SPESIALTEGN = 'fritekstfeltFeilmeldingSpesialTegn',
   FRITEKSTFELT_FEILMELDING_MINTEGN = 'fritekstfeltFeilmeldingMinTegn',
   FRITEKSTFELT_FEILMELDING_MANGLERTEKST = 'fritekstfeltFeilmeldingManglerTekst',
+  FRITEKSTFELT_FEILMELDING_OVERMAKSLENGDE = 'fritekstfeltFeilmeldingOverMaksLengde',
+  ALERT_FEIL_SENDENDRINGSMELDING = 'alertFeilUnderSendEndringsmelding',
 }
 
 export type SendEndringTekstinnhold = Record<
