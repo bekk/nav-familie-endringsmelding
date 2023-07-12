@@ -50,8 +50,8 @@ export default function SendEndringsmelding() {
   const navigate = useNavigate();
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
-  const [erResponseOK, settErResponseOK] = useState<boolean>(true);
 
+  const [erResponseOK, settErResponseOK] = useState<boolean>(true);
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
     EFritekstFeil.MANGLER_TEKST,
   );
@@ -68,6 +68,7 @@ export default function SendEndringsmelding() {
 
   useEffect(() => {
     if (!actionData) return;
+
     if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
       settEndringsmeldingMottattDato(actionData.mottattDato);
       navigate(hentPathForSteg(ESteg.KVITTERING));
@@ -76,7 +77,7 @@ export default function SendEndringsmelding() {
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato]);
 
-  function visFeilmeldinger() {
+  function genererFeilmelding() {
     return (
       erKnappTrykketPå &&
       valideringsfeil && (
@@ -113,7 +114,7 @@ export default function SendEndringsmelding() {
           }
           maxLength={MAKS_INPUT_LENGDE}
           i18n={i18nInnhold(språk)}
-          error={visFeilmeldinger()}
+          error={genererFeilmelding()}
           onInput={event => {
             settValideringsfeil(validerTekst(event.currentTarget.value));
           }}
