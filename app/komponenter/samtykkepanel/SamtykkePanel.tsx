@@ -38,13 +38,12 @@ const SamtykkePanel: React.FC<Props> = ({
         error={
           !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
-            <span data-testid="samtykkepanelFeilmelding">
-              <TekstBlokk
-                tekstblokk={tekster.samtykkePanelFeilmelding}
-                typografi={ETypografiTyper.BODY_SHORT}
-              />
-              {/*denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.*/}
-            </span>
+            <TekstBlokk
+              tekstblokk={tekster.samtykkePanelFeilmelding}
+              typografi={ETypografiTyper.BODY_SHORT}
+              dataTestid="samtykkepanelFeilmelding"
+            />
+            //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
           )
         }
       >

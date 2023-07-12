@@ -72,9 +72,10 @@ export default function Index() {
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
-          <span data-testid="linkPersonvern">
-            <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
-          </span>
+          <TekstBlokk
+            tekstblokk={tekster.linkTilPersonvernerklaering}
+            dataTestid="linkPersonvern"
+          />
         </>
       )}
     </HovedInnhold>
