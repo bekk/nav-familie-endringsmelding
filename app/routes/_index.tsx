@@ -66,7 +66,7 @@ export default function Index() {
 
           <Veileder
             tekst={tekster.veilederhilsenInnhold}
-            erForside={true}
+            poster={true}
             overskrift={tekster.brukerHilsen}
             søker={hentSøkerFornavn(søker)}
           />

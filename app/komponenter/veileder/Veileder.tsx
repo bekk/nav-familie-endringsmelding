@@ -6,21 +6,21 @@ import { ISanityDokument } from '~/typer/sanity/sanity';
 
 interface Props {
   tekst: ISanityDokument;
-  erForside?: boolean;
+  poster?: boolean;
   overskrift?: ISanityDokument;
   søker?: string;
 }
 
 const Veileder: React.FC<Props> = ({
   tekst,
-  erForside,
+  poster,
   overskrift,
   søker,
 }: Props) => {
   return (
     <GuidePanel
-      poster={erForside}
-      className={erForside ? `${css.poster}` : `${css.veilederPanel}`}
+      poster={poster}
+      className={poster ? `${css.poster}` : `${css.veilederPanel}`}
     >
       {overskrift && (
         <div className={`${css.tekstInnholdMellomrom}`}>
