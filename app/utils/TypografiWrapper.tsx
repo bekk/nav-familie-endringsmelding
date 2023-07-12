@@ -41,7 +41,10 @@ export const TypografiWrapper: React.FC<Props> = ({
         </Heading>
       );
     case ETypografiTyper.LABEL:
-      return <Label>{children}</Label>;
+      return <Label style={style}>{children}</Label>;
+
+    case ETypografiTyper.SPAN:
+      return <span style={style}>{children}</span>;
 
     default:
       return <div style={style}>{children}</div>;

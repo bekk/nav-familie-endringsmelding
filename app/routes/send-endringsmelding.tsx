@@ -74,6 +74,7 @@ export default function SendEndringsmelding() {
       valideringsfeil && (
         <TekstBlokk
           tekstblokk={tekster[fritekstFeilTilApiKeys[valideringsfeil]]}
+          typografi={ETypografiTyper.LABEL}
         />
       )
     );
