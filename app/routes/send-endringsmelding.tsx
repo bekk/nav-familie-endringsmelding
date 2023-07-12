@@ -98,7 +98,7 @@ export default function SendEndringsmelding() {
           validerTekst(event.currentTarget.value);
         }}
       />
-      <div className={`${css.navigeringsKnapper}`}>
+      <div className={`${css.sentrertFlexToppMargin}`}>
         <Button
           variant={'secondary'}
           onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
