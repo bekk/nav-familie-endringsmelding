@@ -17,14 +17,14 @@ import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
-
 import { getSession } from '~/sessions';
-
-import { IPostResponse } from '~/typer/response';
 import {
-  MAKS_INPUT_LENGDE,
+  IPostResponse,
   RESPONSE_STATUS_FEIL,
   RESPONSE_STATUS_OK,
+} from '~/typer/response';
+import {
+  MAKS_INPUT_LENGDE,
   i18nInnhold,
   validerTekst,
 } from '~/utils/fritekstfeltValidering';

@@ -4,8 +4,6 @@ import { EFritekstFeil } from '~/typer/fritekstfeil';
 export const SPESIAL_TEGN_REGEX = /[!@#$%^&*()?"{}|<>+¨=]/;
 export const MIN_INPUT_LENGDE = 10;
 export const MAKS_INPUT_LENGDE = 1000;
-export const RESPONSE_STATUS_OK = 'OK MOCK';
-export const RESPONSE_STATUS_FEIL = 'FEIL';
 
 const hentI18nInnhold = (språk: ELocaleType, tegnIgjen: boolean) => {
   switch (språk) {
