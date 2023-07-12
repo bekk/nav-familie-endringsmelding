@@ -14,8 +14,6 @@ export const hentSøker = async (session: Session): Promise<ISøker> => {
       return (await fetchMedToken(session, LOKAL_URL_BACKEND)).json();
     case EMiljø.PRODUKSJON:
     default:
-      const svar = await fetchMedToken(session, API_URL_BACKEND);
-      console.log(svar.body);
       return (await fetchMedToken(session, API_URL_BACKEND)).json();
   }
 };
