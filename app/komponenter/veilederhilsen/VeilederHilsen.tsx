@@ -13,8 +13,8 @@ const VeilederHilsen: React.FC = () => {
   );
 
   return (
-    <GuidePanel poster className={`${css.poster}`}>
-      <div className={`${css.tekstInnholdMellomrom}`}>
+    <GuidePanel poster className={`${css.venstrestiltInnhold}`}>
+      <div className={`${css.bunnMargin}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}
           typografi={ETypografiTyper.HEADING_H2}

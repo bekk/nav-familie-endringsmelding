@@ -23,7 +23,7 @@ const SamtykkePanel: React.FC<Props> = ({
   };
 
   return (
-    <div className={`${css.samtykkePanelOmråde}`}>
+    <div className={`${css.flexKolonneMedGap}`}>
       <TekstBlokk
         tekstblokk={tekster.samtykkePanelTittel}
         typografi={ETypografiTyper.LABEL}

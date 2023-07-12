@@ -11,7 +11,7 @@ export const Språkvelger = () => {
     <>
       <Select
         label={<Label />}
-        className={`${css.språkvelger}`}
+        className={`${css.fastBredde}`}
         value={språk}
         autoComplete="on"
         onChange={endring => {
@@ -28,7 +28,7 @@ export const Språkvelger = () => {
 
 const Label = () => {
   return (
-    <div className={`${css.label}`}>
+    <div className={`${css.flexMedGap}`}>
       <GlobeIcon title="globe-icon" fontSize={'1.5rem'} />
       <span> Språk/language </span>
     </div>

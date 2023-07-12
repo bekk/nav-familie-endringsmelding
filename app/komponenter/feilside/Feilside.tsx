@@ -17,8 +17,8 @@ const Feilside: React.FC = () => {
       </head>
       <body>
         <Banner tekst={'Endringsmelding for barnetrygd'} />
-        <main className={`${HovedInnholdCss.innholdKonteiner}`}>
-          <GuidePanel className={`${css.feilmeldingPanel}`}>
+        <main className={`${HovedInnholdCss.flexGapKonteinerSentrert}`}>
+          <GuidePanel className={`${css.rødPanelToppMargin}`}>
             <p>En feil har oppstått! Vennligst prøv igjen.</p>
           </GuidePanel>
         </main>

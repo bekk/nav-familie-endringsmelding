@@ -9,7 +9,7 @@ interface Props {
 }
 const Banner: React.FC<Props> = ({ tekst }) => {
   return (
-    <section className={`${css.bannerStil}`} role="banner">
+    <section className={`${css.lillaBannerFullBredde}`} role="banner">
       {typeof tekst === 'string' ? (
         <Heading level="1" size="large">
           {tekst}

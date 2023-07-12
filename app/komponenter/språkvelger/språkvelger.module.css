@@ -1,8 +1,8 @@
-.språkvelger {
+.fastBredde {
   width: 10.75rem;
 }
 
-.label {
+.flexMedGap {
   display: flex;
   gap: 0.3rem;
 }
