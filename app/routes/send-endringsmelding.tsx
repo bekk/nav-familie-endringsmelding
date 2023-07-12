@@ -14,7 +14,7 @@ import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
-import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
+import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { getSession } from '~/sessions';

@@ -1,7 +1,7 @@
 import { Session, json } from '@remix-run/node';
 import postResponseMock from '~/mock/postResponseMock';
-import { postMedToken } from '~/server/authorization';
 import { EMiljø } from '~/typer/miljø';
+import { postMedToken } from './authorization';
 
 const STI: string = '/api/send-inn/ba';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
