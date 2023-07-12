@@ -2,119 +2,143 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import React, { useEffect, useState } from 'react';
-import { useSpråk, useTekster } from '~/hooks/contextHooks';
-import { Button, Textarea } from '@navikt/ds-react';
-import { useNavigate } from '@remix-run/react';
+import {
+  useEndringsmeldingMottattDato,
+  useSpråk,
+  useTekster,
+} from '~/hooks/contextHooks';
+import { Alert, Button, Textarea } from '@navikt/ds-react';
+import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
+import { ActionArgs } from '@remix-run/node';
+import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
+import { getSession } from '~/sessions';
+import {
+  IPostResponse,
+  RESPONSE_STATUS_FEIL,
+  RESPONSE_STATUS_OK,
+} from '~/typer/response';
+import {
+  MAKS_INPUT_LENGDE,
+  i18nInnhold,
+  validerTekst,
+} from '~/utils/fritekstfeltValidering';
+
+export async function action({ request }: ActionArgs) {
+  const formData = await request.formData();
+  const endringsmelding = formData.get('endringsmelding') as string;
+  return await sendEndringsmelding(
+    endringsmelding,
+    await getSession(request.headers.get('Cookie')),
+  ).then(response => {
+    if (response.ok) return response.json();
+    return { text: RESPONSE_STATUS_FEIL };
+  });
+}
 
 export default function SendEndringsmelding() {
+  const actionData: IPostResponse | undefined = useActionData<typeof action>();
+  const submit = useSubmit();
+
   const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
-
   const navigate = useNavigate();
   const [språk] = useSpråk();
+  const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
-  const spesialTegnRegex = /[!@#$%^&*()?"{}|<>+¨=]/;
-  const MAKS_INPUT_LENGDE = 1000;
-
-  const i18nInnhold = {
-    counterTooMuch: hentI18nInnhold(true),
-    counterLeft: hentI18nInnhold(false),
-  };
-
-  function hentI18nInnhold(tegnIgjen: boolean) {
-    switch (språk) {
-      case 'nb':
-        return tegnIgjen ? 'tegn igjen' : 'tegn for mye';
-      case 'nn':
-        return tegnIgjen ? 'teikn igjen' : 'teikn for mykje';
-      case 'en':
-        return tegnIgjen ? 'characters left' : 'characters too many';
-    }
-  }
-
-  const [tekstInputOK, settTekstInputOK] = useState<boolean>(false);
-  const [manglerTekst, settManglerTekst] = useState<boolean>(false);
-  const [brukerSpesialtegn, settBrukerSpesialtegn] = useState<boolean>(false);
-  const [minimumTegnOppfylt, settMinimumTegnOppfylt] = useState<boolean>(false);
-  const [knappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
-
-  const validerTekst = (tekst: string) => {
-    settManglerTekst(tekst.length === 0);
-    settMinimumTegnOppfylt(tekst.length > 9);
-    if (tekst.match(spesialTegnRegex)) {
-      settBrukerSpesialtegn(true);
-    } else {
-      settBrukerSpesialtegn(false);
-    }
-  };
-
-  const utledFeilmelding = () => {
-    if (manglerTekst) {
-      return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst} />
-      );
-    } else if (brukerSpesialtegn) {
-      return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn} />
-      );
-    } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
-    }
-  };
+  const [erResponseOK, settErResponseOK] = useState<boolean>(true);
+  const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
+    EFritekstFeil.MANGLER_TEKST,
+  );
+  const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!manglerTekst && !brukerSpesialtegn && minimumTegnOppfylt) {
-      settTekstInputOK(true);
+    if (!actionData) return;
+
+    if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
+      settEndringsmeldingMottattDato(actionData.mottattDato);
+      navigate(hentPathForSteg(ESteg.KVITTERING));
     } else {
-      settTekstInputOK(false);
+      settErResponseOK(false);
     }
-  }, [manglerTekst, brukerSpesialtegn, minimumTegnOppfylt]);
+  }, [actionData, navigate, settEndringsmeldingMottattDato]);
+
+  function genererFeilmelding() {
+    return (
+      erKnappTrykketPå &&
+      valideringsfeil && (
+        <TekstBlokk
+          tekstblokk={tekster[fritekstFeilTilApiKeys[valideringsfeil]]}
+        />
+      )
+    );
+  }
+
+  function håndterSendEndringsmelding(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) {
+    event.preventDefault();
+    if (valideringsfeil === null) {
+      settErResponseOK(true);
+      submit(event.currentTarget, { replace: true });
+    }
+    settKnappTrykketPå(true);
+  }
 
   return (
     <HovedInnhold>
       <StegIndikator nåværendeSteg={1} />
-
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
-      <Textarea
-        label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
-        description={
-          <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
-        }
-        maxLength={MAKS_INPUT_LENGDE}
-        className={`${css.fullBredde}`}
-        autoComplete="on"
-        i18n={i18nInnhold}
-        error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
-        onInput={event => {
-          validerTekst(event.currentTarget.value);
-        }}
-      />
-      <div className={`${css.sentrertFlexToppMargin}`}>
-        <Button
-          variant={'secondary'}
-          onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
-        >
-          <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
-        </Button>
-        <Button
-          variant={tekstInputOK ? 'primary' : 'secondary'}
-          onClick={() => {
-            settKnappTrykketPå(true);
-            tekstInputOK && console.log('går til neste side');
+      <Form method="post" className={`${css.fullBredde}`}>
+        <Textarea
+          name="endringsmelding"
+          label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+          description={
+            <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
+          }
+          autoComplete="on"
+          maxLength={MAKS_INPUT_LENGDE}
+          i18n={i18nInnhold(språk)}
+          error={genererFeilmelding()}
+          onInput={event => {
+            settValideringsfeil(validerTekst(event.currentTarget.value));
           }}
-        >
-          <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
-        </Button>
-      </div>
+        />
+        {!erResponseOK && (
+          <Alert variant="error" className={`${css.toppMargin}`}>
+            <TekstBlokk
+              tekstblokk={tekster.alertFeilUnderSendEndringsmelding}
+            />
+          </Alert>
+        )}
+        <div className={`${css.sentrertFlexToppMargin}`}>
+          <Button
+            type="button"
+            variant={'secondary'}
+            onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
+          >
+            <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
+          </Button>
+          <Button
+            type="submit"
+            variant={valideringsfeil === null ? 'primary' : 'secondary'}
+            onClick={event => {
+              håndterSendEndringsmelding(event);
+            }}
+          >
+            <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
+          </Button>
+        </div>
+      </Form>
     </HovedInnhold>
   );
 }

@@ -7,5 +7,6 @@ export interface IAppContext {
   sanityTekster: ITekstinnhold;
   språk: [ELocaleType, Dispatch<SetStateAction<ELocaleType>>];
   søker: ISøker;
+  endringsmeldingMottattDato: [string, Dispatch<SetStateAction<string>>];
   erSamtykkeBekreftet: [boolean, Dispatch<SetStateAction<boolean>>];
 }
