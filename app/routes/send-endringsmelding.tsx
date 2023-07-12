@@ -84,7 +84,6 @@ export default function SendEndringsmelding() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Veiledning />
-
       <Textarea
         data-testid="fritekstfelt"
         label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
@@ -93,6 +92,7 @@ export default function SendEndringsmelding() {
         }
         maxLength={MAKS_INPUT_LENGDE}
         className={`${css.fullBredde}`}
+        autoComplete="on"
         i18n={i18nInnhold}
         error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
         onInput={event => {

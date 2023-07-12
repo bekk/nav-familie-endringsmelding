@@ -14,6 +14,7 @@ export const Språkvelger = () => {
         className={`${css.språkvelger}`}
         value={språk}
         data-testid="språkvelger"
+        autoComplete="on"
         onChange={endring => {
           settSpråk(endring.target.value as ELocaleType);
         }}
@@ -29,7 +30,7 @@ export const Språkvelger = () => {
 const Label = () => {
   return (
     <span className={`${css.label}`}>
-      <GlobeIcon title="a11y-title" fontSize={'1.5rem'} />
+      <GlobeIcon title="globe-icon" fontSize={'1.5rem'} />
       <span> Språk/language </span>
     </span>
   );
