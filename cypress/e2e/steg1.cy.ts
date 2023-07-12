@@ -3,7 +3,7 @@ describe('Steg1-test', () => {
     cy.visit('http://localhost:3000/send-endringsmelding');
   });
   it('Sjekker at tekst laster fra Sanity', () => {
-    cy.get('.navds-heading--small').contains('Send endringer');
+    cy.get(`[data-testid='overskriftSteg1']`).contains('Send endringer');
   });
   it('Finner tekst i veiledning', () => {
     cy.get(`[data-testid='veiledningSteg1']`).contains(
@@ -21,7 +21,9 @@ describe('Steg1-test', () => {
     cy.get('.navds-stepper__step').eq(1).contains('2');
   });
   it('Sjekke at overskrift til fritekstfelt er tilstede', () => {
-    cy.get('.navds-label').contains('Hva ønsker du å endre?');
+    cy.get(`[data-testid='fritekstfeltTittel']`).contains(
+      'Hva ønsker du å endre?',
+    );
   });
   it('Finner tomt fritekstfelt', () => {
     cy.get(`[data-testid='fritekstfelt']`);

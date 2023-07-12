@@ -82,11 +82,17 @@ export default function SendEndringsmelding() {
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
+        dataTestid="overskriftSteg1"
       />
       <Veiledning />
       <Textarea
         data-testid="fritekstfelt"
-        label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+        label={
+          <TekstBlokk
+            tekstblokk={tekster.fritekstfeltTittel}
+            dataTestid="fritekstfeltTittel"
+          />
+        }
         description={
           <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
         }
