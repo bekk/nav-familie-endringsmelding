@@ -92,6 +92,7 @@ export default function SendEndringsmelding() {
         }
         maxLength={MAKS_INPUT_LENGDE}
         className={`${css.fullBredde}`}
+        autoComplete="on"
         i18n={i18nInnhold}
         error={!tekstInputOK && knappTrykketPå && utledFeilmelding()}
         onInput={event => {
