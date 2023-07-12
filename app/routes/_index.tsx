@@ -33,14 +33,17 @@ export default function Index() {
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
-  const nestePath = hentPathForSteg(ESteg.SEND_ENDRINGER);
 
   const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 
   const håndterKnappeTrykk = () => {
-    settErFeilmeldingAktivert(true);
+    if (erSamtykkeBekreftet) {
+      navigate(hentPathForSteg(ESteg.SEND_ENDRINGER));
+    } else {
+      settErFeilmeldingAktivert(true);
+    }
   };
 
   return (
@@ -63,11 +66,7 @@ export default function Index() {
           />
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
-            onClick={
-              erSamtykkeBekreftet
-                ? () => navigate(nestePath)
-                : håndterKnappeTrykk
-            }
+            onClick={håndterKnappeTrykk}
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
