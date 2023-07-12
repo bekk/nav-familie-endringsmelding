@@ -1,5 +1,4 @@
-import { IPostResponse } from '~/typer/response';
-import { RESPONSE_STATUS_OK } from '~/utils/fritekstfeltValidering';
+import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
 
 const postResponseMock: IPostResponse = {
   text: RESPONSE_STATUS_OK,
