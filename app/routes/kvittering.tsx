@@ -10,7 +10,7 @@ export default function Kvittering() {
 
   return (
     <HovedInnhold>
-      <StegIndikator nåværendeSteg={3} />
+      <StegIndikator nåværendeSteg={2} />
       <TekstBlokk
         tekstblokk={tekster.kvitteringTittel}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
