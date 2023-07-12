@@ -56,14 +56,25 @@ export default function SendEndringsmelding() {
   const utledFeilmelding = () => {
     if (manglerTekst) {
       return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst} />
+        <TekstBlokk
+          tekstblokk={tekster.fritekstfeltFeilmeldingManglerTekst}
+          typografi={ETypografiTyper.LABEL}
+        />
       );
     } else if (brukerSpesialtegn) {
       return (
-        <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn} />
+        <TekstBlokk
+          tekstblokk={tekster.fritekstfeltFeilmeldingSpesialTegn}
+          typografi={ETypografiTyper.LABEL}
+        />
       );
     } else if (!minimumTegnOppfylt) {
-      return <TekstBlokk tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn} />;
+      return (
+        <TekstBlokk
+          tekstblokk={tekster.fritekstfeltFeilmeldingMinTegn}
+          typografi={ETypografiTyper.LABEL}
+        />
+      );
     }
   };
 
