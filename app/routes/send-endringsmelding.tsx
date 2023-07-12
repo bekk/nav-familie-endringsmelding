@@ -16,7 +16,7 @@ import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/utils/sendEndringsmelding';
 import { ActionArgs } from '@remix-run/node';
-import { EFritekstFeil } from '~/typer/fritekstfeil';
+import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 
 import { getSession } from '~/sessions';
 
@@ -57,15 +57,6 @@ export default function SendEndringsmelding() {
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const fritekstfeltFeilmeldinger = {
-    [EFritekstFeil.MANGLER_TEKST]: tekster.fritekstfeltFeilmeldingManglerTekst,
-    [EFritekstFeil.OVER_MAKS_LENGDE]:
-      tekster.fritekstfeltFeilmeldingOverMaksLengde,
-    [EFritekstFeil.HAR_SPESIAL_TEGN]:
-      tekster.fritekstfeltFeilmeldingSpesialTegn,
-    [EFritekstFeil.MINDRE_ENN_TI_TEGN]: tekster.fritekstfeltFeilmeldingMinTegn,
-  };
-
   useEffect(() => {
     if (!actionData) return;
 
@@ -81,7 +72,9 @@ export default function SendEndringsmelding() {
     return (
       erKnappTrykketPå &&
       valideringsfeil && (
-        <TekstBlokk tekstblokk={fritekstfeltFeilmeldinger[valideringsfeil]} />
+        <TekstBlokk
+          tekstblokk={tekster[fritekstFeilTilApiKeys[valideringsfeil]]}
+        />
       )
     );
   }
