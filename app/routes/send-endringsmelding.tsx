@@ -112,6 +112,7 @@ export default function SendEndringsmelding() {
           description={
             <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
           }
+          autoComplete="on"
           maxLength={MAKS_INPUT_LENGDE}
           i18n={i18nInnhold(språk)}
           error={genererFeilmelding()}

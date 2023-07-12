@@ -104,6 +104,7 @@ export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
+        <title>Endringsmelding</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
@@ -124,9 +125,13 @@ export function Oppsett({ children }: OppsettProps) {
 
   return (
     <>
-      {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
+      <div role="navigation">
+        {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
+      </div>
       {children}
-      {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
+      <div role="navigation">
+        {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
+      </div>
     </>
   );
 }
