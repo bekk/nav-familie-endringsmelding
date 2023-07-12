@@ -67,6 +67,8 @@ export default function App() {
     useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
+    useState('');
 
   return (
     <Dokument språk={språk}>
@@ -77,6 +79,10 @@ export default function App() {
             språk: [språk, settSpråk],
             søker: søkerData,
             erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
+            endringsmeldingMottattDato: [
+              endringsmeldingMottattDato,
+              settEndringsmeldingMottattDato,
+            ],
           }}
         />
         <ScrollRestoration />
