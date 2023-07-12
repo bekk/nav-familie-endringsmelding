@@ -10,12 +10,12 @@ describe('Forside tester', () => {
     cy.get(`[data-testid='forsideTittel']`).contains('Change message');
   });
   it('Fornavn hentet fra backend', () => {
-    //Må endre til det fornavnet vi vil hente, mocket
+    //TODO: Endre til det fornavnet vi vil hente, mocket
     cy.get(`[data-testid='hilsenFornavn']`).contains('Hei, Fornavn!');
   });
   it('Kan ikke gå videre før samtykkepanel er bekreftet', () => {
     cy.get(`[data-testid='startKnapp']`).click();
-    //Kan feilmeldingsteksten kanskje hentes på en annen måte eller sjekkes på en annen måte sånn at testen funker selvom teksten blir endret
+    // TODO: Sjekk mot tekst fra Sanity, ikke hardkodes
     cy.get(`[data-testid='samtykkepanelFeilmelding']`).contains(
       'Du må samtykke før du kan fortsette',
     );
