@@ -20,6 +20,15 @@ describe('Forside tester', () => {
       'Du må samtykke før du kan fortsette',
     );
   });
+  it('Skal ikke få gå videre før samtykkepanel er bekreftet etter feilmelding', () => {
+    cy.get(`[data-testid='startKnapp']`).click();
+    // TODO: Sjekk mot tekst fra Sanity, ikke hardkodes
+    cy.get(`[data-testid='samtykkepanelFeilmelding']`).contains(
+      'Du må samtykke før du kan fortsette',
+    );
+    cy.get(`[data-testid='samtykkepanel']`).check();
+    cy.get(`[data-testid='startKnapp']`).click();
+  });
   it('Samtykkepanel bekreftet før man kan gå videre', () => {
     cy.get(`[data-testid='samtykkepanel']`).check();
     cy.get(`[data-testid='startKnapp']`).click();
