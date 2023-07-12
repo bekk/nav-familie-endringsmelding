@@ -38,7 +38,7 @@ export default function Index() {
     settErFeilmeldingAktivert(false);
   };
 
-  const håndterKnappeTrykk = () => {
+  const håndterTrykkStart = () => {
     if (erSamtykkeBekreftet) {
       navigate(hentPathForSteg(ESteg.SEND_ENDRINGER));
     } else {
@@ -66,7 +66,7 @@ export default function Index() {
           />
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
-            onClick={håndterKnappeTrykk}
+            onClick={håndterTrykkStart}
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
