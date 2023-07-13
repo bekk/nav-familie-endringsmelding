@@ -13,7 +13,7 @@ import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
-import Veileder from '~/komponenter/veileder/Veileder';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
@@ -97,7 +97,7 @@ export default function SendEndringsmelding() {
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <Veileder innhold={tekster.veilederInnhold} />
+      <VeilederPanel innhold={tekster.veilederInnhold} />
       <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
           name="endringsmelding"

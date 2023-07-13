@@ -17,7 +17,7 @@ import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
-import Veileder from '~/komponenter/veileder/Veileder';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -71,7 +71,7 @@ export default function Index() {
           </div>
           <Språkvelger />
 
-          <Veileder
+          <VeilederPanel
             innhold={tekster.veilederhilsenInnhold}
             poster={true}
             overskrift={hentBrukerhilsen}

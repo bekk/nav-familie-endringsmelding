@@ -1,6 +1,6 @@
 import { GuidePanel } from '@navikt/ds-react';
 import TekstBlokk from '../tekstblokk/TekstBlokk';
-import css from './veileder.module.css';
+import css from './veilederpanel.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ISanityDokument } from '~/typer/sanity/sanity';
 
@@ -10,7 +10,11 @@ interface Props {
   overskrift?: React.ReactNode;
 }
 
-const Veileder: React.FC<Props> = ({ innhold, poster, overskrift }: Props) => {
+const VeilederPanel: React.FC<Props> = ({
+  innhold,
+  poster,
+  overskrift,
+}: Props) => {
   return (
     <GuidePanel
       poster={poster}
@@ -24,4 +28,4 @@ const Veileder: React.FC<Props> = ({ innhold, poster, overskrift }: Props) => {
   );
 };
 
-export default Veileder;
+export default VeilederPanel;
