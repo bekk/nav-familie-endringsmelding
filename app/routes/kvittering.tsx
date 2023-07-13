@@ -1,8 +1,5 @@
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import {
-  useTekster,
-  //useEndringsmeldingMottattDato,
-} from '~/hooks/contextHooks';
+import { useTekster } from '~/hooks/contextHooks';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
