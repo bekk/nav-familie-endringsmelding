@@ -39,11 +39,13 @@ const SamtykkePanel: React.FC<Props> = ({
         onChange={() => {
           vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
+        data-testid="samtykkepanel"
         error={
           !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={tekster.samtykkePanelFeilmelding}
+              dataTestid="samtykkepanelFeilmelding"
               typografi={ETypografiTyper.LABEL}
             />
           )

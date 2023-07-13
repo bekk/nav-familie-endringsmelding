@@ -52,7 +52,7 @@ export default function Index() {
         <Spinner />
       ) : (
         <>
-          <div className={`${css.toppMargin}`}>
+          <div className={`${css.toppMargin}`} data-testid="forsideTittel">
             <TekstBlokk
               tekstblokk={tekster.tittel}
               typografi={ETypografiTyper.HEADING_H1}
@@ -67,10 +67,14 @@ export default function Index() {
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
             onClick={håndterTrykkStart}
+            data-testid="startKnapp"
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
-          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
+          <TekstBlokk
+            tekstblokk={tekster.linkTilPersonvernerklaering}
+            dataTestid="linkPersonvern"
+          />
         </>
       )}
     </HovedInnhold>

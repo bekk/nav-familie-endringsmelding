@@ -97,12 +97,19 @@ export default function SendEndringsmelding() {
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
+        dataTestid="overskriftSteg1"
       />
       <Veiledning />
       <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
+          data-testid="fritekstfelt"
           name="endringsmelding"
-          label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+          label={
+            <TekstBlokk
+              tekstblokk={tekster.fritekstfeltTittel}
+              dataTestid="fritekstfeltTittel"
+            />
+          }
           description={
             <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
           }
@@ -132,6 +139,7 @@ export default function SendEndringsmelding() {
           <Button
             type="submit"
             variant={valideringsfeil === null ? 'primary' : 'secondary'}
+            data-testid="knappVidereSteg1"
             onClick={event => {
               håndterSendEndringsmelding(event);
             }}
