@@ -19,6 +19,7 @@ const VeilederPanel: React.FC<Props> = ({
     <GuidePanel
       poster={poster}
       className={poster ? `${css.poster}` : `${css.veilederPanel}`}
+      data-testid="veilederPanel"
     >
       {overskrift && (
         <div className={`${css.tekstInnholdMellomrom}`}>{overskrift}</div>

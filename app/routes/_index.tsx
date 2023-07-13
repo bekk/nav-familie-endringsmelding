@@ -57,6 +57,7 @@ export default function Index() {
       tekstblokk={tekster.brukerHilsen}
       typografi={ETypografiTyper.HEADING_H2}
       flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+      dataTestid="hilsenFornavn"
     />
   );
 
