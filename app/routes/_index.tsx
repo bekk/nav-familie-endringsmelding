@@ -49,6 +49,13 @@ export default function Index() {
   };
 
   const søker = useSøker();
+  const hentBrukerhilsen = (
+    <TekstBlokk
+      tekstblokk={tekster.brukerHilsen}
+      typografi={ETypografiTyper.HEADING_H2}
+      flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+    />
+  );
 
   return (
     <HovedInnhold>
@@ -67,8 +74,7 @@ export default function Index() {
           <Veileder
             tekst={tekster.veilederhilsenInnhold}
             poster={true}
-            overskrift={tekster.brukerHilsen}
-            søker={hentSøkerFornavn(søker)}
+            overskrift={hentBrukerhilsen}
           />
           <SamtykkePanel
             håndterSamtykkeEndring={håndterSamtykkeEndring}

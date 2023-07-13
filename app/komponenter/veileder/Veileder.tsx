@@ -7,29 +7,17 @@ import { ISanityDokument } from '~/typer/sanity/sanity';
 interface Props {
   tekst: ISanityDokument;
   poster?: boolean;
-  overskrift?: ISanityDokument;
-  søker?: string;
+  overskrift?: React.ReactNode;
 }
 
-const Veileder: React.FC<Props> = ({
-  tekst,
-  poster,
-  overskrift,
-  søker,
-}: Props) => {
+const Veileder: React.FC<Props> = ({ tekst, poster, overskrift }: Props) => {
   return (
     <GuidePanel
       poster={poster}
       className={poster ? `${css.poster}` : `${css.veilederPanel}`}
     >
       {overskrift && (
-        <div className={`${css.tekstInnholdMellomrom}`}>
-          <TekstBlokk
-            tekstblokk={overskrift}
-            typografi={ETypografiTyper.HEADING_H2}
-            flettefelter={{ søkerNavn: søker }}
-          />
-        </div>
+        <div className={`${css.tekstInnholdMellomrom}`}>{overskrift}</div>
       )}
       <TekstBlokk tekstblokk={tekst} typografi={ETypografiTyper.BODY_SHORT} />
     </GuidePanel>
