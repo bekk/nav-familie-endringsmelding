@@ -11,7 +11,7 @@ export const Språkvelger = () => {
     <>
       <Select
         label={<Label />}
-        className={`${css.selectKonteiner}`}
+        className={`${css.språkvelger}`}
         value={språk}
         data-testid="språkvelger"
         autoComplete="on"
