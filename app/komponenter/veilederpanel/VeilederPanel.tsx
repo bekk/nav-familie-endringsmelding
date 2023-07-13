@@ -18,7 +18,7 @@ const VeilederPanel: React.FC<Props> = ({
   return (
     <GuidePanel
       poster={poster}
-      className={poster ? `${css.posterKonteiner}` : `${css.veilederPanel}`}
+      className={poster ? `${css.veilederPanelPoster}` : `${css.veilederPanel}`}
     >
       {overskrift && <div className={`${css.bunnMargin}`}>{overskrift}</div>}
       <TekstBlokk tekstblokk={innhold} typografi={ETypografiTyper.BODY_SHORT} />
