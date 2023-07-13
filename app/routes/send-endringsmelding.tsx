@@ -9,11 +9,11 @@ import {
 } from '~/hooks/contextHooks';
 import { Alert, Button, Textarea } from '@navikt/ds-react';
 import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
-import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
@@ -74,6 +74,7 @@ export default function SendEndringsmelding() {
       valideringsfeil && (
         <TekstBlokk
           tekstblokk={tekster[fritekstFeilTilApiKeys[valideringsfeil]]}
+          typografi={ETypografiTyper.LABEL}
         />
       )
     );
@@ -96,12 +97,19 @@ export default function SendEndringsmelding() {
       <TekstBlokk
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
+        dataTestid="overskriftSteg1"
       />
-      <Veiledning />
+      <VeilederPanel innhold={tekster.veilederInnhold} />
       <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
+          data-testid="fritekstfelt"
           name="endringsmelding"
-          label={<TekstBlokk tekstblokk={tekster.fritekstfeltTittel} />}
+          label={
+            <TekstBlokk
+              tekstblokk={tekster.fritekstfeltTittel}
+              dataTestid="fritekstfeltTittel"
+            />
+          }
           description={
             <TekstBlokk tekstblokk={tekster.fritekstfeltBeskrivelse} />
           }
@@ -131,6 +139,7 @@ export default function SendEndringsmelding() {
           <Button
             type="submit"
             variant={valideringsfeil === null ? 'primary' : 'secondary'}
+            data-testid="knappVidereSteg1"
             onClick={event => {
               håndterSendEndringsmelding(event);
             }}

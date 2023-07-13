@@ -1,8 +1,0 @@
-.veilederPanel {
-  width: 100%;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-}

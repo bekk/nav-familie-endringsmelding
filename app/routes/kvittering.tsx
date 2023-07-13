@@ -5,6 +5,7 @@ import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import BekreftelseBoks from '~/komponenter/bekreftelsesboks/Bekreftelseboks';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 
 export default function Kvittering() {
   const tekster = useTekster(ESanityMappe.KVITTERING);
@@ -17,6 +18,7 @@ export default function Kvittering() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <BekreftelseBoks />
+      <VeilederPanel innhold={tekster.kvitteringVeileder} />
     </HovedInnhold>
   );
 }

@@ -5,4 +5,5 @@ export enum ETypografiTyper {
   BANNER_HEADING = 'BANNER_HEADING',
   BODY_SHORT = 'BODY_SHORT',
   LABEL = 'LABEL',
+  SPAN = 'SPAN',
 }
