@@ -22,7 +22,7 @@ export default function Kvittering() {
         tekstblokk={tekster.kvitteringTittel}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <Veileder tekst={tekster.kvitteringVeileder} />
+      <Veileder innhold={tekster.kvitteringVeileder} />
     </HovedInnhold>
   );
 }

@@ -5,12 +5,12 @@ import { ETypografiTyper } from '~/typer/typografi';
 import { ISanityDokument } from '~/typer/sanity/sanity';
 
 interface Props {
-  tekst: ISanityDokument;
+  innhold: ISanityDokument;
   poster?: boolean;
   overskrift?: React.ReactNode;
 }
 
-const Veileder: React.FC<Props> = ({ tekst, poster, overskrift }: Props) => {
+const Veileder: React.FC<Props> = ({ innhold, poster, overskrift }: Props) => {
   return (
     <GuidePanel
       poster={poster}
@@ -19,7 +19,7 @@ const Veileder: React.FC<Props> = ({ tekst, poster, overskrift }: Props) => {
       {overskrift && (
         <div className={`${css.tekstInnholdMellomrom}`}>{overskrift}</div>
       )}
-      <TekstBlokk tekstblokk={tekst} typografi={ETypografiTyper.BODY_SHORT} />
+      <TekstBlokk tekstblokk={innhold} typografi={ETypografiTyper.BODY_SHORT} />
     </GuidePanel>
   );
 };

@@ -72,7 +72,7 @@ export default function Index() {
           <Språkvelger />
 
           <Veileder
-            tekst={tekster.veilederhilsenInnhold}
+            innhold={tekster.veilederhilsenInnhold}
             poster={true}
             overskrift={hentBrukerhilsen}
           />

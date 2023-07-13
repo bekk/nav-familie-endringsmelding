@@ -97,7 +97,7 @@ export default function SendEndringsmelding() {
         tekstblokk={tekster.overskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      <Veileder tekst={tekster.veilederInnhold} />
+      <Veileder innhold={tekster.veilederInnhold} />
       <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
           name="endringsmelding"
