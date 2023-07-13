@@ -4,4 +4,7 @@ export default defineConfig({
   e2e: {
     supportFile: false,
   },
+  env: {
+    test: false,
+  },
 });

@@ -33,14 +33,17 @@ export default function Index() {
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
-  const nestePath = hentPathForSteg(ESteg.SEND_ENDRINGER);
 
   const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 
-  const håndterKnappeTrykk = () => {
-    settErFeilmeldingAktivert(true);
+  const håndterTrykkStart = () => {
+    if (erSamtykkeBekreftet) {
+      navigate(hentPathForSteg(ESteg.SEND_ENDRINGER));
+    } else {
+      settErFeilmeldingAktivert(true);
+    }
   };
 
   return (
@@ -49,7 +52,7 @@ export default function Index() {
         <Spinner />
       ) : (
         <>
-          <div className={`${css.toppMargin}`}>
+          <div className={`${css.toppMargin}`} data-testid="forsideTittel">
             <TekstBlokk
               tekstblokk={tekster.tittel}
               typografi={ETypografiTyper.HEADING_H1}
@@ -63,15 +66,15 @@ export default function Index() {
           />
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
-            onClick={
-              erSamtykkeBekreftet
-                ? () => navigate(nestePath)
-                : håndterKnappeTrykk
-            }
+            onClick={håndterTrykkStart}
+            data-testid="startKnapp"
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
-          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
+          <TekstBlokk
+            tekstblokk={tekster.linkTilPersonvernerklaering}
+            dataTestid="linkPersonvern"
+          />
         </>
       )}
     </HovedInnhold>

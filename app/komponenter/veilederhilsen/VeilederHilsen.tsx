@@ -13,7 +13,11 @@ const VeilederHilsen: React.FC = () => {
   );
 
   return (
-    <GuidePanel poster className={`${css.venstrestiltInnhold}`}>
+    <GuidePanel
+      poster
+      className={`${css.venstrestiltInnhold}`}
+      data-testid="hilsenFornavn"
+    >
       <div className={`${css.bunnMargin}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}

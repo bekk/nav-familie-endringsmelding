@@ -9,7 +9,10 @@ const Veiledning: React.FC = () => {
   const { veilederInnhold } = useTekster(ESanityMappe.SEND_ENDRINGER);
 
   return (
-    <GuidePanel className={`${css.responsivBredde}`}>
+    <GuidePanel
+      className={`${css.responsivBredde}`}
+      data-testid="veiledningSteg1"
+    >
       <TekstBlokk
         tekstblokk={veilederInnhold}
         typografi={ETypografiTyper.BODY_SHORT}
