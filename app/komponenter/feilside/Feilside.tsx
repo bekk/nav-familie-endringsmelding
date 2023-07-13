@@ -1,9 +1,11 @@
 import { GuidePanel } from '@navikt/ds-react';
+import { Links, Meta } from '@remix-run/react';
+
+import { ELocaleType } from '~/typer/felles';
+
 import Banner from '../banner/Banner';
 import HovedInnholdCss from '../hovedInnhold/hovedInnhold.module.css';
 import css from './feilside.module.css';
-import { ELocaleType } from '~/typer/felles';
-import { Links, Meta } from '@remix-run/react';
 
 const Feilside: React.FC = () => {
   return (

@@ -1,6 +1,7 @@
 import { useOutletContext } from '@remix-run/react';
-import { ESanityMappe } from '~/typer/felles';
+
 import { IAppContext } from '~/typer/context';
+import { ESanityMappe } from '~/typer/felles';
 
 export function useTekster<Steg extends ESanityMappe>(steg: Steg) {
   const { sanityTekster } = useOutletContext<IAppContext>();

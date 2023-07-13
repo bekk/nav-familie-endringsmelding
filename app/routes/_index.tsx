@@ -1,18 +1,20 @@
-import type { V2_MetaFunction } from '@remix-run/node';
-import css from './_index.module.css';
-import Spinner from '~/komponenter/Spinner';
-import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
-import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { Button } from '@navikt/ds-react';
+import type { V2_MetaFunction } from '@remix-run/node';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
+
 import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
+import Spinner from '~/komponenter/Spinner';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
-import { ESteg, ESanityMappe } from '~/typer/felles';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
+import { ESanityMappe, ESteg } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+
+import css from './_index.module.css';
 
 export const meta: V2_MetaFunction = () => {
   return [

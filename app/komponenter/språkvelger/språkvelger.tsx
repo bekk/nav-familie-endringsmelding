@@ -1,8 +1,10 @@
-import { Select } from '@navikt/ds-react';
-import { ELocaleType } from '~/typer/felles';
-import css from './språkvelger.module.css';
 import { GlobeIcon } from '@navikt/aksel-icons';
+import { Select } from '@navikt/ds-react';
+
 import { useSpråk } from '~/hooks/contextHooks';
+import { ELocaleType } from '~/typer/felles';
+
+import css from './språkvelger.module.css';
 
 export const Språkvelger = () => {
   const [språk, settSpråk] = useSpråk();

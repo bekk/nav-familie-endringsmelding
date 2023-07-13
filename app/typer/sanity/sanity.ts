@@ -1,12 +1,13 @@
 import { PortableTextBlock } from '@portabletext/types';
+
 import { ESanityMappe } from '../felles';
-import { FellesTekstinnhold, EApiKeysFelles } from './sanityFelles';
-import { ForsideTekstinnhold, EApiKeysForside } from './sanityForside';
+import { EApiKeysFelles, FellesTekstinnhold } from './sanityFelles';
+import { EApiKeysForside, ForsideTekstinnhold } from './sanityForside';
+import { EApiKeysKvittering, KvitteringTekstinnhold } from './sanityKvittering';
 import {
   EApiKeysSendEndring,
   SendEndringTekstinnhold,
 } from './sanitySendEndring';
-import { EApiKeysKvittering, KvitteringTekstinnhold } from './sanityKvittering';
 
 export interface ISanityDokument {
   _createdAt: string;

@@ -9,6 +9,7 @@
     "start": "remix-serve build",
     "typecheck": "tsc",
     "lint": "eslint --max-warnings=0 .",
+    "lint-fix": "eslint --fix --max-warnings=0 .",
     "lint-staged": "lint-staged",
     "prepare": "husky install",
     "cypress": "cypress open"

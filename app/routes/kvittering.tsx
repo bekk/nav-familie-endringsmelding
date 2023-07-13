@@ -1,12 +1,12 @@
-import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import {
-  useTekster,
   useEndringsmeldingMottattDato,
+  useTekster,
 } from '~/hooks/contextHooks';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
-import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 
 export default function Kvittering() {
   const [endringsmeldingMottattDato] = useEndringsmeldingMottattDato();

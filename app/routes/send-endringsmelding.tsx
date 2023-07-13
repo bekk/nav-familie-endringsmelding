@@ -1,33 +1,35 @@
-import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
+import { Alert, Button, Textarea } from '@navikt/ds-react';
+import { ActionArgs } from '@remix-run/node';
+import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import React, { useEffect, useState } from 'react';
+
 import {
   useEndringsmeldingMottattDato,
   useSpråk,
   useTekster,
 } from '~/hooks/contextHooks';
-import { Alert, Button, Textarea } from '@navikt/ds-react';
-import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
+import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import Veiledning from '~/komponenter/veiledning/Veiledning';
-import css from './send-endringsmelding.module.css';
-import { ETypografiTyper } from '~/typer/typografi';
-import { ESanityMappe, ESteg } from '~/typer/felles';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
-import { ActionArgs } from '@remix-run/node';
-import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { getSession } from '~/sessions';
+import { ESanityMappe, ESteg } from '~/typer/felles';
+import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import {
   IPostResponse,
   RESPONSE_STATUS_FEIL,
   RESPONSE_STATUS_OK,
 } from '~/typer/response';
+import { ETypografiTyper } from '~/typer/typografi';
 import {
-  MAKS_INPUT_LENGDE,
   i18nInnhold,
+  MAKS_INPUT_LENGDE,
   validerTekst,
 } from '~/utils/fritekstfeltValidering';
+import { hentPathForSteg } from '~/utils/hentPathForSteg';
+
+import css from './send-endringsmelding.module.css';
 
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();

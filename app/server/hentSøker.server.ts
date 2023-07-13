@@ -1,7 +1,8 @@
+import { Session } from '@remix-run/node';
+
 import { fetchMedToken } from '~/server/authorization';
 import { EMiljø } from '~/typer/miljø';
 import { ISøker } from '~/typer/søker';
-import { Session } from '@remix-run/node';
 
 const STI: string = '/api/oppslag/soker';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;

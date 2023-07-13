@@ -1,4 +1,5 @@
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
+
 import { ETypografiTyper } from '~/typer/typografi';
 
 export interface Props {

@@ -1,9 +1,11 @@
 import { GuidePanel } from '@navikt/ds-react';
-import TekstBlokk from '../tekstblokk/TekstBlokk';
+
 import { useTekster } from '~/hooks/contextHooks';
-import css from './veiledning.module.css';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
+
+import TekstBlokk from '../tekstblokk/TekstBlokk';
+import css from './veiledning.module.css';
 
 const Veiledning: React.FC = () => {
   const { veilederInnhold } = useTekster(ESanityMappe.SEND_ENDRINGER);

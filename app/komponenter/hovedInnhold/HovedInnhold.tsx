@@ -1,7 +1,8 @@
 import { useTekster } from '~/hooks/contextHooks';
+import { ESanityMappe } from '~/typer/felles';
+
 import Banner from '../banner/Banner';
 import css from './hovedInnhold.module.css';
-import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
   children?: React.ReactNode;

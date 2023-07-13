@@ -1,6 +1,8 @@
-import { Session, json } from '@remix-run/node';
+import { json, Session } from '@remix-run/node';
+
 import postResponseMock from '~/mock/postResponseMock';
 import { EMiljø } from '~/typer/miljø';
+
 import { postMedToken } from './authorization';
 
 const STI: string = '/api/send-inn/ba';
