@@ -9,11 +9,11 @@ import {
 } from '~/hooks/contextHooks';
 import { Alert, Button, Textarea } from '@navikt/ds-react';
 import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
-import Veiledning from '~/komponenter/veiledning/Veiledning';
 import css from './send-endringsmelding.module.css';
 import { ETypografiTyper } from '~/typer/typografi';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { ActionArgs } from '@remix-run/node';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
@@ -99,7 +99,7 @@ export default function SendEndringsmelding() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
         dataTestid="overskriftSteg1"
       />
-      <Veiledning />
+      <VeilederPanel innhold={tekster.veilederInnhold} />
       <Form method="post" className={`${css.fullBredde}`}>
         <Textarea
           data-testid="fritekstfelt"
