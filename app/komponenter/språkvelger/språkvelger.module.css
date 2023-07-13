@@ -2,7 +2,7 @@
   width: 10.75rem;
 }
 
-.labelKonteiner {
+.label {
   display: flex;
   gap: 0.3rem;
 }
