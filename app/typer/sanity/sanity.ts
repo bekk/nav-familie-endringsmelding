@@ -24,10 +24,12 @@ export interface ISanityDokument {
 
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
+  INNSENDT_TID = 'INNSENDT_TID',
 }
 
 export type FlettefeltVerdier = {
   søkerNavn?: string;
+  innsendtTid?: string;
 };
 
 export interface ITekstinnhold {
