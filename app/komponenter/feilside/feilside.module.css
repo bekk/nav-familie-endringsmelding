@@ -1,10 +1,10 @@
-.rødPanelToppMargin {
+.feilmeldingPanel {
   --ac-guide-panel-border: var(--a-surface-alt-1);
   --ac-guide-panel-illustration-bg: var(--a-surface-alt-1-subtle);
   width: 100%;
   margin-top: 14.5rem;
 }
 
-.rødPanelToppMargin > svg {
+.feilmeldingPanel > svg {
   border: none;
 }

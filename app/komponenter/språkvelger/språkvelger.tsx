@@ -11,7 +11,7 @@ export const Språkvelger = () => {
     <>
       <Select
         label={<Label />}
-        className={`${css.fastBredde}`}
+        className={`${css.selectKonteiner}`}
         value={språk}
         data-testid="språkvelger"
         autoComplete="on"
@@ -29,7 +29,7 @@ export const Språkvelger = () => {
 
 const Label = () => {
   return (
-    <span className={`${css.flexMedGap}`}>
+    <span className={`${css.labelKonteiner}`}>
       <GlobeIcon title="globe-icon" fontSize={'1.5rem'} />
       <span> Språk/language </span>
     </span>

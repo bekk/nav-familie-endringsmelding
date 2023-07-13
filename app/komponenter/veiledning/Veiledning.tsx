@@ -10,7 +10,7 @@ const Veiledning: React.FC = () => {
 
   return (
     <GuidePanel
-      className={`${css.responsivBredde}`}
+      className={`${css.veilederPanel}`}
       data-testid="veiledningSteg1"
     >
       <TekstBlokk

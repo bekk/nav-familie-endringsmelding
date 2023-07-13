@@ -15,7 +15,7 @@ const VeilederHilsen: React.FC = () => {
   return (
     <GuidePanel
       poster
-      className={`${css.venstrestiltInnhold}`}
+      className={`${css.hilsenKonteiner}`}
       data-testid="hilsenFornavn"
     >
       <div className={`${css.bunnMargin}`}>

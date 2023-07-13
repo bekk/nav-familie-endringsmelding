@@ -1,8 +1,8 @@
-.fastBredde {
+.selectKonteiner {
   width: 10.75rem;
 }
 
-.flexMedGap {
+.labelKonteiner {
   display: flex;
   gap: 0.3rem;
 }

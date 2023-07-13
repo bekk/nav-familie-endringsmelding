@@ -10,7 +10,7 @@ const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
   const ANTALL_STEG = 2;
   return (
     <Stepper
-      className={`${css.fullBreddeMedMargin}`}
+      className={`${css.stegIndikator}`}
       activeStep={nåværendeSteg}
       interactive={false}
       orientation="horizontal"

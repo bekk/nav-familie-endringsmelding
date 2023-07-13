@@ -128,7 +128,7 @@ export default function SendEndringsmelding() {
             />
           </Alert>
         )}
-        <div className={`${css.sentrertFlexToppMargin}`}>
+        <div className={`${css.navigeringsKnappKonteiner}`}>
           <Button
             type="button"
             variant={'secondary'}
