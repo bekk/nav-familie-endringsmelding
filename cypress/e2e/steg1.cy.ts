@@ -6,7 +6,7 @@ describe('Steg1-test', () => {
     cy.get(`[data-testid='overskriftSteg1']`).contains('Send endringer');
   });
   it('Finner tekst i veiledning', () => {
-    cy.get(`[data-testid='veiledningSteg1']`).contains(
+    cy.get(`[data-testid='veilederPanel']`).contains(
       'Veiledning på endringsmelding',
     );
   });
