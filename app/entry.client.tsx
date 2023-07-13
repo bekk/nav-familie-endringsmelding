@@ -8,11 +8,18 @@ import { RemixBrowser } from '@remix-run/react';
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
-startTransition(() => {
-  hydrateRoot(
-    document,
-    <StrictMode>
-      <RemixBrowser />
-    </StrictMode>,
-  );
-});
+const erCypressTestAktiv =
+  typeof Cypress !== 'undefined' && Cypress.env('test') === true;
+
+if (erCypressTestAktiv) {
+  require('react-dom').hydrate(<RemixBrowser />, document);
+} else {
+  startTransition(() => {
+    hydrateRoot(
+      document,
+      <StrictMode>
+        <RemixBrowser />
+      </StrictMode>,
+    );
+  });
+}
