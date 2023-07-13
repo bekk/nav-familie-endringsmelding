@@ -11,7 +11,7 @@
     "lint": "eslint --max-warnings=0 .",
     "lint-staged": "lint-staged",
     "prepare": "husky install",
-    "cypress": "cypress open"
+    "cypress": "cypress open --env test=true"
   },
   "eslintIgnore": [
     "/node_modules",

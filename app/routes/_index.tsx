@@ -1,18 +1,23 @@
 import type { V2_MetaFunction } from '@remix-run/node';
 import css from './_index.module.css';
 import Spinner from '~/komponenter/Spinner';
-import VeilederHilsen from '~/komponenter/veilederhilsen/VeilederHilsen';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 import { useState } from 'react';
-import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
+import {
+  useBekreftetSamtykke,
+  useSøker,
+  useTekster,
+} from '~/hooks/contextHooks';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import { ESteg, ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -33,15 +38,27 @@ export default function Index() {
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
 
   const navigate = useNavigate();
-  const nestePath = hentPathForSteg(ESteg.SEND_ENDRINGER);
 
   const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
   };
 
-  const håndterKnappeTrykk = () => {
-    settErFeilmeldingAktivert(true);
+  const håndterTrykkStart = () => {
+    if (erSamtykkeBekreftet) {
+      navigate(hentPathForSteg(ESteg.SEND_ENDRINGER));
+    } else {
+      settErFeilmeldingAktivert(true);
+    }
   };
+
+  const søker = useSøker();
+  const hentBrukerhilsen = (
+    <TekstBlokk
+      tekstblokk={tekster.brukerHilsen}
+      typografi={ETypografiTyper.HEADING_H2}
+      flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+    />
+  );
 
   return (
     <HovedInnhold>
@@ -49,29 +66,34 @@ export default function Index() {
         <Spinner />
       ) : (
         <>
-          <div className={`${css.toppMargin}`}>
+          <div className={`${css.toppMargin}`} data-testid="forsideTittel">
             <TekstBlokk
               tekstblokk={tekster.tittel}
               typografi={ETypografiTyper.HEADING_H1}
             />
           </div>
           <Språkvelger />
-          <VeilederHilsen />
+
+          <VeilederPanel
+            innhold={tekster.veilederhilsenInnhold}
+            poster={true}
+            overskrift={hentBrukerhilsen}
+          />
           <SamtykkePanel
             håndterSamtykkeEndring={håndterSamtykkeEndring}
             feilmeldingAktivert={erFeilmeldingAktivert}
           />
           <Button
             variant={erSamtykkeBekreftet ? 'primary' : 'secondary'}
-            onClick={
-              erSamtykkeBekreftet
-                ? () => navigate(nestePath)
-                : håndterKnappeTrykk
-            }
+            onClick={håndterTrykkStart}
+            data-testid="startKnapp"
           >
             <TekstBlokk tekstblokk={knappStart} />
           </Button>
-          <TekstBlokk tekstblokk={tekster.linkTilPersonvernerklaering} />
+          <TekstBlokk
+            tekstblokk={tekster.linkTilPersonvernerklaering}
+            dataTestid="linkPersonvern"
+          />
         </>
       )}
     </HovedInnhold>
