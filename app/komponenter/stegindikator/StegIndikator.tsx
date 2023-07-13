@@ -11,7 +11,6 @@ const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
   return (
     <Stepper
       className={`${css.stegIndikator}`}
-      aria-labelledby="stepper-heading"
       activeStep={nåværendeSteg}
       interactive={false}
       orientation="horizontal"

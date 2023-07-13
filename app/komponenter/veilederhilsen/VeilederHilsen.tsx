@@ -13,7 +13,7 @@ const VeilederHilsen: React.FC = () => {
   );
 
   return (
-    <GuidePanel poster className={`${css.poster}`}>
+    <GuidePanel poster className={`${css.poster}`} data-testid="hilsenFornavn">
       <div className={`${css.tekstInnholdMellomrom}`}>
         <TekstBlokk
           tekstblokk={brukerHilsen}

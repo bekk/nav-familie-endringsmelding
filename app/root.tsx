@@ -67,6 +67,8 @@ export default function App() {
     useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
+  const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
+    useState('');
 
   return (
     <Dokument språk={språk}>
@@ -77,6 +79,10 @@ export default function App() {
             språk: [språk, settSpråk],
             søker: søkerData,
             erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
+            endringsmeldingMottattDato: [
+              endringsmeldingMottattDato,
+              settEndringsmeldingMottattDato,
+            ],
           }}
         />
         <ScrollRestoration />
@@ -98,6 +104,7 @@ export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
   return (
     <html lang={språk}>
       <head>
+        <title>Endringsmelding</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
@@ -118,9 +125,13 @@ export function Oppsett({ children }: OppsettProps) {
 
   return (
     <>
-      {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
+      <div role="navigation">
+        {parse(dekoratørFragmenter.DECORATOR_HEADER, { trim: true })}
+      </div>
       {children}
-      {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
+      <div role="navigation">
+        {parse(dekoratørFragmenter.DECORATOR_FOOTER, { trim: true })}
+      </div>
     </>
   );
 }

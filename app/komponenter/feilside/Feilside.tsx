@@ -9,6 +9,7 @@ const Feilside: React.FC = () => {
   return (
     <html lang={ELocaleType.NB}>
       <head>
+        <title>Endringsmelding</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
