@@ -12,7 +12,7 @@ const HovedInnhold: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Banner tekst={bannerTekst} />
-      <main className={`${css.flexGapKonteinerSentrert}`}>{children}</main>
+      <main className={`${css.innholdKonteiner}`}>{children}</main>
     </>
   );
 };
