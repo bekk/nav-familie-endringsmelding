@@ -25,18 +25,10 @@ const Forside: React.FC = () => {
   const { knappStart } = useTekster(ESanityMappe.FELLES);
   const søker = useSøker();
   const [erSamtykkeBekreftet] = useBekreftetSamtykke();
+
   const navigate = useNavigate();
 
   const [erFeilmeldingAktivert, settErFeilmeldingAktivert] = useState(false);
-
-  const hentBrukerhilsen = (
-    <TekstBlokk
-      tekstblokk={tekster.brukerHilsen}
-      typografi={ETypografiTyper.HEADING_H2}
-      flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
-      dataTestid="hilsenFornavn"
-    />
-  );
 
   const håndterSamtykkeEndring = () => {
     settErFeilmeldingAktivert(false);
@@ -67,7 +59,14 @@ const Forside: React.FC = () => {
           <VeilederPanel
             innhold={tekster.veilederhilsenInnhold}
             poster={true}
-            overskrift={hentBrukerhilsen}
+            overskrift={
+              <TekstBlokk
+                tekstblokk={tekster.brukerHilsen}
+                typografi={ETypografiTyper.HEADING_H2}
+                flettefelter={{ søkerNavn: hentSøkerFornavn(søker) }}
+                dataTestid="hilsenFornavn"
+              />
+            }
           />
           <SamtykkePanel
             håndterSamtykkeEndring={håndterSamtykkeEndring}
