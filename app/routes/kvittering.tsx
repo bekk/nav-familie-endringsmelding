@@ -1,19 +1,15 @@
-import {
-  useEndringsmeldingMottattDato,
-  useTekster,
-} from '~/hooks/contextHooks';
+import { useTekster } from '~/hooks/contextHooks';
+import BekreftelseBoks from '~/komponenter/bekreftelsesboks/Bekreftelseboks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 
 export default function Kvittering() {
-  const [endringsmeldingMottattDato] = useEndringsmeldingMottattDato();
   const tekster = useTekster(ESanityMappe.KVITTERING);
 
-  //For å teste at mottatt dato er mottatt når man sender til backend
-  console.log(endringsmeldingMottattDato);
   return (
     <HovedInnhold>
       <StegIndikator nåværendeSteg={3} />
@@ -21,6 +17,8 @@ export default function Kvittering() {
         tekstblokk={tekster.kvitteringTittel}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
+      <BekreftelseBoks />
+      <VeilederPanel innhold={tekster.kvitteringVeileder} />
     </HovedInnhold>
   );
 }

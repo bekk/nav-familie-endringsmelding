@@ -13,6 +13,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  ShouldRevalidateFunction,
   useLoaderData,
 } from '@remix-run/react';
 import parse from 'html-react-parser';
@@ -41,6 +42,16 @@ export const links: LinksFunction = () => [
   },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  formMethod,
+  defaultShouldRevalidate,
+}) => {
+  if (formMethod === 'POST') {
+    return false;
+  }
+  return defaultShouldRevalidate;
+};
 
 export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   const session = await getSession(request.headers.get('Cookie'));

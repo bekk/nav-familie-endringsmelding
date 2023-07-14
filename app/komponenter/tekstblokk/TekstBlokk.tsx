@@ -12,12 +12,14 @@ interface Props {
   tekstblokk: ISanityDokument | undefined;
   typografi?: ETypografiTyper;
   flettefelter?: FlettefeltVerdier;
+  dataTestid?: string;
 }
 
 const TekstBlokk: React.FC<Props> = ({
   tekstblokk,
   typografi,
   flettefelter,
+  dataTestid,
 }: Props) => {
   const [språk] = useSpråk();
 
@@ -27,7 +29,11 @@ const TekstBlokk: React.FC<Props> = ({
       components={{
         block: {
           normal: ({ children }) => (
-            <TypografiWrapper typografi={typografi} style={{ margin: '0' }}>
+            <TypografiWrapper
+              typografi={typografi}
+              style={{ margin: '0' }}
+              dataTestid={dataTestid}
+            >
               {children}
             </TypografiWrapper>
           ),

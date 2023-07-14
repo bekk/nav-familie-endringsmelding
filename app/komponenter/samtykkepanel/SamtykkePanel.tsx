@@ -32,17 +32,24 @@ const SamtykkePanel: React.FC<Props> = ({
       />
       <ConfirmationPanel
         checked={erSamtykkeBekreftet}
-        label={<TekstBlokk tekstblokk={tekster.samtykkePanelSamtykke} />}
+        label={
+          <TekstBlokk
+            tekstblokk={tekster.samtykkePanelSamtykke}
+            typografi={ETypografiTyper.SPAN}
+          />
+        }
         onChange={() => {
           vedSamtykkeEndring(!erSamtykkeBekreftet);
         }}
+        data-testid="samtykkepanel"
         error={
           !erSamtykkeBekreftet &&
           feilmeldingAktivert && (
             <TekstBlokk
               tekstblokk={tekster.samtykkePanelFeilmelding}
-              typografi={ETypografiTyper.BODY_SHORT}
-            /> //denne gir feilmelding fordi den ikke er en ren String ("kan ikke være i <p>"). Visuelt fungerer den.
+              dataTestid="samtykkepanelFeilmelding"
+              typografi={ETypografiTyper.LABEL}
+            />
           )
         }
       >

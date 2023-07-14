@@ -13,5 +13,10 @@ export const flettefeltTilTekst = (
         throw Error('Flettefeltet søkernavn ikke sendt med');
       }
       return flettefelter.søkerNavn;
+    case ESanityFlettefeltverdi.INNSENDT_TID:
+      if (!flettefelter?.innsendtTid) {
+        throw Error('Flettefeltet innsendt tid ikke sendt med');
+      }
+      return flettefelter.innsendtTid;
   }
 };
