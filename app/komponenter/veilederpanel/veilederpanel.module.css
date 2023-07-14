@@ -8,15 +8,15 @@
   }
 }
 
-.tekstInnholdMellomrom {
+.bunnMargin {
   margin-bottom: 1.2rem;
 }
 
-.poster {
+.veilederPanelPoster {
   text-align: left;
   width: 100%;
 }
 
-.poster ul {
+.veilederPanelPoster ul {
   margin: 0 auto 2rem auto;
 }

@@ -20,12 +20,10 @@ const VeilederPanel: React.FC<Props> = ({
   return (
     <GuidePanel
       poster={poster}
-      className={poster ? `${css.poster}` : `${css.veilederPanel}`}
+      className={poster ? `${css.veilederPanelPoster}` : `${css.veilederPanel}`}
       data-testid="veilederPanel"
     >
-      {overskrift && (
-        <div className={`${css.tekstInnholdMellomrom}`}>{overskrift}</div>
-      )}
+      {overskrift && <div className={`${css.bunnMargin}`}>{overskrift}</div>}
       <TekstBlokk tekstblokk={innhold} typografi={ETypografiTyper.BODY_SHORT} />
     </GuidePanel>
   );

@@ -130,7 +130,7 @@ export default function SendEndringsmelding() {
             />
           </Alert>
         )}
-        <div className={`${css.navigeringsKnapper}`}>
+        <div className={`${css.navigeringsKnappKonteiner}`}>
           <Button
             type="button"
             variant={'secondary'}
