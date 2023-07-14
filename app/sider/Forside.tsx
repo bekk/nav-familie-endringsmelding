@@ -20,7 +20,7 @@ import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
 
 import css from '../routes/_index.module.css';
 
-export const Forside: React.FC = () => {
+const Forside: React.FC = () => {
   const tekster = useTekster(ESanityMappe.FORSIDE);
   const { knappStart } = useTekster(ESanityMappe.FELLES);
   const søker = useSøker();
