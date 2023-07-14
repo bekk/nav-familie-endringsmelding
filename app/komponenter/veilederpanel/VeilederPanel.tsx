@@ -1,8 +1,10 @@
 import { GuidePanel } from '@navikt/ds-react';
+
+import { ISanityDokument } from '~/typer/sanity/sanity';
+import { ETypografiTyper } from '~/typer/typografi';
+
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './veilederpanel.module.css';
-import { ETypografiTyper } from '~/typer/typografi';
-import { ISanityDokument } from '~/typer/sanity/sanity';
 
 interface Props {
   innhold: ISanityDokument;

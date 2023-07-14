@@ -1,11 +1,11 @@
-import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import { useTekster } from '~/hooks/contextHooks';
+import BekreftelseBoks from '~/komponenter/bekreftelsesboks/Bekreftelseboks';
+import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
+import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { ESanityMappe } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
-import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
-import BekreftelseBoks from '~/komponenter/bekreftelsesboks/Bekreftelseboks';
-import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 
 export default function Kvittering() {
   const tekster = useTekster(ESanityMappe.KVITTERING);

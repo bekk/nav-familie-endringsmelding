@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
+
 import { ESanityMappe } from '~/typer/felles';
-import { ITekstinnhold, ISanityDokument, ApiKeys } from '~/typer/sanity/sanity';
+import { ApiKeys, ISanityDokument, ITekstinnhold } from '~/typer/sanity/sanity';
 
 const sanityKlient = createClient({
   projectId: 'd8ycstqz',

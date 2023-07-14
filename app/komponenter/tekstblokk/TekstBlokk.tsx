@@ -1,11 +1,12 @@
-import type { ETypografiTyper } from '~/typer/typografi';
-import React from 'react';
-import { PortableText } from '@portabletext/react';
-import { FlettefeltVerdier, ISanityDokument } from '~/typer/sanity/sanity';
-import { TypografiWrapper } from '~/utils/TypografiWrapper';
-import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
 import { Link } from '@navikt/ds-react';
+import { PortableText } from '@portabletext/react';
+import React from 'react';
+
 import { useSpråk } from '~/hooks/contextHooks';
+import { FlettefeltVerdier, ISanityDokument } from '~/typer/sanity/sanity';
+import type { ETypografiTyper } from '~/typer/typografi';
+import { flettefeltTilTekst } from '~/utils/fletteTilTekst';
+import { TypografiWrapper } from '~/utils/TypografiWrapper';
 
 interface Props {
   tekstblokk: ISanityDokument | undefined;

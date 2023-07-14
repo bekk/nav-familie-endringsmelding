@@ -1,8 +1,10 @@
-import css from './banner.module.css';
-import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { Heading } from '@navikt/ds-react';
-import { ETypografiTyper } from '~/typer/typografi';
+
 import { ISanityDokument } from '~/typer/sanity/sanity';
+import { ETypografiTyper } from '~/typer/typografi';
+
+import TekstBlokk from '../tekstblokk/TekstBlokk';
+import css from './banner.module.css';
 
 interface Props {
   tekst: ISanityDokument | string;

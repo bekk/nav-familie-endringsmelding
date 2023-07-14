@@ -1,7 +1,8 @@
-import { ITekstinnhold } from './sanity/sanity';
-import { ELocaleType } from './felles';
-import { ISøker } from './søker';
 import { Dispatch, SetStateAction } from 'react';
+
+import { ELocaleType } from './felles';
+import { ITekstinnhold } from './sanity/sanity';
+import { ISøker } from './søker';
 
 export interface IAppContext {
   sanityTekster: ITekstinnhold;

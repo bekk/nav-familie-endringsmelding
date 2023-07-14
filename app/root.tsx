@@ -1,5 +1,5 @@
-import { cssBundleHref } from '@remix-run/css-bundle';
 import designsystemStyles from '@navikt/ds-css/dist/index.css';
+import { cssBundleHref } from '@remix-run/css-bundle';
 import {
   json,
   LinksFunction,
@@ -16,15 +16,17 @@ import {
   ShouldRevalidateFunction,
   useLoaderData,
 } from '@remix-run/react';
-import { hentSanityData } from './server/hentSanityData.server';
-import { ELocaleType } from './typer/felles';
-import { hentSøker } from './server/hentSøker.server';
-import { useState } from 'react';
 import parse from 'html-react-parser';
-import { hentDekoratorHtml } from './server/dekorator.server';
+import { useState } from 'react';
+
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
+
 import Feilside from './komponenter/feilside/Feilside';
+import { hentDekoratorHtml } from './server/dekorator.server';
+import { hentSanityData } from './server/hentSanityData.server';
+import { hentSøker } from './server/hentSøker.server';
+import { ELocaleType } from './typer/felles';
 
 export const links: LinksFunction = () => [
   {

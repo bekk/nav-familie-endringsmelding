@@ -1,11 +1,13 @@
 import { Alert } from '@navikt/ds-react';
+
 import {
   useEndringsmeldingMottattDato,
   useTekster,
 } from '~/hooks/contextHooks';
 import { ESanityMappe } from '~/typer/felles';
-import TekstBlokk from '../tekstblokk/TekstBlokk';
 import { formaterDato } from '~/utils/formaterDato';
+
+import TekstBlokk from '../tekstblokk/TekstBlokk';
 
 const BekreftelseBoks = () => {
   const { bekreftelseBoksInnhold } = useTekster(ESanityMappe.KVITTERING);
