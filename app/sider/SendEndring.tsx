@@ -42,8 +42,12 @@ export default function SendEndringSide() {
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
   const [erSamtykkeBekreftet] = useBekreftetSamtykke();
-  console.log('erSamtykkeBekreftet?', erSamtykkeBekreftet);
-  //TODO: redirecte hvis denne er sann
+
+  useEffect(() => {
+    if (!erSamtykkeBekreftet) {
+      navigate(hentPathForSteg(ESteg.FORSIDE));
+    }
+  }, [erSamtykkeBekreftet, navigate]);
 
   useEffect(() => {
     if (!actionData) return;
