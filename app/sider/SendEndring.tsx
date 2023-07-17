@@ -1,5 +1,4 @@
 import { Alert, Button, Textarea } from '@navikt/ds-react';
-import { ActionArgs } from '@remix-run/node';
 import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import React, { useEffect, useState } from 'react';
 
@@ -12,15 +11,10 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
-import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
-import { getSession } from '~/sessions';
+import { action } from '~/routes/send-endringsmelding';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
-import {
-  IPostResponse,
-  RESPONSE_STATUS_FEIL,
-  RESPONSE_STATUS_OK,
-} from '~/typer/response';
+import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
 import { ETypografiTyper } from '~/typer/typografi';
 import {
   i18nInnhold,
@@ -30,18 +24,6 @@ import {
 import { hentPathForSteg } from '~/utils/hentPathForSteg';
 
 import css from './../routes/send-endringsmelding.module.css';
-
-export async function action({ request }: ActionArgs) {
-  const formData = await request.formData();
-  const endringsmelding = formData.get('endringsmelding') as string;
-  return await sendEndringsmelding(
-    endringsmelding,
-    await getSession(request.headers.get('Cookie')),
-  ).then(response => {
-    if (response.ok) return response.json();
-    return { text: RESPONSE_STATUS_FEIL };
-  });
-}
 
 export default function SendEndringSide() {
   const actionData: IPostResponse | undefined = useActionData<typeof action>();
