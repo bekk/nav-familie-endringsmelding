@@ -3,6 +3,7 @@ import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import React, { useEffect, useState } from 'react';
 
 import {
+  useBekreftetSamtykke,
   useEndringsmeldingMottattDato,
   useSpråk,
   useTekster,
@@ -40,6 +41,9 @@ export default function SendEndringSide() {
     EFritekstFeil.MANGLER_TEKST,
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
+  const [erSamtykkeBekreftet] = useBekreftetSamtykke();
+  console.log('erSamtykkeBekreftet?', erSamtykkeBekreftet);
+  //TODO: redirecte hvis denne er sann
 
   useEffect(() => {
     if (!actionData) return;
