@@ -3,12 +3,12 @@ import { ESteg } from '~/typer/felles';
 export const hentPathForSteg = (steg: ESteg) => {
   switch (steg) {
     case ESteg.FORSIDE:
-      return '/';
+      return '/ba';
     case ESteg.SEND_ENDRINGER:
-      return '/send-endringsmelding';
+      return '/ba/endringsmelding';
     case ESteg.KVITTERING:
-      return '/kvittering';
+      return '/ba/kvittering';
     default:
-      return '/'; //bør i fremtiden vise til feilmelding-side + error handling
+      return '/ba'; //bør i fremtiden vise til feilmelding-side + error handling
   }
 };

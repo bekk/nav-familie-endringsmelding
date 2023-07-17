@@ -9,12 +9,6 @@ export function useTekster<Steg extends ESanityMappe>(steg: Steg) {
   return tekster[steg];
 }
 
-export function useSettTekster() {
-  const { sanityTekster } = useOutletContext<IAppContext>();
-  const [, settTekster] = sanityTekster;
-  return settTekster;
-}
-
 export function useSpråk() {
   const { språk } = useOutletContext<IAppContext>();
   return språk;
