@@ -27,6 +27,7 @@ import { hentDekoratorHtml } from './server/dekorator.server';
 import { hentSanityData } from './server/hentSanityData.server';
 import { hentSøker } from './server/hentSøker.server';
 import { ELocaleType } from './typer/felles';
+import { EStønad } from './typer/stønad';
 
 export const links: LinksFunction = () => [
   {
@@ -59,7 +60,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (!session.has(API_TOKEN_NAME)) {
     await loggInn(session);
   }
-  const tekstData = await hentSanityData();
+  const tekstData = await hentSanityData(EStønad.BARNETRYGD);
   const søkerData = await hentSøker(session);
   const dekoratørFragmenter = await hentDekoratorHtml();
 

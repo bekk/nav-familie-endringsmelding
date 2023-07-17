@@ -1,0 +1,4 @@
+export enum EStønad {
+  BARNETRYGD = 'BARNETRYGD',
+  KONTANTSTØTTE = 'KONTANTSTOTTE',
+}
