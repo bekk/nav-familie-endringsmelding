@@ -1,6 +1,7 @@
-import { EMiljø } from '~/typer/miljø';
 import { Session } from '@remix-run/node';
+
 import { API_TOKEN_NAME } from '~/sessions';
+import { EMiljø } from '~/typer/miljø';
 
 export const fetchMedToken = async (
   session: Session,

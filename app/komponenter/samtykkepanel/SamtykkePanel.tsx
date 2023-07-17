@@ -1,9 +1,11 @@
 import { ConfirmationPanel } from '@navikt/ds-react';
+
+import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
+import { ESanityMappe } from '~/typer/felles';
+import { ETypografiTyper } from '~/typer/typografi';
+
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './samtykkepanel.module.css';
-import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
-import { ETypografiTyper } from '~/typer/typografi';
-import { ESanityMappe } from '~/typer/felles';
 
 interface Props {
   håndterSamtykkeEndring: () => void;
