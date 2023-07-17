@@ -5,7 +5,14 @@ import { ESanityMappe } from '~/typer/felles';
 
 export function useTekster<Steg extends ESanityMappe>(steg: Steg) {
   const { sanityTekster } = useOutletContext<IAppContext>();
-  return sanityTekster[steg];
+  const [tekster] = sanityTekster;
+  return tekster[steg];
+}
+
+export function useSettTekster() {
+  const { sanityTekster } = useOutletContext<IAppContext>();
+  const [, settTekster] = sanityTekster;
+  return settTekster;
 }
 
 export function useSpråk() {

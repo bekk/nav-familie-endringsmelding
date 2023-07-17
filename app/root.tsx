@@ -27,7 +27,8 @@ import { hentDekoratorHtml } from './server/dekorator.server';
 import { hentSanityData } from './server/hentSanityData.server';
 import { hentSøker } from './server/hentSøker.server';
 import { ELocaleType } from './typer/felles';
-import { EStønad } from './typer/stønad';
+import { ITekstinnhold } from './typer/sanity/sanity';
+import { EYtelse } from './typer/ytelse';
 
 export const links: LinksFunction = () => [
   {
@@ -60,7 +61,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (!session.has(API_TOKEN_NAME)) {
     await loggInn(session);
   }
-  const tekstData = await hentSanityData(EStønad.BARNETRYGD);
+  const tekstData = await hentSanityData(EYtelse.BARNETRYGD);
   const søkerData = await hentSøker(session);
   const dekoratørFragmenter = await hentDekoratorHtml();
 
@@ -77,8 +78,8 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 };
 
 export default function App() {
-  const { tekstData, søkerData, dekoratørFragmenter } =
-    useLoaderData<typeof loader>();
+  const { søkerData, dekoratørFragmenter } = useLoaderData<typeof loader>();
+  const [tekstData, settTekstData] = useState<ITekstinnhold | null>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
   const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
@@ -89,7 +90,7 @@ export default function App() {
       <Oppsett>
         <Outlet
           context={{
-            sanityTekster: tekstData,
+            sanityTekster: [tekstData, settTekstData],
             språk: [språk, settSpråk],
             søker: søkerData,
             erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
