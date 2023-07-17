@@ -9,7 +9,6 @@ import { RESPONSE_STATUS_FEIL } from '~/typer/response';
 export async function action({ request }: ActionArgs) {
   const formData = await request.formData();
   const endringsmelding = formData.get('endringsmelding') as string;
-  console.log(endringsmelding);
   return await sendEndringsmelding(
     endringsmelding,
     await getSession(request.headers.get('Cookie')),
