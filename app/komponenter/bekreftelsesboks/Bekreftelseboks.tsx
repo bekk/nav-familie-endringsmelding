@@ -17,7 +17,7 @@ const BekreftelseBoks = () => {
     <Alert variant="success">
       <TekstBlokk
         tekstblokk={bekreftelseBoksInnhold}
-        flettefelter={{ innsendtTid: formaterDato(endringsmeldingMottattDato) }}
+        flettefelter={{ mottattdato: formaterDato(endringsmeldingMottattDato) }}
       />
     </Alert>
   );

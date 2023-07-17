@@ -25,12 +25,12 @@ export interface ISanityDokument {
 
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
-  INNSENDT_TID = 'INNSENDT_TID',
+  mottatt_dato = 'MOTTATT_DATO',
 }
 
 export type FlettefeltVerdier = {
   søkerNavn?: string;
-  innsendtTid?: string;
+  mottattdato?: string;
 };
 
 export interface ITekstinnhold {
