@@ -18,7 +18,7 @@ const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
       orientation="horizontal"
     >
       {[...Array(ANTALL_STEG)].map((_, stegIndex) => {
-        const stegErGjennomført = stegIndex < nåværendeSteg - 1;
+        const stegErGjennomført = stegIndex + 1 < nåværendeSteg;
         return (
           <Stepper.Step
             completed={stegErGjennomført || sisteSteg}
