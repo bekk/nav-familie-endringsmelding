@@ -1,6 +1,6 @@
 describe('Steg1-test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/send-endringsmelding');
+    cy.visit('http://localhost:3000/ba/endringsmelding');
   });
   it('Sjekker at tekst laster fra Sanity', () => {
     cy.get(`[data-testid='overskriftSteg1']`).contains('Send endringer');
