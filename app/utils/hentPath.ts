@@ -1,26 +1,35 @@
 import { ESteg } from '~/typer/felles';
 import { EYtelse } from '~/typer/ytelse';
 
+const urlForBarnetrygd = '/ba';
+const urlForKontantstøtte = '/ks';
+
 export const hentPathForYtelse = (ytelse: EYtelse) => {
   switch (ytelse) {
     case EYtelse.BARNETRYGD:
-      return '/ba';
+      return urlForBarnetrygd;
     case EYtelse.KONTANTSTØTTE:
-      return '/ks';
+      return urlForKontantstøtte;
     default:
       return '/';
   }
 };
 
-export const hentPathForSteg = (steg: ESteg) => {
+export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
+  let urlForYtelse = '';
+  if (ytelse === EYtelse.BARNETRYGD) {
+    urlForYtelse = urlForBarnetrygd;
+  } else if (ytelse === EYtelse.KONTANTSTØTTE) {
+    urlForYtelse = urlForKontantstøtte;
+  }
   switch (steg) {
     case ESteg.FORSIDE:
-      return '/ba';
+      return urlForYtelse;
     case ESteg.SEND_ENDRINGER:
-      return '/ba/endringsmelding';
+      return urlForYtelse + '/endringsmelding';
     case ESteg.KVITTERING:
-      return '/ba/kvittering';
+      return urlForYtelse + '/kvittering';
     default:
-      return '/ba'; //bør i fremtiden vise til feilmelding-side + error handling
+      return urlForYtelse; //bør i fremtiden vise til feilmelding-side + error handling
   }
 };

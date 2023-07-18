@@ -6,6 +6,7 @@ import {
   useEndringsmeldingMottattDato,
   useSpråk,
   useTekster,
+  useYtelse,
 } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
@@ -34,6 +35,7 @@ export default function SendEndringSide() {
   const navigate = useNavigate();
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
+  const ytelse = useYtelse();
 
   const [erResponseOK, settErResponseOK] = useState<boolean>(true);
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
@@ -46,11 +48,11 @@ export default function SendEndringSide() {
 
     if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
       settEndringsmeldingMottattDato(actionData.mottattDato);
-      navigate(hentPathForSteg(ESteg.KVITTERING));
+      navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
       settErResponseOK(false);
     }
-  }, [actionData, navigate, settEndringsmeldingMottattDato]);
+  }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
 
   function genererFeilmelding() {
     return (
@@ -116,7 +118,7 @@ export default function SendEndringSide() {
           <Button
             type="button"
             variant={'secondary'}
-            onClick={() => navigate(hentPathForSteg(ESteg.FORSIDE))}
+            onClick={() => navigate(hentPathForSteg(ytelse, ESteg.FORSIDE))}
           >
             <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
           </Button>
