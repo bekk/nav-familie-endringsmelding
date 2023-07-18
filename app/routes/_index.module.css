@@ -1,3 +1,11 @@
-.toppMargin {
-  margin-top: 5rem;
+.ytelseLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.linkKonteiner {
+  margin-top: 20rem;
+  margin-bottom: 20rem;
 }

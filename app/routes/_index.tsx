@@ -1,4 +1,11 @@
+import { LinkIcon } from '@navikt/aksel-icons';
+import { Link } from '@navikt/ds-react';
 import type { V2_MetaFunction } from '@remix-run/node';
+
+import { EYtelse } from '~/typer/ytelse';
+import { hentPathForYtelse } from '~/utils/hentPath';
+
+import css from './_index.module.css';
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -10,13 +17,23 @@ export const meta: V2_MetaFunction = () => {
     },
   ];
 };
-
-/* 
-
-Ubrukt fil. Her kommer linkene til å komme til de ulike stønader :) 
-
-*/
-
 export default function Index() {
-  return <p>Barnetrygd</p>;
+  return (
+    <div className={`${css.linkKonteiner}`}>
+      <Link
+        href={hentPathForYtelse(EYtelse.BARNETRYGD)}
+        className={`${css.ytelseLink}`}
+      >
+        <LinkIcon title="link-icon" fontSize="1.5rem" />
+        Barnetrygd
+      </Link>
+      <Link
+        href={hentPathForYtelse(EYtelse.KONTANTSTØTTE)}
+        className={`${css.ytelseLink}`}
+      >
+        <LinkIcon title="link-icon" fontSize="1.5rem" />
+        Kontantstøtte
+      </Link>
+    </div>
+  );
 }

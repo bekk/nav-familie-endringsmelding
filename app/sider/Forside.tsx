@@ -15,10 +15,10 @@ import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { hentPathForSteg } from '~/utils/hentPath';
 import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
 
-import css from '../routes/_index.module.css';
+import css from './forside.module.css';
 
 const Forside: React.FC = () => {
   const tekster = useTekster(ESanityMappe.FORSIDE);

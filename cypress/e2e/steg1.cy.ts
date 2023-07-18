@@ -1,6 +1,6 @@
 describe('Steg1-test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('http://localhost:3000/ba');
     cy.get(`[data-testid='samtykkepanel']`).check();
     cy.get(`[data-testid='startKnapp']`).click();
     cy.wait(1000);
