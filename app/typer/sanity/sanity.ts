@@ -25,7 +25,7 @@ export interface ISanityDokument {
 
 export enum ESanityFlettefeltverdi {
   SØKER_NAVN = 'SØKER_NAVN',
-  mottatt_dato = 'MOTTATT_DATO',
+  MOTTATT_DATO = 'MOTTATT_DATO',
 }
 
 export type FlettefeltVerdier = {
