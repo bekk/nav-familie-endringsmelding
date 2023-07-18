@@ -17,15 +17,12 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import parse from 'html-react-parser';
-import { useState } from 'react';
 
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 
 import Feilside from './komponenter/feilside/Feilside';
 import { hentDekoratorHtml } from './server/dekorator.server';
-import { hentSanityData } from './server/hentSanityData.server';
-import { hentSøker } from './server/hentSøker.server';
 import { ELocaleType } from './typer/felles';
 
 export const links: LinksFunction = () => [
@@ -59,13 +56,9 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   if (!session.has(API_TOKEN_NAME)) {
     await loggInn(session);
   }
-  const tekstData = await hentSanityData();
-  const søkerData = await hentSøker(session);
   const dekoratørFragmenter = await hentDekoratorHtml();
 
   const data = {
-    tekstData,
-    søkerData,
     dekoratørFragmenter,
   };
   return json(data, {
@@ -76,28 +69,12 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
 };
 
 export default function App() {
-  const { tekstData, søkerData, dekoratørFragmenter } =
-    useLoaderData<typeof loader>();
-  const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
-  const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
-  const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
-    useState('');
+  const { dekoratørFragmenter } = useLoaderData<typeof loader>();
 
   return (
-    <Dokument språk={språk}>
+    <Dokument språk={ELocaleType.NB}>
       <Oppsett>
-        <Outlet
-          context={{
-            sanityTekster: tekstData,
-            språk: [språk, settSpråk],
-            søker: søkerData,
-            erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
-            endringsmeldingMottattDato: [
-              endringsmeldingMottattDato,
-              settEndringsmeldingMottattDato,
-            ],
-          }}
-        />
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         {parse(dekoratørFragmenter.DECORATOR_SCRIPTS, { trim: true })}

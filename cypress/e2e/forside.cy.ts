@@ -1,6 +1,6 @@
 describe('Forside tester', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:3000/ba');
   });
   it('Tekst laster fra Sanity', () => {
     cy.get(`[data-testid='forsideTittel']`).contains('Endringsmelding');

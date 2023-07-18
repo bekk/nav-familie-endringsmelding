@@ -2,6 +2,7 @@ import { createClient } from '@sanity/client';
 
 import { ESanityMappe } from '~/typer/felles';
 import { ApiKeys, ISanityDokument, ITekstinnhold } from '~/typer/sanity/sanity';
+import { EYtelse } from '~/typer/ytelse';
 
 const sanityKlient = createClient({
   projectId: 'd8ycstqz',
@@ -10,10 +11,11 @@ const sanityKlient = createClient({
   useCdn: true,
 });
 
-export const hentSanityData = async (): Promise<ITekstinnhold> => {
-  const tekst = await sanityKlient.fetch<ISanityDokument[]>(
-    '*[ytelse == "BARNETRYGD"]',
-  );
+export const hentSanityData = async (
+  ytelse: EYtelse,
+): Promise<ITekstinnhold> => {
+  const spørring = `*[ytelse == "${ytelse}"]`;
+  const tekst = await sanityKlient.fetch<ISanityDokument[]>(spørring);
 
   if (tekst.length === 0) {
     throw Error('Kunne ikke hente sanity data');

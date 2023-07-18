@@ -18,6 +18,6 @@ export async function action({ request }: ActionArgs) {
   });
 }
 
-export default function SendEndringsmelding() {
+export default function SendEndringsmeldingSide() {
   return <SendEndringSide />;
 }
