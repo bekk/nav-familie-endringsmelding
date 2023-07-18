@@ -27,3 +27,8 @@ export function useEndringsmeldingMottattDato() {
   const { endringsmeldingMottattDato } = useOutletContext<IAppContext>();
   return endringsmeldingMottattDato;
 }
+
+export function useYtelse() {
+  const { ytelse } = useOutletContext<IAppContext>();
+  return ytelse;
+}

@@ -28,6 +28,7 @@ export default function BarnetrygdIndex() {
           endringsmeldingMottattDato,
           settEndringsmeldingMottattDato,
         ],
+        ytelse: EYtelse.BARNETRYGD,
       }}
     />
   );
