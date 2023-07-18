@@ -1,3 +1,5 @@
+import Forside from '~/sider/Forside';
+
 export default function KSIndex() {
-  return <p>Dette er index for kontantstøtte</p>;
+  return <Forside />;
 }
