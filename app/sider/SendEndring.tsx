@@ -21,7 +21,7 @@ import {
   MAKS_INPUT_LENGDE,
   validerTekst,
 } from '~/utils/fritekstfeltValidering';
-import { hentPathForSteg } from '~/utils/hentPathForSteg';
+import { hentPathForSteg } from '~/utils/hentPath';
 
 import css from './../routes/send-endringsmelding.module.css';
 
