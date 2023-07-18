@@ -12,9 +12,9 @@ const sanityKlient = createClient({
 });
 
 export const hentSanityData = async (
-  stønad: EYtelse,
+  ytelse: EYtelse,
 ): Promise<ITekstinnhold> => {
-  const spørring = `*[ytelse == "${stønad}"]`;
+  const spørring = `*[ytelse == "${ytelse}"]`;
   const tekst = await sanityKlient.fetch<ISanityDokument[]>(spørring);
 
   if (tekst.length === 0) {
