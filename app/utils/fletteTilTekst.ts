@@ -14,9 +14,9 @@ export const flettefeltTilTekst = (
       }
       return flettefelter.søkerNavn;
     case ESanityFlettefeltverdi.MOTTATT_DATO:
-      if (!flettefelter?.mottattdato) {
+      if (!flettefelter?.mottattDato) {
         throw Error('Flettefeltet innsendt tid ikke sendt med');
       }
-      return flettefelter.mottattdato;
+      return flettefelter.mottattDato;
   }
 };
