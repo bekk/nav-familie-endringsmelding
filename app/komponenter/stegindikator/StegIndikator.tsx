@@ -8,6 +8,8 @@ interface Props {
 
 const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
   const ANTALL_STEG = 2;
+  const sisteSteg = nåværendeSteg === ANTALL_STEG;
+
   return (
     <Stepper
       className={`${css.stegIndikator}`}
@@ -16,9 +18,12 @@ const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
       orientation="horizontal"
     >
       {[...Array(ANTALL_STEG)].map((_, stegIndex) => {
-        const stegErGjennomført: boolean = stegIndex < nåværendeSteg - 1;
+        const stegErGjennomført = stegIndex + 1 < nåværendeSteg;
         return (
-          <Stepper.Step completed={stegErGjennomført} key={stegIndex}>
+          <Stepper.Step
+            completed={stegErGjennomført || sisteSteg}
+            key={stegIndex}
+          >
             {' '}
           </Stepper.Step>
         );
