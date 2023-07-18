@@ -13,7 +13,7 @@ export const flettefeltTilTekst = (
         throw Error('Flettefeltet søkernavn ikke sendt med');
       }
       return flettefelter.søkerNavn;
-    case ESanityFlettefeltverdi.mottatt_dato:
+    case ESanityFlettefeltverdi.MOTTATT_DATO:
       if (!flettefelter?.mottattdato) {
         throw Error('Flettefeltet innsendt tid ikke sendt med');
       }
