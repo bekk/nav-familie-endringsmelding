@@ -30,7 +30,7 @@ export enum ESanityFlettefeltverdi {
 
 export type FlettefeltVerdier = {
   søkerNavn?: string;
-  mottattdato?: string;
+  mottattDato?: string;
 };
 
 export interface ITekstinnhold {
