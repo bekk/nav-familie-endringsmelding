@@ -1,3 +1,5 @@
+import Forside from '~/sider/Forside';
+
 export default function BAIndex() {
-  return <p>Dette er index for barnetrygd</p>;
+  return <Forside />;
 }
