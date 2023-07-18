@@ -25,14 +25,14 @@ export default function Index() {
         className={`${css.ytelseLink}`}
       >
         <LinkIcon title="link-icon" fontSize="1.5rem" />
-        <p>Barnetrygd</p>
+        Barnetrygd
       </Link>
       <Link
         href={hentPathForYtelse(EYtelse.KONTANTSTØTTE)}
         className={`${css.ytelseLink}`}
       >
         <LinkIcon title="link-icon" fontSize="1.5rem" />
-        <p>Kontantstøtte</p>
+        Kontantstøtte
       </Link>
     </div>
   );
