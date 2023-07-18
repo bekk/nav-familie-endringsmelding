@@ -1,4 +1,5 @@
 import { LinkIcon } from '@navikt/aksel-icons';
+import { Link } from '@navikt/ds-react';
 import type { V2_MetaFunction } from '@remix-run/node';
 
 import { EYtelse } from '~/typer/ytelse';
@@ -19,20 +20,20 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div className={`${css.linkKonteiner}`}>
-      <a
+      <Link
         href={hentPathForYtelse(EYtelse.BARNETRYGD)}
         className={`${css.ytelseLink}`}
       >
         <LinkIcon title="link-icon" fontSize="1.5rem" />
-        <p>Barnetrygd</p>
-      </a>
-      <a
+        Barnetrygd
+      </Link>
+      <Link
         href={hentPathForYtelse(EYtelse.KONTANTSTØTTE)}
         className={`${css.ytelseLink}`}
       >
         <LinkIcon title="link-icon" fontSize="1.5rem" />
-        <p>Kontantstøtte</p>
-      </a>
+        Kontantstøtte
+      </Link>
     </div>
   );
 }
