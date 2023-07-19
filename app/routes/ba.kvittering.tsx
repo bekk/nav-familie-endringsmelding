@@ -1,5 +1,5 @@
-import Kvittering from './kvittering';
+import KvitteringSide from '~/sider/kvitteringSide';
 
 export default function BAKvittering() {
-  return <Kvittering />;
+  return <KvitteringSide />;
 }
