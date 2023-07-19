@@ -1,5 +1,6 @@
 import { Session } from '@remix-run/node';
 
+import søkerMock from '~/mock/søkerMock';
 import { fetchMedToken } from '~/server/authorization';
 import { EMiljø } from '~/typer/miljø';
 import { ISøker } from '~/typer/søker';
@@ -13,6 +14,8 @@ export const hentSøker = async (session: Session): Promise<ISøker> => {
   switch (process.env.ENV) {
     case EMiljø.LOKAL:
       return (await fetchMedToken(session, LOKAL_URL_BACKEND)).json();
+    case EMiljø.MOCK:
+      return søkerMock;
     case EMiljø.PRODUKSJON:
     default:
       return (await fetchMedToken(session, API_URL_BACKEND)).json();
