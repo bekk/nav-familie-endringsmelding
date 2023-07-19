@@ -3,7 +3,6 @@ import { Form, useActionData, useNavigate, useSubmit } from '@remix-run/react';
 import React, { useEffect, useState } from 'react';
 
 import {
-  useBekreftetSamtykke,
   useEndringsmeldingMottattDato,
   useSpråk,
   useTekster,
@@ -41,13 +40,6 @@ export default function SendEndringSide() {
     EFritekstFeil.MANGLER_TEKST,
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
-  const [erSamtykkeBekreftet] = useBekreftetSamtykke();
-
-  useEffect(() => {
-    if (!erSamtykkeBekreftet) {
-      navigate(hentPathForSteg(ESteg.FORSIDE));
-    }
-  }, [erSamtykkeBekreftet, navigate]);
 
   useEffect(() => {
     if (!actionData) return;
@@ -84,7 +76,7 @@ export default function SendEndringSide() {
   }
 
   return (
-    <HovedInnhold>
+    <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={1} />
       <TekstBlokk
         tekstblokk={tekster.overskrift}
