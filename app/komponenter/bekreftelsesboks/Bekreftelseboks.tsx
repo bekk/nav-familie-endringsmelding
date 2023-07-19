@@ -8,16 +8,17 @@ import { ESanityMappe } from '~/typer/felles';
 import { formaterDato } from '~/utils/formaterDato';
 
 import TekstBlokk from '../tekstblokk/TekstBlokk';
+import css from './bekreftelsesboks.module.css';
 
 const BekreftelseBoks = () => {
   const { bekreftelseBoksInnhold } = useTekster(ESanityMappe.KVITTERING);
   const [endringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
   return (
-    <Alert variant="success">
+    <Alert variant="success" className={`${css.fullBredde}`}>
       <TekstBlokk
         tekstblokk={bekreftelseBoksInnhold}
-        flettefelter={{ innsendtTid: formaterDato(endringsmeldingMottattDato) }}
+        flettefelter={{ mottattDato: formaterDato(endringsmeldingMottattDato) }}
       />
     </Alert>
   );
