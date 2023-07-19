@@ -5,7 +5,7 @@ import { EMiljø } from '~/typer/miljø';
 
 import { postMedToken } from './authorization';
 
-const STI: string = '/api/send-inn/ba';
+const STI: string = '/api/send-inn/ks';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
 const API_URL_BACKEND: string =
   'https://nav-familie-endringsmelding-api.fly.dev' + STI;

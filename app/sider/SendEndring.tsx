@@ -47,6 +47,7 @@ export default function SendEndringSide() {
     if (!actionData) return;
 
     if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
+      console.log('respons', actionData);
       settEndringsmeldingMottattDato(actionData.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
