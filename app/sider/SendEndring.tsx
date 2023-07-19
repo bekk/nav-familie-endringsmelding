@@ -11,7 +11,7 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
-import { action } from '~/routes/send-endringsmelding';
+import { action } from '~/routes/ba.endringsmelding'; //TODO: Må importere riktig action. Laget kort på dette. Kan evt ta det inn som kort.
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
