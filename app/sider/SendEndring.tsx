@@ -11,10 +11,10 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
-import { action } from '~/routes/send-endringsmelding';
+import { action } from '~/routes/ba.endringsmelding';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
-import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
+import { EStatusKode, IPostResponse } from '~/typer/response';
 import { ETypografiTyper } from '~/typer/typografi';
 import {
   i18nInnhold,
@@ -43,10 +43,9 @@ export default function SendEndringSide() {
 
   useEffect(() => {
     if (!actionData) return;
-    console.log('actionData', actionData);
 
-    if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
-      settEndringsmeldingMottattDato(actionData.mottattDato);
+    if (actionData.status === EStatusKode.OK && actionData.data) {
+      settEndringsmeldingMottattDato(actionData.data.mottattDato);
       navigate(hentPathForSteg(ESteg.KVITTERING));
     } else {
       settErResponseOK(false);

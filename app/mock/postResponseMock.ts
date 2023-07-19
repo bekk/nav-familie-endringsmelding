@@ -1,7 +1,7 @@
-import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
+import { EStatusKodeMock } from '~/typer/response';
 
-const postResponseMock: IPostResponse = {
-  text: RESPONSE_STATUS_OK,
+const postResponseMock = {
+  text: EStatusKodeMock.OK,
   mottattDato: '2023-07-06T13:00:00.00000',
 };
 

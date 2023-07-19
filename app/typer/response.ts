@@ -1,11 +1,21 @@
 import { EFritekstFeil } from './fritekstfeil';
 
 export interface IPostResponse {
-  text: string;
-  status: 'OK' | 'FEILET';
-  mottattDato?: string;
+  status: EStatusKode;
+  data?: IResponseData;
   feilkode?: EFritekstFeil;
 }
 
-export const RESPONSE_STATUS_OK = 'OK MOCK';
-export const RESPONSE_STATUS_FEIL = 'FEILET MOCK';
+export interface IResponseData {
+  mottattDato: string;
+}
+
+export enum EStatusKode {
+  OK = 'OK',
+  FEILET = 'FEILET',
+}
+
+export enum EStatusKodeMock {
+  OK = 'OK MOCK',
+  FEILET = 'FEILET MOCK',
+}
