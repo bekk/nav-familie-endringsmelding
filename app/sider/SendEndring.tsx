@@ -43,6 +43,7 @@ export default function SendEndringSide() {
 
   useEffect(() => {
     if (!actionData) return;
+    console.log('actionData', actionData);
 
     if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
       settEndringsmeldingMottattDato(actionData.mottattDato);
