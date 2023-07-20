@@ -78,7 +78,7 @@ export default function SendEndringSide() {
   }
 
   return (
-    <HovedInnhold>
+    <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={1} />
       <TekstBlokk
         tekstblokk={tekster.overskrift}
