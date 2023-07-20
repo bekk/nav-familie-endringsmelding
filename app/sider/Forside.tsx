@@ -6,6 +6,7 @@ import {
   useBekreftetSamtykke,
   useSøker,
   useTekster,
+  useYtelse,
 } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
@@ -25,6 +26,7 @@ const Forside: React.FC = () => {
   const { knappStart } = useTekster(ESanityMappe.FELLES);
   const søker = useSøker();
   const [erSamtykkeBekreftet] = useBekreftetSamtykke();
+  const ytelse = useYtelse();
 
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ const Forside: React.FC = () => {
 
   const håndterTrykkStart = () => {
     if (erSamtykkeBekreftet) {
-      navigate(hentPathForSteg(ESteg.SEND_ENDRINGER));
+      navigate(hentPathForSteg(ytelse, ESteg.SEND_ENDRINGER));
     } else {
       settErFeilmeldingAktivert(true);
     }

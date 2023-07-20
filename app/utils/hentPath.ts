@@ -1,26 +1,27 @@
 import { ESteg } from '~/typer/felles';
 import { EYtelse } from '~/typer/ytelse';
 
+const URL_BARNETRYGD = '/ba';
+const URL_KONTANTSTØTTE = '/ks';
+
 export const hentPathForYtelse = (ytelse: EYtelse) => {
   switch (ytelse) {
     case EYtelse.BARNETRYGD:
-      return '/ba';
+      return URL_BARNETRYGD;
     case EYtelse.KONTANTSTØTTE:
-      return '/ks';
-    default:
-      return '/';
+      return URL_KONTANTSTØTTE;
   }
 };
 
-export const hentPathForSteg = (steg: ESteg) => {
+export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
+  const urlForYtelse = hentPathForYtelse(ytelse);
+
   switch (steg) {
     case ESteg.FORSIDE:
-      return '/ba';
+      return urlForYtelse;
     case ESteg.SEND_ENDRINGER:
-      return '/ba/endringsmelding';
+      return urlForYtelse + '/endringsmelding';
     case ESteg.KVITTERING:
-      return '/ba/kvittering';
-    default:
-      return '/ba'; //bør i fremtiden vise til feilmelding-side + error handling
+      return urlForYtelse + '/kvittering';
   }
 };

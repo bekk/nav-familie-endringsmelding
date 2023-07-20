@@ -1,7 +1,11 @@
 import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 
-import { useBekreftetSamtykke, useTekster } from '~/hooks/contextHooks';
+import {
+  useBekreftetSamtykke,
+  useTekster,
+  useYtelse,
+} from '~/hooks/contextHooks';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { hentPathForSteg } from '~/utils/hentPath';
 
@@ -20,14 +24,15 @@ const HovedInnhold: React.FC<Props> = ({
   const { bannerTekst } = useTekster(ESanityMappe.FELLES);
   const [erSamtykkeBekreftet] = useBekreftetSamtykke();
   const navigate = useNavigate();
+  const ytelse = useYtelse();
 
   const skalRedirecte = måHaBekreftetSamtykke && !erSamtykkeBekreftet;
 
   useEffect(() => {
     if (skalRedirecte) {
-      navigate(hentPathForSteg(ESteg.FORSIDE));
+      navigate(hentPathForSteg(ytelse, ESteg.FORSIDE));
     }
-  }, [skalRedirecte, navigate]);
+  }, [skalRedirecte, navigate, ytelse]);
 
   return (
     <>
