@@ -1,6 +1,7 @@
 import { json, Session } from '@remix-run/node';
 
 import postResponseMock from '~/mock/postResponseMock';
+import { IEndringsmelding } from '~/typer/endringsmelding';
 import { EMiljø } from '~/typer/miljø';
 
 import { postMedToken } from './authorization';
@@ -11,13 +12,13 @@ const API_URL_BACKEND: string =
   'https://nav-familie-endringsmelding-api.fly.dev' + STI;
 
 export async function sendEndringsmelding(
-  endringsmelding: string,
+  endringsmelding: IEndringsmelding,
   session: Session,
 ): Promise<Response> {
   const requestInfo = new Request(LOKAL_URL_BACKEND, {
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      accept: 'application/json',
     },
     method: 'POST',
   });
@@ -28,14 +29,14 @@ export async function sendEndringsmelding(
         session,
         LOKAL_URL_BACKEND,
         requestInfo,
-        JSON.stringify(endringsmelding),
+        endringsmelding,
       );
     case EMiljø.PRODUKSJON:
       return await postMedToken(
         session,
         API_URL_BACKEND,
         requestInfo,
-        JSON.stringify(endringsmelding),
+        endringsmelding,
       );
     default:
       return json(postResponseMock);
