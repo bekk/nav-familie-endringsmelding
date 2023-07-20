@@ -1,7 +1,7 @@
 import { ELocaleType } from '~/typer/felles';
 import { EFritekstFeil } from '~/typer/fritekstfeil';
 
-export const SPESIAL_TEGN_REGEX = /[!@#$%^&*()?"{}|<>+¨=]/;
+export const SPESIAL_TEGN_REGEX = /[#$^&*()"{}|<>+¨=]/;
 export const MIN_INPUT_LENGDE = 10;
 export const MAKS_INPUT_LENGDE = 1000;
 
