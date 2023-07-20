@@ -1,5 +1,12 @@
 # Nav familie endringsmelding
 
+Applikasjonen skal brukes for å sende endringsmeldinger for ulike stønader til saksbehandlere. Ved å automatisere dette så blir det lettere, enkelere og raskere for både saksbehandler og bruker.
+
+Følgende stønader er støttet i applikasjonen;
+
+- Barnetrygd
+- Kontantstøtte
+
 Applikasjonen bruker remix. Se den offisielle dokumentasjonen for mer info
 
 - [Remix Docs](https://remix.run/docs)
