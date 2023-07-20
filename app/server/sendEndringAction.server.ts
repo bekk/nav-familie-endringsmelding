@@ -6,7 +6,6 @@ import { EStatusKode, IPostResponse } from '~/typer/response';
 export default async function sendEndringAction(request: Request) {
   const formData = await request.formData();
   const endringsmeldingTekst = formData.get('endringsmelding') as string;
-
   const endringsmelding: IEndringsmelding = {
     tekst: endringsmeldingTekst,
     dokumenter: [],

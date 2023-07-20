@@ -68,6 +68,7 @@ const hentApiUrl = () => {
   switch (process.env.ENV) {
     case EMiljø.LOKAL:
       return 'http://localhost:8099';
+    case EMiljø.MOCK:
     case EMiljø.PRODUKSJON:
     default:
       return 'https://nav-familie-endringsmelding-api.fly.dev';

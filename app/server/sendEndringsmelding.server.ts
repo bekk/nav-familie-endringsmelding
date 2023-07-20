@@ -31,14 +31,15 @@ export async function sendEndringsmelding(
         requestInfo,
         endringsmelding,
       );
+    case EMiljø.MOCK:
+      return json(postResponseMock);
     case EMiljø.PRODUKSJON:
+    default:
       return await postMedToken(
         session,
         API_URL_BACKEND,
         requestInfo,
         endringsmelding,
       );
-    default:
-      return json(postResponseMock);
   }
 }
