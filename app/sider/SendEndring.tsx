@@ -12,11 +12,13 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
-import { action } from '~/routes/send-endringsmelding';
+import { action as actionBA } from '~/routes/ba.endringsmelding';
+import { action as actionKS } from '~/routes/ks.endringsmelding';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { IPostResponse, RESPONSE_STATUS_OK } from '~/typer/response';
 import { ETypografiTyper } from '~/typer/typografi';
+import { EYtelse } from '~/typer/ytelse';
 import {
   i18nInnhold,
   MAKS_INPUT_LENGDE,
@@ -24,9 +26,11 @@ import {
 } from '~/utils/fritekstfeltValidering';
 import { hentPathForSteg } from '~/utils/hentPath';
 
-import css from './../routes/send-endringsmelding.module.css';
+import css from './send-endringsmelding.module.css';
 
 export default function SendEndringSide() {
+  const ytelse = useYtelse();
+  const action = ytelse === EYtelse.BARNETRYGD ? actionBA : actionKS;
   const actionData: IPostResponse | undefined = useActionData<typeof action>();
   const submit = useSubmit();
 
@@ -35,7 +39,6 @@ export default function SendEndringSide() {
   const navigate = useNavigate();
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
-  const ytelse = useYtelse();
 
   const [erResponseOK, settErResponseOK] = useState<boolean>(true);
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
@@ -47,7 +50,6 @@ export default function SendEndringSide() {
     if (!actionData) return;
 
     if (actionData.text === RESPONSE_STATUS_OK && actionData.mottattDato) {
-      console.log('respons', actionData);
       settEndringsmeldingMottattDato(actionData.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
@@ -79,7 +81,7 @@ export default function SendEndringSide() {
   }
 
   return (
-    <HovedInnhold>
+    <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={1} />
       <TekstBlokk
         tekstblokk={tekster.overskrift}
