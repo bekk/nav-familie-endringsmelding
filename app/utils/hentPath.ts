@@ -10,8 +10,6 @@ export const hentPathForYtelse = (ytelse: EYtelse) => {
       return URL_BARNETRYGD;
     case EYtelse.KONTANTSTØTTE:
       return URL_KONTANTSTØTTE;
-    default:
-      return '/';
   }
 };
 
@@ -25,7 +23,5 @@ export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
       return urlForYtelse + '/endringsmelding';
     case ESteg.KVITTERING:
       return urlForYtelse + '/kvittering';
-    default:
-      return urlForYtelse;
   }
 };
