@@ -90,7 +90,7 @@ export default function SendEndringSide() {
 
   return (
     <HovedInnhold måHaBekreftetSamtykke>
-      {navigation.state === 'submitting' ? (
+      {navigation.state === 'submitting' || navigation.state === 'loading' ? (
         <Spinner />
       ) : (
         <>
