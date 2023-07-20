@@ -12,7 +12,7 @@ export default function KvitteringSide() {
 
   return (
     <HovedInnhold måHaBekreftetSamtykke>
-      <StegIndikator nåværendeSteg={2} />
+      <StegIndikator nåværendeSteg={3} />
       <TekstBlokk
         tekstblokk={tekster.kvitteringTittel}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
