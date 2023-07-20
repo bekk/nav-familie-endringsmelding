@@ -1,5 +1,5 @@
-import Kvittering from './kvittering';
+import KvitteringSide from '~/sider/Kvittering';
 
 export default function KSKvittering() {
-  return <Kvittering />;
+  return <KvitteringSide />;
 }
