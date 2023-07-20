@@ -66,3 +66,37 @@ Da har du fått. satt en cookie som gjør at du KAN nå backend (men vi har ikke
 Filen [deploy.yml](.github%2Fworkflows%2Fdeploy.yml) sørger for at vi deployer hver gang vi merger med master 🚀
 
 Prod finnes her: [nav-familie-endringsmelding.fly.dev](https://nav-familie-endringsmelding.fly.dev/)
+
+# URLer brukt i Prod:
+
+Følgende liste med URLer er de linken som blir brukt i produksjon:
+
+- **Forsiden** / Frontend : https://nav-familie-endringsmelding.fly.dev/ <br>
+  - Deployet av: https://github.com/bekk/nav-familie-endringsmelding
+- **API** / Backend : https://nav-familie-endringsmelding-api.fly.dev <br>
+  - Deployet av: https://github.com/bekk/nav-familie-endringsmelding-api
+
+## Forside for ulike stønader
+
+Ved å gå til https://nav-familie-endringsmelding.fly.dev/ kommer man til forsiden for send endring applikasjonen. <br>
+Hver stønad har sin egen forside og egen logikk. Det er derfor viktig at man sender brukeren til forsiden for den aktuellle stønaden og ikke forsiden for applikasjonen.
+
+### Barnetrygd
+
+Start send endrings melding prosessen ved å gå til forsiden for barnetrygd;
+https://nav-familie-endringsmelding.fly.dev/ba
+
+Da vil:
+
+- Steg 1 ligge under `/ba/endringsmelding`
+- Kvitteing ligge under `/ba/kvittering`
+
+### Kontantstøtte
+
+Start send endrings melding prosessen ved å gå til forsiden for kontantstøtte;
+https://nav-familie-endringsmelding.fly.dev/ks
+
+Da vil:
+
+- Steg 1 ligge under `/ks/endringsmelding`
+- Kvitteing ligge under `/ks/kvittering`
