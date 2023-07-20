@@ -11,7 +11,7 @@ export default function KvitteringSide() {
   const tekster = useTekster(ESanityMappe.KVITTERING);
 
   return (
-    <HovedInnhold>
+    <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={2} />
       <TekstBlokk
         tekstblokk={tekster.kvitteringTittel}

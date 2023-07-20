@@ -1,6 +1,9 @@
 describe('Steg1-test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/ba/endringsmelding');
+    cy.visit('http://localhost:3000/ba');
+    cy.get(`[data-testid='samtykkepanel']`).check();
+    cy.get(`[data-testid='startKnapp']`).click();
+    cy.wait(1000);
   });
   it('Sjekker at tekst laster fra Sanity', () => {
     cy.get(`[data-testid='overskriftSteg1']`).contains('Send endringer');
