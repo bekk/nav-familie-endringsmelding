@@ -28,7 +28,7 @@
     "@navikt/nav-dekoratoren-moduler": "^2.1.1",
     "@portabletext/react": "^3.0.2",
     "@portabletext/types": "^2.0.2",
-    "@remix-run/css-bundle": "^1.18.1",
+    "@remix-run/css-bundle": "^1.19.0",
     "@remix-run/node": "^1.18.1",
     "@remix-run/react": "^1.18.1",
     "@remix-run/serve": "^1.18.1",
