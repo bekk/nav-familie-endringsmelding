@@ -1,6 +1,6 @@
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { getSession } from '~/sessions';
-import { RESPONSE_STATUS_FEIL } from '~/typer/response';
+import { EStatusKode, IPostResponse } from '~/typer/response';
 
 export default async function sendEndringAction(request: Request) {
   const formData = await request.formData();
@@ -8,8 +8,27 @@ export default async function sendEndringAction(request: Request) {
   return await sendEndringsmelding(
     endringsmelding,
     await getSession(request.headers.get('Cookie')),
-  ).then(response => {
-    if (response.ok) return response.json();
-    return { text: RESPONSE_STATUS_FEIL };
-  });
+  )
+    .then(async response => {
+      try {
+        const responseJson = await response.json();
+        return { response: responseJson, status: response.status };
+      } catch (e) {
+        return { status: response.status };
+      }
+    })
+    .then(data => {
+      if (data.status === 200) {
+        return {
+          status: EStatusKode.OK,
+          data: { mottattDato: data.response.mottattDato },
+        } as IPostResponse;
+      } else {
+        //Her kan feilkode være null, dermed kan null brukes når alerten skal spesifiseres senere
+        return {
+          status: EStatusKode.FEILET,
+          feilKode: data?.response?.feil,
+        } as IPostResponse;
+      }
+    });
 }
