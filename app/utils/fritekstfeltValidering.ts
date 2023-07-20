@@ -24,7 +24,6 @@ export const i18nInnhold = (språk: ELocaleType) => {
 };
 
 export const validerTekst = (endringsmelding: string): EFritekstFeil | null => {
-  return null;
   if (endringsmelding.length === 0) {
     return EFritekstFeil.MANGLER_TEKST;
   }
