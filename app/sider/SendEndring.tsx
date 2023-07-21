@@ -40,7 +40,7 @@ export default function SendEndringSide() {
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
-  const [feilkode, settFeilkode] = useState<EFritekstFeil | null>(null);
+  const [feilKode, settFeilKode] = useState<EFritekstFeil | null>(null);
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
     EFritekstFeil.MANGLER_TEKST,
   );
@@ -53,7 +53,7 @@ export default function SendEndringSide() {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
-      settFeilkode(actionData.feilkode || null);
+      settFeilKode(actionData.feilKode || null);
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
 
@@ -74,7 +74,7 @@ export default function SendEndringSide() {
   ) {
     event.preventDefault();
     if (valideringsfeil === null) {
-      settFeilkode(null);
+      settFeilKode(null);
       submit(event.currentTarget, { replace: true });
     }
     settKnappTrykketPå(true);
@@ -110,11 +110,10 @@ export default function SendEndringSide() {
             settValideringsfeil(validerTekst(event.currentTarget.value));
           }}
         />
-        {/**Nå vil ikke denne vises når den er satt til null */}
-        {!feilkode && (
+        {feilKode && (
           <Alert variant="error" className={`${css.toppMargin}`}>
             <TekstBlokk
-              tekstblokk={tekster.alertFeilUnderSendEndringsmelding}
+              tekstblokk={tekster[fritekstFeilTilApiKeys[feilKode]]}
             />
           </Alert>
         )}
