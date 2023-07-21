@@ -15,7 +15,7 @@ import {
   useYtelse,
 } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
-import Spinner from '~/komponenter/Spinner';
+import Spinner from '~/komponenter/spinner/Spinner';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
