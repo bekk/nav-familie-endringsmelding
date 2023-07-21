@@ -5,6 +5,7 @@ export enum EApiKeysFelles {
   KNAPP_SEND_ENDRINGER = 'knappSendEndringer',
   BANNER = 'bannerTekst',
   KNAPP_START = 'knappStart',
+  KNAPP_NESTE = 'knappNeste',
 }
 
 export type FellesTekstinnhold = Record<EApiKeysFelles, ISanityDokument>;
