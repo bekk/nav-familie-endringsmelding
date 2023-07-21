@@ -1,10 +1,15 @@
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { getSession } from '~/sessions';
+import { IEndringsmelding } from '~/typer/endringsmelding';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 
 export default async function sendEndringAction(request: Request) {
   const formData = await request.formData();
-  const endringsmelding = formData.get('endringsmelding') as string;
+  const endringsmeldingTekst = formData.get('endringsmelding') as string;
+  const endringsmelding: IEndringsmelding = {
+    tekst: endringsmeldingTekst,
+    dokumenter: [],
+  };
   return await sendEndringsmelding(
     endringsmelding,
     await getSession(request.headers.get('Cookie')),
