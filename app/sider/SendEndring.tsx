@@ -91,7 +91,7 @@ export default function SendEndringSide() {
   return (
     <HovedInnhold måHaBekreftetSamtykke>
       {navigation.state === 'submitting' || navigation.state === 'loading' ? (
-        <Spinner />
+        <Spinner skalSentreres />
       ) : (
         <>
           <StegIndikator nåværendeSteg={1} />

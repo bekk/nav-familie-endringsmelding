@@ -11,7 +11,7 @@ const Spinner = ({ skalSentreres = false }: Props) => {
     <>
       {skalSentreres ? (
         <div className={`${css.spinnerKonteiner}`}>
-          <Loader size="3xlarge" title="venter..." />;
+          <Loader size="3xlarge" title="venter..." />
         </div>
       ) : (
         <Loader size="3xlarge" title="venter..." />
