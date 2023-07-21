@@ -48,10 +48,15 @@ export default function SendEndringSide() {
 
   useEffect(() => {
     if (!actionData) return;
-
     if (actionData.status === EStatusKode.OK && actionData.data) {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
-      navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
+      //TODO: Bytte ut if-setning med navigate ved hentPath, når steg fra sanity er på plass
+      if (ytelse == 'BARNETRYGD') {
+        navigate('/ba/dokumentasjon');
+      } else if (ytelse == 'KONTANTSTOTTE') {
+        navigate('/ks/dokumentasjon');
+      }
+      //navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON));
     } else {
       settErResponseOK(false);
     }
