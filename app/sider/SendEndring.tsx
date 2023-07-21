@@ -148,7 +148,7 @@ export default function SendEndringSide() {
                 <TekstBlokk tekstblokk={teksterFelles.knappSendEndringer} />
               </Button>
             </div>
-          </Form>{' '}
+          </Form>
         </>
       )}
     </HovedInnhold>
