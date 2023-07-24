@@ -3,6 +3,7 @@ import { getSession } from '~/sessions';
 import { IEndringsmelding } from '~/typer/endringsmelding';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 import { EYtelse } from '~/typer/ytelse';
+import { hentAPIPathForYtelse } from '~/utils/hentPath';
 
 export default async function sendEndringAction(
   request: Request,
@@ -14,12 +15,7 @@ export default async function sendEndringAction(
     tekst: endringsmeldingTekst,
     dokumenter: [],
   };
-  let ytelseSti: string = '';
-  if (ytelse === EYtelse.BARNETRYGD) {
-    ytelseSti = 'ba';
-  } else if (ytelse === EYtelse.KONTANTSTØTTE) {
-    ytelseSti = 'ks';
-  }
+  const ytelseSti = hentAPIPathForYtelse(ytelse);
   return await sendEndringsmelding(
     endringsmelding,
     ytelseSti,

@@ -25,3 +25,12 @@ export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
       return urlForYtelse + '/kvittering';
   }
 };
+
+export const hentAPIPathForYtelse = (ytelse: EYtelse) => {
+  switch (ytelse) {
+    case EYtelse.BARNETRYGD:
+      return '/ba';
+    case EYtelse.KONTANTSTØTTE:
+      return '/ks';
+  }
+};
