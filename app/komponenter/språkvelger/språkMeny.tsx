@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Menu, MenuItem } from 'react-aria-menubutton';
 
 import { ELocaleType } from '~/typer/felles';
-import { språkTittel } from '~/utils/språk';
+import { språkTittel, støttedeSpråk } from '~/utils/språk';
 
 import css from './språkMeny.module.css';
 
@@ -20,9 +20,8 @@ export const ListeElement: FC<{ språk: ELocaleType }> = ({ språk }) => {
 };
 
 export const SpråkMeny: FC<{
-  støttedeSpråk: ELocaleType[];
   valgtSpråk: ELocaleType;
-}> = ({ støttedeSpråk, valgtSpråk }) => {
+}> = ({ valgtSpråk }) => {
   return (
     <Menu>
       <ul className={`${css.språkListe}`}>

@@ -6,15 +6,12 @@ import { Button, Wrapper } from 'react-aria-menubutton';
 
 import { useSpråk } from '~/hooks/contextHooks';
 import { ELocaleType } from '~/typer/felles';
-import { språkTittel } from '~/utils/språk';
+import { språkTittel, støttedeSpråk } from '~/utils/språk';
 
 import { SpråkMeny } from './språkMeny';
 import css from './språkvelger.module.css';
 
-interface Props {
-  støttedeSpråk: ELocaleType[];
-}
-export const Språkvelger: React.FC<Props> = ({ støttedeSpråk }) => {
+export const Språkvelger: React.FC = () => {
   const [språk, settSpråk] = useSpråk();
   const [erÅpen, settErÅpen] = useState<boolean>(false);
 
@@ -43,7 +40,7 @@ export const Språkvelger: React.FC<Props> = ({ støttedeSpråk }) => {
         </BodyShort>
         {erÅpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
-      <SpråkMeny valgtSpråk={språk} støttedeSpråk={støttedeSpråk} />
+      <SpråkMeny valgtSpråk={språk} />
     </Wrapper>
   );
 };
