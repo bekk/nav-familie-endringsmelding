@@ -21,8 +21,8 @@ import parse from 'html-react-parser';
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 
-import Feilside from './komponenter/feilside/Feilside';
 import { hentDekoratorHtml } from './server/dekorator.server';
+import Feilside from './sider/Feilside';
 import { ELocaleType } from './typer/felles';
 
 export const links: LinksFunction = () => [

@@ -58,16 +58,11 @@ export default function SendEndringSide() {
     if (!actionData) return;
     if (actionData.status === EStatusKode.OK && actionData.data) {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
-      //TODO: Bytte ut if-setning med navigate ved hentPath, når steg fra sanity er på plass
-      if (ytelse == 'BARNETRYGD') {
-        navigate('/ba/dokumentasjon');
-      } else if (ytelse == 'KONTANTSTOTTE') {
-        navigate('/ks/dokumentasjon');
-      }
-      //navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON));
+      navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
       settErResponseOK(false);
     }
+    console.log(actionData.data?.mottattDato);
   }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
 
   function genererFeilmelding() {
@@ -141,6 +136,17 @@ export default function SendEndringSide() {
                 onClick={() => navigate(hentPathForSteg(ytelse, ESteg.FORSIDE))}
               >
                 <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
+              </Button>
+
+              <Button
+                type="button"
+                variant={valideringsfeil === null ? 'primary' : 'secondary'}
+                data-testid="knappVidereSteg2"
+                onClick={() =>
+                  navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON))
+                }
+              >
+                <TekstBlokk tekstblokk={teksterFelles.knappNeste} />
               </Button>
               <Button
                 type="submit"
