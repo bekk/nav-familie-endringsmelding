@@ -16,7 +16,7 @@ const FilopplastningFelt = () => {
 
   return (
     <>
-      <Dropzone onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}>
+      <Dropzone onDrop={opplastedeFiler => håndterLastOppFil(opplastedeFiler)}>
         {({ getRootProps, getInputProps }) => (
           <section
             className={`${css.dokumentasjonKonteiner}`}
