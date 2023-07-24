@@ -56,6 +56,7 @@ export default function SendEndringSide() {
 
   useEffect(() => {
     if (!actionData) return;
+
     if (actionData.status === EStatusKode.OK && actionData.data) {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));

@@ -16,9 +16,8 @@ export default function DokumentasjonSide() {
 
   const teksterFelles = useTekster(ESanityMappe.FELLES);
 
-  //TODO: legge til en submit-funksjon, i tillegg til en action. Navigere videre til kvitteringsside med dataen.
   function håndterSendDokumentasjon() {
-    // navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
+    //TODO: legge til en submit-funksjon, i tillegg til en action. Navigere videre til kvitteringsside med dataen.
   }
 
   return (
