@@ -1,7 +1,9 @@
 import { DownloadIcon } from '@navikt/aksel-icons';
-import { Table } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { useState } from 'react';
 import Dropzone from 'react-dropzone';
+
+import { formaterDato } from '~/utils/formaterDato';
 
 import css from './filopplastningfelt.module.css';
 
@@ -21,9 +23,10 @@ const FilopplastningFelt = () => {
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            <p>
-              <DownloadIcon title="a11y-title" /> Last opp dokumentasjon
-            </p>
+            <section>
+              <DownloadIcon title="nedlastningsikon" />
+              <BodyShort>Last opp dokumentasjon</BodyShort>
+            </section>
           </section>
         )}
       </Dropzone>
@@ -46,7 +49,7 @@ const FilopplastningFelt = () => {
                   <Table.HeaderCell scope="row">{fil.name}</Table.HeaderCell>
                   <Table.DataCell>{fil.size}</Table.DataCell>
                   <Table.DataCell>
-                    {new Date(fil.lastModified).toDateString()}
+                    {formaterDato(fil.lastModified)}
                   </Table.DataCell>
                 </Table.Row>
               );
