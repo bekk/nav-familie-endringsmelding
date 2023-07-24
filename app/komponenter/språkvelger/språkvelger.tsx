@@ -1,6 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon, GlobeIcon } from '@navikt/aksel-icons';
 import { BodyShort } from '@navikt/ds-react';
-import * as React from 'react';
 import { useState } from 'react';
 import { Button, Wrapper } from 'react-aria-menubutton';
 
@@ -11,7 +10,7 @@ import { språkTittel, støttedeSpråk } from '~/utils/språk';
 import { SpråkMeny } from './språkMeny';
 import css from './språkvelger.module.css';
 
-export const Språkvelger: React.FC = () => {
+export const Språkvelger = () => {
   const [språk, settSpråk] = useSpråk();
   const [erÅpen, settErÅpen] = useState<boolean>(false);
 
@@ -31,7 +30,6 @@ export const Språkvelger: React.FC = () => {
       className={`${css.språkvelgerWrapper}`}
     >
       <Button
-        id="språkvelger"
         value={språk}
         className={`${css.språkvelgerKnapp}`}
         data-testid="språkvelger"
