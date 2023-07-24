@@ -1,3 +1,5 @@
+import { Alert } from '@navikt/ds-react';
+
 import { useTekster } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
@@ -15,6 +17,9 @@ export default function DokumentasjonSide() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
         dataTestid="overskriftDokumentering"
       />
+      <Alert variant="info">
+        <TekstBlokk tekstblokk={tekster.veiledning} />
+      </Alert>
     </HovedInnhold>
   );
 }
