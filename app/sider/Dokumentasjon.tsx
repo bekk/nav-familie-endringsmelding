@@ -6,6 +6,7 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { ESanityMappe, ESteg } from '~/typer/felles';
+import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPath';
 
 import css from './dokumentasjon.module.css';
@@ -14,6 +15,7 @@ export default function DokumentasjonSide() {
   const ytelse = useYtelse();
   const navigate = useNavigate();
 
+  const tekster = useTekster(ESanityMappe.DOKUMENTASJON);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
 
   function håndterSendDokumentasjon() {
@@ -23,7 +25,10 @@ export default function DokumentasjonSide() {
   return (
     <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={2} />
-      <h1>Dokumentasjonsopplastning her</h1>
+      <TekstBlokk
+        tekstblokk={tekster.dokumentasjonOverskrift}
+        typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
+      />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
           type="button"
