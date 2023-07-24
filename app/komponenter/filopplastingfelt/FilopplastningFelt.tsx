@@ -23,10 +23,8 @@ const FilopplastningFelt = () => {
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            <section>
-              <DownloadIcon title="nedlastningsikon" />
-              <BodyShort>Last opp dokumentasjon</BodyShort>
-            </section>
+            <DownloadIcon title="nedlastningsikon" />
+            <BodyShort>Last opp dokumentasjon</BodyShort>
           </section>
         )}
       </Dropzone>
