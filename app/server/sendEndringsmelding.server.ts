@@ -6,13 +6,14 @@ import { EMiljø } from '~/typer/miljø';
 
 import { postMedToken } from './authorization';
 
-const STI: string = '/api/send-inn/ba';
+const STI: string = '/api/send-inn';
 const LOKAL_URL_BACKEND: string = 'http://localhost:8099' + STI;
 const API_URL_BACKEND: string =
   'https://nav-familie-endringsmelding-api.fly.dev' + STI;
 
 export async function sendEndringsmelding(
   endringsmelding: IEndringsmelding,
+  ytelseSti: string,
   session: Session,
 ): Promise<Response> {
   const requestInfo = new Request(LOKAL_URL_BACKEND, {
@@ -27,7 +28,7 @@ export async function sendEndringsmelding(
     case EMiljø.LOKAL:
       return await postMedToken(
         session,
-        LOKAL_URL_BACKEND,
+        LOKAL_URL_BACKEND + ytelseSti,
         requestInfo,
         endringsmelding,
       );
@@ -37,7 +38,7 @@ export async function sendEndringsmelding(
     default:
       return await postMedToken(
         session,
-        API_URL_BACKEND,
+        API_URL_BACKEND + ytelseSti,
         requestInfo,
         endringsmelding,
       );
