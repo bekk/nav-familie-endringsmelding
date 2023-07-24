@@ -3,8 +3,8 @@ import { Links, Meta } from '@remix-run/react';
 
 import { ELocaleType } from '~/typer/felles';
 
-import Banner from '../banner/Banner';
-import HovedInnholdCss from '../hovedInnhold/hovedInnhold.module.css';
+import Banner from '../komponenter/banner/Banner';
+import HovedInnholdCss from '../komponenter/hovedInnhold/hovedInnhold.module.css';
 import css from './feilside.module.css';
 
 const Feilside: React.FC = () => {
