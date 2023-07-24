@@ -142,7 +142,9 @@ export default function SendEndringSide() {
                 type="button"
                 variant={valideringsfeil === null ? 'primary' : 'secondary'}
                 data-testid="knappVidereSteg2"
-                onClick={() => navigate(hentPathForSteg(ytelse, ESteg.FORSIDE))} //denne skal bli til dokumentasjonsiden når den siden er laget
+                onClick={() =>
+                  navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON))
+                }
               >
                 <TekstBlokk tekstblokk={teksterFelles.knappNeste} />
               </Button>
