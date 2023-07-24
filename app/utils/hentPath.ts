@@ -23,5 +23,7 @@ export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
       return urlForYtelse + '/endringsmelding';
     case ESteg.KVITTERING:
       return urlForYtelse + '/kvittering';
+    case ESteg.DOKUMENTASJON:
+      return urlForYtelse + '/dokumentasjon';
   }
 };

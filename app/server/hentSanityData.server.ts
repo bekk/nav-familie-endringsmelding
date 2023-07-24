@@ -34,6 +34,10 @@ export const hentSanityData = async (
       ESanityMappe.KVITTERING,
     ),
     [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
+    [ESanityMappe.DOKUMENTASJON]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.DOKUMENTASJON,
+    ),
   };
 
   return tekstInnhold;
