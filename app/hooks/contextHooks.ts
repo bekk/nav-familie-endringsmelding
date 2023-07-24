@@ -23,6 +23,11 @@ export function useBekreftetSamtykke() {
   return erSamtykkeBekreftet;
 }
 
+export function useEndringsmelding() {
+  const { endringsmelding } = useOutletContext<IAppContext>();
+  return endringsmelding;
+}
+
 export function useEndringsmeldingMottattDato() {
   const { endringsmeldingMottattDato } = useOutletContext<IAppContext>();
   return endringsmeldingMottattDato;
