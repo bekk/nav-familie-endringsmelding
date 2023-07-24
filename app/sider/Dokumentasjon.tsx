@@ -16,6 +16,7 @@ import { action as actionKS } from '~/routes/ks.dokumentasjon';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
+import { ETypografiTyper } from '~/typer/typografi';
 import { EYtelse } from '~/typer/ytelse';
 import { hentPathForSteg } from '~/utils/hentPath';
 
@@ -23,8 +24,9 @@ import css from './dokumentasjon.module.css';
 
 export default function DokumentasjonSide() {
   const ytelse = useYtelse();
+  const teksterDokumentasjon = useTekster(ESanityMappe.DOKUMENTASJON);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
-  const tekster = useTekster(ESanityMappe.SEND_ENDRINGER);
+  const teksterSendEndringer = useTekster(ESanityMappe.SEND_ENDRINGER);
   const [endringsmelding] = useEndringsmelding();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
@@ -59,10 +61,15 @@ export default function DokumentasjonSide() {
   return (
     <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={2} />
-      <h1>Dokumentasjonsopplastning her</h1>
+      <TekstBlokk
+        tekstblokk={teksterDokumentasjon.dokumentasjonOverskrift}
+        typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
+      />
       {feilKode && (
         <Alert variant="error" className={`${css.toppMargin}`}>
-          <TekstBlokk tekstblokk={tekster[fritekstFeilTilApiKeys[feilKode]]} />
+          <TekstBlokk
+            tekstblokk={teksterSendEndringer[fritekstFeilTilApiKeys[feilKode]]}
+          />
         </Alert>
       )}
       <div className={`${css.navigeringsKnappKonteiner}`}>
