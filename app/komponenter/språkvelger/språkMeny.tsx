@@ -10,7 +10,7 @@ import css from './språkMeny.module.css';
 export const ListeElement: FC<{ språk: ELocaleType }> = ({ språk }) => {
   return (
     <li value={språk}>
-      <MenuItem className={`${css.menyElement}`}>
+      <MenuItem className={`${css.menyElement}`} data-testid={språk}>
         <BodyShort size={'small'} key={språk}>
           {språkTittel[språk]}
         </BodyShort>

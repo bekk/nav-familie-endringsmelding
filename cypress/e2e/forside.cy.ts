@@ -6,7 +6,8 @@ describe('Forside tester', () => {
     cy.get(`[data-testid='forsideTittel']`).contains('Endringsmelding');
   });
   it('Språkvelger endrer språk', () => {
-    cy.get(`[data-testid='språkvelger']`).select('en');
+    cy.get(`[data-testid='språkvelger']`).click();
+    cy.get(`[data-testid='en']`).click();
     cy.get(`[data-testid='forsideTittel']`).contains('Change message');
   });
   it('Fornavn hentet fra backend', () => {
