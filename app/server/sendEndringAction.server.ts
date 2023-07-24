@@ -1,6 +1,7 @@
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { getSession } from '~/sessions';
 import { IEndringsmelding } from '~/typer/endringsmelding';
+import { EFritekstFeil } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 
 export default async function sendEndringAction(request: Request) {
@@ -29,10 +30,11 @@ export default async function sendEndringAction(request: Request) {
           data: { mottattDato: data.response.mottattDato },
         } as IPostResponse;
       } else {
-        //Her kan feilkode være null, dermed kan null brukes når alerten skal spesifiseres senere
         return {
           status: EStatusKode.FEILET,
-          feilKode: data?.response?.feil,
+          feilKode: Object.values(EFritekstFeil).includes(data?.response?.feil)
+            ? data?.response?.feil
+            : EFritekstFeil.INGEN_VALIDERINGSFEIL,
         } as IPostResponse;
       }
     });
