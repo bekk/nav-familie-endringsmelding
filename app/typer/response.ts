@@ -3,7 +3,7 @@ import { EFritekstFeil } from './fritekstfeil';
 export interface IPostResponse {
   status: EStatusKode;
   data?: IResponseData;
-  feilKode?: EFritekstFeil | null;
+  feilKode?: EFritekstFeil;
 }
 
 export interface IResponseData {
