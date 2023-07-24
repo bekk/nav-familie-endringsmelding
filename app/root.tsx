@@ -21,8 +21,8 @@ import parse from 'html-react-parser';
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 
-import Feilside from './komponenter/feilside/Feilside';
 import { hentDekoratorHtml } from './server/dekorator.server';
+import Feilside from './sider/Feilside';
 import { ELocaleType } from './typer/felles';
 
 export const links: LinksFunction = () => [
@@ -72,7 +72,7 @@ export default function App() {
   const { dekoratørFragmenter } = useLoaderData<typeof loader>();
 
   return (
-    <Dokument språk={ELocaleType.NB}>
+    <Dokument>
       <Oppsett>
         <Outlet />
         <ScrollRestoration />
@@ -86,13 +86,12 @@ export default function App() {
 
 interface DokumentProps {
   children: React.ReactNode;
-  språk?: ELocaleType;
 }
 
-export function Dokument({ children, språk = ELocaleType.NB }: DokumentProps) {
+export function Dokument({ children }: DokumentProps) {
   const { dekoratørFragmenter } = useLoaderData<typeof loader>();
   return (
-    <html lang={språk}>
+    <html lang={ELocaleType.NB}>
       <head>
         <title>Endringsmelding</title>
         <meta charSet="utf-8" />

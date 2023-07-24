@@ -19,6 +19,7 @@ export const Språkvelger: React.FC = () => {
     const valgtSpråk = støttedeSpråk.find(språk => språk === valg.key);
     if (valgtSpråk) {
       settSpråk(valgtSpråk);
+      document.documentElement.lang = valgtSpråk;
     }
   };
   return (
@@ -33,6 +34,8 @@ export const Språkvelger: React.FC = () => {
         id="språkvelger"
         value={språk}
         className={`${css.språkvelgerKnapp}`}
+        data-testid="språkvelger"
+        autoComplete="on"
       >
         <GlobeIcon />
         <BodyShort size={'small'} className={`${css.valgtSpråk}`}>
