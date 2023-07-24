@@ -13,7 +13,6 @@ export default function DokumentasjonSide() {
       <TekstBlokk
         tekstblokk={tekster.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
-        dataTestid="overskriftDokumentering"
       />
     </HovedInnhold>
   );
