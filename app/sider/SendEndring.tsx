@@ -62,7 +62,6 @@ export default function SendEndringSide() {
     } else {
       settErResponseOK(false);
     }
-    console.log(actionData.data?.mottattDato);
   }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
 
   function genererFeilmelding() {
