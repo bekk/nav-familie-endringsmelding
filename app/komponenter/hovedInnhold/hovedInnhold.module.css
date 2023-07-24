@@ -1,6 +1,7 @@
 .innholdKonteiner {
   padding: 1rem;
   max-width: 37.5rem;
+  min-height: 100vh;
   margin: 0 auto;
   padding-bottom: 5rem;
   display: flex;
