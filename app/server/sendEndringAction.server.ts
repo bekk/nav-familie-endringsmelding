@@ -2,16 +2,27 @@ import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { getSession } from '~/sessions';
 import { IEndringsmelding } from '~/typer/endringsmelding';
 import { EStatusKode, IPostResponse } from '~/typer/response';
+import { EYtelse } from '~/typer/ytelse';
 
-export default async function sendEndringAction(request: Request) {
+export default async function sendEndringAction(
+  request: Request,
+  ytelse: EYtelse,
+) {
   const formData = await request.formData();
   const endringsmeldingTekst = formData.get('endringsmelding') as string;
   const endringsmelding: IEndringsmelding = {
     tekst: endringsmeldingTekst,
     dokumenter: [],
   };
+  let ytelseSti: string = '';
+  if (ytelse === EYtelse.BARNETRYGD) {
+    ytelseSti = 'ba';
+  } else if (ytelse === EYtelse.KONTANTSTØTTE) {
+    ytelseSti = 'ks';
+  }
   return await sendEndringsmelding(
     endringsmelding,
+    ytelseSti,
     await getSession(request.headers.get('Cookie')),
   )
     .then(async response => {
