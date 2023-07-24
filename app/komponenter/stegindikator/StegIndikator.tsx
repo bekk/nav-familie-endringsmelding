@@ -7,7 +7,7 @@ interface Props {
 }
 
 const StegIndikator: React.FC<Props> = ({ nåværendeSteg }) => {
-  const ANTALL_STEG = 2;
+  const ANTALL_STEG = 3;
   const sisteSteg = nåværendeSteg === ANTALL_STEG;
 
   return (

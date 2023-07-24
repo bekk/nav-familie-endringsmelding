@@ -10,7 +10,7 @@ import {
 } from '~/hooks/contextHooks';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import SamtykkePanel from '~/komponenter/samtykkepanel/SamtykkePanel';
-import Spinner from '~/komponenter/Spinner';
+import Spinner from '~/komponenter/spinner/Spinner';
 import { Språkvelger } from '~/komponenter/språkvelger/språkvelger';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import VeilederPanel from '~/komponenter/veilederpanel/VeilederPanel';
