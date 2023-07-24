@@ -18,6 +18,7 @@ import { ESanityMappe, ESteg } from '~/typer/felles';
 import { ETypografiTyper } from '~/typer/typografi';
 import { hentPathForSteg } from '~/utils/hentPath';
 import { hentSøkerFornavn } from '~/utils/hentSøkerInfo';
+import { støttedeSpråk } from '~/utils/språk';
 
 import css from './forside.module.css';
 
@@ -56,7 +57,7 @@ const Forside: React.FC = () => {
               typografi={ETypografiTyper.HEADING_H1}
             />
           </div>
-          <Språkvelger />
+          <Språkvelger støttedeSpråk={støttedeSpråk} />
 
           <VeilederPanel
             innhold={tekster.veilederhilsenInnhold}

@@ -1,9 +1,22 @@
-/* .språkvelger {
-  width: 10.75rem;
+.språkvelgerKnapp {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  outline: none;
+  border-radius: 0.25rem;
+  border: 3px solid var(--a-gray-400);
 }
 
-.label {
-  display: flex;
-  gap: 0.3rem;
+.språkvelgerKnapp:focus {
+  border: solid 3px var(--a-blue-800);
 }
- */
+
+.språkvelgerWrapper {
+  position: relative;
+  outline: none;
+}
+
+.valgtSpråk {
+  padding: 0 1.22rem;
+  flex-grow: 1;
+}
