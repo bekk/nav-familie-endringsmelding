@@ -33,7 +33,7 @@ const FilopplastningFelt = () => {
 
       {filer.length > 0 && (
         <section>
-          <p>Filer som er lastet opp:</p>
+          <BodyShort>Filer som er lastet opp:</BodyShort>
 
           <Table>
             <Table.Header>
