@@ -18,7 +18,7 @@ export default function DokumentasjonSide() {
         dataTestid="overskriftDokumentering"
       />
       <Alert variant="info">
-        <TekstBlokk tekstblokk={tekster.veiledning} />
+        <TekstBlokk tekstblokk={tekster.infomellomLagring} />
       </Alert>
     </HovedInnhold>
   );
