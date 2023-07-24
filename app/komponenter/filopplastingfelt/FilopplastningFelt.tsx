@@ -31,32 +31,34 @@ const FilopplastningFelt = () => {
         )}
       </Dropzone>
 
-      <section>
-        <p>Filer som er lastet opp:</p>
+      {filer.length > 0 && (
+        <section>
+          <p>Filer som er lastet opp:</p>
 
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Størrelse</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Sist Endret</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {filer.map((fil: File) => {
-              return (
-                <Table.Row key={fil.name}>
-                  <Table.HeaderCell scope="row">{fil.name}</Table.HeaderCell>
-                  <Table.DataCell>{fil.size}</Table.DataCell>
-                  <Table.DataCell>
-                    {formaterDato(fil.lastModified)}
-                  </Table.DataCell>
-                </Table.Row>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      </section>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Størrelse</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Sist Endret</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {filer.map((fil: File) => {
+                return (
+                  <Table.Row key={fil.name}>
+                    <Table.HeaderCell scope="row">{fil.name}</Table.HeaderCell>
+                    <Table.DataCell>{fil.size}</Table.DataCell>
+                    <Table.DataCell>
+                      {formaterDato(fil.lastModified)}
+                    </Table.DataCell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
+          </Table>
+        </section>
+      )}
     </>
   );
 };
