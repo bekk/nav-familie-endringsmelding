@@ -1,0 +1,8 @@
+.navigeringsKnappKonteiner {
+  margin-top: 5rem;
+  min-width: 17rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
