@@ -1,3 +1,4 @@
+import FilopplastningFelt from '~/komponenter/filopplastingfelt/FilopplastningFelt';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 
@@ -6,6 +7,8 @@ export default function DokumentasjonSide() {
     <HovedInnhold /*måHaBekreftetSamtykke*/>
       <StegIndikator nåværendeSteg={2} />
       <h1>Dokumentasjonsopplastning her</h1>
+
+      <FilopplastningFelt />
     </HovedInnhold>
   );
 }

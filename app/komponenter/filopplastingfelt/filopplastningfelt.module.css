@@ -1,0 +1,12 @@
+.dokumentasjonKonteiner {
+  border: 1px;
+  border-color: black;
+  border-style: dashed;
+  width: 90%;
+  background-color: var(--a-surface-selected);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
