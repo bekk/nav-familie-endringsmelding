@@ -19,6 +19,7 @@ export const Språkvelger = () => {
         autoComplete="on"
         onChange={endring => {
           settSpråk(endring.target.value as ELocaleType);
+          document.documentElement.lang = endring.target.value;
         }}
       >
         <option value={ELocaleType.NB}>Norsk (Bokmål)</option>

@@ -1,6 +1,7 @@
 import { Session } from '@remix-run/node';
 
 import { API_TOKEN_NAME } from '~/sessions';
+import { IEndringsmelding } from '~/typer/endringsmelding';
 import { EMiljø } from '~/typer/miljø';
 
 export const fetchMedToken = async (
@@ -19,24 +20,26 @@ export const postMedToken = async (
   session: Session,
   url: string,
   requestInfo?: Request,
-  payload?: string,
+  payload?: IEndringsmelding,
 ): Promise<Response> => {
   const headersMedToken = await lagHeadersMedToken(session, requestInfo);
   return fetch(url, {
     headers: headersMedToken,
     method: 'Post',
-    body: payload,
+    body: JSON.stringify(payload),
   });
 };
 
 const lagHeadersMedToken = async (session: Session, requestInfo?: Request) => {
-  const headersFromRequest = requestInfo?.headers || {};
+  //const headersFromRequest = requestInfo?.headers || {};
   const token = await prepareSecuredRequest(session);
-  return new Headers({
-    ...headersFromRequest,
+  const headerSomObjekt = {
+    'Content-Type': 'application/json',
+    accept: 'application/json',
     authorization: token.authorization,
     'x-wonderwall-id-token': '',
-  });
+  };
+  return new Headers(headerSomObjekt);
 };
 
 const prepareSecuredRequest = async (session: Session) => {

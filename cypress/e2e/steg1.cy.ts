@@ -14,7 +14,7 @@ describe('Steg1-test', () => {
     );
   });
   it('Sjekker at stegindikator har rett antall steg', () => {
-    cy.get('.navds-stepper').children().should('have.length', 2);
+    cy.get('.navds-stepper').children().should('have.length', 3);
   });
   //TODO: finne en måte å teste at rett steg på stegIndikator er aktivt. Prøvd metoder liknende denne, uten hell:
   /*   it('Sjekker at stegindikator har attributt activeStep, () => {
