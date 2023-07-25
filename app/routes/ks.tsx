@@ -18,7 +18,10 @@ export default function KontantStøtteIndex() {
   const { tekstData, søkerData } = useLoaderData<typeof loader>();
   const [språk, settSpråk] = useState<ELocaleType>(ELocaleType.NB);
   const [erSamtykkeBekreftet, settErSamtykkeBekreftet] = useState(false);
-  const endringsmelding: IEndringsmelding = { tekst: '', dokumenter: [] };
+  const [endringsmelding, settEndringsmelding] = useState<IEndringsmelding>({
+    tekst: '',
+    dokumenter: [],
+  });
   const [endringsmeldingMottattDato, settEndringsmeldingMottattDato] =
     useState('');
 
@@ -29,7 +32,7 @@ export default function KontantStøtteIndex() {
         språk: [språk, settSpråk],
         søker: søkerData,
         erSamtykkeBekreftet: [erSamtykkeBekreftet, settErSamtykkeBekreftet],
-        endringsmelding: endringsmelding,
+        endringsmelding: [endringsmelding, settEndringsmelding],
         endringsmeldingMottattDato: [
           endringsmeldingMottattDato,
           settEndringsmeldingMottattDato,
