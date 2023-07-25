@@ -8,6 +8,7 @@ import {
   useTekster,
   useYtelse,
 } from '~/hooks/contextHooks';
+import FilopplastningFelt from '~/komponenter/filopplastingfelt/FilopplastningFelt';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
@@ -59,6 +60,7 @@ export default function DokumentasjonSide() {
   return (
     <HovedInnhold måHaBekreftetSamtykke>
       <StegIndikator nåværendeSteg={2} />
+
       <TekstBlokk
         tekstblokk={teksterDokumentasjon.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
@@ -70,6 +72,8 @@ export default function DokumentasjonSide() {
           />
         </Alert>
       )}
+
+      <FilopplastningFelt />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
           type="button"
