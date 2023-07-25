@@ -32,13 +32,15 @@ export default function SendEndringSide() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [språk] = useSpråk();
-  const [, settEndringsmelding] = useEndringsmelding();
+  const [endringsmelding, settEndringsmelding] = useEndringsmelding();
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
     EFritekstFeil.MANGLER_TEKST,
   );
   const [erKnappTrykketPå, settKnappTrykketPå] = useState<boolean>(false);
 
-  const [endringsmeldingInput, settEndringsmeldingInput] = useState<string>('');
+  const [endringsmeldingInput, settEndringsmeldingInput] = useState<string>(
+    endringsmelding.tekst,
+  );
 
   function genererFeilmelding() {
     return (
@@ -54,7 +56,10 @@ export default function SendEndringSide() {
 
   function håndterTrykkNeste() {
     if (valideringsfeil === null) {
-      settEndringsmelding({ tekst: endringsmeldingInput, dokumenter: [] });
+      settEndringsmelding(endringsmelding => ({
+        ...endringsmelding,
+        tekst: endringsmeldingInput,
+      }));
       navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON));
     }
     settKnappTrykketPå(true);
@@ -89,6 +94,7 @@ export default function SendEndringSide() {
             maxLength={MAKS_INPUT_LENGDE}
             i18n={i18nInnhold(språk)}
             error={genererFeilmelding()}
+            defaultValue={endringsmelding.tekst}
             onInput={event => {
               settValideringsfeil(validerTekst(event.currentTarget.value));
               settEndringsmeldingInput(event.currentTarget.value);
