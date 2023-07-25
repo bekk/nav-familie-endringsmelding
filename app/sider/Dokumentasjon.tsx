@@ -73,7 +73,12 @@ export default function DokumentasjonSide() {
         </Alert>
       )}
 
-      <TekstBlokk tekstblokk={teksterDokumentasjon.veiledning} />
+      <div>
+        <TekstBlokk
+          tekstblokk={teksterDokumentasjon.veiledning}
+          typografi={ETypografiTyper.BODY_SHORT}
+        />
+      </div>
       <FilopplastningFelt />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
