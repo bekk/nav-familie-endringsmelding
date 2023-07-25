@@ -49,6 +49,9 @@ const strukturerInnholdForSteg = (
 ): Record<ApiKeys, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
-    .reduce((acc, dok) => {
-      return { ...acc, [dok.api_navn]: dok };
-    }, {} as Record<ApiKeys, ISanityDokument>);
+    .reduce(
+      (acc, dok) => {
+        return { ...acc, [dok.api_navn]: dok };
+      },
+      {} as Record<ApiKeys, ISanityDokument>,
+    );
