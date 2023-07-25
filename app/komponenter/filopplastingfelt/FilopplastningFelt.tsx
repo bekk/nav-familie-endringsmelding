@@ -1,6 +1,6 @@
 import { DownloadIcon } from '@navikt/aksel-icons';
 import { BodyShort, Table } from '@navikt/ds-react';
-import { Form, useActionData, useSubmit } from '@remix-run/react';
+import { Form, useSubmit } from '@remix-run/react';
 import { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
@@ -11,9 +11,6 @@ import css from './filopplastningfelt.module.css';
 const FilopplastningFelt = () => {
   const [filer, settFiler] = useState<File[]>([]);
   const submit = useSubmit();
-  const actionData = useActionData();
-
-  console.log(actionData);
 
   const håndterLastOppFil = (nyeFiler: File[]) => {
     settFiler(gamleFiler => [...gamleFiler, ...nyeFiler]);

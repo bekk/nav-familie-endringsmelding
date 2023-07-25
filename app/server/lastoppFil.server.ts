@@ -26,6 +26,7 @@ async function lastOppFil(
   const url = hentFilOpplastningURL();
   return await postFilMedToken(session, url, filData)
     .then(async response => {
+      // For å teste responsen, ha denne her!
       console.log(response);
       try {
         //Legg til fil ID i context her!!
