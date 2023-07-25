@@ -21,6 +21,7 @@ const FilopplastningFelt = () => {
       formdata.append('file', fil);
       submit(formdata, {
         method: 'post',
+        encType: 'multipart/form-data',
       });
     });
   };

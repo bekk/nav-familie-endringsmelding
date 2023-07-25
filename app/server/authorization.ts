@@ -36,17 +36,15 @@ export const postFilMedToken = async (
   requestInfo?: Request,
   fil?: File,
 ): Promise<Response> => {
-  const headersMedToken = await lagHeadersMedToken(
-    session,
-    requestInfo,
-    'multipart/form-data; boundary=----WebKitFormBoundaryyEmKNDsBKjB7QEqu',
-  );
+  const headersMedToken = await lagHeadersMedToken(session, requestInfo);
 
-  console.log(headersMedToken);
+  const requestData = new FormData();
+  requestData.append('file', fil);
+
   return fetch(url, {
     headers: headersMedToken,
     method: 'POST',
-    body: fil,
+    body: requestData,
   });
 };
 
@@ -58,8 +56,6 @@ const lagHeadersMedToken = async (
   //const headersFromRequest = requestInfo?.headers || {};
   const token = await prepareSecuredRequest(session);
   const headerSomObjekt = {
-    'Content-Type':
-      contentType !== undefined ? contentType : 'application/json',
     accept: 'application/json',
     authorization: token.authorization,
     'x-wonderwall-id-token': '',
