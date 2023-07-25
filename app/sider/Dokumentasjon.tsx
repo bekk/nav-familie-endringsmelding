@@ -30,7 +30,7 @@ export default function DokumentasjonSide() {
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
       <Alert variant="info">
-        <TekstBlokk tekstblokk={tekster.infomellomLagring} />
+        <TekstBlokk tekstblokk={tekster.infoMellomlagring} />
       </Alert>
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
