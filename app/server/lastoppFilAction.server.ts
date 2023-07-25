@@ -9,13 +9,14 @@ import lastOppFil from './lastoppFil.server';
 
 export default async function lastOppFilAction(request: Request) {
   const uploadHandler = unstable_createMemoryUploadHandler({
-    maxPartSize: 500_000,
+    maxPartSize: 1_000_000 * 21, // 21 MB
   });
   const formData = await unstable_parseMultipartFormData(
     request,
     uploadHandler,
   );
-  const fil = formData.get('file') as File;
-
-  return await lastOppFil(fil, await getSession(request.headers.get('Cookie')));
+  return await lastOppFil(
+    formData,
+    await getSession(request.headers.get('Cookie')),
+  );
 }

@@ -20,27 +20,26 @@ const hentFilOpplastningURL = () => {
 };
 
 async function lastOppFil(
-  fil: File,
+  filData: FormData,
   session: Session,
 ): Promise<IPostFilResponse> {
   const url = hentFilOpplastningURL();
-  return await postFilMedToken(session, url, undefined, fil)
+  return await postFilMedToken(session, url, filData)
     .then(async response => {
       console.log(response);
       try {
-        const responseJson: IFil = await response.json();
+        //Legg til fil ID i context her!!
+        const nyFil: IFil = await response.json();
+
         return {
-          response: responseJson,
+          response: nyFil,
           status: response.ok ? EStatusKode.OK : EStatusKode.FEILET,
         };
       } catch (e) {
-        console.log('Feil ved parsing');
         return { status: EStatusKode.FEILET };
       }
     })
     .catch(err => {
-      // Uventet feil!
-      console.log('Uventet feil:', err);
       return { status: EStatusKode.FEILET };
     });
 }
