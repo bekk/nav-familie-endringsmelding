@@ -48,7 +48,7 @@ export default function SendEndringSide() {
   const [språk] = useSpråk();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
-  const [erResponseOK, settErResponseOK] = useState<boolean>(true);
+  const [feilKode, settFeilKode] = useState<EFritekstFeil | null>(null);
   const [valideringsfeil, settValideringsfeil] = useState<EFritekstFeil | null>(
     EFritekstFeil.MANGLER_TEKST,
   );
@@ -61,7 +61,7 @@ export default function SendEndringSide() {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
     } else {
-      settErResponseOK(false);
+      settFeilKode(actionData.feilKode || null);
     }
   }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
 
@@ -82,7 +82,7 @@ export default function SendEndringSide() {
   ) {
     event.preventDefault();
     if (valideringsfeil === null) {
-      settErResponseOK(true);
+      settFeilKode(null);
       submit(event.currentTarget, { replace: true });
     }
     settKnappTrykketPå(true);
@@ -122,10 +122,10 @@ export default function SendEndringSide() {
                 settValideringsfeil(validerTekst(event.currentTarget.value));
               }}
             />
-            {!erResponseOK && (
+            {feilKode && (
               <Alert variant="error" className={`${css.toppMargin}`}>
                 <TekstBlokk
-                  tekstblokk={tekster.alertFeilUnderSendEndringsmelding}
+                  tekstblokk={tekster[fritekstFeilTilApiKeys[feilKode]]}
                 />
               </Alert>
             )}
@@ -136,6 +136,16 @@ export default function SendEndringSide() {
                 onClick={() => navigate(hentPathForSteg(ytelse, ESteg.FORSIDE))}
               >
                 <TekstBlokk tekstblokk={teksterFelles.knappTilbake} />
+              </Button>
+              <Button
+                type="button"
+                variant={valideringsfeil === null ? 'primary' : 'secondary'}
+                data-testid="knappVidereSteg2"
+                onClick={() =>
+                  navigate(hentPathForSteg(ytelse, ESteg.DOKUMENTASJON))
+                }
+              >
+                <TekstBlokk tekstblokk={teksterFelles.knappNeste} />
               </Button>
               <Button
                 type="submit"

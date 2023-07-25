@@ -34,6 +34,10 @@ export const hentSanityData = async (
       ESanityMappe.KVITTERING,
     ),
     [ESanityMappe.FELLES]: strukturerInnholdForSteg(tekst, ESanityMappe.FELLES),
+    [ESanityMappe.DOKUMENTASJON]: strukturerInnholdForSteg(
+      tekst,
+      ESanityMappe.DOKUMENTASJON,
+    ),
   };
 
   return tekstInnhold;
@@ -45,6 +49,9 @@ const strukturerInnholdForSteg = (
 ): Record<ApiKeys, ISanityDokument> =>
   dokumenter
     .filter(dok => dok.steg === steg)
-    .reduce((acc, dok) => {
-      return { ...acc, [dok.api_navn]: dok };
-    }, {} as Record<ApiKeys, ISanityDokument>);
+    .reduce(
+      (acc, dok) => {
+        return { ...acc, [dok.api_navn]: dok };
+      },
+      {} as Record<ApiKeys, ISanityDokument>,
+    );
