@@ -32,7 +32,10 @@ const FilopplastningFelt = () => {
         encType="multipart/form-data"
         className={`${css.dokumentasjonKonteiner}`}
       >
-        <Dropzone onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}>
+        <Dropzone
+          multiple={false}
+          onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}
+        >
           {({ getRootProps, getInputProps }) => (
             <section {...getRootProps()}>
               <input name="fileInput" {...getInputProps()} />
