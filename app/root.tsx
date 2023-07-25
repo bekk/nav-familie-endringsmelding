@@ -21,6 +21,7 @@ import parse from 'html-react-parser';
 import { loggInn } from '~/server/authorization';
 import { API_TOKEN_NAME, commitSession, getSession } from '~/sessions';
 
+import css from './root.module.css';
 import { hentDekoratorHtml } from './server/dekorator.server';
 import Feilside from './sider/Feilside';
 import { ELocaleType } from './typer/felles';
@@ -100,7 +101,7 @@ export function Dokument({ children }: DokumentProps) {
         {parse(dekoratørFragmenter.DECORATOR_STYLES, { trim: true })}
         <Links />
       </head>
-      <body>{children}</body>
+      <body className={`${css.body}`}>{children}</body>
     </html>
   );
 }
