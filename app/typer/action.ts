@@ -1,0 +1,4 @@
+export enum EAction {
+  LAST_OPP_FIL = 'LAST_OPP_FIL',
+  SEND_ENDRINGER = 'SEND_ENDRINGER',
+}
