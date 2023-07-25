@@ -1,5 +1,6 @@
 import { DownloadIcon } from '@navikt/aksel-icons';
 import { Table } from '@navikt/ds-react';
+import { Form } from '@remix-run/react';
 import { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
@@ -14,19 +15,22 @@ const FilopplastningFelt = () => {
 
   return (
     <>
-      <Dropzone onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}>
-        {({ getRootProps, getInputProps }) => (
-          <section
-            className={`${css.dokumentasjonKonteiner}`}
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} />
-            <p>
-              <DownloadIcon title="a11y-title" /> Last opp dokumentasjon
-            </p>
-          </section>
-        )}
-      </Dropzone>
+      <Form method="post" encType="multipart/form-data">
+        <Dropzone onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section
+              className={`${css.dokumentasjonKonteiner}`}
+              {...getRootProps()}
+            >
+              <input name="fileInput" {...getInputProps()} />
+              <p>
+                <DownloadIcon title="a11y-title" /> Last opp dokumentasjon
+              </p>
+            </section>
+          )}
+        </Dropzone>
+        <button type="submit">Send</button>
+      </Form>
 
       <section>
         <p>Filer som er lastet opp:</p>
