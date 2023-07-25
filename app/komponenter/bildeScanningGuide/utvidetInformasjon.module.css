@@ -1,0 +1,16 @@
+.utvidetInformasjonKonteiner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+.godtBildeToggleLinkKonteiner {
+  width: 100%;
+  /* justify-content: left; */
+}
+
+.innholdKonteiner {
+  width: 100%;
+}

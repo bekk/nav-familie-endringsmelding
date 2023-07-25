@@ -1,0 +1,19 @@
+.bildeKonteiner {
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.statusTekst {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.statusIkonKonteiner {
+  padding-right: 0.5rem;
+  line-height: 0;
+}
+
+.beskrivelse {
+  padding-right: 0.5rem;
+}

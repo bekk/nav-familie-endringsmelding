@@ -2,6 +2,7 @@ import { Button } from '@navikt/ds-react';
 import { useNavigate } from '@remix-run/react';
 
 import { useTekster, useYtelse } from '~/hooks/contextHooks';
+import BildeScanningGuide from '~/komponenter/bildeScanningGuide/BildeScanningGuide';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
@@ -29,6 +30,7 @@ export default function DokumentasjonSide() {
         tekstblokk={tekster.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
+      <BildeScanningGuide />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
           type="button"
