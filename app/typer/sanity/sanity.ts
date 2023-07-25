@@ -1,6 +1,10 @@
 import { PortableTextBlock } from '@portabletext/types';
 
 import { ESanityMappe } from '../felles';
+import {
+  DokumentasjonTekstInnhold,
+  EApiKeysDokumentasjon,
+} from './sanityDokumentasjon';
 import { EApiKeysFelles, FellesTekstinnhold } from './sanityFelles';
 import { EApiKeysForside, ForsideTekstinnhold } from './sanityForside';
 import { EApiKeysKvittering, KvitteringTekstinnhold } from './sanityKvittering';
@@ -38,10 +42,12 @@ export interface ITekstinnhold {
   [ESanityMappe.SEND_ENDRINGER]: SendEndringTekstinnhold;
   [ESanityMappe.KVITTERING]: KvitteringTekstinnhold;
   [ESanityMappe.FELLES]: FellesTekstinnhold;
+  [ESanityMappe.DOKUMENTASJON]: DokumentasjonTekstInnhold;
 }
 
 export type ApiKeys =
   | EApiKeysForside
   | EApiKeysSendEndring
   | EApiKeysKvittering
-  | EApiKeysFelles;
+  | EApiKeysFelles
+  | EApiKeysDokumentasjon;

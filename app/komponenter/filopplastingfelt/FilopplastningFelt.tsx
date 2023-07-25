@@ -1,8 +1,10 @@
 import { DownloadIcon } from '@navikt/aksel-icons';
-import { Table } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { Form, useActionData, useSubmit } from '@remix-run/react';
 import { useState } from 'react';
 import Dropzone from 'react-dropzone';
+
+import { formaterDato } from '~/utils/formaterDato';
 
 import css from './filopplastningfelt.module.css';
 
@@ -37,40 +39,41 @@ const FilopplastningFelt = () => {
           {({ getRootProps, getInputProps }) => (
             <section {...getRootProps()}>
               <input name="fileInput" {...getInputProps()} />
-              <p>
-                <DownloadIcon title="a11y-title" /> Last opp dokumentasjon
-              </p>
+              <DownloadIcon title="nedlastningsikon" />
+              <BodyShort>Last opp dokumentasjon</BodyShort>
             </section>
           )}
         </Dropzone>
       </Form>
 
-      <section>
-        <p>Filer som er lastet opp:</p>
+      {filer.length > 0 && (
+        <section>
+          <BodyShort>Filer som er lastet opp:</BodyShort>
 
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Størrelse</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Sist Endret</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {filer.map((fil: File) => {
-              return (
-                <Table.Row key={fil.name}>
-                  <Table.HeaderCell scope="row">{fil.name}</Table.HeaderCell>
-                  <Table.DataCell>{fil.size}</Table.DataCell>
-                  <Table.DataCell>
-                    {new Date(fil.lastModified).toDateString()}
-                  </Table.DataCell>
-                </Table.Row>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      </section>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Størrelse</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Sist Endret</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {filer.map((fil: File) => {
+                return (
+                  <Table.Row key={fil.name}>
+                    <Table.HeaderCell scope="row">{fil.name}</Table.HeaderCell>
+                    <Table.DataCell>{fil.size}</Table.DataCell>
+                    <Table.DataCell>
+                      {formaterDato(fil.lastModified)}
+                    </Table.DataCell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
+          </Table>
+        </section>
+      )}
     </>
   );
 };
