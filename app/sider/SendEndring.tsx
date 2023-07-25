@@ -105,7 +105,7 @@ export default function SendEndringSide() {
             <Button
               type="button"
               variant={valideringsfeil === null ? 'primary' : 'secondary'}
-              data-testid="knappVidereSteg2"
+              data-testid="knappVidereSteg1"
               onClick={håndterTrykkNeste}
             >
               <TekstBlokk tekstblokk={teksterFelles.knappNeste} />
