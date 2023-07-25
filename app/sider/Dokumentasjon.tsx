@@ -11,13 +11,11 @@ import {
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
-import { action as actionBA } from '~/routes/ba.dokumentasjon';
-import { action as actionKS } from '~/routes/ks.dokumentasjon';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 import { ETypografiTyper } from '~/typer/typografi';
-import { EYtelse } from '~/typer/ytelse';
+import { hentAction } from '~/utils/hentAction';
 import { hentPathForSteg } from '~/utils/hentPath';
 
 import css from './dokumentasjon.module.css';
@@ -33,7 +31,7 @@ export default function DokumentasjonSide() {
   const navigate = useNavigate();
   const submit = useSubmit();
 
-  const action = ytelse === EYtelse.BARNETRYGD ? actionBA : actionKS;
+  const action = hentAction(ytelse);
   const actionData: IPostResponse | undefined = useActionData<typeof action>();
 
   const [feilKode, settFeilKode] = useState<EFritekstFeil | null>(null);
