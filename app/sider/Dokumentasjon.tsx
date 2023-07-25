@@ -31,7 +31,7 @@ export default function DokumentasjonSide() {
         tekstblokk={tekster.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-
+      <TekstBlokk tekstblokk={tekster.veiledning} />
       <FilopplastningFelt />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
