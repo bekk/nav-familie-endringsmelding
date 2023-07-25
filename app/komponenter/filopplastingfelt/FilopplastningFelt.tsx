@@ -1,6 +1,6 @@
 import { DownloadIcon } from '@navikt/aksel-icons';
 import { Table } from '@navikt/ds-react';
-import { Form } from '@remix-run/react';
+import { Form, useActionData, useSubmit } from '@remix-run/react';
 import { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
@@ -8,20 +8,33 @@ import css from './filopplastningfelt.module.css';
 
 const FilopplastningFelt = () => {
   const [filer, settFiler] = useState<File[]>([]);
+  const submit = useSubmit();
+  const actionData = useActionData();
+
+  console.log(actionData);
 
   const håndterLastOppFil = (nyeFiler: File[]) => {
     settFiler(gamleFiler => [...gamleFiler, ...nyeFiler]);
+
+    nyeFiler.forEach(fil => {
+      const formdata = new FormData();
+      formdata.append('file', fil);
+      submit(formdata, {
+        method: 'post',
+      });
+    });
   };
 
   return (
     <>
-      <Form method="post" encType="multipart/form-data">
+      <Form
+        method="post"
+        encType="multipart/form-data"
+        className={`${css.dokumentasjonKonteiner}`}
+      >
         <Dropzone onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}>
           {({ getRootProps, getInputProps }) => (
-            <section
-              className={`${css.dokumentasjonKonteiner}`}
-              {...getRootProps()}
-            >
+            <section {...getRootProps()}>
               <input name="fileInput" {...getInputProps()} />
               <p>
                 <DownloadIcon title="a11y-title" /> Last opp dokumentasjon
@@ -29,7 +42,6 @@ const FilopplastningFelt = () => {
             </section>
           )}
         </Dropzone>
-        <button type="submit">Send</button>
       </Form>
 
       <section>

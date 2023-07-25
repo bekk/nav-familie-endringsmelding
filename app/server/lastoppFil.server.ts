@@ -11,7 +11,7 @@ const hentFilOpplastningURL = () => {
 
   switch (process.env.ENV) {
     case EMiljø.LOKAL:
-      return 'https://localhost:8099';
+      return 'http://localhost:8099' + sti;
     case EMiljø.MOCK:
     case EMiljø.PRODUKSJON:
     default:
@@ -26,6 +26,7 @@ async function lastOppFil(
   const url = hentFilOpplastningURL();
   return await postFilMedToken(session, url, undefined, fil)
     .then(async response => {
+      console.log(response);
       try {
         const responseJson: IFil = await response.json();
         return {
@@ -33,11 +34,13 @@ async function lastOppFil(
           status: response.ok ? EStatusKode.OK : EStatusKode.FEILET,
         };
       } catch (e) {
+        console.log('Feil ved parsing');
         return { status: EStatusKode.FEILET };
       }
     })
     .catch(err => {
       // Uventet feil!
+      console.log('Uventet feil:', err);
       return { status: EStatusKode.FEILET };
     });
 }
