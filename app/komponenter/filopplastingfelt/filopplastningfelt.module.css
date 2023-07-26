@@ -2,7 +2,6 @@
   border: 1px;
   border-color: black;
   border-style: dashed;
-  width: 90%;
   background-color: var(--a-surface-selected);
 
   display: flex;
@@ -11,4 +10,8 @@
   cursor: pointer;
   gap: 1rem;
   padding: 1rem;
+}
+
+.form {
+  width: 100%;
 }

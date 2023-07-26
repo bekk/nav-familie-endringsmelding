@@ -37,14 +37,17 @@ const FilopplastningFelt = () => {
       <Form
         method="post"
         encType="multipart/form-data"
-        className={`${css.dokumentasjonKonteiner}`}
+        className={`${css.form}`}
       >
         <Dropzone
           multiple={false}
           onDrop={acceptedFiles => håndterLastOppFil(acceptedFiles)}
         >
           {({ getRootProps, getInputProps }) => (
-            <section {...getRootProps()}>
+            <section
+              {...getRootProps()}
+              className={`${css.dokumentasjonKonteiner}`}
+            >
               <input name="fileInput" {...getInputProps()} />
               <DownloadIcon title="nedlastningsikon" />
               <BodyShort>Last opp dokumentasjon</BodyShort>
