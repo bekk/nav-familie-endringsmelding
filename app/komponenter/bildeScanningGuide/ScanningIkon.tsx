@@ -1,13 +1,14 @@
 import React from 'react';
 
 interface ScanProps {
-  title?: string;
-  height?: number;
+  title: string;
+  height: number;
 }
 
 type ScanIconStatusKey = 'good' | 'keystone' | 'horizontal' | 'shadow';
 
-export interface Props extends ScanProps {
+export interface Props {
+  title: string;
   status: ScanIconStatusKey;
 }
 
@@ -238,7 +239,8 @@ const ShadowScanning = ({ title, height }: ScanProps) => {
   );
 };
 const ScanningIkon = (props: Props) => {
-  const { height = 100, title } = props;
+  const { title } = props;
+  const height = 100;
   switch (props.status) {
     case 'good':
       return <GoodScanning title={title} height={height} />;

@@ -9,7 +9,7 @@ import TekstBlokk from '../tekstblokk/TekstBlokk';
 import css from './godtBildeToggleLink.module.css';
 
 interface Props {
-  erÅpen?: boolean;
+  erÅpen: boolean;
   vedToggle: () => void;
 }
 
