@@ -1,7 +1,7 @@
 import { Session } from '@remix-run/node';
 
 import { API_TOKEN_NAME } from '~/sessions';
-import { IEndringsmelding } from '~/typer/endringsmelding';
+import { IEndringsmeldingFormData } from '~/typer/endringsmelding';
 import { EMiljø } from '~/typer/miljø';
 
 export const fetchMedToken = async (
@@ -20,7 +20,7 @@ export const postMedToken = async (
   session: Session,
   url: string,
   requestInfo?: Request,
-  payload?: IEndringsmelding,
+  payload?: IEndringsmeldingFormData,
 ): Promise<Response> => {
   const headersMedToken = await lagHeadersMedToken(session, requestInfo);
   return fetch(url, {

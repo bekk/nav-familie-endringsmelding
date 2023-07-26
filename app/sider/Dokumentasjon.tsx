@@ -43,7 +43,7 @@ export default function DokumentasjonSide() {
 
   useEffect(() => {
     if (!actionData) return;
-
+    console.log('kjøh');
     if (
       actionData.status === EStatusKode.OK &&
       'data' in actionData &&
@@ -74,13 +74,18 @@ export default function DokumentasjonSide() {
     settEndringsmeldingMottattDato,
     ytelse,
     settEndringsmelding,
-    endringsmelding,
+    endringsmelding.dokumenter,
+    endringsmelding.tekst,
   ]);
 
   function håndterSendEndringsmelding() {
+    let dokumenterStreng = '';
+    endringsmelding.dokumenter.forEach(dok => (dokumenterStreng += dok + ','));
     const formData = new FormData();
-    formData.append('endringsmelding', endringsmelding.tekst);
+    formData.append('tekst', endringsmelding.tekst);
+    formData.append('dokumenter', dokumenterStreng);
     formData.append('_action', EAction.SEND_ENDRINGER);
+
     submit(formData, {
       method: 'post',
       action: hentPathForSteg(ytelse, ESteg.DOKUMENTASJON),
