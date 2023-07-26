@@ -61,20 +61,13 @@ export default function DokumentasjonSide() {
   }
 
   return (
-    <HovedInnhold måHaBekreftetSamtykke>
+    <HovedInnhold måHaBekreftetSamtykke={false}>
       <StegIndikator nåværendeSteg={2} />
 
       <TekstBlokk
         tekstblokk={teksterDokumentasjon.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
-      {feilKode && (
-        <Alert variant="error" className={`${css.toppMargin}`}>
-          <TekstBlokk
-            tekstblokk={teksterSendEndringer[fritekstFeilTilApiKeys[feilKode]]}
-          />
-        </Alert>
-      )}
       <div>
         <TekstBlokk
           tekstblokk={teksterDokumentasjon.veiledning}
@@ -83,6 +76,13 @@ export default function DokumentasjonSide() {
       </div>
       <TaGodtBildeInfo />
       <FilopplastningFelt />
+      {feilKode && (
+        <Alert variant="error" className={`${css.toppMargin}`}>
+          <TekstBlokk
+            tekstblokk={teksterSendEndringer[fritekstFeilTilApiKeys[feilKode]]}
+          />
+        </Alert>
+      )}
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
           type="button"
