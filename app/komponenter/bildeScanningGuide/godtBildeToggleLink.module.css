@@ -1,14 +1,6 @@
-.godtBildeToggleLink {
-  justify-content: left;
-  cursor: pointer;
-  display: inline-block;
-  text-align: left;
-  padding-right: 1.5rem;
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.chevronKonteiner {
-  position: absolute;
-  right: 0;
+.lenke {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: fit-content;
 }

@@ -18,14 +18,10 @@ const GodtBildeToggleLink = (props: Props) => {
   const tekster = useTekster(ESanityMappe.DOKUMENTASJON);
 
   return (
-    <span className={`${css.godtBildeToggleLink}`}>
-      <Link onClick={vedToggle} aria-expanded={erÅpen}>
-        <TekstBlokk tekstblokk={tekster.taGodtBildeLink}></TekstBlokk>
-        <span className={`${css.chevronKonteiner}`}>
-          {erÅpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-        </span>
-      </Link>
-    </span>
+    <Link onClick={vedToggle} aria-expanded={erÅpen} className={`${css.lenke}`}>
+      <TekstBlokk tekstblokk={tekster.taGodtBildeLink}></TekstBlokk>
+      {erÅpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+    </Link>
   );
 };
 
