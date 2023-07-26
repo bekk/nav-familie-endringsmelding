@@ -7,6 +7,10 @@
   gap: 1rem;
 }
 
+.navigeringsKnappKonteiner > Button {
+  min-width: 10rem;
+}
+
 .toppMargin {
   margin-top: 5rem;
 }
