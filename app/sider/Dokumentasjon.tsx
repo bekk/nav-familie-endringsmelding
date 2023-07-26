@@ -43,7 +43,6 @@ export default function DokumentasjonSide() {
 
   useEffect(() => {
     if (!actionData) return;
-    console.log('kjøh');
     if (
       actionData.status === EStatusKode.OK &&
       'data' in actionData &&
