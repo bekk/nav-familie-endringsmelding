@@ -1,4 +1,4 @@
-import { Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import React, { ReactElement } from 'react';
 
 import css from './bildeScanningEksempel.module.css';
@@ -17,15 +17,15 @@ const BildeScanningEksempel = ({
   statusTekst,
   beskrivelse,
 }: Props) => (
-  <div>
-    <div className={`${css.bildeKonteiner}`}>{bilde}</div>
+  <div className={`${css.konteiner}`}>
+    {bilde}
     <Label size={'small'} className={`${css.statusTekst}`}>
-      <span role="presentation" className={`${css.statusIkonKonteiner}`}>
-        <StatusIkon status={status} />
-      </span>
+      <StatusIkon status={status} />
       {statusTekst}
     </Label>
-    <div className={`${css.beskrivelse}`}>{beskrivelse}</div>
+    <BodyShort size={'small'} className={`${css.beskrivelse}`}>
+      {beskrivelse}
+    </BodyShort>
   </div>
 );
 
