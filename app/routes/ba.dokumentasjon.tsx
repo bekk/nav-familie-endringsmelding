@@ -1,6 +1,6 @@
 import { ActionArgs } from '@remix-run/node';
 
-import { håndterDokumentasjonAction } from '~/server/håndterActionDokumentasjon';
+import { håndterDokumentasjonAction } from '~/server/håndterActionDokumentasjon.server';
 import DokumentasjonSide from '~/sider/Dokumentasjon';
 import { EYtelse } from '~/typer/ytelse';
 
