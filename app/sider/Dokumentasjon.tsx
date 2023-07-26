@@ -8,6 +8,7 @@ import {
   useTekster,
   useYtelse,
 } from '~/hooks/contextHooks';
+import TaGodtBildeInfo from '~/komponenter/bildeScanningGuide/TaGodtBilde';
 import FilopplastningFelt from '~/komponenter/filopplastingfelt/FilopplastningFelt';
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
@@ -60,13 +61,21 @@ export default function DokumentasjonSide() {
   }
 
   return (
-    <HovedInnhold måHaBekreftetSamtykke>
+    <HovedInnhold måHaBekreftetSamtykke={false}>
       <StegIndikator nåværendeSteg={2} />
 
       <TekstBlokk
         tekstblokk={teksterDokumentasjon.dokumentasjonOverskrift}
         typografi={ETypografiTyper.STEG_HEADING_SMALL_H1}
       />
+      <div>
+        <TekstBlokk
+          tekstblokk={teksterDokumentasjon.veiledning}
+          typografi={ETypografiTyper.BODY_SHORT}
+        />
+      </div>
+      <TaGodtBildeInfo />
+      <FilopplastningFelt />
       {feilKode && (
         <Alert variant="error" className={`${css.toppMargin}`}>
           <TekstBlokk
@@ -74,14 +83,6 @@ export default function DokumentasjonSide() {
           />
         </Alert>
       )}
-
-      <div>
-        <TekstBlokk
-          tekstblokk={teksterDokumentasjon.veiledning}
-          typografi={ETypografiTyper.BODY_SHORT}
-        />
-      </div>
-      <FilopplastningFelt />
       <div className={`${css.navigeringsKnappKonteiner}`}>
         <Button
           type="button"
