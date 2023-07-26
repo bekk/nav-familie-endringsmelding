@@ -56,7 +56,9 @@ const Forside: React.FC = () => {
               typografi={ETypografiTyper.HEADING_H1}
             />
           </div>
-          <Språkvelger />
+          <div className={`${css.overrideMarginer}`}>
+            <Språkvelger />
+          </div>
 
           <VeilederPanel
             innhold={tekster.veilederhilsenInnhold}

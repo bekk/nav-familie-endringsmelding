@@ -1,3 +1,9 @@
 .toppMargin {
   margin-top: 5rem;
+  gap: 0;
+}
+
+.overrideMarginer {
+  margin-top: -2.5rem;
+  margin-bottom: 5rem;
 }
