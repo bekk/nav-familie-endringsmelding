@@ -1,6 +1,6 @@
 import { sendEndringsmelding } from '~/server/sendEndringsmelding.server';
 import { getSession } from '~/sessions';
-import { IEndringsmelding } from '~/typer/endringsmelding';
+import { IEndringsmeldingFormData } from '~/typer/endringsmelding';
 import { EFritekstFeil } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 import { EYtelse } from '~/typer/ytelse';
@@ -11,10 +11,11 @@ export default async function sendEndringAction(
   ytelse: EYtelse,
 ) {
   const formData = await request.formData();
-  const endringsmeldingTekst = formData.get('endringsmelding') as string;
-  const endringsmelding: IEndringsmelding = {
-    tekst: endringsmeldingTekst,
-    dokumenter: [],
+  const tekst = formData.get('tekst') as string;
+  const dokumenter = formData.get('dokumenter') as string;
+  const endringsmelding: IEndringsmeldingFormData = {
+    tekst: tekst,
+    dokumenter: dokumenter,
   };
   const ytelseSti = hentAPIPathForYtelse(ytelse);
   return await sendEndringsmelding(
