@@ -11,7 +11,7 @@ const TaGodtBildeInfo = () => {
         vedToggle={() => settErÅpen(!erÅpen)}
         erÅpen={erÅpen}
       />
-      {!erÅpen && <TaGodtBildeInnhold />}
+      {erÅpen && <TaGodtBildeInnhold />}
     </div>
   );
 };
