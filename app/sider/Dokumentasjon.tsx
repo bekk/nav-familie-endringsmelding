@@ -13,7 +13,9 @@ import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
 import { EAction } from '~/typer/action';
+import { IEndringsmelding } from '~/typer/endringsmelding';
 import { ESanityMappe, ESteg } from '~/typer/felles';
+import { IFil, IPostFilResponse } from '~/typer/filopplastning';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
 import { ETypografiTyper } from '~/typer/typografi';
@@ -27,27 +29,53 @@ export default function DokumentasjonSide() {
   const teksterDokumentasjon = useTekster(ESanityMappe.DOKUMENTASJON);
   const teksterFelles = useTekster(ESanityMappe.FELLES);
   const teksterSendEndringer = useTekster(ESanityMappe.SEND_ENDRINGER);
-  const [endringsmelding] = useEndringsmelding();
+  const [endringsmelding, settEndringsmelding] = useEndringsmelding();
   const [, settEndringsmeldingMottattDato] = useEndringsmeldingMottattDato();
 
   const navigate = useNavigate();
   const submit = useSubmit();
 
   const action = hentAction(ytelse);
-  const actionData: IPostResponse | undefined = useActionData<typeof action>();
+  const actionData: IPostResponse | IPostFilResponse | undefined =
+    useActionData<typeof action>();
 
   const [feilKode, settFeilKode] = useState<EFritekstFeil | null>(null);
 
   useEffect(() => {
     if (!actionData) return;
 
-    if (actionData.status === EStatusKode.OK && actionData.data) {
+    if (
+      actionData.status === EStatusKode.OK &&
+      'data' in actionData &&
+      actionData.data
+    ) {
       settEndringsmeldingMottattDato(actionData.data.mottattDato);
       navigate(hentPathForSteg(ytelse, ESteg.KVITTERING));
-    } else {
+    } else if (
+      actionData.status === EStatusKode.OK &&
+      'response' in actionData &&
+      actionData.response
+    ) {
+      actionData as IPostFilResponse;
+      const fil: IFil = actionData.response;
+      const dokumenter = endringsmelding.dokumenter;
+      dokumenter.push(fil.dokumentId);
+      const nyEndringsmelding: IEndringsmelding = {
+        dokumenter: dokumenter,
+        tekst: endringsmelding.tekst,
+      };
+      settEndringsmelding(nyEndringsmelding);
+    } else if ('data' in actionData) {
       settFeilKode(actionData.feilKode || null);
     }
-  }, [actionData, navigate, settEndringsmeldingMottattDato, ytelse]);
+  }, [
+    actionData,
+    navigate,
+    settEndringsmeldingMottattDato,
+    ytelse,
+    settEndringsmelding,
+    endringsmelding,
+  ]);
 
   function håndterSendEndringsmelding() {
     const formData = new FormData();
