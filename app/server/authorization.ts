@@ -30,6 +30,25 @@ export const postMedToken = async (
   });
 };
 
+export const postFilMedToken = async (
+  session: Session,
+  url: string,
+  filData: FormData,
+): Promise<Response> => {
+  const token = await prepareSecuredRequest(session);
+  const headersMedToken = new Headers({
+    accept: 'application/json',
+    authorization: token.authorization,
+    'x-wonderwall-id-token': '',
+  });
+
+  return fetch(url, {
+    headers: headersMedToken,
+    method: 'POST',
+    body: filData,
+  });
+};
+
 const lagHeadersMedToken = async (session: Session, requestInfo?: Request) => {
   //const headersFromRequest = requestInfo?.headers || {};
   const token = await prepareSecuredRequest(session);

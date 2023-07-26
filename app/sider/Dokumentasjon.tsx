@@ -12,6 +12,7 @@ import FilopplastningFelt from '~/komponenter/filopplastingfelt/FilopplastningFe
 import HovedInnhold from '~/komponenter/hovedInnhold/HovedInnhold';
 import StegIndikator from '~/komponenter/stegindikator/StegIndikator';
 import TekstBlokk from '~/komponenter/tekstblokk/TekstBlokk';
+import { EAction } from '~/typer/action';
 import { ESanityMappe, ESteg } from '~/typer/felles';
 import { EFritekstFeil, fritekstFeilTilApiKeys } from '~/typer/fritekstfeil';
 import { EStatusKode, IPostResponse } from '~/typer/response';
@@ -51,6 +52,7 @@ export default function DokumentasjonSide() {
   function håndterSendEndringsmelding() {
     const formData = new FormData();
     formData.append('endringsmelding', endringsmelding.tekst);
+    formData.append('_action', EAction.SEND_ENDRINGER);
     submit(formData, {
       method: 'post',
       action: hentPathForSteg(ytelse, ESteg.DOKUMENTASJON),

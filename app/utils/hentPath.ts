@@ -13,7 +13,7 @@ export const hentPathForYtelse = (ytelse: EYtelse) => {
   }
 };
 
-export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg) => {
+export const hentPathForSteg = (ytelse: EYtelse, steg: ESteg): string => {
   const urlForYtelse = hentPathForYtelse(ytelse);
 
   switch (steg) {
