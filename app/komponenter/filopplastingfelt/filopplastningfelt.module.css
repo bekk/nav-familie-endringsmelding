@@ -1,0 +1,17 @@
+.dokumentasjonKonteiner {
+  border: 1px;
+  border-color: black;
+  border-style: dashed;
+  background-color: var(--a-surface-selected);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.form {
+  width: 100%;
+}

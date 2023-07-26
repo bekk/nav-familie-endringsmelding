@@ -39,13 +39,16 @@
     "html-react-parser": "^4.0.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-aria-menubutton": "^7.0.3",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.19.0",
     "@remix-run/eslint-config": "^1.19.0",
     "@types/cookie": "^0.5.1",
     "@types/react": "^18.0.35",
+    "@types/react-aria-menubutton": "^6.2.9",
     "@types/react-dom": "^18.0.11",
     "cypress": "^12.17.0",
     "eslint": "^8.45.0",
@@ -56,6 +59,11 @@
     "lint-staged": "^13.2.2",
     "prettier": "^3.0.0",
     "typescript": "^5.0.4"
+  },
+  "overrides": {
+    "react-aria-menubutton": {
+      "react": "$react"
+    }
   },
   "engines": {
     "node": ">=18"

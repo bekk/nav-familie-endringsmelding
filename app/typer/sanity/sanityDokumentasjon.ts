@@ -2,6 +2,7 @@ import { ISanityDokument } from './sanity';
 
 export enum EApiKeysDokumentasjon {
   OVERSKRIFT = 'dokumentasjonOverskrift',
+  VEILEDNING = 'veiledning',
   TA_GODT_BILDE_LINK = 'taGodtBildeLink',
   SLIK_TAR_DU_ET_GODT_BILDE = 'slikTarDuEtGodtBilde',
   ETTER_DU_HAR_TATT_BILDE = 'etterDuHarTattBilde',
