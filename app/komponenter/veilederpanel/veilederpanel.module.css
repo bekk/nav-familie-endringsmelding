@@ -1,11 +1,14 @@
 .veilederPanel {
   width: 100%;
   padding: 0;
-  text-align: left;
 
   @media (max-width: 768px) {
     width: 80%;
   }
+}
+
+.veilederPanel ul {
+  padding-left: 1.5rem;
 }
 
 .bunnMargin {
@@ -18,5 +21,6 @@
 }
 
 .veilederPanelPoster ul {
-  margin: 0 auto 2rem auto;
+  margin: 0.5rem auto 2rem auto;
+  padding-left: 1.5rem;
 }
