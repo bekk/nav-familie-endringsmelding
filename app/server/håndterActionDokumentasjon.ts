@@ -15,6 +15,6 @@ export const håndterDokumentasjonAction = async (
     case EAction.LAST_OPP_FIL:
       return await lastOppFilAction(request.clone());
     case EAction.SEND_ENDRINGER:
-      return sendEndringAction(request.clone(), ytelse);
+      return await sendEndringAction(request.clone(), ytelse);
   }
 };
