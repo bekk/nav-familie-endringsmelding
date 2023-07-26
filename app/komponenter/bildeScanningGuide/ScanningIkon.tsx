@@ -1,26 +1,21 @@
 import React from 'react';
 
-interface ScanProps {
-  title: string;
-  height: number;
-}
-
 type ScanIconStatusKey = 'good' | 'keystone' | 'horizontal' | 'shadow';
 
+const VIEWBOX_HEIGHT = 100;
+
 export interface Props {
-  title: string;
   status: ScanIconStatusKey;
 }
 
-const GoodScanning = ({ title, height }: ScanProps) => {
+const GoodScanning = () => {
   return (
     <svg
       role="presentation"
       focusable="false"
       viewBox="0 0 83 121"
-      height={height}
+      height={VIEWBOX_HEIGHT}
     >
-      {title && <title>{title}</title>}
       <defs>
         <filter
           x="-10.6%"
@@ -63,15 +58,14 @@ const GoodScanning = ({ title, height }: ScanProps) => {
     </svg>
   );
 };
-const KeystoneScanning = ({ title, height }: ScanProps) => {
+const KeystoneScanning = () => {
   return (
     <svg
       role="presentation"
       focusable="false"
       viewBox="0 0 83 121"
-      height={height}
+      height={VIEWBOX_HEIGHT}
     >
-      {title && <title>{title}</title>}
       <desc>Bildet er ikke tatt ovenfra</desc>
       <defs>
         <filter
@@ -119,15 +113,14 @@ const KeystoneScanning = ({ title, height }: ScanProps) => {
     </svg>
   );
 };
-const HorizontalScanning = ({ title, height }: ScanProps) => {
+const HorizontalScanning = () => {
   return (
     <svg
       role="presentation"
       focusable="false"
       viewBox="0 0 83 121"
-      height={height}
+      height={VIEWBOX_HEIGHT}
     >
-      {title && <title>{title}</title>}
       <desc>Bildet har ikke riktig retning</desc>
       <defs>
         <filter
@@ -175,15 +168,14 @@ const HorizontalScanning = ({ title, height }: ScanProps) => {
     </svg>
   );
 };
-const ShadowScanning = ({ title, height }: ScanProps) => {
+const ShadowScanning = () => {
   return (
     <svg
       role="presentation"
       focusable="false"
       viewBox="0 0 83 121"
-      height={height}
+      height={VIEWBOX_HEIGHT}
     >
-      {title && <title>{title}</title>}
       <desc>Bildet har har skygge oppå legeerklæring</desc>
       <defs>
         <filter
@@ -238,20 +230,18 @@ const ShadowScanning = ({ title, height }: ScanProps) => {
     </svg>
   );
 };
-const ScanningIkon = (props: Props) => {
-  const { title } = props;
-  const height = 100;
-  switch (props.status) {
+const ScanningIkon = ({ status }: Props) => {
+  switch (status) {
     case 'good':
-      return <GoodScanning title={title} height={height} />;
+      return <GoodScanning />;
     case 'keystone':
-      return <KeystoneScanning title={title} height={height} />;
+      return <KeystoneScanning />;
     case 'horizontal':
-      return <HorizontalScanning title={title} height={height} />;
+      return <HorizontalScanning />;
     case 'shadow':
-      return <ShadowScanning title={title} height={height} />;
+      return <ShadowScanning />;
     default:
-      return <GoodScanning title={title} height={height} />;
+      return <GoodScanning />;
   }
 };
 
