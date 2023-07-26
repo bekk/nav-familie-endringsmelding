@@ -31,7 +31,7 @@ const TekstBlokk: React.FC<Props> = ({
           normal: ({ children }) => (
             <TypografiWrapper
               typografi={typografi}
-              style={{ margin: '0' }}
+              style={{ margin: '0', minHeight: '1rem' }}
               dataTestid={dataTestid}
             >
               {children}
