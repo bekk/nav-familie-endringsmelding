@@ -6,8 +6,8 @@ import { ESanityMappe } from '~/typer/felles';
 
 import TekstBlokk from '../tekstblokk/TekstBlokk';
 import BildeScanningEksempel from './BildeScanningEksempel';
-import css from './bildeScanningGuide.module.css';
 import ScanningIkon from './ScanningIkon';
+import css from './taGodtBildeInnhold.module.css';
 
 const TaGodtBildeInnhold = () => {
   const tekster = useTekster(ESanityMappe.DOKUMENTASJON);
