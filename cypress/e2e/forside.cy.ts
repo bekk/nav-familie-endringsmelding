@@ -12,7 +12,7 @@ describe('Forside tester', () => {
   });
   it('Fornavn hentet fra backend', () => {
     //TODO: Endre til det fornavnet vi vil hente, mocket
-    cy.get(`[data-testid='hilsenFornavn']`).contains('Hei, Fornavn!');
+    cy.get(`[data-testid='hilsenFornavn']`).contains('Hei, Askeladden!');
   });
   it('Kan ikke gå videre før samtykkepanel er bekreftet', () => {
     cy.get(`[data-testid='startKnapp']`).click();
