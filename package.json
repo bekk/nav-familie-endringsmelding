@@ -51,7 +51,7 @@
     "@types/react-aria-menubutton": "^6.2.9",
     "@types/react-dom": "^18.0.11",
     "cypress": "^12.17.0",
-    "eslint": "^8.45.0",
+    "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-css-modules": "^2.11.0",
     "eslint-plugin-prettier": "^5.0.0",
